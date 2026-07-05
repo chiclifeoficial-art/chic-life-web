@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Chic Life — Cosmética de autor del Valle del Cauca. Belleza, cuidado capilar y skincare con alma colombiana. Envíos a nivel nacional.">
+<meta name="keywords" content="cosmética colombiana, cuidado capilar, skincare, Valle del Cauca, Buga, belleza natural, Chic Life">
+<meta property="og:title" content="Chic Life: Del Click al Corazón">
+<meta property="og:description" content="Vivir con estilo no es un lujo, es una actitud que todos merecemos.">
+<meta property="og:type" content="website">
+<title>Chic Life: Del Click al Corazón</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   CSS CUSTOM PROPERTIES
+═══════════════════════════════════════════════════════════ */
+:root {
+  --fuchsia:   #FF1493;
+  --fuchsia-d: #CC0070;
+  --rose:      #FFB6C1;
+  --rose-l:    #FFF0F5;
+  --gold:      #D4A96A;
+  --gold-l:    #FDF3E3;
+  --peach:     #F9E4D4;
+  --terracotta:#C8715A;
+  --ink:       #1A1A1A;
+  --ink-s:     #3D3D3D;
+  --mist:      #8A8A8A;
+  --white:     #FFFFFF;
+  --cream:     #FEFAF7;
+  --glass-bg:  rgba(255,255,255,0.72);
+  --glass-border: rgba(255,20,147,0.18);
+  --shadow-f:  0 8px 48px rgba(255,20,147,0.18);
+  --shadow-g:  0 4px 32px rgba(212,169,106,0.22);
+  --r-sm:      10px;
+  --r-md:      18px;
+  --r-lg:      32px;
+  --fd: 'Playfair Display', Georgia, serif;
+  --fb: 'Poppins', sans-serif;
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--fb);background:var(--cream);color:var(--ink);overflow-x:hidden;line-height:1.7}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font-family:var(--fb);cursor:pointer;border:none;outline:none}
+ul{list-style:none}
+
+/* Grain overlay */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.022}
+
+/* ═══════════════════════════════════════════════════════════
+   ANNOUNCEMENT BAR
+═══════════════════════════════════════════════════════════ */
+.announce{
+  background: linear-gradient(90deg,var(--fuchsia),#FF69B4,var(--fuchsia));
+  background-size:200% 100%;
+  animation:gradShift 4s ease infinite;
+  color:var(--white);text-align:center;
+  padding:9px 16px;font-size:.78rem;font-weight:500;letter-spacing:.08em;
+  position:relative;z-index:1000;overflow:hidden;
+}
+.announce-inner{display:flex;align-items:center;justify-content:center;gap:12px;
+  animation:marquee 18s linear infinite}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-30%)}}
+
+/* ═══════════════════════════════════════════════════════════
+   HEADER / NAV
+═══════════════════════════════════════════════════════════ */
+header{
+  position:sticky;top:0;z-index:900;
+  background:var(--glass-bg);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--glass-border);
+  transition:box-shadow .3s;
+}
+header.scrolled{box-shadow:0 4px 32px rgba(255,20,147,.1)}
+.nav-wrap{max-width:1280px;margin:0 auto;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:var(--fd);font-size:1.5rem;font-weight:700;
+  background:linear-gradient(135deg,var(--fuchsia),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:.02em}
+.nav-links{display:flex;align-items:center;gap:8px}
+.nav-links a,.dropdown-trigger{
+  font-size:.8rem;font-weight:500;letter-spacing:.06em;padding:8px 14px;
+  border-radius:40px;color:var(--ink-s);transition:all .25s;background:none;
+  position:relative;display:flex;align-items:center;gap:4px}
+.nav-links a:hover,.dropdown-trigger:hover{color:var(--fuchsia);background:rgba(255,20,147,.06)}
+.dropdown{position:relative}
+.dropdown-menu{
+  position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);
+  min-width:200px;background:var(--white);border:1px solid var(--glass-border);
+  border-radius:var(--r-md);padding:8px;box-shadow:var(--shadow-f);
+  opacity:0;visibility:hidden;transform:translateX(-50%) translateY(-8px);
+  transition:all .25s var(--ease);}
+.dropdown:hover .dropdown-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.dropdown-menu a{display:block;padding:10px 16px;font-size:.82rem;border-radius:var(--r-sm);
+  color:var(--ink-s);transition:all .2s}
+.dropdown-menu a:hover{background:var(--rose-l);color:var(--fuchsia)}
+.nav-cta{
+  padding:10px 22px;border-radius:40px;
+  background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
+  color:var(--white)!important;font-weight:600;font-size:.8rem;
+  box-shadow:0 4px 16px rgba(255,20,147,.35);
+  transition:all .3s var(--ease);letter-spacing:.06em}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,20,147,.45)!important;background:rgba(255,20,147,.06)!important;-webkit-text-fill-color:var(--white)!important}
+.burger{display:none;background:none;border:none;cursor:pointer;
+  flex-direction:column;gap:5px;padding:6px}
+.burger span{display:block;width:24px;height:2px;background:var(--ink);border-radius:2px;transition:all .3s}
+.burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.active span:nth-child(2){opacity:0;transform:translateX(-10px)}
+.burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--white);z-index:800;
+  padding:100px 32px 40px;flex-direction:column;gap:8px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--fd);font-size:1.8rem;font-weight:700;color:var(--ink);
+  padding:12px 0;border-bottom:1px solid rgba(255,20,147,.1);transition:color .2s}
+.mobile-menu a:hover{color:var(--fuchsia)}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════════════ */
+.hero{
+  min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#FDF3E3 0%,#FFF0F5 35%,#FFF5F8 60%,#FEFAF7 100%);
+}
+/* Decorative blobs */
+.hero::before{content:'';position:absolute;top:-20%;right:-10%;width:60vw;height:80vh;
+  border-radius:50% 40% 60% 30%/40% 50% 40% 60%;
+  background:radial-gradient(ellipse,rgba(255,20,147,.1) 0%,rgba(212,169,106,.06) 50%,transparent 70%);
+  animation:blobFloat 8s ease-in-out infinite alternate}
+.hero::after{content:'';position:absolute;bottom:-10%;left:-5%;width:40vw;height:60vh;
+  border-radius:60% 40% 30% 70%/60% 30% 70% 40%;
+  background:radial-gradient(ellipse,rgba(212,169,106,.12) 0%,transparent 60%);
+  animation:blobFloat 10s ease-in-out infinite alternate-reverse}
+@keyframes blobFloat{0%{transform:scale(1) rotate(0deg)}100%{transform:scale(1.08) rotate(6deg)}}
+.hero-inner{max-width:1280px;margin:0 auto;padding:0 32px;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+  position:relative;z-index:1;width:100%}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 16px;border-radius:40px;
+  background:rgba(255,20,147,.08);border:1px solid rgba(255,20,147,.2);
+  font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fuchsia);margin-bottom:24px;
+}
+.hero h1{
+  font-family:var(--fd);
+  font-size:clamp(2.6rem,5vw,4.4rem);
+  font-weight:900;line-height:1.08;
+  color:var(--ink);letter-spacing:-.02em;margin-bottom:16px;
+}
+.hero h1 em{font-style:italic;
+  background:linear-gradient(135deg,var(--fuchsia),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.05rem;color:var(--ink-s);font-weight:300;
+  line-height:1.75;max-width:480px;margin-bottom:36px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{
+  padding:14px 32px;border-radius:50px;
+  background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
+  color:var(--white);font-weight:600;font-size:.9rem;letter-spacing:.06em;
+  box-shadow:0 8px 32px rgba(255,20,147,.38);
+  transition:all .3s var(--ease);position:relative;overflow:hidden;
+}
+.btn-primary::after{content:'';position:absolute;inset:-2px;
+  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.25),transparent 60%);
+  transform:translateX(-100%);transition:transform .6s}
+.btn-primary:hover::after{transform:translateX(100%)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,20,147,.48)}
+.btn-secondary{
+  padding:14px 28px;border-radius:50px;
+  background:transparent;color:var(--ink);
+  border:2px solid rgba(26,26,26,.2);font-weight:500;
+  transition:all .3s;font-size:.9rem}
+.btn-secondary:hover{border-color:var(--fuchsia);color:var(--fuchsia)}
+.hero-right{position:relative;display:flex;align-items:center;justify-content:center}
+/* Floating stats */
+.hero-card{
+  background:var(--white);border:1px solid rgba(255,20,147,.12);
+  border-radius:var(--r-md);padding:20px 24px;
+  box-shadow:0 8px 40px rgba(255,20,147,.1);
+  animation:floatCard 6s ease-in-out infinite;
+  text-align:center;
+}
+.hero-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:380px}
+.hero-card:nth-child(2){animation-delay:-2s}
+.hero-card:nth-child(3){animation-delay:-4s}
+.hero-card:nth-child(4){animation-delay:-1s}
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hc-n{font-family:var(--fd);font-size:2rem;font-weight:900;
+  background:linear-gradient(135deg,var(--fuchsia),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hc-l{font-size:.72rem;font-weight:500;color:var(--mist);letter-spacing:.08em;text-transform:uppercase}
+/* Valle SVG deco */
+.valle-deco{width:100%;max-width:340px;opacity:.18;position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+
+/* Story cards */
+.story-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  max-width:1280px;margin:0 auto;padding:0 32px;margin-top:80px;
+  position:relative;z-index:1;
+}
+.story-card{
+  position:relative;border-radius:var(--r-md);overflow:hidden;
+  height:380px;cursor:pointer;
+  background:linear-gradient(135deg,var(--peach),var(--rose));
+}
+.story-card:nth-child(2){background:linear-gradient(135deg,#F3E8FF,#FFD6E8)}
+.story-card:nth-child(3){background:linear-gradient(135deg,#E8F8FF,#E8E0FF)}
+.story-card-inner{position:absolute;inset:0;padding:36px 32px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(to top,rgba(26,26,26,.65) 0%,transparent 55%);
+  transition:all .4s var(--ease)}
+.story-card:hover .story-card-inner{background:linear-gradient(to top,rgba(255,20,147,.75) 0%,rgba(255,20,147,.15) 60%)}
+.story-icon{font-size:3.5rem;position:absolute;top:28px;right:28px;
+  transition:transform .4s var(--ease)}
+.story-card:hover .story-icon{transform:scale(1.15) rotate(-6deg)}
+.story-card h3{font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--white);margin-bottom:8px}
+.story-card p{font-size:.84rem;color:rgba(255,255,255,.8);margin-bottom:20px}
+.story-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;
+  background:var(--white);color:var(--fuchsia);border-radius:30px;
+  font-size:.78rem;font-weight:600;letter-spacing:.06em;
+  transform:translateY(6px);opacity:.9;transition:all .3s}
+.story-card:hover .story-btn{transform:translateY(0);opacity:1;
+  background:var(--fuchsia);color:var(--white)}
+
+/* ═══════════════════════════════════════════════════════════
+   SECTIONS COMMON
+═══════════════════════════════════════════════════════════ */
+section{padding:100px 32px}
+.container{max-width:1280px;margin:0 auto}
+.sec-label{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--fuchsia);display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.sec-label::before{content:'';width:28px;height:1px;background:var(--fuchsia)}
+.sec-title{font-family:var(--fd);font-size:clamp(2rem,4vw,3rem);
+  font-weight:900;line-height:1.1;letter-spacing:-.02em;margin-bottom:12px}
+.sec-title em{font-style:italic;color:var(--fuchsia)}
+.sec-lead{font-size:.97rem;color:var(--ink-s);font-weight:300;max-width:560px;line-height:1.8}
+
+/* Reveal animation */
+.rev{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rev.visible{opacity:1;transform:none}
+.rev.rl{transform:translateX(-40px)}.rev.rr{transform:translateX(40px)}
+.rev.visible.rl,.rev.visible.rr{transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+
+/* ═══════════════════════════════════════════════════════════
+   SOBRE NOSOTROS
+═══════════════════════════════════════════════════════════ */
+.about{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;margin-top:56px}
+.about-visual{
+  position:relative;border-radius:var(--r-lg);overflow:hidden;
+  height:520px;background:linear-gradient(145deg,var(--peach),var(--rose-l),var(--gold-l));
+}
+.about-visual::before{content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='%23FF1493' opacity='.12'/%3E%3C/svg%3E");
+}
+.about-visual-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:20px;text-align:center;padding:40px}
+.av-icon{font-size:5rem}
+.av-tagline{font-family:var(--fd);font-size:1.6rem;font-weight:700;color:var(--fuchsia);font-style:italic}
+.av-sub{font-size:.84rem;color:var(--ink-s)}
+.about-accent{position:absolute;bottom:24px;right:24px;
+  background:var(--white);border-radius:var(--r-md);padding:16px 20px;
+  box-shadow:var(--shadow-f);font-size:.78rem}
+.about-accent strong{display:block;color:var(--fuchsia);font-family:var(--fd);font-size:1.1rem}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}
+.badge{
+  padding:8px 18px;border-radius:40px;font-size:.8rem;font-weight:600;
+  border:2px solid var(--fuchsia);color:var(--fuchsia);
+  cursor:default;position:relative;overflow:hidden;transition:all .3s;
+}
+.badge::before{content:'';position:absolute;inset:0;background:var(--fuchsia);
+  transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.badge:hover::before{transform:scaleX(1)}
+.badge:hover{color:var(--white)}
+.badge span{position:relative;z-index:1}
+.manifesto{font-size:1rem;color:var(--ink-s);line-height:1.85;font-weight:300}
+.manifesto strong{color:var(--fuchsia);font-weight:600}
+.manifesto-quote{
+  border-left:3px solid var(--fuchsia);padding-left:20px;margin:24px 0;
+  font-family:var(--fd);font-size:1.15rem;font-style:italic;color:var(--ink);line-height:1.6
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CATÁLOGO
+═══════════════════════════════════════════════════════════ */
+.catalogo{background:var(--cream)}
+.tabs{display:flex;gap:8px;background:var(--white);border-radius:50px;
+  padding:6px;width:fit-content;margin:48px 0 40px;
+  box-shadow:0 4px 20px rgba(0,0,0,.07)}
+.tab-btn{
+  padding:11px 28px;border-radius:40px;font-size:.84rem;font-weight:600;
+  background:transparent;color:var(--mist);transition:all .3s var(--ease);
+  letter-spacing:.04em
+}
+.tab-btn.active{background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
+  color:var(--white);box-shadow:0 4px 16px rgba(255,20,147,.35)}
+.tab-pane{display:none}.tab-pane.active{display:block}
+/* Product grid */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
+.prod-card{
+  background:var(--white);border:1px solid rgba(255,20,147,.1);
+  border-radius:var(--r-md);overflow:hidden;
+  transition:all .35s var(--ease);position:relative;
+}
+.prod-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-f);
+  border-color:rgba(255,20,147,.3)}
+.prod-img{height:200px;display:flex;align-items:center;justify-content:center;
+  font-size:4rem;background:var(--rose-l);position:relative;overflow:hidden}
+.prod-img::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,20,147,.06),rgba(212,169,106,.08))}
+.prod-badge{position:absolute;top:12px;left:12px;
+  padding:4px 10px;border-radius:20px;
+  background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
+  color:var(--white);font-size:.65rem;font-weight:700;letter-spacing:.08em;z-index:1}
+.prod-body{padding:22px}
+.prod-brand{font-size:.68rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--fuchsia);margin-bottom:6px}
+.prod-name{font-family:var(--fd);font-size:1.1rem;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.prod-desc{font-size:.82rem;color:var(--mist);line-height:1.6;margin-bottom:16px}
+.prod-price{font-family:var(--fd);font-size:1.3rem;font-weight:900;color:var(--fuchsia)}
+.prod-cta{
+  width:100%;padding:10px;border-radius:30px;margin-top:12px;
+  background:var(--rose-l);color:var(--fuchsia);font-weight:600;font-size:.8rem;
+  transition:all .3s;letter-spacing:.06em
+}
+.prod-cta:hover{background:linear-gradient(135deg,var(--fuchsia),#FF69B4);color:var(--white)}
+/* Rizos section */
+.rizos-sec{
+  margin-top:48px;background:linear-gradient(135deg,var(--ink),#2D0A1F);
+  border-radius:var(--r-lg);padding:48px;color:var(--white)
+}
+.rizos-title{font-family:var(--fd);font-size:1.6rem;font-weight:700;margin-bottom:8px}
+.rizos-sub{color:rgba(255,255,255,.6);font-size:.88rem;margin-bottom:32px}
+.rizos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rizos-card{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r-md);padding:24px;transition:all .3s;
+}
+.rizos-card:hover{background:rgba(255,20,147,.15);border-color:rgba(255,20,147,.3);transform:translateY(-4px)}
+.rizos-icon{font-size:2.2rem;margin-bottom:12px}
+.rizos-card h4{font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:6px}
+.rizos-card p{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.6}
+/* Tip chic */
+.tip-chic{
+  margin-top:32px;background:linear-gradient(135deg,var(--gold-l),var(--peach));
+  border-left:4px solid var(--gold);border-radius:var(--r-md);
+  padding:24px 28px;display:flex;gap:16px;align-items:flex-start;
+  animation:tipPop .5s var(--ease) both;animation-play-state:paused
+}
+.tip-chic.visible{animation-play-state:running}
+@keyframes tipPop{from{opacity:0;transform:scale(.96) translateY(8px)}to{opacity:1;transform:none}}
+.tip-icon{font-size:1.8rem;flex-shrink:0}
+.tip-text{font-size:.88rem;color:var(--ink-s);line-height:1.7;font-style:italic}
+.tip-text strong{color:var(--gold);font-style:normal}
+/* Blush selector */
+.blush-card{background:var(--white);border-radius:var(--r-lg);padding:40px;
+  box-shadow:0 8px 48px rgba(255,20,147,.1);border:1px solid rgba(255,20,147,.1)}
+.blush-display{
+  height:200px;border-radius:var(--r-md);margin:24px 0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:4rem;
+  transition:background .4s var(--ease);
+  background:linear-gradient(135deg,#FFB6C1,#FF69B4)
+}
+.blush-tones{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.tone{
+  width:36px;height:36px;border-radius:50%;cursor:pointer;
+  border:3px solid transparent;transition:all .3s;position:relative;
+}
+.tone:hover,.tone.active{transform:scale(1.2);border-color:var(--ink)}
+.ritual-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  margin-top:32px;position:relative}
+.ritual-flow::before{content:'';position:absolute;top:32px;left:calc(16% + 20px);
+  right:calc(16% + 20px);height:2px;
+  background:linear-gradient(90deg,var(--fuchsia),var(--gold));z-index:0}
+.ritual-step{text-align:center;position:relative;z-index:1}
+.step-circle{
+  width:64px;height:64px;border-radius:50%;margin:0 auto 16px;
+  display:flex;align-items:center;justify-content:center;font-size:1.6rem;
+  background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
+  box-shadow:0 4px 20px rgba(255,20,147,.3);
+}
+.ritual-step h4{font-size:.88rem;font-weight:600;margin-bottom:4px}
+.ritual-step p{font-size:.78rem;color:var(--mist)}
+
+/* ═══════════════════════════════════════════════════════════
+   CALENDARIO LUNAR
+═══════════════════════════════════════════════════════════ */
+.lunar{
+  background:linear-gradient(160deg,#0D0A1A,#1A0A2E,#0D0A1A);
+  color:var(--white);position:relative;overflow:hidden;
+}
+.lunar::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 40% at 70% 30%,rgba(255,20,147,.15),transparent),
+              radial-gradient(ellipse 40% 60% at 20% 70%,rgba(212,169,106,.1),transparent)}
+.lunar .sec-label{color:#FFB6C1}
+.lunar .sec-title{color:var(--white)}
+.lunar .sec-title em{color:#FFB6C1}
+.lunar .sec-lead{color:rgba(255,255,255,.6)}
+.lunar-welcome{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r-md);padding:28px;margin:40px 0;
+  text-align:center;font-family:var(--fd);font-size:1.2rem;font-style:italic;color:rgba(255,255,255,.8)
+}
+.lunar-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:start}
+.lunar-objectives h3{font-family:var(--fd);font-size:1.2rem;margin-bottom:20px;color:rgba(255,255,255,.8)}
+.obj-btn{
+  width:100%;padding:16px 20px;border-radius:var(--r-md);margin-bottom:10px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.7);text-align:left;font-size:.9rem;font-weight:500;
+  transition:all .3s;display:flex;align-items:center;gap:12px;
+}
+.obj-btn:hover,.obj-btn.active{
+  background:rgba(255,20,147,.2);border-color:rgba(255,20,147,.4);color:var(--white)
+}
+.obj-icon{font-size:1.4rem;flex-shrink:0}
+/* Moon SVG */
+.moon-display{text-align:center;padding:24px}
+.moon-svg{margin:0 auto 20px}
+.phase-info{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r-md);padding:24px;
+}
+.phase-name{font-family:var(--fd);font-size:1.4rem;color:#FFB6C1;margin-bottom:8px}
+.phase-icon-lg{font-size:3rem;margin-bottom:12px}
+.phase-rec{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.7}
+.lunar-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:28px;
+  background:rgba(255,255,255,.04);border-radius:var(--r-md);padding:16px}
+.cal-day-header{text-align:center;font-size:.65rem;font-weight:600;letter-spacing:.1em;
+  color:rgba(255,255,255,.35);text-transform:uppercase;padding:4px}
+.cal-day{text-align:center;padding:8px 4px;border-radius:8px;cursor:pointer;
+  transition:background .2s;font-size:.78rem;color:rgba(255,255,255,.5)}
+.cal-day:hover{background:rgba(255,20,147,.15)}
+.cal-day.moon-day{color:var(--white);font-weight:600}
+.cal-day.moon-crecimiento{color:#FFB6C1}.cal-day.moon-rapido{color:var(--gold-l)}.cal-day.moon-depilacion{color:#C8A8FF}
+.cal-day.today{background:rgba(255,20,147,.25);border-radius:50%}
+.cal-month-header{grid-column:1/-1;text-align:center;font-family:var(--fd);
+  font-size:1rem;color:rgba(255,255,255,.7);padding:8px 0;margin-bottom:4px}
+
+/* ═══════════════════════════════════════════════════════════
+   CONTACTO & REDES
+═══════════════════════════════════════════════════════════ */
+.contacto{background:var(--cream)}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:56px}
+.contact-text .sec-lead{margin-bottom:32px}
+.wa-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:16px 32px;border-radius:50px;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:var(--white);font-weight:600;font-size:.9rem;
+  box-shadow:0 8px 32px rgba(37,211,102,.35);
+  transition:all .3s var(--ease);
+}
+.wa-btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(37,211,102,.45)}
+.wa-btn svg{width:24px;height:24px;fill:white;flex-shrink:0}
+.contact-info{margin-top:28px;display:flex;flex-direction:column;gap:10px}
+.ci-row{display:flex;align-items:center;gap:12px;font-size:.9rem;color:var(--ink-s)}
+.ci-icon{width:36px;height:36px;border-radius:50%;background:var(--rose-l);
+  display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.social-cards{display:grid;grid-template-columns:1fr;gap:14px}
+.social-card{
+  display:flex;align-items:center;gap:16px;padding:18px 22px;
+  background:var(--white);border:1px solid rgba(0,0,0,.08);border-radius:var(--r-md);
+  text-decoration:none;transition:all .3s var(--ease);color:var(--ink);
+}
+.social-card:hover{transform:translateX(6px);border-color:rgba(255,20,147,.3);
+  box-shadow:0 4px 20px rgba(255,20,147,.1)}
+.social-icon{width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.social-icon.ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.social-icon.tk{background:#000}
+.social-icon.fb{background:#1877F2}
+.social-icon svg{width:22px;height:22px;fill:white}
+.social-card-body{flex:1}
+.social-card-name{font-weight:600;font-size:.92rem;margin-bottom:2px}
+.social-card-handle{font-size:.78rem;color:var(--mist)}
+.social-arrow{font-size:1.1rem;color:var(--mist);transition:transform .3s;margin-left:auto}
+.social-card:hover .social-arrow{transform:translateX(4px);color:var(--fuchsia)}
+
+/* WhatsApp float */
+.wa-float{
+  position:fixed;bottom:28px;right:28px;z-index:800;
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 32px rgba(37,211,102,.45);
+  animation:waPulse 2.5s ease infinite;
+  text-decoration:none;
+}
+.wa-float svg{width:28px;height:28px;fill:white}
+@keyframes waPulse{0%,100%{box-shadow:0 8px 32px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,.4)}
+  50%{box-shadow:0 8px 32px rgba(37,211,102,.45),0 0 0 14px rgba(37,211,102,0)}}
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════════ */
+footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
+.footer-grid{max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand .logo-f{font-family:var(--fd);font-size:1.4rem;font-weight:700;
+  background:linear-gradient(135deg,var(--fuchsia),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:14px}
+.footer-brand p{font-size:.84rem;line-height:1.7;max-width:240px}
+.footer-col h4{font-family:var(--fd);font-size:1rem;font-weight:700;
+  color:var(--white);margin-bottom:16px}
+.footer-col ul li{margin-bottom:8px}
+.footer-col ul li a{font-size:.84rem;color:rgba(255,255,255,.55);transition:color .2s}
+.footer-col ul li a:hover{color:var(--fuchsia)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;
+  max-width:1280px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:.78rem;color:rgba(255,255,255,.35)}
+.footer-social{display:flex;gap:10px}
+.fs-btn{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;transition:all .3s;text-decoration:none}
+.fs-btn:hover{border-color:var(--fuchsia);background:rgba(255,20,147,.15)}
+.fs-btn svg{width:14px;height:14px;fill:rgba(255,255,255,.5)}
+.fs-btn:hover svg{fill:var(--fuchsia)}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-card-grid{margin:0 auto}
+  .story-cards{grid-template-columns:1fr 1fr}
+  .about-grid,.contact-layout,.lunar-layout{grid-template-columns:1fr}
+  .rizos-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .hero-sub{margin:0 auto 36px}
+  .hero-btns{justify-content:center}
+  .ritual-flow::before{display:none}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .burger{display:flex}
+  section{padding:72px 20px}
+  .story-cards{grid-template-columns:1fr;padding:0 20px}
+  .story-card{height:280px}
+  .rizos-grid{grid-template-columns:1fr}
+  .ritual-flow{grid-template-columns:1fr;gap:20px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .lunar-calendar{display:none}
+  .hero-card-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .hero h1{font-size:2.2rem}
+  .footer-grid{grid-template-columns:1fr}
+  .hero-card-grid{grid-template-columns:1fr 1fr;max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- BARRA DE ANUNCIO -->
+<div class="announce" role="banner">
+  <div class="announce-inner">
+    <span>✨ Envíos a nivel nacional &nbsp;|&nbsp; Cosmética de autor del Valle del Cauca ✨</span>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span>💕 WhatsApp: +57 322 690 5702 &nbsp;|&nbsp; @chiclifeoficial ✨</span>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span>✨ Envíos a nivel nacional &nbsp;|&nbsp; Cosmética de autor del Valle del Cauca ✨</span>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span>💕 WhatsApp: +57 322 690 5702 &nbsp;|&nbsp; @chiclifeoficial ✨</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header id="site-header">
+  <div class="nav-wrap">
+    <a href="#inicio" class="logo">Chic Life</a>
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <div class="dropdown">
+        <button class="dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          Tienda ▾
+        </button>
+        <div class="dropdown-menu" role="menu">
+          <a href="#catalogo" role="menuitem">💇 Cuidado Capilar</a>
+          <a href="#skincare" role="menuitem">✨ Skincare & Color</a>
+        </div>
+      </div>
+      <a href="#nosotros">Sobre Nosotros</a>
+      <a href="#lunar">Comunidad Lunar</a>
+      <a href="#contacto">Contacto</a>
+      <a href="https://wa.me/573226905702?text=Hola%20Chic%20Life!%20Me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20productos%20%F0%9F%8C%B8" 
+         target="_blank" class="nav-cta" rel="noopener">Pedir ahora</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MENÚ MÓVIL -->
+<nav class="mobile-menu" id="mobile-menu" aria-label="Menú móvil">
+  <a href="#inicio" class="mob-link">Inicio</a>
+  <a href="#catalogo" class="mob-link">Cuidado Capilar</a>
+  <a href="#skincare" class="mob-link">Skincare & Color</a>
+  <a href="#nosotros" class="mob-link">Sobre Nosotros</a>
+  <a href="#lunar" class="mob-link">Comunidad Lunar</a>
+  <a href="#contacto" class="mob-link">Contacto</a>
+</nav>
+
+<!-- HERO -->
+<section id="inicio" class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge rev">
+        🌸 Cosmética Colombiana de Autor
+      </div>
+      <h1 class="rev d1">
+        Chic Life:<br><em>Del Click al Corazón</em>
+      </h1>
+      <p class="hero-sub rev d2">
+        Vivir con estilo no es un lujo, es una actitud que todos merecemos.
+        Belleza, cuidado capilar y skincare con alma del Valle del Cauca.
+      </p>
+      <div class="hero-btns rev d3">
+        <a href="#catalogo" class="btn-primary">
+          ✨ Inicia tu Transformación
+        </a>
+        <a href="https://chiclife.my.canva.site/catalogo" target="_blank" class="btn-secondary" rel="noopener">
+          Ver Catálogo →
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <!-- Valle SVG decorativo -->
+      <svg class="valle-deco" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M150 20 C80 40,30 100,40 180 C50 260,90 310,150 350 C210 310,250 260,260 180 C270 100,220 40,150 20Z" fill="url(#vg1)" stroke="#FF1493" stroke-width="1.5"/>
+        <defs><linearGradient id="vg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFB6C1" stop-opacity=".3"/><stop offset="100%" stop-color="#D4A96A" stop-opacity=".2"/></linearGradient></defs>
+        <circle cx="150" cy="140" r="8" fill="#FF1493" opacity=".6"/>
+        <circle cx="120" cy="200" r="5" fill="#D4A96A" opacity=".5"/>
+        <circle cx="180" cy="220" r="6" fill="#FF1493" opacity=".4"/>
+        <path d="M70 280 Q150 240 230 280" stroke="#FF1493" stroke-width="1" fill="none" opacity=".3"/>
+        <text x="100" y="155" fill="#FF1493" font-size="11" opacity=".7" font-family="Georgia,serif">Guadalajara</text>
+        <text x="110" y="170" fill="#FF1493" font-size="10" opacity=".6" font-family="Georgia,serif">de Buga</text>
+      </svg>
+
+      <div class="hero-card-grid rev d2">
+        <div class="hero-card">
+          <div class="hc-n">10+</div>
+          <div class="hc-l">Marcas curadas</div>
+        </div>
+        <div class="hero-card">
+          <div class="hc-n">🌿</div>
+          <div class="hc-l">Natural & orgánico</div>
+        </div>
+        <div class="hero-card">
+          <div class="hc-n">💕</div>
+          <div class="hc-l">Comunidad activa</div>
+        </div>
+        <div class="hero-card">
+          <div class="hc-n">🚚</div>
+          <div class="hc-l">Envíos nacionales</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY CARDS -->
+<div class="story-cards">
+  <a href="#catalogo" class="story-card rev d1" aria-label="Cuidado Capilar">
+    <span class="story-icon" aria-hidden="true">💇‍♀️</span>
+    <div class="story-card-inner">
+      <h3>Cuidado Capilar</h3>
+      <p>Rituales de fuerza y brillo natural</p>
+      <span class="story-btn">Explorar Soluciones →</span>
+    </div>
+  </a>
+  <a href="#skincare" class="story-card rev d2" aria-label="Skincare & Color">
+    <span class="story-icon" aria-hidden="true">✨</span>
+    <div class="story-card-inner">
+      <h3>Skincare & Color</h3>
+      <p>El arte de resaltar tu esencia</p>
+      <span class="story-btn">Ver Tendencias →</span>
+    </div>
+  </a>
+  <a href="#lunar" class="story-card rev d3" aria-label="Calendario Lunar">
+    <span class="story-icon" aria-hidden="true">🌙</span>
+    <div class="story-card-inner">
+      <h3>Calendario Lunar</h3>
+      <p>Sincroniza tu belleza con el cosmos</p>
+      <span class="story-btn">Consultar Guía →</span>
+    </div>
+  </a>
+</div>
+
+<!-- SOBRE NOSOTROS -->
+<section class="about" id="nosotros">
+  <div class="container">
+    <div class="sec-label rev">Nuestra Esencia</div>
+    <h2 class="sec-title rev d1">La historia detrás<br>de <em>Chic Life</em></h2>
+
+    <div class="about-grid">
+      <div class="about-visual rev rl">
+        <div class="about-visual-center">
+          <div class="av-icon">🌸</div>
+          <div class="av-tagline">Karina · Chic Life</div>
+          <div class="av-sub">Guadalajara de Buga · Valle del Cauca</div>
+        </div>
+        <div class="about-accent">
+          <strong>2026</strong>
+          Estrategia Orgánica
+        </div>
+      </div>
+
+      <div class="about-text rev rr">
+        <div class="sec-label">Quiénes Somos</div>
+        <h3 style="font-family:var(--fd);font-size:1.7rem;font-weight:700;margin-bottom:20px;line-height:1.3">
+          Cosmética con alma,<br>belleza con propósito
+        </h3>
+        <div class="badges" role="list" aria-label="Valores de la marca">
+          <div class="badge" role="listitem" tabindex="0"><span>🌸 Femenina</span></div>
+          <div class="badge" role="listitem" tabindex="0"><span>✨ Atractiva</span></div>
+          <div class="badge" role="listitem" tabindex="0"><span>🌈 Vibrante</span></div>
+          <div class="badge" role="listitem" tabindex="0"><span>💕 Emocional</span></div>
+        </div>
+        <div class="manifesto">
+          <div class="manifesto-quote">
+            "¡Porque vivir con estilo no es un lujo, es una actitud que todos merecemos!
+            Tu vida Chic comienza aquí."
+          </div>
+          <p>Chic Life nació desde el corazón del Valle del Cauca con una misión clara:
+          democratizar la belleza de calidad. <strong>Karina</strong> fundó la marca con la convicción de
+          que cada mujer merece rituales de cuidado que celebren su feminidad, su fuerza y su identidad.</p>
+          <br>
+          <p>Hoy somos un movimiento de empoderamiento femenino — una comunidad donde cada
+          clienta es protagonista. <strong>Del Click al Corazón</strong> no es solo un slogan;
+          es la promesa de que cada interacción contigo importa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATÁLOGO -->
+<section class="catalogo" id="catalogo">
+  <div class="container">
+    <div class="sec-label rev">Tienda</div>
+    <h2 class="sec-title rev d1">Soluciones reales para<br><em>tu belleza</em></h2>
+    <p class="sec-lead rev d2">Portafolio curado de más de 10 marcas especializadas. Sin intermediarios, con asesoría personalizada por WhatsApp.</p>
+
+    <div class="tabs rev d2" role="tablist" aria-label="Categorías de productos">
+      <button class="tab-btn active" role="tab" aria-selected="true" 
+              aria-controls="pane-capilar" id="tab-capilar"
+              onclick="switchTab('capilar')">💇 Cuidado Capilar</button>
+      <button class="tab-btn" role="tab" aria-selected="false"
+              aria-controls="pane-skincare" id="tab-skincare"
+              onclick="switchTab('skincare')" id="skincare">✨ Skincare & Color</button>
+    </div>
+
+    <!-- PESTAÑA: CAPILAR -->
+    <div class="tab-pane active" id="pane-capilar" role="tabpanel" aria-labelledby="tab-capilar">
+      <div class="prod-grid">
+        <div class="prod-card rev d1">
+          <div class="prod-img">🧴<span class="prod-badge">⭐ Destacado</span></div>
+          <div class="prod-body">
+            <div class="prod-brand">Click Hair</div>
+            <div class="prod-name">Shampoo de Miel Brillo Intenso</div>
+            <div class="prod-desc">Alta concentración de vitaminas que devuelven la luminosidad y vitalidad. Sin sal ni parabenos.</div>
+            <div class="prod-price">$44.000</div>
+            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Shampoo%20de%20Miel%20Brillo%20Intenso%20de%20Click%20Hair%20%F0%9F%8C%B8" 
+               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d2">
+          <div class="prod-img">💆‍♀️</div>
+          <div class="prod-body">
+            <div class="prod-brand">Click Hair</div>
+            <div class="prod-name">Mascarilla de Miel Brillo Intenso</div>
+            <div class="prod-desc">Recupera la vitalidad y realza el color después de tratamientos químicos. Cabello renovado.</div>
+            <div class="prod-price">$49.900</div>
+            <a href="https://wa.me/573226905702" target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d3">
+          <div class="prod-img">🌿<span class="prod-badge">Vegano</span></div>
+          <div class="prod-body">
+            <div class="prod-brand">Ponto Hair Club</div>
+            <div class="prod-name">Shampoo Crespos 300ml</div>
+            <div class="prod-desc">Con aloe vera y agua micelar. Limpia sin resecar las puntas. Vegano y liberado. Para texturas rizadas.</div>
+            <div class="prod-price">$30.500</div>
+            <a href="https://wa.me/573226905702" target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d1">
+          <div class="prod-img">✨</div>
+          <div class="prod-body">
+            <div class="prod-brand">Origen Botánico</div>
+            <div class="prod-name">Mascarilla Bomba Botánica S.O.S</div>
+            <div class="prod-desc">Colágeno y biotina que repara profundamente. Disminuye la caída y reduce el frizz 72%.</div>
+            <div class="prod-price">$33.900</div>
+            <a href="https://wa.me/573226905702" target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d2">
+          <div class="prod-img">🧪<span class="prod-badge">CBD</span></div>
+          <div class="prod-body">
+            <div class="prod-brand">Magia Natural</div>
+            <div class="prod-name">Shampoo Aguacate & CBD 450ml</div>
+            <div class="prod-desc">CBD y aguacate estimulan el crecimiento, controlan la caspa y fortalecen el folículo piloso.</div>
+            <div class="prod-price">$42.000</div>
+            <a href="https://wa.me/573226905702" target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d3">
+          <div class="prod-img">🌊</div>
+          <div class="prod-body">
+            <div class="prod-brand">Amazónica Beleza</div>
+            <div class="prod-name">Kit Purify Anticaída 500ml</div>
+            <div class="prod-desc">Con mirra y rosas. Limpia profundamente, evita la caída y promueve el crecimiento acelerado.</div>
+            <div class="prod-price">$42.000</div>
+            <a href="https://wa.me/573226905702" target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección Rizos -->
+      <div class="rizos-sec rev">
+        <div class="rizos-title">💫 Curaduría Especializada: Rizos Perfectos</div>
+        <div class="rizos-sub">Línea Ponto Hair Club — Vegana, liberada, sin sulfatos ni parabenos</div>
+        <div class="rizos-grid">
+          <div class="rizos-card">
+            <div class="rizos-icon">🚿</div>
+            <h4>Punto Champú</h4>
+            <p>Limpieza suave con aloe vera y agua micelar. Recupera los rizos sin resecar. $30.500</p>
+          </div>
+          <div class="rizos-card">
+            <div class="rizos-icon">💦</div>
+            <h4>Punto Hidratación 3en1</h4>
+            <p>Mascarilla, acondicionador y crema de peinar en uno. Brillo, reparación y suavidad. $41.700</p>
+          </div>
+          <div class="rizos-card">
+            <div class="rizos-icon">💅</div>
+            <h4>Gelly Fest Fijación Media</h4>
+            <p>Arándano y cereza para rizos definidos, flexibles y sin frizz. Sin sensación pegajosa. $24.900</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tip Chic -->
+      <div class="tip-chic rev">
+        <div class="tip-icon">💡</div>
+        <div>
+          <strong style="display:block;font-size:.88rem;color:var(--ink);margin-bottom:6px">Tip Chic 💕</strong>
+          <div class="tip-text">
+            <strong>¿El secreto de las expertas?</strong> Nunca saltes el acondicionador.
+            Sella la cutícula, retiene la humedad y mantiene ese brillo espejo todo el día.
+            Aplícalo siempre desde las puntas hacia el centro — nunca en la raíz.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PESTAÑA: SKINCARE -->
+    <div class="tab-pane" id="pane-skincare" role="tabpanel" aria-labelledby="tab-skincare">
+      <div class="blush-card rev">
+        <div class="sec-label">Producto Estrella</div>
+        <h3 style="font-family:var(--fd);font-size:1.6rem;font-weight:700">Liquid Blush</h3>
+        <p style="color:var(--mist);font-size:.88rem;margin-top:6px">El aliado perfecto para un look vibrante y saludable. Acabado natural, efecto piel sana y duración todo el día.</p>
+
+        <div class="blush-display" id="blush-display">💋</div>
+
+        <div style="margin-bottom:12px;font-size:.82rem;font-weight:600;color:var(--ink-s);letter-spacing:.06em;text-transform:uppercase">Elige tu tono</div>
+        <div class="blush-tones" role="radiogroup" aria-label="Tonos de blush">
+          <div class="tone active" role="radio" aria-checked="true" aria-label="Rosa durazno" tabindex="0"
+               style="background:linear-gradient(135deg,#FFB6C1,#FF69B4)" 
+               data-color="linear-gradient(135deg,#FFB6C1,#FF69B4)" 
+               data-name="Rosa Durazno" onclick="selectTone(this)"></div>
+          <div class="tone" role="radio" aria-checked="false" aria-label="Coral vibrante" tabindex="0"
+               style="background:linear-gradient(135deg,#FF7F50,#FF4500)"
+               data-color="linear-gradient(135deg,#FF7F50,#FF4500)"
+               data-name="Coral Vibrante" onclick="selectTone(this)"></div>
+          <div class="tone" role="radio" aria-checked="false" aria-label="Fucsia intenso" tabindex="0"
+               style="background:linear-gradient(135deg,#FF1493,#CC0070)"
+               data-color="linear-gradient(135deg,#FF1493,#CC0070)"
+               data-name="Fucsia Intenso" onclick="selectTone(this)"></div>
+          <div class="tone" role="radio" aria-checked="false" aria-label="Nude rosado" tabindex="0"
+               style="background:linear-gradient(135deg,#DEB887,#C8A882)"
+               data-color="linear-gradient(135deg,#DEB887,#C8A882)"
+               data-name="Nude Rosado" onclick="selectTone(this)"></div>
+          <div class="tone" role="radio" aria-checked="false" aria-label="Terracota" tabindex="0"
+               style="background:linear-gradient(135deg,#C8715A,#A0522D)"
+               data-color="linear-gradient(135deg,#C8715A,#A0522D)"
+               data-name="Terracota" onclick="selectTone(this)"></div>
+        </div>
+        <div id="tone-name" style="font-size:.82rem;color:var(--mist);margin-bottom:24px">Rosa Durazno — Glam natural</div>
+
+        <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Liquid%20Blush%20%F0%9F%92%8B" 
+           target="_blank" class="btn-primary" style="display:inline-flex;gap:8px" rel="noopener">
+          💋 Pedir Liquid Blush
+        </a>
+      </div>
+
+      <!-- Ritual -->
+      <div style="margin-top:48px" class="rev d2">
+        <div class="sec-label">Ritual Diario</div>
+        <h3 style="font-family:var(--fd);font-size:1.5rem;font-weight:700;margin-bottom:32px">Tu Ritual Skincare <em style="color:var(--fuchsia);font-style:italic">Glowy</em></h3>
+        <div class="ritual-flow">
+          <div class="ritual-step">
+            <div class="step-circle">
+              <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <h4>1. Limpieza</h4>
+            <p>Doble limpieza para piel luminosa y libre de impurezas</p>
+          </div>
+          <div class="ritual-step">
+            <div class="step-circle" style="background:linear-gradient(135deg,var(--gold),#F5C060)">
+              <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </div>
+            <h4>2. Hidratación</h4>
+            <p>Sérum y crema hidratante para una piel plump y saludable</p>
+          </div>
+          <div class="ritual-step">
+            <div class="step-circle" style="background:linear-gradient(135deg,var(--terracotta),var(--fuchsia))">
+              <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 100-16 8 8 0 000 16zM9 11.5C9 10.12 10.12 9 11.5 9S14 10.12 14 11.5 12.88 14 11.5 14 9 12.88 9 11.5zm5.5 0C14.5 10.12 15.62 9 17 9s2.5 1.12 2.5 2.5S18.38 14 17 14s-2.5-1.12-2.5-2.5z"/></svg>
+            </div>
+            <h4>3. Toque de Color</h4>
+            <p>Liquid Blush para un glow natural que dura todo el día</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:48px" class="rev">
+      <a href="https://chiclife.my.canva.site/catalogo" target="_blank" 
+         class="btn-primary" style="display:inline-flex;gap:8px;font-size:.88rem" rel="noopener">
+        🛍 Ver catálogo completo
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDARIO LUNAR -->
+<section class="lunar" id="lunar">
+  <div class="container" style="position:relative;z-index:1">
+    <div class="sec-label rev">Comunidad</div>
+    <h2 class="sec-title rev d1">Calendario Lunar<br><em>Chic Life 2026</em></h2>
+    <p class="sec-lead rev d2">Sincroniza tu ritual de belleza con las fases de la luna y maximiza cada tratamiento.</p>
+
+    <div class="lunar-welcome rev d2">
+      🌙 "Un nuevo mes para seguir creciendo y aprendiendo. Sintoniza tu ritmo con la luna y florece con Chic Life." 🌸
+    </div>
+
+    <div class="lunar-layout">
+      <div class="lunar-objectives rev rl">
+        <h3>🎯 Tu Objetivo de Belleza</h3>
+        <button class="obj-btn active" onclick="selectObjective(this,'crecimiento-fuerte')"
+                aria-pressed="true">
+          <span class="obj-icon">⚫</span>
+          <div>
+            <div style="font-weight:600">Crecimiento Fuerte</div>
+            <div style="font-size:.75rem;opacity:.6">Luna nueva · Siembra intención</div>
+          </div>
+        </button>
+        <button class="obj-btn" onclick="selectObjective(this,'crecimiento-rapido')"
+                aria-pressed="false">
+          <span class="obj-icon">🔴</span>
+          <div>
+            <div style="font-weight:600">Crecimiento Rápido</div>
+            <div style="font-size:.75rem;opacity:.6">Luna creciente · Activa el folículo</div>
+          </div>
+        </button>
+        <button class="obj-btn" onclick="selectObjective(this,'depilacion')"
+                aria-pressed="false">
+          <span class="obj-icon">⚪</span>
+          <div>
+            <div style="font-weight:600">Depilación</div>
+            <div style="font-size:.75rem;opacity:.6">Luna menguante · Retarda el vello</div>
+          </div>
+        </button>
+
+        <!-- Calendario mensual -->
+        <div class="lunar-calendar" id="lunar-calendar" aria-label="Calendario lunar"></div>
+      </div>
+
+      <div class="moon-display rev rr">
+        <!-- SVG Luna animado -->
+        <svg class="moon-svg" width="180" height="180" viewBox="0 0 180 180" aria-hidden="true" id="moon-svg">
+          <defs>
+            <radialGradient id="moonGrad" cx="40%" cy="35%">
+              <stop offset="0%" stop-color="#FFF8DC"/>
+              <stop offset="60%" stop-color="#F5DEB3"/>
+              <stop offset="100%" stop-color="#DEB887"/>
+            </radialGradient>
+            <radialGradient id="shadowGrad" cx="60%" cy="50%">
+              <stop offset="0%" stop-color="#0D0A1A" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#0D0A1A" stop-opacity="0.9"/>
+            </radialGradient>
+          </defs>
+          <circle cx="90" cy="90" r="80" fill="url(#moonGrad)" opacity=".95"/>
+          <!-- Craters -->
+          <circle cx="65" cy="70" r="8" fill="#C4A57A" opacity=".35"/>
+          <circle cx="110" cy="100" r="12" fill="#C4A57A" opacity=".25"/>
+          <circle cx="75" cy="115" r="5" fill="#C4A57A" opacity=".3"/>
+          <!-- Shadow overlay (phase) -->
+          <ellipse id="moon-shadow" cx="110" cy="90" rx="40" ry="80" fill="#0D0A1A" opacity=".82"/>
+          <!-- Glow -->
+          <circle cx="90" cy="90" r="82" fill="none" stroke="rgba(255,248,220,0.3)" stroke-width="6"/>
+        </svg>
+
+        <div class="phase-info" id="phase-info">
+          <div class="phase-icon-lg" id="phase-icon">⚫</div>
+          <div class="phase-name" id="phase-name">Luna Nueva</div>
+          <div class="phase-rec" id="phase-rec">
+            La energía de la luna nueva favorece el inicio de nuevos rituales capilares.
+            Es el mejor momento para aplicar tratamientos anticaída y estimulantes del crecimiento.
+            La energía de renovación potencia la absorción de nutrientes.
+          </div>
+          <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)">
+            <div style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+                 color:rgba(255,255,255,.35);margin-bottom:8px">Productos recomendados</div>
+            <div id="phase-products" style="font-size:.84rem;color:rgba(255,255,255,.6)">
+              Kit Anticaída Avrill · Tónico Capilar de Romero · Energizante Capilar Click Hair
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contacto" id="contacto">
+  <div class="container">
+    <div class="sec-label rev">Hablemos</div>
+    <h2 class="sec-title rev d1">Atención personalizada<br><em>para ti</em></h2>
+
+    <div class="contact-layout">
+      <div class="contact-text">
+        <p class="sec-lead rev d1">
+          ¿Tienes dudas sobre tu ritual? ¿No sabes cuál producto es el indicado para tu tipo de cabello?
+          Escríbenos y conecta con Karina y su equipo directamente.
+        </p>
+
+        <div style="margin-top:32px" class="rev d2">
+          <a href="https://wa.me/573226905702?text=Hola%20Chic%20Life!%20Quisiera%20asesor%C3%ADa%20personalizada%20sobre%20productos%20de%20belleza%20%F0%9F%8C%B8" 
+             target="_blank" class="wa-btn" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Escribir por WhatsApp
+          </a>
+        </div>
+
+        <div class="contact-info rev d3">
+          <div class="ci-row"><div class="ci-icon">📱</div><span>+57 322 690 5702</span></div>
+          <div class="ci-row"><div class="ci-icon">📍</div><span>Guadalajara de Buga, Valle del Cauca</span></div>
+          <div class="ci-row"><div class="ci-icon">⏰</div><span>Lunes–Viernes 8am–8pm · Fines de semana 9am–3pm</span></div>
+          <div class="ci-row"><div class="ci-icon">🚚</div><span>Envíos a nivel nacional · Domicilio en Buga $2.500</span></div>
+        </div>
+      </div>
+
+      <div class="social-cards rev rr">
+        <a href="https://www.instagram.com/chiclifeoficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+           target="_blank" class="social-card" rel="noopener" aria-label="Instagram @chiclifeoficial">
+          <div class="social-icon ig">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+          <div class="social-card-body">
+            <div class="social-card-name">Instagram</div>
+            <div class="social-card-handle">@chiclifeoficial · 1.187 seguidoras</div>
+          </div>
+          <span class="social-arrow">→</span>
+        </a>
+
+        <a href="https://www.tiktok.com/@chic_life_oficial?t=ZS-8uy2uHOuBYA&_r=1" 
+           target="_blank" class="social-card" rel="noopener" aria-label="TikTok @chic_life_oficial">
+          <div class="social-icon tk">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </div>
+          <div class="social-card-body">
+            <div class="social-card-name">TikTok</div>
+            <div class="social-card-handle">@chic_life_oficial</div>
+          </div>
+          <span class="social-arrow">→</span>
+        </a>
+
+        <a href="https://www.facebook.com/ChicLifeOficial" 
+           target="_blank" class="social-card" rel="noopener" aria-label="Facebook Chic Life">
+          <div class="social-icon fb">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.994 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </div>
+          <div class="social-card-body">
+            <div class="social-card-name">Facebook</div>
+            <div class="social-card-handle">Chic Life — Página oficial</div>
+          </div>
+          <span class="social-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-f">Chic Life</div>
+      <p>Belleza, cosmética y cuidado personal con alma del Valle del Cauca. Del Click al Corazón.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Tienda Online</h4>
+      <ul>
+        <li><a href="#catalogo">Cuidado Capilar</a></li>
+        <li><a href="#skincare">Skincare & Color</a></li>
+        <li><a href="https://chiclife.my.canva.site/catalogo" target="_blank" rel="noopener">Catálogo Completo</a></li>
+        <li><a href="#lunar">Calendario Lunar</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/573226905702" target="_blank" rel="noopener">WhatsApp: +57 322 690 5702</a></li>
+        <li><a href="#">Guadalajara de Buga</a></li>
+        <li><a href="#">Valle del Cauca, Colombia</a></li>
+        <li><a href="#">Envíos a nivel nacional</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Redes Sociales</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/chiclifeoficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">📸 Instagram</a></li>
+        <li><a href="https://www.tiktok.com/@chic_life_oficial" target="_blank" rel="noopener">🎵 TikTok</a></li>
+        <li><a href="https://www.facebook.com/ChicLifeOficial" target="_blank" rel="noopener">📘 Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Chic Life. Estrategia Orgánica desde el Valle del Cauca. Todos los derechos reservados.</p>
+    <div class="footer-social">
+      <a class="fs-btn" href="https://www.instagram.com/chiclifeoficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a class="fs-btn" href="https://www.tiktok.com/@chic_life_oficial" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      </a>
+      <a class="fs-btn" href="https://www.facebook.com/ChicLifeOficial" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.994 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/573226905702?text=Hola%20Chic%20Life!%20Me%20interesa%20conocer%20sus%20productos%20%F0%9F%8C%B8" 
+   target="_blank" class="wa-float" rel="noopener" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// HEADER SCROLL EFFECT
+// ═══════════════════════════════════════════════════════════
+const header = document.getElementById('site-header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+// ═══════════════════════════════════════════════════════════
+// HAMBURGER MENU
+// ═══════════════════════════════════════════════════════════
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobile-menu');
+burger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  burger.classList.toggle('active', isOpen);
+  burger.setAttribute('aria-expanded', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+document.querySelectorAll('.mob-link').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    burger.classList.remove('active');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  });
+});
+
+// ═══════════════════════════════════════════════════════════
+// INTERSECTION OBSERVER — REVEAL ANIMATIONS
+// ═══════════════════════════════════════════════════════════
+const revObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Special case for tip-chic
+      if (e.target.classList.contains('tip-chic')) {
+        e.target.classList.add('visible');
+      }
+      revObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.rev').forEach(el => revObs.observe(el));
+
+// ═══════════════════════════════════════════════════════════
+// TAB SWITCHING — CATÁLOGO
+// ═══════════════════════════════════════════════════════════
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.remove('active');
+    btn.setAttribute('aria-selected', 'false');
+  });
+  document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+
+  const activeBtn = document.getElementById('tab-' + name);
+  const activePane = document.getElementById('pane-' + name);
+  if (activeBtn) { activeBtn.classList.add('active'); activeBtn.setAttribute('aria-selected', 'true'); }
+  if (activePane) {
+    activePane.classList.add('active');
+    // Re-trigger reveals in newly visible tab
+    activePane.querySelectorAll('.rev:not(.visible)').forEach(el => {
+      setTimeout(() => el.classList.add('visible'), 100);
+    });
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// BLUSH TONE SELECTOR
+// ═══════════════════════════════════════════════════════════
+const toneLabels = {
+  'Rosa Durazno': 'Rosa Durazno — Glam natural',
+  'Coral Vibrante': 'Coral Vibrante — Verano eterno',
+  'Fucsia Intenso': 'Fucsia Intenso — Chic vibrante',
+  'Nude Rosado': 'Nude Rosado — Belleza sutil',
+  'Terracota': 'Terracota — Tierra colombiana',
+};
+
+function selectTone(el) {
+  document.querySelectorAll('.tone').forEach(t => {
+    t.classList.remove('active');
+    t.setAttribute('aria-checked', 'false');
+  });
+  el.classList.add('active');
+  el.setAttribute('aria-checked', 'true');
+  const color = el.getAttribute('data-color');
+  const name = el.getAttribute('data-name');
+  const display = document.getElementById('blush-display');
+  if (display) display.style.background = color;
+  const label = document.getElementById('tone-name');
+  if (label) label.textContent = toneLabels[name] || name;
+}
+
+// ═══════════════════════════════════════════════════════════
+// CALENDARIO LUNAR
+// ═══════════════════════════════════════════════════════════
+const lunarData = {
+  'crecimiento-fuerte': {
+    icon: '⚫',
+    phase: 'Luna Nueva',
+    shadowX: 130, shadowRx: 55,
+    rec: 'La energía de la luna nueva favorece el inicio de nuevos rituales capilares. Es el mejor momento para aplicar tratamientos anticaída y estimulantes del crecimiento. La energía de renovación potencia la absorción de nutrientes.',
+    products: 'Kit Anticaída Avrill · Tónico Capilar de Romero · Energizante Capilar Click Hair',
+    calClass: 'moon-crecimiento',
+    days: [2, 3, 10, 11, 17, 18, 25, 26]
+  },
+  'crecimiento-rapido': {
+    icon: '🔴',
+    phase: 'Luna Creciente',
+    shadowX: 115, shadowRx: 35,
+    rec: 'La luna creciente activa la energía del crecimiento. El organismo absorbe mejor los nutrientes y los folículos responden con más intensidad a los tratamientos estimulantes. Ideal para aplicar mascarillas nutritivas.',
+    products: 'Shampoo Anticaída Cebolla · Energizante Capilar · Miel Capilar con Argán',
+    calClass: 'moon-rapido',
+    days: [5, 6, 7, 13, 14, 20, 21, 28, 29]
+  },
+  'depilacion': {
+    icon: '⚪',
+    phase: 'Luna Menguante',
+    shadowX: 65, shadowRx: 40,
+    rec: 'La luna menguante reduce la actividad celular, lo que hace que el vello crezca más lento después de la depilación. El resultado dura más tiempo y hay menos irritación. Perfecto para cera, rasurado o depilación con hilo.',
+    products: 'Mantequilla Corporal Karité · Crema Hidratante post-depilación',
+    calClass: 'moon-depilacion',
+    days: [1, 8, 9, 15, 16, 22, 23, 30, 31]
+  }
+};
+
+let currentObjective = 'crecimiento-fuerte';
+
+function selectObjective(btn, id) {
+  document.querySelectorAll('.obj-btn').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-pressed', 'false');
+  });
+  btn.classList.add('active');
+  btn.setAttribute('aria-pressed', 'true');
+  currentObjective = id;
+  updateMoon(id);
+  renderCalendar(id);
+}
+
+function updateMoon(id) {
+  const d = lunarData[id];
+  document.getElementById('phase-icon').textContent = d.icon;
+  document.getElementById('phase-name').textContent = d.phase;
+  document.getElementById('phase-rec').textContent = d.rec;
+  document.getElementById('phase-products').textContent = d.products;
+  const shadow = document.getElementById('moon-shadow');
+  if (shadow) {
+    shadow.setAttribute('cx', d.shadowX);
+    shadow.setAttribute('rx', d.shadowRx);
+  }
+}
+
+function renderCalendar(id) {
+  const cal = document.getElementById('lunar-calendar');
+  if (!cal) return;
+  const d = lunarData[id];
+  const days = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  const today = new Date().getDate();
+  const month = 'Mayo 2026';
+  // May 2026 starts on Friday (index 5)
+  let html = `<div class="cal-month-header">${month}</div>`;
+  days.forEach(day => { html += `<div class="cal-day-header">${day}</div>`; });
+  // Fill empty cells for May 1 = Friday
+  for (let i = 0; i < 5; i++) html += `<div class="cal-day"></div>`;
+  for (let day = 1; day <= 31; day++) {
+    const isMoon = d.days.includes(day);
+    const isToday = day === today;
+    let cls = 'cal-day';
+    if (isMoon) cls += ` moon-day ${d.calClass}`;
+    if (isToday) cls += ' today';
+    html += `<div class="${cls}" title="${isMoon ? d.phase : ''}">${day}${isMoon ? ' ' + d.icon : ''}</div>`;
+  }
+  cal.innerHTML = html;
+}
+
+// Initialize
+updateMoon('crecimiento-fuerte');
+renderCalendar('crecimiento-fuerte');
+
+// ═══════════════════════════════════════════════════════════
+// KEYBOARD NAV FOR BADGES & TONES
+// ═══════════════════════════════════════════════════════════
+document.querySelectorAll('.tone').forEach(tone => {
+  tone.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectTone(tone); }
+  });
+});
+</script>
+</body>
+</html>
