@@ -326,7 +326,8 @@ section{padding:100px 32px}
 .prod-img::after{content:'';position:absolute;inset:0;
   background:linear-gradient(135deg,rgba(255,20,147,.06),rgba(212,169,106,.08))}
 .prod-img.has-photo::after{content:none}
-.prod-img.has-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.prod-img.has-photo{height:auto;aspect-ratio:4/5;background:var(--rose-l)}
+.prod-img.has-photo img{width:100%;height:100%;object-fit:contain;display:block}
 .prod-badge{position:absolute;top:12px;left:12px;
   padding:4px 10px;border-radius:20px;
   background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
