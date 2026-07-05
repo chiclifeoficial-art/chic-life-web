@@ -325,6 +325,8 @@ section{padding:100px 32px}
   font-size:4rem;background:var(--rose-l);position:relative;overflow:hidden}
 .prod-img::after{content:'';position:absolute;inset:0;
   background:linear-gradient(135deg,rgba(255,20,147,.06),rgba(212,169,106,.08))}
+.prod-img.has-photo::after{content:none}
+.prod-img.has-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .prod-badge{position:absolute;top:12px;left:12px;
   padding:4px 10px;border-radius:20px;
   background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
@@ -787,12 +789,14 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
     <div class="tab-pane active" id="pane-capilar" role="tabpanel" aria-labelledby="tab-capilar">
       <div class="prod-grid">
         <div class="prod-card rev d1">
-          <div class="prod-img">🧴<span class="prod-badge">⭐ Destacado</span></div>
+          <div class="prod-img has-photo">
+            <img src="images/shampoo-de-miel.jpg" alt="Shampoo de Miel Brillo Intenso - Click Hair" loading="lazy">
+            <span class="prod-badge">⭐ Destacado</span>
+          </div>
           <div class="prod-body">
             <div class="prod-brand">Click Hair</div>
             <div class="prod-name">Shampoo de Miel Brillo Intenso</div>
             <div class="prod-desc">Alta concentración de vitaminas que devuelven la luminosidad y vitalidad. Sin sal ni parabenos.</div>
-            <div class="prod-price">$44.000</div>
             <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Shampoo%20de%20Miel%20Brillo%20Intenso%20de%20Click%20Hair%20%F0%9F%8C%B8" 
                target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
           </div>
