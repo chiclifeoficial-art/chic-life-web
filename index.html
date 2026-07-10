@@ -578,6 +578,44 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   .hero-card-grid{grid-template-columns:1fr 1fr;max-width:100%}
 }
 </style>
+
+<!-- ═══════════════════════════════════════════════════════════
+     GOOGLE ANALYTICS 4
+     ⚠️ REEMPLAZA "G-XXXXXXXXXX" POR TU ID DE MEDICIÓN REAL.
+     Lo obtienes en analytics.google.com → Admin → Flujos de datos
+     → tu flujo web → "ID de MEDICIÓN" (empieza con G-).
+     Mientras tenga el valor de ejemplo, NO va a registrar datos reales.
+     ═══════════════════════════════════════════════════════════ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════
+     META PIXEL (Facebook / Instagram) — para remarketing
+     ⚠️ REEMPLAZA "0000000000000000" POR TU ID DE PIXEL REAL.
+     Lo obtienes en business.facebook.com/events_manager →
+     tu Pixel → "Detalles" (número de 15-16 dígitos).
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '0000000000000000');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=0000000000000000&ev=PageView&noscript=1"
+/></noscript>
+
 </head>
 <body>
 
@@ -795,78 +833,7 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
 
     <!-- PESTAÑA: CAPILAR -->
     <div class="tab-pane active" id="pane-capilar" role="tabpanel" aria-labelledby="tab-capilar">
-      <div class="prod-grid">
-        <div class="prod-card rev d1">
-          <div class="prod-img has-photo">
-            <img src="images/shampoo-de-miel.jpg" alt="Shampoo de Miel Brillo Intenso - Click Hair" loading="lazy">
-            <span class="prod-badge">⭐ Destacado</span>
-          </div>
-          <div class="prod-body">
-            <div class="prod-brand">Click Hair</div>
-            <div class="prod-name">Shampoo de Miel Brillo Intenso</div>
-            <div class="prod-desc">Alta concentración de vitaminas que devuelven la luminosidad y vitalidad. Sin sal ni parabenos.</div>
-            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Shampoo%20de%20Miel%20Brillo%20Intenso%20de%20Click%20Hair%20%F0%9F%8C%B8" 
-               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d2">
-          <div class="prod-img has-photo">
-            <img src="images/mascarilla-de-miel.webp" alt="Mascarilla de Miel Brillo Intenso - Click Hair" loading="lazy">
-          </div>
-          <div class="prod-body">
-            <div class="prod-brand">Click Hair</div>
-            <div class="prod-name">Mascarilla de Miel Brillo Intenso</div>
-            <div class="prod-desc">Recupera la vitalidad y realza el color después de tratamientos químicos. Cabello renovado.</div>
-            <a href="https://wa.me/573226905702" target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d3">
-          <div class="prod-img has-photo" style="aspect-ratio:1/1">
-            <img src="images/shampoo-crespos.webp" alt="Shampoo Crespos 300ml - Ponto Hair Club" loading="lazy">
-            <span class="prod-badge">Vegano</span>
-          </div>
-          <div class="prod-body">
-            <div class="prod-brand">Ponto Hair Club</div>
-            <div class="prod-name">Shampoo Crespos 300ml</div>
-            <div class="prod-desc">Con aloe vera y agua micelar. Limpia sin resecar las puntas. Vegano y liberado. Para texturas rizadas.</div>
-            <a href="https://wa.me/573226905702" target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d1">
-          <div class="prod-img has-photo" style="aspect-ratio:1/1">
-            <img src="images/mascarilla-bomba-botanica.webp" alt="Mascarilla Bomba Botánica S.O.S - Origen Botánico" loading="lazy">
-          </div>
-          <div class="prod-body">
-            <div class="prod-brand">Origen Botánico</div>
-            <div class="prod-name">Mascarilla Bomba Botánica S.O.S</div>
-            <div class="prod-desc">Colágeno y biotina que repara profundamente. Disminuye la caída y reduce el frizz 72%.</div>
-            <a href="https://wa.me/573226905702" target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d2">
-          <div class="prod-img has-photo" style="aspect-ratio:1/1">
-            <img src="images/shampoo-aguacate-cbd_1.webp" alt="Shampoo Aguacate y CBD 450ml - Magia Natural" loading="lazy">
-            <span class="prod-badge">CBD</span>
-          </div>
-          <div class="prod-body">
-            <div class="prod-brand">Magia Natural</div>
-            <div class="prod-name">Shampoo Aguacate & CBD 450ml</div>
-            <div class="prod-desc">CBD y aguacate estimulan el crecimiento, controlan la caspa y fortalecen el folículo piloso.</div>
-            <a href="https://wa.me/573226905702" target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d3">
-          <div class="prod-img has-photo" style="aspect-ratio:851/940">
-            <img src="images/kit-purify-anticaida_1.webp" alt="Kit Purify Anticaída 500ml - Amazónica Beleza" loading="lazy">
-          </div>
-          <div class="prod-body">
-            <div class="prod-brand">Amazónica Beleza</div>
-            <div class="prod-name">Kit Purify Anticaída 500ml</div>
-            <div class="prod-desc">Con mirra y rosas. Limpia profundamente, evita la caída y promueve el crecimiento acelerado.</div>
-            <a href="https://wa.me/573226905702" target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-      </div>
+      <div class="prod-grid" id="grid-capilar"></div>
 
       <!-- Sección Rizos -->
       <div class="rizos-sec rev">
@@ -907,68 +874,7 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
 
     <!-- PESTAÑA: SKINCARE -->
     <div class="tab-pane" id="pane-skincare" role="tabpanel" aria-labelledby="tab-skincare">
-      <div class="prod-grid">
-        <div class="prod-card rev d1">
-          <div class="prod-img">💧</div>
-          <div class="prod-body">
-            <div class="prod-brand">Chic Life</div>
-            <div class="prod-name">Sérum Vitamina C Luminoso</div>
-            <div class="prod-desc">Ilumina el tono de la piel y ayuda a unificar manchas. Antioxidante de uso diario.</div>
-            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20S%C3%A9rum%20Vitamina%20C%20Luminoso" 
-               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d2">
-          <div class="prod-img">🫙</div>
-          <div class="prod-body">
-            <div class="prod-brand">Chic Life</div>
-            <div class="prod-name">Crema Hidratante Ácido Hialurónico</div>
-            <div class="prod-desc">Hidratación profunda de larga duración. Piel visiblemente más tersa desde la primera aplicación.</div>
-            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20la%20Crema%20Hidratante%20%C3%81cido%20Hialur%C3%B3nico" 
-               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d3">
-          <div class="prod-img">☀️<span class="prod-badge">FPS 50</span></div>
-          <div class="prod-body">
-            <div class="prod-brand">Chic Life</div>
-            <div class="prod-name">Protector Solar Facial FPS 50</div>
-            <div class="prod-desc">Protección diaria de amplio espectro, acabado ligero sin efecto blanco.</div>
-            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Protector%20Solar%20Facial%20FPS%2050" 
-               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d1">
-          <div class="prod-img">🌹</div>
-          <div class="prod-body">
-            <div class="prod-brand">Chic Life</div>
-            <div class="prod-name">Tónico Facial Agua de Rosas</div>
-            <div class="prod-desc">Equilibra el pH de la piel y refresca después de la limpieza. Apto para piel sensible.</div>
-            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20T%C3%B3nico%20Facial%20Agua%20de%20Rosas" 
-               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d2">
-          <div class="prod-img">👁️</div>
-          <div class="prod-body">
-            <div class="prod-brand">Chic Life</div>
-            <div class="prod-name">Contorno de Ojos con Colágeno</div>
-            <div class="prod-desc">Reduce la apariencia de líneas finas y ojeras. Aplicación suave con roller de masaje.</div>
-            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Contorno%20de%20Ojos%20con%20Col%C3%A1geno" 
-               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d3">
-          <div class="prod-img">✨</div>
-          <div class="prod-body">
-            <div class="prod-brand">Chic Life</div>
-            <div class="prod-name">Bruma Facial Iluminadora</div>
-            <div class="prod-desc">Fija el maquillaje y da un acabado radiante con partículas de luz sutiles.</div>
-            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20la%20Bruma%20Facial%20Iluminadora" 
-               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-      </div>
+      <div class="prod-grid" id="grid-skincare"></div>
 
       <div class="blush-card rev">
         <div class="sec-label">Producto Estrella</div>
@@ -1040,68 +946,7 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
 
     <!-- PESTAÑA: CUIDADO CORPORAL -->
     <div class="tab-pane" id="pane-corporal" role="tabpanel" aria-labelledby="tab-corporal">
-      <div class="prod-grid">
-        <div class="prod-card rev d1">
-          <div class="prod-img">🧈<span class="prod-badge">⭐ Destacado</span></div>
-          <div class="prod-body">
-            <div class="prod-brand">Chic Life</div>
-            <div class="prod-name">Mantequilla Corporal de Karité</div>
-            <div class="prod-desc">Nutrición intensa para piel muy seca. Textura densa que se absorbe sin dejar sensación grasosa.</div>
-            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20la%20Mantequilla%20Corporal%20de%20Karit%C3%A9" 
-               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d2">
-          <div class="prod-img">☕</div>
-          <div class="prod-body">
-            <div class="prod-brand">Chic Life</div>
-            <div class="prod-name">Exfoliante Corporal de Café</div>
-            <div class="prod-desc">Elimina células muertas y reactiva la circulación. Aroma intenso a café colombiano.</div>
-            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Exfoliante%20Corporal%20de%20Caf%C3%A9" 
-               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d3">
-          <div class="prod-img">💧</div>
-          <div class="prod-body">
-            <div class="prod-brand">Chic Life</div>
-            <div class="prod-name">Aceite Corporal Nutritivo</div>
-            <div class="prod-desc">Blend de aceites naturales que sella la hidratación y deja la piel con brillo saludable.</div>
-            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Aceite%20Corporal%20Nutritivo" 
-               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d1">
-          <div class="prod-img">🌸</div>
-          <div class="prod-body">
-            <div class="prod-brand">Chic Life</div>
-            <div class="prod-name">Crema Reafirmante Corporal</div>
-            <div class="prod-desc">Ayuda a mejorar la firmeza y elasticidad de la piel con uso constante.</div>
-            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20la%20Crema%20Reafirmante%20Corporal" 
-               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d2">
-          <div class="prod-img">🚿</div>
-          <div class="prod-body">
-            <div class="prod-brand">Chic Life</div>
-            <div class="prod-name">Gel de Ducha Hidratante</div>
-            <div class="prod-desc">Limpieza suave que no reseca. Espuma cremosa con extractos naturales.</div>
-            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Gel%20de%20Ducha%20Hidratante" 
-               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-        <div class="prod-card rev d3">
-          <div class="prod-img">🌺</div>
-          <div class="prod-body">
-            <div class="prod-brand">Chic Life</div>
-            <div class="prod-name">Loción Corporal Perfumada</div>
-            <div class="prod-desc">Hidratación ligera de absorción rápida con fragancia floral que dura todo el día.</div>
-            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20la%20Loci%C3%B3n%20Corporal%20Perfumada" 
-               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
-          </div>
-        </div>
-      </div>
+      <div class="prod-grid" id="grid-corporal"></div>
     </div>
 
     <div style="text-align:center;margin-top:48px" class="rev">
@@ -1408,6 +1253,180 @@ document.querySelectorAll('.mob-link').forEach(link => {
     document.body.style.overflow = '';
   });
 });
+
+// ═══════════════════════════════════════════════════════════
+// TRACKING DE INTENCIÓN — CLICS EN WHATSAPP
+// Dispara un evento a GA4 y Meta Pixel cada vez que alguien hace clic
+// en cualquier botón "Pedir por WhatsApp" o "Pedir ahora" del sitio.
+// Esto permite armar audiencias de remarketing de "visitó pero no
+// hizo clic en pedir" en vez de solo "visitó la página".
+// ═══════════════════════════════════════════════════════════
+document.addEventListener('click', function (e) {
+  const link = e.target.closest('a[href*="wa.me"]');
+  if (!link) return;
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'generate_lead', { method: 'WhatsApp' });
+  }
+  if (typeof fbq === 'function') {
+    fbq('track', 'Lead');
+  }
+});
+
+// ═══════════════════════════════════════════════════════════
+// CATÁLOGO DE PRODUCTOS — DATOS
+// Para agregar un producto nuevo: copia un objeto dentro del arreglo
+// de la categoría correspondiente y cambia sus valores. No hace falta
+// tocar HTML ni CSS. Los campos `img`/`imgAlt` son opcionales — si no
+// hay foto real todavía, usa `emoji` en su lugar.
+// ═══════════════════════════════════════════════════════════
+const WA_PHONE = '573226905702';
+
+const PRODUCTS = {
+  capilar: [
+    {
+      brand: 'Click Hair', name: 'Shampoo de Miel Brillo Intenso',
+      desc: 'Alta concentración de vitaminas que devuelven la luminosidad y vitalidad. Sin sal ni parabenos.',
+      img: 'images/shampoo-de-miel.jpg', imgAlt: 'Shampoo de Miel Brillo Intenso - Click Hair',
+      badge: '⭐ Destacado',
+      waMsg: 'Hola! Me interesa el Shampoo de Miel Brillo Intenso de Click Hair 🌸'
+    },
+    {
+      brand: 'Click Hair', name: 'Mascarilla de Miel Brillo Intenso',
+      desc: 'Recupera la vitalidad y realza el color después de tratamientos químicos. Cabello renovado.',
+      img: 'images/mascarilla-de-miel.webp', imgAlt: 'Mascarilla de Miel Brillo Intenso - Click Hair'
+    },
+    {
+      brand: 'Ponto Hair Club', name: 'Shampoo Crespos 300ml',
+      desc: 'Con aloe vera y agua micelar. Limpia sin resecar las puntas. Vegano y liberado. Para texturas rizadas.',
+      img: 'images/shampoo-crespos.webp', imgAlt: 'Shampoo Crespos 300ml - Ponto Hair Club',
+      badge: 'Vegano', aspectRatio: '1/1'
+    },
+    {
+      brand: 'Origen Botánico', name: 'Mascarilla Bomba Botánica S.O.S',
+      desc: 'Colágeno y biotina que repara profundamente. Disminuye la caída y reduce el frizz 72%.',
+      img: 'images/mascarilla-bomba-botanica.webp', imgAlt: 'Mascarilla Bomba Botánica S.O.S - Origen Botánico',
+      aspectRatio: '1/1'
+    },
+    {
+      brand: 'Magia Natural', name: 'Shampoo Aguacate & CBD 450ml',
+      desc: 'CBD y aguacate estimulan el crecimiento, controlan la caspa y fortalecen el folículo piloso.',
+      img: 'images/shampoo-aguacate-cbd_1.webp', imgAlt: 'Shampoo Aguacate y CBD 450ml - Magia Natural',
+      badge: 'CBD', aspectRatio: '1/1'
+    },
+    {
+      brand: 'Amazónica Beleza', name: 'Kit Purify Anticaída 500ml',
+      desc: 'Con mirra y rosas. Limpia profundamente, evita la caída y promueve el crecimiento acelerado.',
+      img: 'images/kit-purify-anticaida_1.webp', imgAlt: 'Kit Purify Anticaída 500ml - Amazónica Beleza',
+      aspectRatio: '851/940'
+    }
+  ],
+  skincare: [
+    {
+      brand: 'Chic Life', name: 'Sérum Vitamina C Luminoso',
+      desc: 'Ilumina el tono de la piel y ayuda a unificar manchas. Antioxidante de uso diario.',
+      emoji: '💧'
+    },
+    {
+      brand: 'Chic Life', name: 'Crema Hidratante Ácido Hialurónico',
+      desc: 'Hidratación profunda de larga duración. Piel visiblemente más tersa desde la primera aplicación.',
+      emoji: '🫙'
+    },
+    {
+      brand: 'Chic Life', name: 'Protector Solar Facial FPS 50',
+      desc: 'Protección diaria de amplio espectro, acabado ligero sin efecto blanco.',
+      emoji: '☀️', badge: 'FPS 50'
+    },
+    {
+      brand: 'Chic Life', name: 'Tónico Facial Agua de Rosas',
+      desc: 'Equilibra el pH de la piel y refresca después de la limpieza. Apto para piel sensible.',
+      emoji: '🌹'
+    },
+    {
+      brand: 'Chic Life', name: 'Contorno de Ojos con Colágeno',
+      desc: 'Reduce la apariencia de líneas finas y ojeras. Aplicación suave con roller de masaje.',
+      emoji: '👁️'
+    },
+    {
+      brand: 'Chic Life', name: 'Bruma Facial Iluminadora',
+      desc: 'Fija el maquillaje y da un acabado radiante con partículas de luz sutiles.',
+      emoji: '✨'
+    }
+  ],
+  corporal: [
+    {
+      brand: 'Chic Life', name: 'Mantequilla Corporal de Karité',
+      desc: 'Nutrición intensa para piel muy seca. Textura densa que se absorbe sin dejar sensación grasosa.',
+      emoji: '🧈', badge: '⭐ Destacado'
+    },
+    {
+      brand: 'Chic Life', name: 'Exfoliante Corporal de Café',
+      desc: 'Elimina células muertas y reactiva la circulación. Aroma intenso a café colombiano.',
+      emoji: '☕'
+    },
+    {
+      brand: 'Chic Life', name: 'Aceite Corporal Nutritivo',
+      desc: 'Blend de aceites naturales que sella la hidratación y deja la piel con brillo saludable.',
+      emoji: '💧'
+    },
+    {
+      brand: 'Chic Life', name: 'Crema Reafirmante Corporal',
+      desc: 'Ayuda a mejorar la firmeza y elasticidad de la piel con uso constante.',
+      emoji: '🌸'
+    },
+    {
+      brand: 'Chic Life', name: 'Gel de Ducha Hidratante',
+      desc: 'Limpieza suave que no reseca. Espuma cremosa con extractos naturales.',
+      emoji: '🚿'
+    },
+    {
+      brand: 'Chic Life', name: 'Loción Corporal Perfumada',
+      desc: 'Hidratación ligera de absorción rápida con fragancia floral que dura todo el día.',
+      emoji: '🌺'
+    }
+  ]
+};
+
+const REV_CYCLE = ['d1', 'd2', 'd3']; // ritmo de aparición escalonado, se repite cada 3 tarjetas
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function renderProductGrid(gridId, items) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+
+  grid.innerHTML = items.map((p, i) => {
+    const revClass = REV_CYCLE[i % REV_CYCLE.length];
+    const badgeHtml = p.badge ? `<span class="prod-badge">${escapeHtml(p.badge)}</span>` : '';
+
+    const imgBlock = p.img
+      ? `<div class="prod-img has-photo"${p.aspectRatio ? ` style="aspect-ratio:${p.aspectRatio}"` : ''}>
+           <img src="${p.img}" alt="${escapeHtml(p.imgAlt || p.name)}" loading="lazy">
+           ${badgeHtml}
+         </div>`
+      : `<div class="prod-img">${p.emoji || '🌸'}${badgeHtml}</div>`;
+
+    const waText = p.waMsg ? `?text=${encodeURIComponent(p.waMsg)}` : '';
+
+    return `<div class="prod-card rev ${revClass}">
+      ${imgBlock}
+      <div class="prod-body">
+        <div class="prod-brand">${escapeHtml(p.brand)}</div>
+        <div class="prod-name">${escapeHtml(p.name)}</div>
+        <div class="prod-desc">${escapeHtml(p.desc)}</div>
+        <a href="https://wa.me/${WA_PHONE}${waText}" target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+renderProductGrid('grid-capilar', PRODUCTS.capilar);
+renderProductGrid('grid-skincare', PRODUCTS.skincare);
+renderProductGrid('grid-corporal', PRODUCTS.corporal);
 
 // ═══════════════════════════════════════════════════════════
 // INTERSECTION OBSERVER — REVEAL ANIMATIONS
