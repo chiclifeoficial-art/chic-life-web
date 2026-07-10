@@ -109,12 +109,14 @@ header.scrolled{box-shadow:0 4px 32px rgba(255,20,147,.1)}
   color:var(--ink-s);transition:all .2s}
 .dropdown-menu a:hover{background:var(--rose-l);color:var(--fuchsia)}
 .nav-cta{
-  padding:10px 22px;border-radius:40px;
+  padding:12px 28px;border-radius:40px;
   background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
-  color:var(--white)!important;font-weight:600;font-size:.8rem;
-  box-shadow:0 4px 16px rgba(255,20,147,.35);
+  color:var(--white)!important;font-weight:700;font-size:.86rem;
+  box-shadow:0 4px 20px rgba(255,20,147,.5);
   transition:all .3s var(--ease);letter-spacing:.06em}
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,20,147,.45)!important;background:rgba(255,20,147,.06)!important;-webkit-text-fill-color:var(--white)!important}
+.nav-cta:hover{transform:translateY(-2px) scale(1.04);
+  box-shadow:0 10px 28px rgba(255,20,147,.65);
+  background:linear-gradient(135deg,#FF69B4,var(--fuchsia))}
 .burger{display:none;background:none;border:none;cursor:pointer;
   flex-direction:column;gap:5px;padding:6px}
 .burger span{display:block;width:24px;height:2px;background:var(--ink);border-radius:2px;transition:all .3s}
@@ -603,8 +605,9 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
           Tienda ▾
         </button>
         <div class="dropdown-menu" role="menu">
-          <a href="#catalogo" role="menuitem">💇 Cuidado Capilar</a>
-          <a href="#skincare" role="menuitem">✨ Skincare & Color</a>
+          <a href="#catalogo" role="menuitem" onclick="switchTab('capilar')">💇 Cuidado Capilar</a>
+          <a href="#catalogo" role="menuitem" onclick="switchTab('skincare')">✨ Skincare & Color</a>
+          <a href="#catalogo" role="menuitem" onclick="switchTab('corporal')">🧴 Cuidado Corporal</a>
         </div>
       </div>
       <a href="#nosotros">Sobre Nosotros</a>
@@ -622,8 +625,9 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
 <!-- MENÚ MÓVIL -->
 <nav class="mobile-menu" id="mobile-menu" aria-label="Menú móvil">
   <a href="#inicio" class="mob-link">Inicio</a>
-  <a href="#catalogo" class="mob-link">Cuidado Capilar</a>
-  <a href="#skincare" class="mob-link">Skincare & Color</a>
+  <a href="#catalogo" class="mob-link" onclick="switchTab('capilar')">Cuidado Capilar</a>
+  <a href="#catalogo" class="mob-link" onclick="switchTab('skincare')">Skincare & Color</a>
+  <a href="#catalogo" class="mob-link" onclick="switchTab('corporal')">Cuidado Corporal</a>
   <a href="#nosotros" class="mob-link">Sobre Nosotros</a>
   <a href="#lunar" class="mob-link">Comunidad Lunar</a>
   <a href="#contacto" class="mob-link">Contacto</a>
@@ -690,7 +694,7 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
 
 <!-- STORY CARDS -->
 <div class="story-cards">
-  <a href="#catalogo" class="story-card rev d1" aria-label="Cuidado Capilar"
+  <a href="#catalogo" class="story-card rev d1" aria-label="Cuidado Capilar" onclick="switchTab('capilar')"
      style="background-image:url('images/cuidado-capilar.webp');background-size:cover;background-position:center top">
     <div class="story-card-inner">
       <h3>Cuidado Capilar</h3>
@@ -698,7 +702,7 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
       <span class="story-btn">Explorar Soluciones →</span>
     </div>
   </a>
-  <a href="#skincare" class="story-card rev d2" aria-label="Skincare & Color"
+  <a href="#catalogo" class="story-card rev d2" aria-label="Skincare & Color" onclick="switchTab('skincare')"
      style="background-image:url('images/skincare-color.jpg');background-size:cover;background-position:center top">
     <div class="story-card-inner">
       <h3>Skincare & Color</h3>
@@ -706,7 +710,7 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
       <span class="story-btn">Ver Tendencias →</span>
     </div>
   </a>
-  <a href="#catalogo" class="story-card rev d3" aria-label="Cuidado Corporal"
+  <a href="#catalogo" class="story-card rev d3" aria-label="Cuidado Corporal" onclick="switchTab('corporal')"
      style="background-image:url('images/cuidado-corporal.jpg');background-size:cover;background-position:center top">
     <div class="story-card-inner">
       <h3>Cuidado Corporal</h3>
@@ -783,7 +787,10 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
               onclick="switchTab('capilar')">💇 Cuidado Capilar</button>
       <button class="tab-btn" role="tab" aria-selected="false"
               aria-controls="pane-skincare" id="tab-skincare"
-              onclick="switchTab('skincare')" id="skincare">✨ Skincare & Color</button>
+              onclick="switchTab('skincare')">✨ Skincare & Color</button>
+      <button class="tab-btn" role="tab" aria-selected="false"
+              aria-controls="pane-corporal" id="tab-corporal"
+              onclick="switchTab('corporal')">🧴 Cuidado Corporal</button>
     </div>
 
     <!-- PESTAÑA: CAPILAR -->
@@ -900,6 +907,69 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
 
     <!-- PESTAÑA: SKINCARE -->
     <div class="tab-pane" id="pane-skincare" role="tabpanel" aria-labelledby="tab-skincare">
+      <div class="prod-grid">
+        <div class="prod-card rev d1">
+          <div class="prod-img">💧</div>
+          <div class="prod-body">
+            <div class="prod-brand">Chic Life</div>
+            <div class="prod-name">Sérum Vitamina C Luminoso</div>
+            <div class="prod-desc">Ilumina el tono de la piel y ayuda a unificar manchas. Antioxidante de uso diario.</div>
+            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20S%C3%A9rum%20Vitamina%20C%20Luminoso" 
+               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d2">
+          <div class="prod-img">🫙</div>
+          <div class="prod-body">
+            <div class="prod-brand">Chic Life</div>
+            <div class="prod-name">Crema Hidratante Ácido Hialurónico</div>
+            <div class="prod-desc">Hidratación profunda de larga duración. Piel visiblemente más tersa desde la primera aplicación.</div>
+            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20la%20Crema%20Hidratante%20%C3%81cido%20Hialur%C3%B3nico" 
+               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d3">
+          <div class="prod-img">☀️<span class="prod-badge">FPS 50</span></div>
+          <div class="prod-body">
+            <div class="prod-brand">Chic Life</div>
+            <div class="prod-name">Protector Solar Facial FPS 50</div>
+            <div class="prod-desc">Protección diaria de amplio espectro, acabado ligero sin efecto blanco.</div>
+            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Protector%20Solar%20Facial%20FPS%2050" 
+               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d1">
+          <div class="prod-img">🌹</div>
+          <div class="prod-body">
+            <div class="prod-brand">Chic Life</div>
+            <div class="prod-name">Tónico Facial Agua de Rosas</div>
+            <div class="prod-desc">Equilibra el pH de la piel y refresca después de la limpieza. Apto para piel sensible.</div>
+            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20T%C3%B3nico%20Facial%20Agua%20de%20Rosas" 
+               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d2">
+          <div class="prod-img">👁️</div>
+          <div class="prod-body">
+            <div class="prod-brand">Chic Life</div>
+            <div class="prod-name">Contorno de Ojos con Colágeno</div>
+            <div class="prod-desc">Reduce la apariencia de líneas finas y ojeras. Aplicación suave con roller de masaje.</div>
+            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Contorno%20de%20Ojos%20con%20Col%C3%A1geno" 
+               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d3">
+          <div class="prod-img">✨</div>
+          <div class="prod-body">
+            <div class="prod-brand">Chic Life</div>
+            <div class="prod-name">Bruma Facial Iluminadora</div>
+            <div class="prod-desc">Fija el maquillaje y da un acabado radiante con partículas de luz sutiles.</div>
+            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20la%20Bruma%20Facial%20Iluminadora" 
+               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+
       <div class="blush-card rev">
         <div class="sec-label">Producto Estrella</div>
         <h3 style="font-family:var(--fd);font-size:1.6rem;font-weight:700">Liquid Blush</h3>
@@ -963,6 +1033,72 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
             </div>
             <h4>3. Toque de Color</h4>
             <p>Liquid Blush para un glow natural que dura todo el día</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PESTAÑA: CUIDADO CORPORAL -->
+    <div class="tab-pane" id="pane-corporal" role="tabpanel" aria-labelledby="tab-corporal">
+      <div class="prod-grid">
+        <div class="prod-card rev d1">
+          <div class="prod-img">🧈<span class="prod-badge">⭐ Destacado</span></div>
+          <div class="prod-body">
+            <div class="prod-brand">Chic Life</div>
+            <div class="prod-name">Mantequilla Corporal de Karité</div>
+            <div class="prod-desc">Nutrición intensa para piel muy seca. Textura densa que se absorbe sin dejar sensación grasosa.</div>
+            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20la%20Mantequilla%20Corporal%20de%20Karit%C3%A9" 
+               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d2">
+          <div class="prod-img">☕</div>
+          <div class="prod-body">
+            <div class="prod-brand">Chic Life</div>
+            <div class="prod-name">Exfoliante Corporal de Café</div>
+            <div class="prod-desc">Elimina células muertas y reactiva la circulación. Aroma intenso a café colombiano.</div>
+            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Exfoliante%20Corporal%20de%20Caf%C3%A9" 
+               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d3">
+          <div class="prod-img">💧</div>
+          <div class="prod-body">
+            <div class="prod-brand">Chic Life</div>
+            <div class="prod-name">Aceite Corporal Nutritivo</div>
+            <div class="prod-desc">Blend de aceites naturales que sella la hidratación y deja la piel con brillo saludable.</div>
+            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Aceite%20Corporal%20Nutritivo" 
+               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d1">
+          <div class="prod-img">🌸</div>
+          <div class="prod-body">
+            <div class="prod-brand">Chic Life</div>
+            <div class="prod-name">Crema Reafirmante Corporal</div>
+            <div class="prod-desc">Ayuda a mejorar la firmeza y elasticidad de la piel con uso constante.</div>
+            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20la%20Crema%20Reafirmante%20Corporal" 
+               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d2">
+          <div class="prod-img">🚿</div>
+          <div class="prod-body">
+            <div class="prod-brand">Chic Life</div>
+            <div class="prod-name">Gel de Ducha Hidratante</div>
+            <div class="prod-desc">Limpieza suave que no reseca. Espuma cremosa con extractos naturales.</div>
+            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Gel%20de%20Ducha%20Hidratante" 
+               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+        </div>
+        <div class="prod-card rev d3">
+          <div class="prod-img">🌺</div>
+          <div class="prod-body">
+            <div class="prod-brand">Chic Life</div>
+            <div class="prod-name">Loción Corporal Perfumada</div>
+            <div class="prod-desc">Hidratación ligera de absorción rápida con fragancia floral que dura todo el día.</div>
+            <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20la%20Loci%C3%B3n%20Corporal%20Perfumada" 
+               target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
           </div>
         </div>
       </div>
@@ -1197,8 +1333,9 @@ window.addEventListener('load', function () {
     <div class="footer-col">
       <h4>Tienda Online</h4>
       <ul>
-        <li><a href="#catalogo">Cuidado Capilar</a></li>
-        <li><a href="#skincare">Skincare & Color</a></li>
+        <li><a href="#catalogo" onclick="switchTab('capilar')">Cuidado Capilar</a></li>
+        <li><a href="#catalogo" onclick="switchTab('skincare')">Skincare & Color</a></li>
+        <li><a href="#catalogo" onclick="switchTab('corporal')">Cuidado Corporal</a></li>
         <li><a href="https://chiclife.my.canva.site/catalogo" target="_blank" rel="noopener">Catálogo Completo</a></li>
         <li><a href="#lunar">Calendario Lunar</a></li>
       </ul>
