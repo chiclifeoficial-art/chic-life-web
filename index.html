@@ -298,6 +298,19 @@ section{padding:100px 32px}
   border-left:3px solid var(--fuchsia);padding-left:20px;margin:24px 0;
   font-family:var(--fd);font-size:1.15rem;font-style:italic;color:var(--ink);line-height:1.6
 }
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.pillar-card{
+  background:var(--rose-l);border-radius:var(--r-md);padding:32px 28px;
+  border-top:4px solid var(--fuchsia);transition:transform .3s var(--ease),box-shadow .3s var(--ease)
+}
+.pillar-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-f)}
+.pillar-icon{font-size:2rem;margin-bottom:14px}
+.pillar-card h4{font-family:var(--fd);font-size:1.25rem;font-weight:700;color:var(--ink);margin-bottom:14px}
+.pillar-card p{font-size:.86rem;color:var(--ink-s);line-height:1.75;font-weight:300}
+.pillar-card ul{margin:14px 0;padding-left:0}
+.pillar-card li{font-size:.84rem;color:var(--ink-s);line-height:1.7;padding-left:18px;position:relative;margin-bottom:6px}
+.pillar-card li::before{content:'—';position:absolute;left:0;color:var(--fuchsia);font-weight:700}
+.pillar-card li strong{color:var(--ink);font-weight:600}
 
 /* ═══════════════════════════════════════════════════════════
    CATÁLOGO
@@ -554,6 +567,7 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   .hero-card-grid{margin:0 auto}
   .story-cards{grid-template-columns:1fr 1fr}
   .about-grid,.contact-layout,.lunar-layout{grid-template-columns:1fr}
+  .pillars-grid{grid-template-columns:1fr 1fr}
   .rizos-grid{grid-template-columns:1fr 1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
   .hero-sub{margin:0 auto 36px}
@@ -567,7 +581,7 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   .story-cards{grid-template-columns:1fr;padding:0 20px}
   .story-card{height:280px}
   .rizos-grid{grid-template-columns:1fr}
-  .ritual-flow{grid-template-columns:1fr;gap:20px}
+  .pillars-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
   .lunar-calendar{display:none}
   .hero-card-grid{grid-template-columns:1fr 1fr}
@@ -807,6 +821,37 @@ fbq('track', 'PageView');
           clienta es protagonista. <strong>Del Click al Corazón</strong> no es solo un slogan;
           es la promesa de que cada interacción contigo importa.</p>
         </div>
+      </div>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-card rev d1">
+        <div class="pillar-icon">💗</div>
+        <h4>Propósito</h4>
+        <p>Democratizar el bienestar integral de la mujer, transformando el cuidado capilar, facial y corporal en rituales de amor propio con alma y propósito. Nuestra razón de ser es demostrar que <strong>"vivir con estilo no es un lujo, es una actitud que todas merecemos"</strong> — no a través de grandes presupuestos publicitarios, sino elevando la identidad femenina mediante contenido que toca la fibra emocional y cultural correcta, del click al corazón.</p>
+      </div>
+
+      <div class="pillar-card rev d2">
+        <div class="pillar-icon">🎯</div>
+        <h4>Misión</h4>
+        <p>Ser el principal curador y facilitador de cosmética colombiana de autor, ofreciendo un portafolio rigurosamente seleccionado de más de 10 marcas especializadas que brindan soluciones reales en tres frentes:</p>
+        <ul>
+          <li><strong>Cuidado Capilar</strong> — restauración, fuerza y brillo natural adaptado a cada tipo de hebra.</li>
+          <li><strong>Cuidado Facial</strong> — tratamientos con vitamina C, ácido hialurónico y activos botánicos, incluyendo nuestra línea de color para un acabado natural.</li>
+          <li><strong>Cuidado Corporal</strong> — mantequillas, exfoliantes y rituales sensoriales que nutren la piel.</li>
+        </ul>
+        <p>Todo mediante asesoría personalizada por WhatsApp que prioriza la educación sobre la venta tradicional.</p>
+      </div>
+
+      <div class="pillar-card rev d3">
+        <div class="pillar-icon">🌙</div>
+        <h4>Visión <span style="font-size:.7rem;color:var(--fuchsia);font-weight:600">hacia 2026</span></h4>
+        <p>Consolidarnos como el movimiento de empoderamiento femenino y boutique digital de referencia en Colombia, liderando la transición del comercio transaccional hacia una economía de la confianza y la cercanía. Aspiramos a:</p>
+        <ul>
+          <li>Integrar sabiduría ancestral —como nuestro Calendario Lunar— con cosmética de autor en cada ritual.</li>
+          <li>Transformar a nuestra comunidad en embajadoras orgánicas que encuentren en Chic Life un aliado real.</li>
+          <li>Que cada interacción digital y cada entrega física sea un momento de deleite inolvidable.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -1386,7 +1431,7 @@ const PRODUCTS = {
     },
     {
       brand: 'Four Sensations', name: 'Exfoliante Four Sensations',
-      desc: 'Renueva tu piel. Ilumina tu esencia. Este exfoliante une lo mejor de la ciencia y la naturaleza para ofrecerte una experiencia nutritiva y revitalizante. 200ml.',
+      desc: 'Renueva tu piel. Ilumina tu esencia. Este exfoliante une lo mejor de la ciencia y la naturaleza para ofrecerte una experiencia nutritiva y revitalizante.',
       img: 'images/exfoliante-four-sensations.jpg', imgAlt: 'Exfoliante Four Sensations',
       aspectRatio: '374/534'
     },
@@ -1398,7 +1443,7 @@ const PRODUCTS = {
     }
   ]
 };
- 
+
 const REV_CYCLE = ['d1', 'd2', 'd3']; // ritmo de aparición escalonado, se repite cada 3 tarjetas
 
 function escapeHtml(str) {
