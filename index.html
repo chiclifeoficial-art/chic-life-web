@@ -369,10 +369,13 @@ section{padding:100px 32px}
 .rizos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .rizos-card{
   background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
-  border-radius:var(--r-md);padding:24px;transition:all .3s;
+  border-radius:var(--r-md);overflow:hidden;transition:all .3s;
 }
 .rizos-card:hover{background:rgba(255,20,147,.15);border-color:rgba(255,20,147,.3);transform:translateY(-4px)}
+.rizos-img{aspect-ratio:1/1;overflow:hidden;background:rgba(0,0,0,.25)}
+.rizos-img img{width:100%;height:100%;object-fit:cover;display:block}
 .rizos-icon{font-size:2.2rem;margin-bottom:12px}
+.rizos-body{padding:20px 24px 24px}
 .rizos-card h4{font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:6px}
 .rizos-card p{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.6}
 /* Tip chic */
@@ -896,19 +899,25 @@ fbq('track', 'PageView');
         <div class="rizos-sub">Línea Ponto Hair Club — Vegana, liberada, sin sulfatos ni parabenos</div>
         <div class="rizos-grid">
           <div class="rizos-card">
-            <div class="rizos-icon">🚿</div>
-            <h4>Ponto Champú</h4>
-            <p>Limpieza suave con aloe vera y agua micelar. Recupera los rizos sin resecar.</p>
+            <div class="rizos-img"><img src="images/ponto-champu.webp" alt="Ponto Champú 300ml - Ponto Hair Club" loading="lazy"></div>
+            <div class="rizos-body">
+              <h4>Ponto Champú</h4>
+              <p>Limpieza suave con aloe vera y agua micelar. Recupera los rizos sin resecar.</p>
+            </div>
           </div>
           <div class="rizos-card">
-            <div class="rizos-icon">💦</div>
-            <h4>Ponto Hidratación 3en1</h4>
-            <p>Mascarilla, acondicionador y crema de peinar en uno. Brillo, reparación y suavidad.</p>
+            <div class="rizos-img"><img src="images/ponto-hidratacion-3en1.webp" alt="Ponto Hidratación 3en1 1000gr - Ponto Hair Club" loading="lazy"></div>
+            <div class="rizos-body">
+              <h4>Ponto Hidratación 3en1</h4>
+              <p>Mascarilla, acondicionador y crema de peinar en uno. Brillo, reparación y suavidad.</p>
+            </div>
           </div>
           <div class="rizos-card">
-            <div class="rizos-icon">💅</div>
-            <h4>Gelly Fest Fijación Media</h4>
-            <p>Arándano y cereza para rizos definidos, flexibles y sin frizz. Sin sensación pegajosa.</p>
+            <div class="rizos-img"><img src="images/gelly-fest-fijacion-media.webp" alt="Gelly Fest Fijación Media - Ponto Hair Club" loading="lazy"></div>
+            <div class="rizos-body">
+              <h4>Gelly Fest Fijación Media</h4>
+              <p>Arándano y cereza para rizos definidos, flexibles y sin frizz. Sin sensación pegajosa.</p>
+            </div>
           </div>
         </div>
       </div>
