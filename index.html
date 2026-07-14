@@ -2458,7 +2458,7 @@ document.querySelectorAll('.tone').forEach(tone => {
     <div id="cl-view-code" hidden>
       <p class="cl-popup-eyebrow">Este es tu código:</p>
       <div class="cl-popup-code">
-        <span id="cl-code-text">BIENVENIDA</span>
+        <span id="cl-code-text">BIENVENIDA10</span>
         <button type="button" id="cl-copy-btn" aria-label="Copiar código">📋</button>
       </div>
       <p class="cl-popup-cta-text">Copia el código y disfruta tu 10% off.</p>
@@ -2485,19 +2485,8 @@ document.querySelectorAll('.tone').forEach(tone => {
   const codeText = document.getElementById('cl-code-text');
   const copyBtn = document.getElementById('cl-copy-btn');
 
-  const STORAGE_SUBSCRIBED = 'clSubscribed';
-  const STORAGE_DISMISSED = 'clPopupDismissedAt';
-  const DISMISS_DAYS = 7;
-
-  function yaSuscrita(){
-    return localStorage.getItem(STORAGE_SUBSCRIBED) === 'true';
-  }
-  function fueDescartadoRecientemente(){
-    const ts = localStorage.getItem(STORAGE_DISMISSED);
-    if (!ts) return false;
-    const dias = (Date.now() - Number(ts)) / (1000 * 60 * 60 * 24);
-    return dias < DISMISS_DAYS;
-  }
+  // El popup se muestra cada vez que se carga/actualiza la página
+  // (sin memoria entre visitas — a propósito, por instrucción explícita).
   function abrirPopup(){
     overlay.classList.add('cl-open');
     requestAnimationFrame(() => overlay.classList.add('cl-visible'));
@@ -2509,19 +2498,11 @@ document.querySelectorAll('.tone').forEach(tone => {
     setTimeout(() => overlay.classList.remove('cl-open'), 350);
   }
 
-  if (!yaSuscrita() && !fueDescartadoRecientemente()) {
-    setTimeout(abrirPopup, 4000);
-  }
+  setTimeout(abrirPopup, 4000);
 
-  closeBtn.addEventListener('click', () => {
-    localStorage.setItem(STORAGE_DISMISSED, String(Date.now()));
-    cerrarPopup();
-  });
+  closeBtn.addEventListener('click', cerrarPopup);
   overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) {
-      localStorage.setItem(STORAGE_DISMISSED, String(Date.now()));
-      cerrarPopup();
-    }
+    if (e.target === overlay) cerrarPopup();
   });
 
   function mostrarError(msg){
@@ -2562,10 +2543,14 @@ document.querySelectorAll('.tone').forEach(tone => {
       return;
     }
 
+    // Google Sheets interpreta un valor que empieza con "+" como el inicio
+    // de una fórmula (por eso salía #ERROR!). Se guarda sin el "+" y solo
+    // con dígitos para que quede limpio y sea fácil de analizar después.
+    const whatsappDigitos = whatsapp.replace(/\D/g, '');
     const payload = {
       nombre: nombre,
       email: email,
-      whatsapp: '+57 ' + whatsapp,
+      whatsapp: '57' + whatsappDigitos,
       pais: 'Colombia',
       fechaNacimiento: `${dd}/${mm}/${yyyy}`
     };
@@ -2592,7 +2577,6 @@ document.querySelectorAll('.tone').forEach(tone => {
           return;
         }
 
-        localStorage.setItem(STORAGE_SUBSCRIBED, 'true');
         codeText.textContent = data.code;
         viewForm.hidden = true;
         viewCode.hidden = false;
