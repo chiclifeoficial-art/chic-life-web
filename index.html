@@ -406,6 +406,19 @@ section{padding:100px 32px}
   border:3px solid transparent;transition:all .3s;position:relative;
 }
 .tone:hover,.tone.active{transform:scale(1.2);border-color:var(--ink)}
+.blush-media{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+.blush-video{position:relative;border-radius:var(--r-md);overflow:hidden;
+  box-shadow:0 8px 32px rgba(255,20,147,.18);background:#000}
+.blush-video video{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.blush-gallery{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.blush-gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:var(--r-md);
+  display:block;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.blush-info{margin:28px 0;display:flex;flex-direction:column;gap:20px}
+.blush-info h4{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+.blush-info p,.blush-info li{font-size:.88rem;color:var(--ink-s);line-height:1.7}
+.blush-info ol{padding-left:20px}
+.blush-faq-item{margin-bottom:14px}
+.blush-faq-item strong{display:block;color:var(--ink);font-size:.88rem;margin-bottom:4px}
 .ritual-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
   margin-top:32px;position:relative}
 .ritual-flow::before{content:'';position:absolute;top:32px;left:calc(16% + 20px);
@@ -594,6 +607,7 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   .story-cards{grid-template-columns:1fr;padding:0 20px}
   .story-card{height:280px}
   .rizos-grid{grid-template-columns:1fr}
+  .blush-media{grid-template-columns:1fr}
   .pillars-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
   .lunar-calendar{display:none}
@@ -941,17 +955,29 @@ fbq('track', 'PageView');
       <div class="prod-grid" id="grid-skincare"></div>
 
       <div class="blush-card rev">
-        <div class="sec-label">Producto Estrella</div>
+        <div class="sec-label">Producto Estrella · Anyeluz</div>
         <h3 style="font-family:var(--fd);font-size:1.6rem;font-weight:700">Liquid Blush</h3>
-        <p style="color:var(--mist);font-size:.88rem;margin-top:6px">El aliado perfecto para un look vibrante y saludable. Acabado natural, efecto piel sana y duración todo el día.</p>
+        <p style="color:var(--mist);font-size:.88rem;margin-top:6px">Rubor líquido 2 en 1 para labios y mejillas. Acabado natural, efecto piel sana y duración todo el día.</p>
 
-        <div class="blush-display" id="blush-display">💋</div>
+        <div class="blush-media">
+          <div class="blush-video">
+            <video poster="images/liquid-blush-poster.jpg" controls muted loop playsinline preload="metadata">
+              <source src="videos/liquid-blush-demo.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="blush-gallery">
+            <img src="images/liquid-blush-tubo.webp" alt="Liquid Blush Anyeluz - envase 13ml" loading="lazy">
+            <img src="images/liquid-blush-modelo1.webp" alt="Modelo sosteniendo Liquid Blush Anyeluz" loading="lazy">
+            <img src="images/liquid-blush-modelo2.webp" alt="Aplicación de Liquid Blush en mejilla" loading="lazy">
+            <img src="images/liquid-blush-labios.webp" alt="Liquid Blush aplicado en labios" loading="lazy">
+          </div>
+        </div>
 
         <div style="margin-bottom:12px;font-size:.82rem;font-weight:600;color:var(--ink-s);letter-spacing:.06em;text-transform:uppercase">Elige tu tono</div>
         <div class="blush-tones" role="radiogroup" aria-label="Tonos de blush">
           <div class="tone active" role="radio" aria-checked="true" aria-label="Rosa durazno" tabindex="0"
-               style="background:linear-gradient(135deg,#FFB6C1,#FF69B4)" 
-               data-color="linear-gradient(135deg,#FFB6C1,#FF69B4)" 
+               style="background:linear-gradient(135deg,#FFB6C1,#FF69B4)"
+               data-color="linear-gradient(135deg,#FFB6C1,#FF69B4)"
                data-name="Rosa Durazno" onclick="selectTone(this)"></div>
           <div class="tone" role="radio" aria-checked="false" aria-label="Coral vibrante" tabindex="0"
                style="background:linear-gradient(135deg,#FF7F50,#FF4500)"
@@ -969,10 +995,39 @@ fbq('track', 'PageView');
                style="background:linear-gradient(135deg,#C8715A,#A0522D)"
                data-color="linear-gradient(135deg,#C8715A,#A0522D)"
                data-name="Terracota" onclick="selectTone(this)"></div>
+          <div class="tone" role="radio" aria-checked="false" aria-label="Durazno suave" tabindex="0"
+               style="background:linear-gradient(135deg,#FFB199,#FF8A65)"
+               data-color="linear-gradient(135deg,#FFB199,#FF8A65)"
+               data-name="Durazno Suave" onclick="selectTone(this)"></div>
         </div>
         <div id="tone-name" style="font-size:.82rem;color:var(--mist);margin-bottom:24px">Rosa Durazno — Glam natural</div>
 
-        <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Liquid%20Blush%20%F0%9F%92%8B" 
+        <div class="blush-info">
+          <div>
+            <h4>Descripción</h4>
+            <p>Rubor líquido 2 en 1 para labios y mejillas, con aplicador de esponjita para una distribución uniforme y controlada. Su fórmula líquida se funde fácilmente con la piel para un acabado natural y luminoso. Disponible en 6 tonos.</p>
+          </div>
+          <div>
+            <h4>Modo de Uso</h4>
+            <ol>
+              <li>Aplica una pequeña cantidad en el centro de la mejilla y difumina hacia las sienes con los dedos o una brocha.</li>
+              <li>Con el mismo aplicador, distribúyelo sobre los labios desde el centro hacia las comisuras y difumina con los dedos.</li>
+            </ol>
+          </div>
+          <div>
+            <h4>Preguntas Frecuentes</h4>
+            <div class="blush-faq-item">
+              <strong>¿Qué beneficios ofrece?</strong>
+              <span>Color vibrante y duradero en mejillas y labios, con aplicación sencilla y precisa gracias al aplicador de esponjita.</span>
+            </div>
+            <div class="blush-faq-item">
+              <strong>¿Cuánto dura la pigmentación en la piel?</strong>
+              <span>Color duradero durante todo el día.</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Liquid%20Blush%20%F0%9F%92%8B"
            target="_blank" class="btn-primary" style="display:inline-flex;gap:8px" rel="noopener">
           💋 Pedir Liquid Blush
         </a>
@@ -1982,6 +2037,7 @@ const toneLabels = {
   'Fucsia Intenso': 'Fucsia Intenso — Chic vibrante',
   'Nude Rosado': 'Nude Rosado — Belleza sutil',
   'Terracota': 'Terracota — Tierra colombiana',
+  'Durazno Suave': 'Durazno Suave — Luz cálida',
 };
 
 function selectTone(el) {
