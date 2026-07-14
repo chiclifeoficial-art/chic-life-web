@@ -2651,12 +2651,12 @@ document.querySelectorAll('.tone').forEach(tone => {
 <style>
 /* Badge de calificación en cada tarjeta de producto */
 .cl-rev-badge{
-  display:flex;align-items:center;gap:6px;
-  background:none;border:none;padding:4px 0;margin:2px 0 10px;
+  display:flex;align-items:center;gap:8px;
+  background:none;border:none;padding:4px 0;margin:2px 0 11px;
   cursor:pointer;text-align:left;width:fit-content;
 }
-.cl-rev-stars{color:var(--gold);font-size:.85rem;letter-spacing:1px}
-.cl-rev-text{font-size:.76rem;color:var(--mist);text-decoration:underline;text-underline-offset:2px}
+.cl-rev-stars{color:var(--gold);font-size:1.05rem;letter-spacing:1.5px;line-height:1}
+.cl-rev-text{font-size:.78rem;color:var(--mist);text-decoration:underline;text-underline-offset:2px}
 .cl-rev-badge:hover .cl-rev-text{color:var(--fuchsia-d)}
 
 /* Modal ancho (resumen + lista de reseñas) */
@@ -2677,8 +2677,8 @@ document.querySelectorAll('.tone').forEach(tone => {
 
 .cl-rev-summary-row{display:flex;align-items:center;gap:20px;margin-bottom:20px;flex-wrap:wrap}
 .cl-rev-avg{text-align:center}
-.cl-rev-avg-num{font-family:var(--fd);font-size:2rem;font-weight:900;color:var(--ink);line-height:1}
-.cl-rev-avg-stars{color:var(--gold);font-size:1rem;letter-spacing:2px;margin:4px 0}
+.cl-rev-avg-num{font-family:var(--fd);font-size:2.2rem;font-weight:900;color:var(--ink);line-height:1}
+.cl-rev-avg-stars{color:var(--gold);font-size:1.5rem;letter-spacing:3px;margin:6px 0;text-shadow:0 1px 3px rgba(212,169,106,.35)}
 .cl-rev-avg-total{font-size:.72rem;color:var(--mist)}
 .cl-rev-bars{flex:1;min-width:160px;display:flex;flex-direction:column;gap:4px}
 .cl-rev-bar-row{display:flex;align-items:center;gap:8px;font-size:.72rem;color:var(--ink-s)}
@@ -2704,7 +2704,7 @@ document.querySelectorAll('.tone').forEach(tone => {
 .cl-rev-list{max-height:280px;overflow-y:auto;text-align:left;margin-bottom:4px}
 .cl-rev-item{padding:12px 0;border-bottom:1px solid rgba(0,0,0,.06)}
 .cl-rev-item:last-child{border-bottom:none}
-.cl-rev-item-stars{color:var(--gold);font-size:.82rem;letter-spacing:1px}
+.cl-rev-item-stars{color:var(--gold);font-size:1.05rem;letter-spacing:1.5px;line-height:1}
 .cl-rev-item-meta{display:flex;justify-content:space-between;gap:8px;margin-top:2px}
 .cl-rev-item-name{font-weight:600;font-size:.82rem;color:var(--ink)}
 .cl-rev-item-date{font-size:.7rem;color:var(--mist)}
@@ -2715,14 +2715,14 @@ document.querySelectorAll('.tone').forEach(tone => {
 
 /* Selector de estrellas interactivo (formulario de envío) */
 .cl-revform-stars{
-  display:flex;gap:6px;margin-bottom:18px;font-size:1.6rem;line-height:1;
+  display:flex;gap:10px;margin-bottom:18px;font-size:2.2rem;line-height:1;
 }
 .cl-revform-star{
-  cursor:pointer;color:var(--rose);transition:transform .1s, color .15s;
+  cursor:pointer;color:var(--rose);transition:transform .15s var(--ease), color .15s;
   background:none;border:none;padding:0;
 }
-.cl-revform-star:hover{transform:scale(1.12)}
-.cl-revform-star.is-filled{color:var(--gold)}
+.cl-revform-star:hover{transform:scale(1.18)}
+.cl-revform-star.is-filled{color:var(--gold);text-shadow:0 2px 5px rgba(212,169,106,.4)}
 
 .cl-revform-textarea{
   width:100%;min-height:110px;padding:13px 16px;margin-bottom:4px;
