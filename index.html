@@ -967,9 +967,9 @@ fbq('track', 'PageView');
           </div>
           <div class="blush-gallery">
             <img src="images/liquid-blush-tubo.webp" alt="Liquid Blush Anyeluz - envase 13ml" loading="lazy">
-            <img src="images/liquid-blush-modelo1.png" alt="Modelo sosteniendo Liquid Blush Anyeluz" loading="lazy">
-            <img src="images/liquid-blush-modelo2.png" alt="Aplicación de Liquid Blush en mejilla" loading="lazy">
-            <img src="images/liquid-blush-labios.png" alt="Liquid Blush aplicado en labios" loading="lazy">
+            <img src="images/liquid-blush-modelo1.webp" alt="Modelo sosteniendo Liquid Blush Anyeluz" loading="lazy">
+            <img src="images/liquid-blush-modelo2.webp" alt="Aplicación de Liquid Blush en mejilla" loading="lazy">
+            <img src="images/liquid-blush-labios.webp" alt="Liquid Blush aplicado en labios" loading="lazy">
           </div>
         </div>
 
@@ -2325,5 +2325,304 @@ document.querySelectorAll('.tone').forEach(tone => {
   });
 });
 </script>
+
+<!-- ═══════════════════════════════════════════════════════════
+     POPUP DE BIENVENIDA — 10% OFF (captura de clientas)
+     Guarda los datos en tu Google Sheet vía Apps Script y muestra
+     un código de descuento único por clienta.
+     IMPORTANTE: reemplaza APPS_SCRIPT_URL más abajo por la URL
+     que te da Google al implementar el Web App (ver GUIA_DESPLIEGUE.md).
+═══════════════════════════════════════════════════════════ -->
+<style>
+.cl-popup-overlay{
+  position:fixed;inset:0;z-index:10000;display:none;
+  align-items:center;justify-content:center;
+  background:rgba(26,26,26,.55);backdrop-filter:blur(3px);
+  padding:20px;opacity:0;transition:opacity .35s var(--ease);
+}
+.cl-popup-overlay.cl-open{display:flex}
+.cl-popup-overlay.cl-visible{opacity:1}
+.cl-popup{
+  position:relative;width:100%;max-width:400px;
+  background:var(--rose-l);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-f);padding:36px 32px 28px;
+  text-align:center;transform:scale(.92) translateY(12px);
+  transition:transform .35s var(--ease);
+  max-height:90vh;overflow-y:auto;
+}
+.cl-popup-overlay.cl-visible .cl-popup{transform:scale(1) translateY(0)}
+.cl-popup-close{
+  position:absolute;top:14px;right:16px;background:none;border:none;
+  font-size:1.4rem;line-height:1;color:var(--fuchsia-d);cursor:pointer;
+  width:32px;height:32px;border-radius:50%;transition:background .2s;
+}
+.cl-popup-close:hover{background:rgba(255,20,147,.1)}
+.cl-popup-eyebrow{
+  font-family:var(--fd);font-size:1.35rem;font-weight:700;
+  color:var(--fuchsia-d);margin-bottom:4px;
+}
+#cl-view-form h3{
+  font-family:var(--fb);font-size:.92rem;font-weight:500;
+  color:var(--ink-s);margin-bottom:22px;
+}
+.cl-popup-form-el{
+  width:100%;padding:13px 16px;margin-bottom:12px;
+  border:1.5px solid rgba(255,20,147,.25);border-radius:var(--r-sm);
+  background:var(--white);font-family:var(--fb);font-size:.9rem;
+  color:var(--ink);outline:none;transition:border-color .2s;
+}
+.cl-popup-form-el:focus{border-color:var(--fuchsia)}
+.cl-popup-phone{display:flex;gap:8px;margin-bottom:12px}
+.cl-popup-flag{
+  display:flex;align-items:center;gap:4px;padding:0 12px;
+  border:1.5px solid rgba(255,20,147,.25);border-radius:var(--r-sm);
+  background:var(--white);font-size:.85rem;white-space:nowrap;color:var(--ink-s);
+}
+.cl-popup-phone input{margin-bottom:0;flex:1;min-width:0}
+.cl-popup-label{
+  text-align:left;font-size:.78rem;color:var(--fuchsia-d);
+  font-weight:600;margin-bottom:6px;
+}
+.cl-popup-dob{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:8px;margin-bottom:16px}
+.cl-popup-dob input{margin-bottom:0;text-align:center}
+.cl-popup-submit{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:14px;border-radius:var(--r-sm);
+  background:linear-gradient(90deg,var(--fuchsia),var(--fuchsia-d));
+  color:var(--white);font-weight:600;font-size:.92rem;
+  letter-spacing:.02em;border:none;cursor:pointer;
+  transition:opacity .2s,transform .2s;text-decoration:none;
+}
+.cl-popup-submit:hover{transform:translateY(-1px)}
+.cl-popup-submit:disabled{opacity:.65;cursor:not-allowed;transform:none}
+.cl-btn-spinner{
+  width:14px;height:14px;border:2px solid rgba(255,255,255,.5);
+  border-top-color:var(--white);border-radius:50%;
+  animation:cl-spin .7s linear infinite;
+}
+@keyframes cl-spin{to{transform:rotate(360deg)}}
+.cl-popup-legal{font-size:.68rem;color:var(--mist);margin-top:14px;line-height:1.5}
+.cl-popup-error{
+  color:var(--fuchsia-d);background:rgba(255,20,147,.08);
+  border-radius:var(--r-sm);padding:8px 12px;font-size:.78rem;
+  margin-top:10px;
+}
+#cl-view-code .cl-popup-eyebrow{margin-bottom:18px}
+.cl-popup-code{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  border:2px dashed var(--fuchsia);border-radius:var(--r-sm);
+  padding:14px 18px;margin-bottom:18px;background:var(--white);
+}
+#cl-code-text{
+  font-family:var(--fd);font-weight:700;font-size:1.1rem;
+  letter-spacing:.03em;color:var(--fuchsia-d);
+}
+#cl-copy-btn{
+  background:none;border:none;font-size:1.1rem;cursor:pointer;
+  color:var(--fuchsia-d);padding:2px;
+}
+.cl-popup-cta-text{font-weight:600;font-size:.9rem;color:var(--ink);margin-bottom:8px}
+.cl-popup-fine{font-size:.76rem;color:var(--mist);font-style:italic;margin-bottom:20px;line-height:1.5}
+@media(max-width:480px){.cl-popup{padding:30px 22px 24px}}
+</style>
+
+<div class="cl-popup-overlay" id="cl-popup-overlay">
+  <div class="cl-popup" role="dialog" aria-modal="true" aria-labelledby="cl-popup-heading">
+    <button class="cl-popup-close" id="cl-popup-close" aria-label="Cerrar">&times;</button>
+
+    <div id="cl-view-form">
+      <p class="cl-popup-eyebrow" id="cl-popup-heading">¡Conoce nuestras novedades!</p>
+      <h3>Y disfruta un 10% OFF en tu primera compra.</h3>
+      <form id="cl-popup-form" novalidate>
+        <input class="cl-popup-form-el" type="text" name="nombre" placeholder="Nombre" required>
+        <input class="cl-popup-form-el" type="email" name="email" placeholder="Correo electrónico" required>
+        <div class="cl-popup-phone">
+          <span class="cl-popup-flag">🇨🇴 +57</span>
+          <input class="cl-popup-form-el" type="tel" name="whatsapp" placeholder="WhatsApp" inputmode="numeric" required>
+        </div>
+        <p class="cl-popup-label">Fecha de nacimiento</p>
+        <div class="cl-popup-dob">
+          <input class="cl-popup-form-el" type="text" name="dd" placeholder="DD" maxlength="2" inputmode="numeric" required>
+          <input class="cl-popup-form-el" type="text" name="mm" placeholder="MM" maxlength="2" inputmode="numeric" required>
+          <input class="cl-popup-form-el" type="text" name="yyyy" placeholder="YYYY" maxlength="4" inputmode="numeric" required>
+        </div>
+        <button type="submit" class="cl-popup-submit" id="cl-popup-submit-btn">
+          <span class="cl-btn-text">¡Quiero mi descuento!</span>
+          <span class="cl-btn-spinner" id="cl-btn-spinner" hidden></span>
+        </button>
+        <p class="cl-popup-error" id="cl-popup-error" hidden></p>
+        <p class="cl-popup-legal">Al registrarte, aceptas recibir correos y mensajes de WhatsApp de Chic Life. No compartimos tus datos con terceros.</p>
+      </form>
+    </div>
+
+    <div id="cl-view-code" hidden>
+      <p class="cl-popup-eyebrow">Este es tu código:</p>
+      <div class="cl-popup-code">
+        <span id="cl-code-text">BIENVENIDA10</span>
+        <button type="button" id="cl-copy-btn" aria-label="Copiar código">📋</button>
+      </div>
+      <p class="cl-popup-cta-text">Copia el código y disfruta tu 10% off.</p>
+      <p class="cl-popup-fine">Este código es único y personal — está ligado a tu correo, así que consérvalo para tu primera compra.</p>
+      <a href="#catalogo" class="cl-popup-submit" id="cl-popup-shop-link">Ir al catálogo</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ⚠️ Reemplaza esta URL por la de tu Web App de Google Apps Script
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgxUY9131rcgUqhLjXkRfCvXkSfFMyq3RL-I720jkJKnXjGq2-k0eCpAB_mqZYP9ap/exec';
+
+  const overlay = document.getElementById('cl-popup-overlay');
+  const closeBtn = document.getElementById('cl-popup-close');
+  const form = document.getElementById('cl-popup-form');
+  const errorEl = document.getElementById('cl-popup-error');
+  const submitBtn = document.getElementById('cl-popup-submit-btn');
+  const btnText = submitBtn.querySelector('.cl-btn-text');
+  const spinner = document.getElementById('cl-btn-spinner');
+  const viewForm = document.getElementById('cl-view-form');
+  const viewCode = document.getElementById('cl-view-code');
+  const codeText = document.getElementById('cl-code-text');
+  const copyBtn = document.getElementById('cl-copy-btn');
+
+  const STORAGE_SUBSCRIBED = 'clSubscribed';
+  const STORAGE_DISMISSED = 'clPopupDismissedAt';
+  const DISMISS_DAYS = 7;
+
+  function yaSuscrita(){
+    return localStorage.getItem(STORAGE_SUBSCRIBED) === 'true';
+  }
+  function fueDescartadoRecientemente(){
+    const ts = localStorage.getItem(STORAGE_DISMISSED);
+    if (!ts) return false;
+    const dias = (Date.now() - Number(ts)) / (1000 * 60 * 60 * 24);
+    return dias < DISMISS_DAYS;
+  }
+  function abrirPopup(){
+    overlay.classList.add('cl-open');
+    requestAnimationFrame(() => overlay.classList.add('cl-visible'));
+    document.body.style.overflow = 'hidden';
+  }
+  function cerrarPopup(){
+    overlay.classList.remove('cl-visible');
+    document.body.style.overflow = '';
+    setTimeout(() => overlay.classList.remove('cl-open'), 350);
+  }
+
+  if (!yaSuscrita() && !fueDescartadoRecientemente()) {
+    setTimeout(abrirPopup, 4000);
+  }
+
+  closeBtn.addEventListener('click', () => {
+    localStorage.setItem(STORAGE_DISMISSED, String(Date.now()));
+    cerrarPopup();
+  });
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      localStorage.setItem(STORAGE_DISMISSED, String(Date.now()));
+      cerrarPopup();
+    }
+  });
+
+  function mostrarError(msg){
+    errorEl.textContent = msg;
+    errorEl.hidden = false;
+  }
+  function ocultarError(){
+    errorEl.hidden = true;
+  }
+  function ponerCargando(cargando){
+    submitBtn.disabled = cargando;
+    btnText.textContent = cargando ? 'Enviando…' : '¡Quiero mi descuento!';
+    spinner.hidden = !cargando;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    ocultarError();
+
+    const fd = new FormData(form);
+    const nombre = fd.get('nombre').trim();
+    const email = fd.get('email').trim();
+    const whatsapp = fd.get('whatsapp').trim();
+    const dd = fd.get('dd').trim().padStart(2, '0');
+    const mm = fd.get('mm').trim().padStart(2, '0');
+    const yyyy = fd.get('yyyy').trim();
+
+    if (!nombre || !email || !whatsapp || !dd || !mm || !yyyy) {
+      mostrarError('Por favor completa todos los campos.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      mostrarError('Ingresa un correo electrónico válido.');
+      return;
+    }
+    if (yyyy.length !== 4) {
+      mostrarError('Ingresa el año de nacimiento completo (YYYY).');
+      return;
+    }
+
+    const payload = {
+      nombre: nombre,
+      email: email,
+      whatsapp: '+57 ' + whatsapp,
+      pais: 'Colombia',
+      fechaNacimiento: `${dd}/${mm}/${yyyy}`
+    };
+
+    if (APPS_SCRIPT_URL.indexOf('PEGA_AQUI') !== -1) {
+      mostrarError('Falta configurar la conexión con Google Sheets (APPS_SCRIPT_URL). Revisa GUIA_DESPLIEGUE.md.');
+      return;
+    }
+
+    ponerCargando(true);
+
+    // Content-Type text/plain evita el preflight CORS que Apps Script
+    // no maneja bien con fetch + JSON directo.
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    })
+      .then(res => res.json())
+      .then(data => {
+        ponerCargando(false);
+        if (!data.success) {
+          mostrarError(data.error || 'Algo salió mal. Intenta de nuevo.');
+          return;
+        }
+
+        localStorage.setItem(STORAGE_SUBSCRIBED, 'true');
+        codeText.textContent = data.code;
+        viewForm.hidden = true;
+        viewCode.hidden = false;
+
+        if (typeof gtag === 'function') {
+          gtag('event', 'generate_lead', { method: 'Popup 10% OFF' });
+          gtag('event', 'sign_up', { method: 'Popup' });
+        }
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead');
+          fbq('track', 'CompleteRegistration');
+        }
+      })
+      .catch(() => {
+        ponerCargando(false);
+        mostrarError('No pudimos conectar con el servidor. Verifica tu conexión e intenta de nuevo.');
+      });
+  });
+
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(codeText.textContent).then(() => {
+      const original = copyBtn.textContent;
+      copyBtn.textContent = '✅';
+      setTimeout(() => { copyBtn.textContent = original; }, 1500);
+    });
+  });
+
+  document.getElementById('cl-popup-shop-link').addEventListener('click', cerrarPopup);
+})();
+</script>
+
 </body>
 </html>
