@@ -1335,7 +1335,7 @@ window.addEventListener('load', function () {
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Chic Life. Estrategia Orgánica desde el Valle del Cauca. Todos los derechos reservados.</p>
+    <p>© 2026 Chic Life. Estrategia Orgánica desde el Valle del Cauca. Todos los derechos reservados. · <a href="#" class="cl-privacy-link" style="color:inherit;text-decoration:underline">Política de Privacidad</a></p>
     <div class="footer-social">
       <a class="fs-btn" href="https://www.instagram.com/chiclifeoficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -2483,7 +2483,7 @@ document.querySelectorAll('.tone').forEach(tone => {
           <span class="cl-btn-spinner" id="cl-btn-spinner" hidden></span>
         </button>
         <p class="cl-popup-error" id="cl-popup-error" hidden></p>
-        <p class="cl-popup-legal">Al registrarte, aceptas recibir correos y mensajes de WhatsApp de Chic Life. No compartimos tus datos con terceros.</p>
+        <p class="cl-popup-legal">Al registrarte, aceptas recibir correos y mensajes de WhatsApp de Chic Life, conforme a nuestra <a href="#" class="cl-privacy-link">Política de Privacidad</a>.</p>
       </form>
     </div>
 
@@ -2802,8 +2802,8 @@ document.querySelectorAll('.tone').forEach(tone => {
         <input class="cl-popup-form-el" type="email" id="cl-revform-email" placeholder="">
 
         <p class="cl-popup-legal" style="text-align:left">
-          Al enviar esta reseña, aceptas que Chic Life use tu nombre y comentario en el sitio.
-          No compartimos tu correo con terceros.
+          Al enviar esta reseña, aceptas que Chic Life use tu nombre y comentario en el sitio, conforme a nuestra
+          <a href="#" class="cl-privacy-link">Política de Privacidad</a>. No compartimos tu correo con terceros.
         </p>
 
         <p class="cl-popup-error" id="cl-revform-error" hidden></p>
@@ -3125,6 +3125,102 @@ document.querySelectorAll('.tone').forEach(tone => {
   });
 
   cargarResumenGlobal();
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════
+     POLÍTICA DE PRIVACIDAD — modal desplegable
+     Se abre desde el enlace del footer y desde el texto legal de
+     los formularios de suscripción y reseñas (clase .cl-privacy-link).
+═══════════════════════════════════════════════════════════ -->
+<style>
+.cl-privacy-body{
+  max-height:60vh;overflow-y:auto;text-align:left;
+  font-size:.85rem;line-height:1.7;color:var(--ink-s);
+  padding-right:6px;
+}
+.cl-privacy-body h4{
+  font-family:var(--fd);color:var(--fuchsia-d);font-size:1rem;
+  margin:20px 0 8px;
+}
+.cl-privacy-body h4:first-child{margin-top:0}
+.cl-privacy-body p{margin-bottom:12px}
+.cl-privacy-body ul{margin:0 0 12px 18px}
+.cl-privacy-body li{margin-bottom:6px}
+.cl-privacy-body strong{color:var(--ink)}
+.cl-privacy-body a{color:var(--fuchsia-d);text-decoration:underline}
+</style>
+
+<div class="cl-popup-overlay" id="cl-privacy-overlay">
+  <div class="cl-popup cl-popup--wide" role="dialog" aria-modal="true" aria-labelledby="cl-privacy-title">
+    <button class="cl-popup-close" id="cl-privacy-close" aria-label="Cerrar">&times;</button>
+    <p class="cl-popup-eyebrow" id="cl-privacy-title" style="margin-bottom:16px">Política de Privacidad</p>
+
+    <div class="cl-privacy-body">
+      <h4>¿Qué información solicitamos y cómo la usamos?</h4>
+      <p>En <a href="https://chiclifeoficial-art.github.io/chic-life-web/" target="_blank" rel="noopener">chiclifeoficial-art.github.io/chic-life-web</a> recopilamos información personal de nuestras clientas con el fin de mejorar la experiencia de compra, facilitar la comunicación y ofrecer productos, servicios y promociones de manera más personalizada.</p>
+      <p>Los datos que podemos solicitar incluyen, entre otros: nombre, correo electrónico, número de WhatsApp, fecha de nacimiento y dirección de envío. Nos los proporcionas directamente al suscribirte para recibir tu código de bienvenida, al dejar una reseña sobre un producto, o al coordinar un pedido por WhatsApp.</p>
+      <p>Por seguridad, Chic Life no almacena ni tiene acceso a los datos de tus medios de pago. El pago de tu pedido se coordina directamente contigo por WhatsApp, a través del medio que elijas (transferencia bancaria, Nequi, Daviplata, Transfiya, Bre-B, Sistecrédito o Addi), bajo los propios protocolos de seguridad de cada entidad.</p>
+      <p>La información recolectada puede ser utilizada para:</p>
+      <ul>
+        <li>Procesar y completar tus pedidos.</li>
+        <li>Enviarte tu código de descuento de bienvenida y comunicaciones relacionadas con tu compra.</li>
+        <li>Publicar tu nombre y tu comentario si decides enviar una reseña de un producto (tu correo electrónico nunca se publica).</li>
+        <li>Registrar tus compras y preferencias.</li>
+        <li>Mejorar la navegación, el diseño del sitio y la experiencia de usuario.</li>
+        <li>Analizar patrones de tráfico para optimizar nuestros productos y servicios.</li>
+      </ul>
+      <p>En Chic Life utilizamos tu información de manera responsable y únicamente para fines relacionados con la gestión de tu experiencia de compra y comunicación comercial.</p>
+      <p>También podremos cruzar algunos datos con información pública o con aliados comerciales, con el fin de mejorar la personalización de nuestras comunicaciones, promociones, eventos y contenido de interés para nuestras clientas.</p>
+      <p>Tus datos personales no serán vendidos ni alquilados bajo ninguna circunstancia. Sin embargo, podrán ser compartidos en actividades específicas, como sorteos o alianzas promocionales, siempre que sea necesario para la dinámica correspondiente y de acuerdo con las condiciones informadas en su momento.</p>
+
+      <h4>Dónde se almacena tu información</h4>
+      <p>Los datos que nos proporcionas se guardan en una base de datos privada administrada por Chic Life, alojada sobre infraestructura de Google (Google Sheets), a la que solo tiene acceso el equipo de Chic Life.</p>
+
+      <h4>Seguridad de la información</h4>
+      <p>Al interactuar con nuestro sitio web, queremos que tengas una experiencia confiable y segura. El pago de tu pedido <strong>nunca se realiza dentro del sitio web</strong>: se coordina directamente contigo por WhatsApp y a través de la aplicación bancaria o de pagos que elijas. Chic Life no ve, procesa ni almacena tus claves, números de cuenta o de tarjeta en ningún momento — esa información queda exclusivamente entre tú y tu entidad financiera.</p>
+
+      <h4>Compra segura en Chic Life</h4>
+      <p>Tu privacidad y seguridad son fundamentales para nosotros. Por eso trabajamos continuamente para proteger tu información personal y garantizar una experiencia confiable, tanto en nuestro sitio web como en la atención por WhatsApp.</p>
+
+      <h4>Tus derechos como titular de los datos</h4>
+      <p>De acuerdo con la Ley 1581 de 2012, tienes derecho a conocer, actualizar, rectificar y solicitar la eliminación de tus datos personales en cualquier momento. Para ejercer estos derechos, puedes escribirnos por WhatsApp al <a href="https://wa.me/573226905702" target="_blank" rel="noopener">+57 322 690 5702</a>.</p>
+      <p>Recuerda que, al hacer un pedido a través de nuestro sitio web o por WhatsApp, o al brindarnos tus datos mediante alguno de nuestros formularios (como el de suscripción al 10% de descuento o el de reseñas de productos), autorizas a Chic Life al tratamiento de los mismos conforme a lo expresado anteriormente y a la Ley 1581 de 2012.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const privacyOverlay = document.getElementById('cl-privacy-overlay');
+  const privacyClose = document.getElementById('cl-privacy-close');
+
+  function abrirPrivacidad(){
+    privacyOverlay.classList.add('cl-open');
+    requestAnimationFrame(() => privacyOverlay.classList.add('cl-visible'));
+    document.body.style.overflow = 'hidden';
+  }
+  function cerrarPrivacidad(){
+    privacyOverlay.classList.remove('cl-visible');
+    document.body.style.overflow = '';
+    setTimeout(() => privacyOverlay.classList.remove('cl-open'), 350);
+  }
+
+  privacyClose.addEventListener('click', cerrarPrivacidad);
+  privacyOverlay.addEventListener('click', (e) => {
+    if (e.target === privacyOverlay) cerrarPrivacidad();
+  });
+
+  // Delegación: cualquier enlace con esta clase abre el modal, sin
+  // importar si está en el footer o dentro de un formulario (popup
+  // de suscripción, formulario de reseñas, etc.).
+  document.addEventListener('click', function(e){
+    const link = e.target.closest('.cl-privacy-link');
+    if (link) {
+      e.preventDefault();
+      abrirPrivacidad();
+    }
+  });
 })();
 </script>
 
