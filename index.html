@@ -352,13 +352,41 @@ section{padding:100px 32px}
   text-transform:uppercase;color:var(--fuchsia);margin-bottom:6px}
 .prod-name{font-family:var(--fd);font-size:1.1rem;font-weight:700;margin-bottom:8px;color:var(--ink)}
 .prod-desc{font-size:.82rem;color:var(--mist);line-height:1.6;margin-bottom:16px}
-.prod-price{font-family:var(--fd);font-size:1.3rem;font-weight:900;color:var(--fuchsia)}
+.prod-price{font-family:var(--fd);font-size:1.3rem;font-weight:900;color:var(--fuchsia);margin-bottom:10px}
+.prod-empty{grid-column:1/-1;text-align:center;color:var(--mist);font-size:.88rem;padding:32px 0}
+.prod-detalle{margin:2px 0 4px;border-top:1px solid rgba(255,20,147,.12);padding-top:10px}
+.prod-detalle summary{
+  cursor:pointer;font-size:.76rem;font-weight:600;color:var(--fuchsia-d);
+  letter-spacing:.02em;list-style:none;display:flex;align-items:center;gap:6px;
+}
+.prod-detalle summary::-webkit-details-marker{display:none}
+.prod-detalle summary::before{content:'+';font-size:1rem;line-height:1;transition:transform .2s}
+.prod-detalle[open] summary::before{content:'–'}
+.prod-detalle-body{padding:10px 2px 2px;font-size:.78rem;color:var(--ink-s);line-height:1.6}
+.prod-detalle-body h5{font-family:var(--fb);font-size:.72rem;font-weight:700;color:var(--fuchsia-d);
+  text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px}
+.prod-detalle-body h5:first-child{margin-top:0}
 .prod-cta{
-  width:100%;padding:10px;border-radius:30px;margin-top:12px;
+  width:100%;padding:10px;border-radius:30px;margin-top:0;
   background:var(--rose-l);color:var(--fuchsia);font-weight:600;font-size:.8rem;
-  transition:all .3s;letter-spacing:.06em
+  transition:all .3s;letter-spacing:.06em;display:block;text-align:center;
 }
 .prod-cta:hover{background:linear-gradient(135deg,var(--fuchsia),#FF69B4);color:var(--white)}
+.prod-img.is-agotado img{filter:grayscale(55%);opacity:.82}
+.prod-agotado{
+  display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.03em;
+  color:var(--terracotta);background:var(--peach);
+  padding:3px 11px;border-radius:20px;margin-bottom:10px;
+}
+.prod-actions{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.prod-cart-btn{
+  width:100%;padding:11px;border-radius:30px;
+  background:linear-gradient(90deg,var(--fuchsia),var(--fuchsia-d));
+  color:var(--white);font-weight:600;font-size:.8rem;letter-spacing:.06em;
+  transition:transform .2s,opacity .2s;
+}
+.prod-cart-btn:hover{transform:translateY(-1px)}
+.prod-cart-btn:active{transform:translateY(0)}
 /* Rizos section */
 .rizos-sec{
   margin-top:48px;background:linear-gradient(135deg,var(--ink),#2D0A1F);
@@ -1386,10 +1414,23 @@ window.addEventListener('load', function () {
 </footer>
 
 <!-- WhatsApp flotante -->
-<a href="https://wa.me/573226905702?text=Hola%20Chic%20Life!%20Me%20interesa%20conocer%20sus%20productos%20%F0%9F%8C%B8" 
+<a href="https://wa.me/573226905702?text=Hola%20Chic%20Life!%20Me%20interesa%20conocer%20sus%20productos%20%F0%9F%8C%B8"
    target="_blank" class="wa-float" rel="noopener" aria-label="Contactar por WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
 </a>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CONEXIÓN CON GOOGLE SHEETS (Apps Script)
+     Una sola URL, compartida por el catálogo en vivo, el popup de
+     bienvenida y el sistema de reseñas. Configúrala UNA vez aquí.
+     Va ANTES del script principal a propósito: el catálogo la
+     necesita apenas carga la página.
+     IMPORTANTE: reemplaza el valor por la URL que te da Google al
+     implementar el Web App (ver GUIA_DESPLIEGUE.md).
+═══════════════════════════════════════════════════════════ -->
+<script>
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgxUY9131rcgUqhLjXkRfCvXkSfFMyq3RL-I720jkJKnXjGq2-k0eCpAB_mqZYP9ap/exec';
+</script>
 
 <script>
 // ═══════════════════════════════════════════════════════════
@@ -1440,15 +1481,19 @@ document.addEventListener('click', function (e) {
 });
 
 // ═══════════════════════════════════════════════════════════
-// CATÁLOGO DE PRODUCTOS — DATOS
-// Para agregar un producto nuevo: copia un objeto dentro del arreglo
-// de la categoría correspondiente y cambia sus valores. No hace falta
-// tocar HTML ni CSS. Los campos `img`/`imgAlt` son opcionales — si no
-// hay foto real todavía, usa `emoji` en su lugar.
+// CATÁLOGO DE PRODUCTOS — RESPALDO LOCAL
+// El catálogo real ahora vive en Google Sheets (hoja "Apeiron -
+// Inventario", sincronizada desde Apeiron ERP) y se carga en vivo
+// más abajo con cargarInventario(). Este arreglo PRODUCTS_RESPALDO
+// solo se usa si esa carga falla (por ejemplo, si APPS_SCRIPT_URL no
+// está configurado o el servidor no responde) — así el sitio nunca
+// se queda vacío. Para agregar un producto aquí: copia un objeto
+// dentro del arreglo de la categoría correspondiente. Los campos
+// `img`/`imgAlt` son opcionales — si no hay foto, usa `emoji`.
 // ═══════════════════════════════════════════════════════════
 const WA_PHONE = '573226905702';
 
-const PRODUCTS = {
+const PRODUCTS_RESPALDO = {
   capilar: [
     {
       brand: 'Click Hair', name: 'Shampoo de Miel Brillo Intenso',
@@ -1586,25 +1631,79 @@ function slugify_(texto) {
     .replace(/(^-|-$)/g, '');
 }
 
+function formatearCOP_(numero) {
+  return '$' + Math.round(numero).toLocaleString('es-CO');
+}
+
 function renderProductGrid(gridId, items) {
   const grid = document.getElementById(gridId);
   if (!grid) return;
+
+  if (!items || !items.length) {
+    grid.innerHTML = '<p class="prod-empty">Por ahora no hay productos disponibles en esta categoría.</p>';
+    return;
+  }
 
   grid.innerHTML = items.map((p, i) => {
     const revClass = REV_CYCLE[i % REV_CYCLE.length];
     const badgeHtml = p.badge ? `<span class="prod-badge">${escapeHtml(p.badge)}</span>` : '';
 
+    // "Agotado" solo se calcula cuando el stock es un dato real que vino
+    // de Apeiron (número). Los productos del catálogo de respaldo no
+    // traen stock (undefined) y nunca se marcan como agotados — no hay
+    // forma de saberlo sin la sincronización en vivo.
+    const agotado = typeof p.stock === 'number' && p.stock <= 0;
+
     const imgBlock = p.img
-      ? `<div class="prod-img has-photo"${p.aspectRatio ? ` style="aspect-ratio:${p.aspectRatio}"` : ''}>
+      ? `<div class="prod-img has-photo${agotado ? ' is-agotado' : ''}"${p.aspectRatio ? ` style="aspect-ratio:${p.aspectRatio}"` : ''}>
            <img src="${p.img}" alt="${escapeHtml(p.imgAlt || p.name)}" loading="lazy">
            ${badgeHtml}
          </div>`
-      : `<div class="prod-img">${p.emoji || '🌸'}${badgeHtml}</div>`;
+      : `<div class="prod-img${agotado ? ' is-agotado' : ''}">${p.emoji || '🌸'}${badgeHtml}</div>`;
 
-    const waText = p.waMsg ? `?text=${encodeURIComponent(p.waMsg)}` : '';
+    // Si está agotado, el mensaje de WhatsApp pregunta puntualmente por
+    // disponibilidad en vez del genérico "me interesa" — así la clienta
+    // no tiene que redactarlo ella misma.
+    const waMsgFinal = agotado
+      ? `Hola! Quiero consultar disponibilidad de ${p.name}${p.brand ? ' de ' + p.brand : ''} 🌸`
+      : p.waMsg;
+    const waText = waMsgFinal ? `?text=${encodeURIComponent(waMsgFinal)}` : '';
 
     const nombreCompleto = `${p.brand} ${p.name}`;
-    const productoId = slugify_(nombreCompleto);
+    // Usa el Código Apeiron si viene del inventario en vivo (más estable
+    // que un slug del nombre); si no, cae al slug de siempre.
+    const productoId = p.id || slugify_(nombreCompleto);
+
+    const precioHtml = p.precioVenta
+      ? `<div class="prod-price">${formatearCOP_(p.precioVenta)}</div>`
+      : '';
+
+    const agotadoHtml = agotado
+      ? `<div class="prod-agotado">Agotado — consulta disponibilidad</div>`
+      : '';
+
+    const tieneDetalle = p.modoUso || p.beneficios;
+    const detalleHtml = tieneDetalle ? `
+        <details class="prod-detalle">
+          <summary>Modo de uso y beneficios</summary>
+          <div class="prod-detalle-body">
+            ${p.modoUso ? `<h5>Modo de uso</h5><p>${escapeHtml(p.modoUso)}</p>` : ''}
+            ${p.beneficios ? `<h5>Beneficios</h5><p>${escapeHtml(p.beneficios)}</p>` : ''}
+          </div>
+        </details>` : '';
+
+    // El botón "Agregar al carrito" solo aparece si hay un precio real
+    // publicado Y no está agotado (productos del catálogo de respaldo,
+    // sin Precio Venta, o sin stock actual se quedan solo con "Pedir
+    // por WhatsApp" para consultar disponibilidad).
+    const cartBtnHtml = (p.precioVenta && !agotado)
+      ? `<button type="button" class="prod-cart-btn cl-cart-add"
+          data-id="${escapeHtml(productoId)}"
+          data-nombre="${escapeHtml(nombreCompleto)}"
+          data-img="${escapeHtml(p.img || '')}"
+          data-precio="${p.precioVenta}"
+          data-stock="${Number.isFinite(p.stock) ? p.stock : ''}">🛍️ Agregar al carrito</button>`
+      : '';
 
     return `<div class="prod-card rev ${revClass}">
       ${imgBlock}
@@ -1612,6 +1711,8 @@ function renderProductGrid(gridId, items) {
         <div class="prod-brand">${escapeHtml(p.brand)}</div>
         <div class="prod-name">${escapeHtml(p.name)}</div>
         <div class="prod-desc">${escapeHtml(p.desc)}</div>
+        ${agotadoHtml}
+        ${precioHtml}
         <button type="button" class="cl-rev-badge"
           data-producto-id="${productoId}"
           data-producto-nombre="${escapeHtml(nombreCompleto)}"
@@ -1619,15 +1720,94 @@ function renderProductGrid(gridId, items) {
           <span class="cl-rev-stars" data-role="stars">☆☆☆☆☆</span>
           <span class="cl-rev-text" data-role="text">Sé la primera en opinar</span>
         </button>
-        <a href="https://wa.me/${WA_PHONE}${waText}" target="_blank" class="prod-cta" rel="noopener">Pedir por WhatsApp</a>
+        ${detalleHtml}
+        <div class="prod-actions">
+          ${cartBtnHtml}
+          <a href="https://wa.me/${WA_PHONE}${waText}" target="_blank" class="prod-cta" rel="noopener">${agotado ? 'Consultar disponibilidad' : 'Pedir por WhatsApp'}</a>
+        </div>
       </div>
     </div>`;
   }).join('');
 }
 
-renderProductGrid('grid-capilar', PRODUCTS.capilar);
-renderProductGrid('grid-skincare', PRODUCTS.skincare);
-renderProductGrid('grid-corporal', PRODUCTS.corporal);
+// ═══════════════════════════════════════════════════════════
+// CARGA DEL CATÁLOGO EN VIVO (Apeiron ERP vía Google Sheets)
+// Si la carga falla por cualquier motivo (URL sin configurar, sin
+// internet, la hoja está vacía, etc.), el sitio cae automáticamente
+// al catálogo de respaldo (PRODUCTS_RESPALDO) — nunca se queda vacío.
+// ═══════════════════════════════════════════════════════════
+
+function mostrarCargandoCatalogo_() {
+  ['grid-capilar', 'grid-skincare', 'grid-corporal'].forEach(id => {
+    const grid = document.getElementById(id);
+    if (grid) grid.innerHTML = '<p class="prod-empty">Cargando catálogo…</p>';
+  });
+}
+
+function mapearProductoSheet_(p) {
+  return {
+    id: p.codigo || slugify_(`${p.marca} ${p.nombre}`),
+    brand: p.marca,
+    name: p.nombre,
+    desc: p.descripcion,
+    img: (p.fotos && p.fotos[0]) || '',
+    modoUso: p.modoUso,
+    beneficios: p.beneficios,
+    precioVenta: p.precioVenta,
+    stock: p.stock, // para topar la cantidad que se puede agregar al carrito
+    waMsg: `Hola! Me interesa el producto ${p.nombre}${p.marca ? ' de ' + p.marca : ''} 🌸`
+  };
+}
+
+function usarCatalogoRespaldo_() {
+  renderProductGrid('grid-capilar', PRODUCTS_RESPALDO.capilar);
+  renderProductGrid('grid-skincare', PRODUCTS_RESPALDO.skincare);
+  renderProductGrid('grid-corporal', PRODUCTS_RESPALDO.corporal);
+}
+
+function cargarInventario() {
+  mostrarCargandoCatalogo_();
+
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf('PEGA_AQUI') !== -1) {
+    console.warn('Chic Life: APPS_SCRIPT_URL no configurado — usando catálogo de respaldo.');
+    usarCatalogoRespaldo_();
+    return;
+  }
+
+  fetch(`${APPS_SCRIPT_URL}?accion=inventario`)
+    .then(res => res.json())
+    .then(data => {
+      if (!data.success || !Array.isArray(data.productos)) {
+        throw new Error(data.error || 'Respuesta de inventario inválida');
+      }
+
+      const porCategoria = { capilar: [], skincare: [], corporal: [] };
+      data.productos.forEach(p => {
+        if (porCategoria[p.categoria]) {
+          porCategoria[p.categoria].push(mapearProductoSheet_(p));
+        }
+      });
+
+      const total = porCategoria.capilar.length + porCategoria.skincare.length + porCategoria.corporal.length;
+      if (total === 0) {
+        // Probablemente la hoja está vacía o mal configurada todavía,
+        // no una tienda real sin ningún producto — usamos el respaldo.
+        console.warn('Chic Life: el inventario de Sheets respondió vacío — usando catálogo de respaldo.');
+        usarCatalogoRespaldo_();
+        return;
+      }
+
+      renderProductGrid('grid-capilar', porCategoria.capilar);
+      renderProductGrid('grid-skincare', porCategoria.skincare);
+      renderProductGrid('grid-corporal', porCategoria.corporal);
+    })
+    .catch(err => {
+      console.warn('Chic Life: no se pudo cargar el inventario en vivo — usando catálogo de respaldo.', err);
+      usarCatalogoRespaldo_();
+    });
+}
+
+cargarInventario();
 
 // ═══════════════════════════════════════════════════════════
 // TIP CHIC 💕 — CATÁLOGO ANUAL DINÁMICO (366 tips, uno por día)
@@ -2382,17 +2562,6 @@ document.querySelectorAll('.tone').forEach(tone => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectTone(tone); }
   });
 });
-</script>
-
-<!-- ═══════════════════════════════════════════════════════════
-     CONEXIÓN CON GOOGLE SHEETS (Apps Script)
-     Una sola URL, compartida por el popup de bienvenida y por el
-     sistema de reseñas de productos. Configúrala UNA vez aquí.
-     IMPORTANTE: reemplaza el valor por la URL que te da Google al
-     implementar el Web App (ver GUIA_DESPLIEGUE.md).
-═══════════════════════════════════════════════════════════ -->
-<script>
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgxUY9131rcgUqhLjXkRfCvXkSfFMyq3RL-I720jkJKnXjGq2-k0eCpAB_mqZYP9ap/exec';
 </script>
 
 <!-- ═══════════════════════════════════════════════════════════
@@ -3256,6 +3425,379 @@ document.querySelectorAll('.tone').forEach(tone => {
       abrirPrivacidad();
     }
   });
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CARRITO DE COMPRAS
+     Acumula productos y cantidades en el navegador (localStorage,
+     nada se envía a Google Sheets). El botón "Finalizar compra" NO
+     cobra nada en el sitio: arma un mensaje de WhatsApp con el
+     resumen del pedido y lo manda a tu número — el pago se sigue
+     coordinando por WhatsApp exactamente como hoy.
+     Depende de WA_PHONE, formatearCOP_ y escapeHtml, definidos
+     arriba en el script principal del catálogo.
+═══════════════════════════════════════════════════════════ -->
+<style>
+.cl-cart-float{
+  position:fixed;bottom:28px;left:28px;z-index:800;
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,var(--fuchsia),var(--fuchsia-d));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 32px rgba(255,20,147,.45);
+  border:none;cursor:pointer;font-size:1.6rem;
+}
+.cl-cart-badge{
+  position:absolute;top:-4px;right:-4px;min-width:22px;height:22px;
+  padding:0 5px;border-radius:11px;background:var(--gold);
+  color:var(--white);font-size:.7rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.25);
+}
+.cl-cart-empty{font-size:.86rem;color:var(--mist);text-align:center;padding:30px 0}
+.cl-cart-list{max-height:320px;overflow-y:auto;text-align:left;margin-bottom:16px}
+.cl-cart-item{
+  display:flex;align-items:center;gap:10px;padding:12px 0;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.cl-cart-item:last-child{border-bottom:none}
+.cl-cart-item-thumb{
+  width:48px;height:48px;border-radius:var(--r-sm);object-fit:cover;
+  background:var(--peach);flex-shrink:0;
+}
+.cl-cart-item-thumb--vacio{
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+}
+.cl-cart-item-info{flex:1;min-width:0}
+.cl-cart-item-name{
+  font-size:.82rem;font-weight:600;color:var(--ink);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.cl-cart-item-price{font-size:.74rem;color:var(--mist);margin-top:2px}
+.cl-cart-item-stock-note{font-size:.68rem;color:var(--terracotta);margin-top:2px}
+.cl-cart-item-side{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.cl-cart-qty{display:flex;align-items:center;gap:8px}
+.cl-cart-qty-btn{
+  width:24px;height:24px;border-radius:50%;background:var(--rose-l);
+  color:var(--fuchsia-d);font-size:.95rem;font-weight:700;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+}
+.cl-cart-qty-btn:disabled{opacity:.4;cursor:not-allowed}
+.cl-cart-qty-num{font-size:.82rem;font-weight:600;min-width:14px;text-align:center}
+.cl-cart-item-subtotal{font-size:.8rem;font-weight:700;color:var(--ink)}
+.cl-cart-item-remove{
+  background:none;border:none;font-size:.68rem;color:var(--mist);
+  text-decoration:underline;text-underline-offset:2px;
+}
+.cl-cart-item-remove:hover{color:var(--fuchsia-d)}
+.cl-cart-total-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:12px;border-top:2px solid rgba(255,20,147,.12);
+  margin-bottom:16px;
+}
+.cl-cart-total-label{font-size:.82rem;color:var(--ink-s);font-weight:600}
+.cl-cart-total-num{font-family:var(--fd);font-size:1.4rem;font-weight:900;color:var(--fuchsia)}
+.cl-cart-actions{display:flex;flex-direction:column;gap:10px}
+.cl-cart-checkout-btn{
+  width:100%;padding:14px;border-radius:var(--r-sm);
+  background:linear-gradient(90deg,var(--fuchsia),var(--fuchsia-d));
+  color:var(--white);font-weight:600;font-size:.9rem;letter-spacing:.02em;
+  border:none;cursor:pointer;transition:transform .2s;
+}
+.cl-cart-checkout-btn:hover{transform:translateY(-1px)}
+.cl-cart-clear-btn{
+  background:none;border:none;font-size:.76rem;color:var(--mist);
+  text-decoration:underline;text-underline-offset:2px;align-self:center;
+}
+.cl-cart-clear-btn:hover{color:var(--fuchsia-d)}
+.cl-cart-note{font-size:.7rem;color:var(--mist);text-align:center;margin-top:12px;line-height:1.5}
+</style>
+
+<button type="button" class="cl-cart-float" id="cl-cart-float" aria-label="Ver carrito de compras">
+  🛍️
+  <span class="cl-cart-badge" id="cl-cart-badge" hidden>0</span>
+</button>
+
+<div class="cl-popup-overlay" id="cl-cart-overlay">
+  <div class="cl-popup cl-popup--wide" role="dialog" aria-modal="true" aria-labelledby="cl-cart-heading">
+    <button class="cl-popup-close" id="cl-cart-close" aria-label="Cerrar">&times;</button>
+    <p class="cl-popup-eyebrow" id="cl-cart-heading">Tu carrito</p>
+
+    <p class="cl-cart-empty" id="cl-cart-empty">Todavía no has agregado productos. Explora el catálogo y da clic en "Agregar al carrito" 🌸</p>
+
+    <div class="cl-cart-list" id="cl-cart-list"></div>
+
+    <div id="cl-cart-actions" hidden>
+      <div class="cl-cart-total-row">
+        <span class="cl-cart-total-label">Total</span>
+        <span class="cl-cart-total-num" id="cl-cart-total">$0</span>
+      </div>
+      <div class="cl-cart-actions">
+        <button type="button" class="cl-cart-checkout-btn" id="cl-cart-checkout">Finalizar compra por WhatsApp</button>
+        <button type="button" class="cl-cart-clear-btn" id="cl-cart-clear">Vaciar carrito</button>
+      </div>
+      <p class="cl-cart-note">El pago no se procesa en el sitio — te escribimos por WhatsApp para coordinar el pago y el envío, igual que siempre.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const CART_KEY = 'cl_carrito_v1';
+  const SESSION_KEY = 'cl_carrito_sesion';
+
+  function leerCarrito_(){
+    try {
+      const arr = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+      return Array.isArray(arr) ? arr : [];
+    } catch (e) {
+      return [];
+    }
+  }
+  function guardarCarrito_(items){
+    try { localStorage.setItem(CART_KEY, JSON.stringify(items)); } catch (e) {}
+  }
+
+  // Id anónimo por navegador (no por persona: no lleva nombre, correo
+  // ni WhatsApp) — solo sirve para no repetir la misma fila de
+  // "Carritos" mil veces si la clienta abre y cierra la pestaña varias
+  // veces con lo mismo en el carrito.
+  function obtenerSesionId_(){
+    try {
+      let id = localStorage.getItem(SESSION_KEY);
+      if (!id) {
+        id = 'ses-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+        localStorage.setItem(SESSION_KEY, id);
+      }
+      return id;
+    } catch (e) {
+      return 'ses-sin-guardar';
+    }
+  }
+
+  let carrito = leerCarrito_();
+  let ultimaHuellaEnviada_ = '';
+
+  const floatBtn = document.getElementById('cl-cart-float');
+  const floatBadge = document.getElementById('cl-cart-badge');
+  const overlay = document.getElementById('cl-cart-overlay');
+  const closeBtn = document.getElementById('cl-cart-close');
+  const listEl = document.getElementById('cl-cart-list');
+  const emptyEl = document.getElementById('cl-cart-empty');
+  const actionsEl = document.getElementById('cl-cart-actions');
+  const totalEl = document.getElementById('cl-cart-total');
+  const checkoutBtn = document.getElementById('cl-cart-checkout');
+  const clearBtn = document.getElementById('cl-cart-clear');
+
+  function abrirOverlay_(){
+    overlay.classList.add('cl-open');
+    requestAnimationFrame(() => overlay.classList.add('cl-visible'));
+    document.body.style.overflow = 'hidden';
+  }
+  function cerrarOverlay_(){
+    overlay.classList.remove('cl-visible');
+    document.body.style.overflow = '';
+    setTimeout(() => overlay.classList.remove('cl-open'), 350);
+  }
+
+  function totalUnidades_(){
+    return carrito.reduce((s, it) => s + it.cantidad, 0);
+  }
+
+  function actualizarBadge_(){
+    const n = totalUnidades_();
+    floatBadge.hidden = n <= 0;
+    if (n > 0) floatBadge.textContent = n > 99 ? '99+' : String(n);
+  }
+
+  function renderCarrito_(){
+    actualizarBadge_();
+
+    if (!carrito.length) {
+      listEl.innerHTML = '';
+      emptyEl.hidden = false;
+      actionsEl.hidden = true;
+      return;
+    }
+
+    emptyEl.hidden = true;
+    actionsEl.hidden = false;
+
+    let total = 0;
+    listEl.innerHTML = carrito.map((it, i) => {
+      const subtotal = it.precioVenta * it.cantidad;
+      total += subtotal;
+      const thumb = it.img
+        ? `<img class="cl-cart-item-thumb" src="${it.img}" alt="">`
+        : `<div class="cl-cart-item-thumb cl-cart-item-thumb--vacio">🌸</div>`;
+      const tope = (typeof it.stock === 'number' && it.stock > 0) ? it.stock : null;
+      const alTope = tope !== null && it.cantidad >= tope;
+
+      return `<div class="cl-cart-item" data-idx="${i}">
+        ${thumb}
+        <div class="cl-cart-item-info">
+          <div class="cl-cart-item-name">${escapeHtml(it.nombre)}</div>
+          <div class="cl-cart-item-price">${formatearCOP_(it.precioVenta)} c/u</div>
+          ${alTope ? `<div class="cl-cart-item-stock-note">Máximo disponible: ${tope}</div>` : ''}
+        </div>
+        <div class="cl-cart-item-side">
+          <div class="cl-cart-qty">
+            <button type="button" class="cl-cart-qty-btn" data-accion="restar" aria-label="Quitar una unidad">−</button>
+            <span class="cl-cart-qty-num">${it.cantidad}</span>
+            <button type="button" class="cl-cart-qty-btn" data-accion="sumar" aria-label="Agregar una unidad"${alTope ? ' disabled' : ''}>+</button>
+          </div>
+          <div class="cl-cart-item-subtotal">${formatearCOP_(subtotal)}</div>
+          <button type="button" class="cl-cart-item-remove" data-accion="quitar">Quitar</button>
+        </div>
+      </div>`;
+    }).join('');
+
+    totalEl.textContent = formatearCOP_(total);
+  }
+
+  // Se llama desde el botón "Agregar al carrito" de cada tarjeta de
+  // producto (delegación de eventos, funciona con tarjetas que se
+  // vuelven a renderizar al cargar el inventario en vivo).
+  function agregarAlCarrito_(prod){
+    const tope = (typeof prod.stock === 'number' && prod.stock > 0) ? prod.stock : null;
+    const existente = carrito.find(it => it.id === prod.id);
+
+    if (existente) {
+      existente.cantidad += 1;
+      if (tope !== null) existente.cantidad = Math.min(existente.cantidad, tope);
+    } else {
+      carrito.push({
+        id: prod.id,
+        nombre: prod.nombre,
+        img: prod.img || '',
+        precioVenta: prod.precioVenta,
+        stock: tope,
+        cantidad: 1
+      });
+    }
+    guardarCarrito_(carrito);
+    renderCarrito_();
+  }
+
+  document.addEventListener('click', function(e){
+    const addBtn = e.target.closest('.cl-cart-add');
+    if (!addBtn) return;
+    agregarAlCarrito_({
+      id: addBtn.dataset.id,
+      nombre: addBtn.dataset.nombre,
+      img: addBtn.dataset.img,
+      precioVenta: Number(addBtn.dataset.precio) || 0,
+      stock: addBtn.dataset.stock === '' ? null : Number(addBtn.dataset.stock)
+    });
+    abrirOverlay_();
+  });
+
+  floatBtn.addEventListener('click', () => { renderCarrito_(); abrirOverlay_(); });
+  closeBtn.addEventListener('click', cerrarOverlay_);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) cerrarOverlay_(); });
+
+  listEl.addEventListener('click', function(e){
+    const btn = e.target.closest('button[data-accion]');
+    const fila = e.target.closest('.cl-cart-item');
+    if (!btn || !fila) return;
+
+    const idx = Number(fila.dataset.idx);
+    const item = carrito[idx];
+    if (!item) return;
+
+    if (btn.dataset.accion === 'sumar') {
+      const tope = (typeof item.stock === 'number' && item.stock > 0) ? item.stock : null;
+      if (tope === null || item.cantidad < tope) item.cantidad += 1;
+    } else if (btn.dataset.accion === 'restar') {
+      item.cantidad -= 1;
+      if (item.cantidad <= 0) carrito.splice(idx, 1);
+    } else if (btn.dataset.accion === 'quitar') {
+      carrito.splice(idx, 1);
+    }
+
+    guardarCarrito_(carrito);
+    renderCarrito_();
+  });
+
+  clearBtn.addEventListener('click', function(){
+    if (!carrito.length) return;
+    if (!confirm('¿Vaciar todo el carrito?')) return;
+    carrito = [];
+    guardarCarrito_(carrito);
+    renderCarrito_();
+  });
+
+  function calcularTotal_(){
+    return carrito.reduce((s, it) => s + it.precioVenta * it.cantidad, 0);
+  }
+
+  // ── Registro de carritos (para verlos en la hoja "Carritos") ──
+  // No es un paso obligatorio para comprar: si esto falla o
+  // APPS_SCRIPT_URL no está configurado, el carrito y el envío por
+  // WhatsApp siguen funcionando igual — es solo para que puedas ver
+  // qué se quedó sin finalizar.
+  function enviarSnapshotCarrito_(estado){
+    if (!carrito.length) return;
+    if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf('PEGA_AQUI') !== -1) return;
+
+    const huella = estado + '|' + JSON.stringify(carrito.map(it => [it.id, it.cantidad]));
+    if (huella === ultimaHuellaEnviada_) return; // sin cambios desde el último envío
+    ultimaHuellaEnviada_ = huella;
+
+    const payload = JSON.stringify({
+      accion: 'carrito',
+      sesionId: obtenerSesionId_(),
+      productos: carrito.map(it => ({ nombre: it.nombre, cantidad: it.cantidad })),
+      total: calcularTotal_(),
+      estado: estado
+    });
+
+    if (estado === 'Abandonado' && navigator.sendBeacon) {
+      // sendBeacon: pensado justo para "la pestaña se está cerrando",
+      // no se cancela como podría pasarle a un fetch normal.
+      navigator.sendBeacon(APPS_SCRIPT_URL, payload);
+    } else {
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: payload
+      }).catch(() => {}); // no bloquea el flujo si falla
+    }
+  }
+
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden) enviarSnapshotCarrito_('Abandonado');
+  });
+  window.addEventListener('pagehide', function(){
+    enviarSnapshotCarrito_('Abandonado');
+  });
+
+  checkoutBtn.addEventListener('click', function(){
+    if (!carrito.length) return;
+
+    let total = 0;
+    const lineas = carrito.map(it => {
+      const subtotal = it.precioVenta * it.cantidad;
+      total += subtotal;
+      return `• ${it.nombre} x${it.cantidad} — ${formatearCOP_(subtotal)}`;
+    });
+
+    const mensaje = 'Hola Chic Life! 🌸 Quiero hacer este pedido:\n\n' +
+      lineas.join('\n') +
+      `\n\nTotal: ${formatearCOP_(total)}` +
+      '\n\n¿Me ayudas a coordinar el pago y el envío?';
+
+    enviarSnapshotCarrito_('Enviado a WhatsApp');
+    window.open(`https://wa.me/${WA_PHONE}?text=${encodeURIComponent(mensaje)}`, '_blank');
+
+    // Se vacía apenas se manda a WhatsApp — si la clienta quiere seguir
+    // comprando después, empieza un carrito nuevo.
+    carrito = [];
+    guardarCarrito_(carrito);
+    renderCarrito_();
+  });
+
+  renderCarrito_();
 })();
 </script>
 
