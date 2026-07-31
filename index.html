@@ -1837,7 +1837,7 @@ function mostrarCargandoCatalogo_() {
 }
 
 function mapearProductoSheet_(p) {
-  const fotos = (p.fotos && p.fotos.length) ? p.fotos : [];
+  const fotos = (p.fotos || []).filter(u => u && u.trim());
   return {
     id: p.codigo || slugify_(`${p.marca} ${p.nombre}`),
     brand: p.marca,
@@ -2114,14 +2114,25 @@ function cerrarBusqueda_() {
   const close  = document.getElementById('search-close');
   let _debounce = null;
 
+  function _posicionarBarra() {
+    const hdr = document.querySelector('header');
+    if (hdr) bar.style.top = hdr.getBoundingClientRect().bottom + 'px';
+  }
+
   toggle.addEventListener('click', () => {
     const opening = !bar.classList.contains('open');
+    if (opening) _posicionarBarra();
     bar.classList.toggle('open', opening);
     toggle.classList.toggle('active', opening);
     toggle.setAttribute('aria-expanded', opening);
     if (opening) { setTimeout(() => input.focus(), 50); }
     else { cerrarBusqueda_(); }
   });
+
+  // Reposicionar si el usuario hace scroll mientras la barra está abierta
+  window.addEventListener('scroll', () => {
+    if (bar.classList.contains('open')) _posicionarBarra();
+  }, { passive: true });
 
   close.addEventListener('click', () => cerrarBusqueda_());
 
