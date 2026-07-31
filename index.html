@@ -1080,6 +1080,7 @@ fbq('track', 'PageView');
         <button class="search-back-btn" onclick="cerrarBusqueda_()">← Volver al catálogo</button>
       </div>
       <div class="prod-grid" id="grid-busqueda"></div>
+      <div class="pagination" id="pagination-busqueda"></div>
       <div class="search-empty" id="search-empty" style="display:none">
         <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:56px;margin:0 auto 12px;opacity:.3"><circle cx="28" cy="28" r="18" stroke="#FF1493" stroke-width="3"/><path d="M42 42l12 12" stroke="#FF1493" stroke-width="3" stroke-linecap="round"/><path d="M20 28h16M28 20v16" stroke="#FF1493" stroke-width="2.5" stroke-linecap="round"/></svg>
         <p>No encontramos productos que coincidan.<br><span style="font-size:.85rem">Intenta con otro término: nombre, marca o beneficio.</span></p>
@@ -2037,10 +2038,11 @@ function buscarProductos_(query) {
   if (resultados.length) {
     countEl.textContent = `${resultados.length} resultado${resultados.length !== 1 ? 's' : ''} para "${query}"`;
     emptyEl.style.display = 'none';
-    renderProductGrid('grid-busqueda', resultados);
+    renderCategoriaPaginada_('busqueda', resultados);
   } else {
     countEl.textContent = '';
     gridEl.innerHTML = '';
+    document.getElementById('pagination-busqueda').innerHTML = '';
     emptyEl.style.display = 'block';
   }
 
