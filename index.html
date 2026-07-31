@@ -131,6 +131,41 @@ header.scrolled{box-shadow:0 4px 32px rgba(255,20,147,.1)}
 .mobile-menu a:hover{color:var(--fuchsia)}
 
 /* ═══════════════════════════════════════════════════════════
+   BUSCADOR
+═══════════════════════════════════════════════════════════ */
+.search-toggle{background:none;border:none;cursor:pointer;padding:8px 10px;
+  color:var(--ink-s);display:flex;align-items:center;transition:color .25s;border-radius:50px}
+.search-toggle:hover,.search-toggle.active{color:var(--fuchsia);background:rgba(255,20,147,.06)}
+.search-bar{position:fixed;top:68px;left:0;right:0;z-index:850;
+  background:rgba(254,250,247,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:2px solid rgba(255,20,147,.15);padding:14px 32px;
+  display:none;align-items:center;gap:12px;
+  box-shadow:0 8px 32px rgba(255,20,147,.12);animation:searchDown .2s var(--ease)}
+.search-bar.open{display:flex}
+@keyframes searchDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.search-bar input{flex:1;font-family:var(--fb);font-size:1rem;padding:11px 20px;
+  border:2px solid rgba(255,20,147,.2);border-radius:50px;outline:none;
+  background:var(--white);color:var(--ink);transition:border-color .2s}
+.search-bar input:focus{border-color:var(--fuchsia)}
+.search-bar input::placeholder{color:var(--mist)}
+.search-close{background:none;border:none;cursor:pointer;padding:6px 10px;
+  color:var(--mist);font-size:1.3rem;line-height:1;border-radius:50%;transition:all .2s}
+.search-close:hover{color:var(--fuchsia);background:rgba(255,20,147,.08)}
+.search-results-header{display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;margin-bottom:28px}
+.search-results-count{font-size:.9rem;color:var(--mist)}
+.search-back-btn{font-size:.8rem;font-weight:500;letter-spacing:.06em;padding:8px 18px;
+  border-radius:40px;border:1.5px solid rgba(255,20,147,.25);background:none;
+  color:var(--fuchsia);cursor:pointer;transition:all .25s}
+.search-back-btn:hover{background:var(--fuchsia);color:var(--white)}
+.search-empty{text-align:center;padding:72px 0}
+.search-empty p{color:var(--mist);font-size:1rem;margin-top:12px}
+@media(max-width:768px){
+  .search-bar{padding:12px 16px;top:60px}
+  .search-bar input{font-size:.9rem;padding:10px 16px}
+}
+
+/* ═══════════════════════════════════════════════════════════
    HERO
 ═══════════════════════════════════════════════════════════ */
 .hero{
@@ -775,14 +810,24 @@ fbq('track', 'PageView');
       <a href="#nosotros">Sobre Nosotros</a>
       <a href="#lunar">Comunidad Lunar</a>
       <a href="#contacto">Contacto</a>
-      <a href="https://wa.me/573226905702?text=Hola%20Chic%20Life!%20Me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20productos%20%F0%9F%8C%B8" 
+      <a href="https://wa.me/573226905702?text=Hola%20Chic%20Life!%20Me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20productos%20%F0%9F%8C%B8"
          target="_blank" class="nav-cta" rel="noopener">Pedir ahora</a>
     </nav>
+    <button class="search-toggle" id="search-toggle" aria-label="Buscar productos" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
     <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
+
+<!-- BARRA DE BÚSQUEDA -->
+<div class="search-bar" id="search-bar" role="search" aria-label="Buscar productos">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mist)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  <input type="search" id="search-input" placeholder="Buscar por nombre, beneficios, características…" autocomplete="off" aria-label="Buscar productos">
+  <button class="search-close" id="search-close" aria-label="Cerrar búsqueda">✕</button>
+</div>
 
 <!-- MENÚ MÓVIL -->
 <nav class="mobile-menu" id="mobile-menu" aria-label="Menú móvil">
@@ -1026,6 +1071,19 @@ fbq('track', 'PageView');
     <div class="tab-pane" id="pane-maquillaje" role="tabpanel" aria-labelledby="tab-maquillaje">
       <div class="prod-grid" id="grid-maquillaje"></div>
       <div class="pagination" id="pagination-maquillaje"></div>
+    </div>
+
+    <!-- PESTAÑA: RESULTADOS DE BÚSQUEDA -->
+    <div class="tab-pane" id="pane-busqueda" role="tabpanel" aria-label="Resultados de búsqueda" style="display:none">
+      <div class="search-results-header">
+        <span class="search-results-count" id="search-count"></span>
+        <button class="search-back-btn" onclick="cerrarBusqueda_()">← Volver al catálogo</button>
+      </div>
+      <div class="prod-grid" id="grid-busqueda"></div>
+      <div class="search-empty" id="search-empty" style="display:none">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:56px;margin:0 auto 12px;opacity:.3"><circle cx="28" cy="28" r="18" stroke="#FF1493" stroke-width="3"/><path d="M42 42l12 12" stroke="#FF1493" stroke-width="3" stroke-linecap="round"/><path d="M20 28h16M28 20v16" stroke="#FF1493" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <p>No encontramos productos que coincidan.<br><span style="font-size:.85rem">Intenta con otro término: nombre, marca o beneficio.</span></p>
+      </div>
     </div>
 
     <div style="text-align:center;margin-top:48px" class="rev">
@@ -1756,6 +1814,12 @@ function usarCatalogoRespaldo_() {
   // El catálogo de respaldo no trae productos de maquillaje todavía
   // (se agregó la categoría después) — muestra el mensaje vacío normal.
   renderCategoriaPaginada_('maquillaje', PRODUCTS_RESPALDO.maquillaje);
+  window._catalogoSearch = [
+    ...(PRODUCTS_RESPALDO.capilar || []).map(p => ({...p, _cat: 'capilar'})),
+    ...(PRODUCTS_RESPALDO.skincare || []).map(p => ({...p, _cat: 'skincare'})),
+    ...(PRODUCTS_RESPALDO.corporal || []).map(p => ({...p, _cat: 'corporal'})),
+    ...(PRODUCTS_RESPALDO.maquillaje || []).map(p => ({...p, _cat: 'maquillaje'}))
+  ];
   armarCatalogoTips_({
     capilar: PRODUCTS_RESPALDO.capilar,
     skincare: PRODUCTS_RESPALDO.skincare,
@@ -1802,6 +1866,12 @@ function cargarInventario() {
       renderCategoriaPaginada_('corporal', porCategoria.corporal);
       renderCategoriaPaginada_('maquillaje', porCategoria.maquillaje);
       armarCatalogoTips_(porCategoria);
+      window._catalogoSearch = [
+        ...porCategoria.capilar.map(p => ({...p, _cat: 'capilar'})),
+        ...porCategoria.skincare.map(p => ({...p, _cat: 'skincare'})),
+        ...porCategoria.corporal.map(p => ({...p, _cat: 'corporal'})),
+        ...porCategoria.maquillaje.map(p => ({...p, _cat: 'maquillaje'}))
+      ];
     })
     .catch(err => {
       console.warn('Chic Life: no se pudo cargar el inventario en vivo — usando catálogo de respaldo.', err);
@@ -1928,6 +1998,100 @@ function switchTab(name) {
     });
   }
 }
+
+// ═══════════════════════════════════════════════════════════
+// BUSCADOR DE PRODUCTOS
+// ═══════════════════════════════════════════════════════════
+function _normalizar(str) {
+  return (str || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
+function buscarProductos_(query) {
+  const q = _normalizar(query).trim();
+  if (!q) { cerrarBusqueda_(); return; }
+
+  const todos = window._catalogoSearch || [];
+  const resultados = todos.filter(p => {
+    const campos = _normalizar(
+      [p.name, p.brand, p.desc, p.beneficios, p.modoUso, p._cat].join(' ')
+    );
+    return q.split(/\s+/).every(palabra => campos.includes(palabra));
+  });
+
+  // Mostrar panel de búsqueda
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active'); b.setAttribute('aria-selected', 'false');
+  });
+  document.querySelectorAll('.tab-pane').forEach(p => {
+    p.classList.remove('active'); p.style.display = '';
+  });
+
+  const pane = document.getElementById('pane-busqueda');
+  pane.style.display = 'block';
+  pane.classList.add('active');
+
+  const countEl = document.getElementById('search-count');
+  const emptyEl = document.getElementById('search-empty');
+  const gridEl  = document.getElementById('grid-busqueda');
+
+  if (resultados.length) {
+    countEl.textContent = `${resultados.length} resultado${resultados.length !== 1 ? 's' : ''} para "${query}"`;
+    emptyEl.style.display = 'none';
+    renderProductGrid('grid-busqueda', resultados);
+  } else {
+    countEl.textContent = '';
+    gridEl.innerHTML = '';
+    emptyEl.style.display = 'block';
+  }
+
+  document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function cerrarBusqueda_() {
+  const input = document.getElementById('search-input');
+  const bar   = document.getElementById('search-bar');
+  const toggle = document.getElementById('search-toggle');
+  const pane  = document.getElementById('pane-busqueda');
+  if (input)  input.value = '';
+  if (bar)    bar.classList.remove('open');
+  if (toggle) { toggle.classList.remove('active'); toggle.setAttribute('aria-expanded', 'false'); }
+  if (pane)   { pane.classList.remove('active'); pane.style.display = 'none'; }
+  switchTab('capilar');
+}
+
+// Inicializar listeners del buscador
+(function initSearch_() {
+  const toggle = document.getElementById('search-toggle');
+  const bar    = document.getElementById('search-bar');
+  const input  = document.getElementById('search-input');
+  const close  = document.getElementById('search-close');
+  let _debounce = null;
+
+  toggle.addEventListener('click', () => {
+    const opening = !bar.classList.contains('open');
+    bar.classList.toggle('open', opening);
+    toggle.classList.toggle('active', opening);
+    toggle.setAttribute('aria-expanded', opening);
+    if (opening) { setTimeout(() => input.focus(), 50); }
+    else { cerrarBusqueda_(); }
+  });
+
+  close.addEventListener('click', () => cerrarBusqueda_());
+
+  input.addEventListener('input', () => {
+    clearTimeout(_debounce);
+    _debounce = setTimeout(() => buscarProductos_(input.value), 320);
+  });
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Escape') cerrarBusqueda_();
+    if (e.key === 'Enter') { clearTimeout(_debounce); buscarProductos_(input.value); }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && bar.classList.contains('open')) cerrarBusqueda_();
+  });
+})();
 
 // ═══════════════════════════════════════════════════════════
 // BLUSH TONE SELECTOR
