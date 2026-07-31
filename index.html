@@ -383,6 +383,17 @@ section{padding:100px 32px}
 .prod-img.has-photo::after{content:none}
 .prod-img.has-photo{height:auto;aspect-ratio:4/5;background:var(--rose-l)}
 .prod-img.has-photo img{width:100%;height:100%;object-fit:contain;display:block}
+/* ── Galería multi-imagen ── */
+.prod-img.has-gallery{position:relative}
+.prod-img.has-gallery img{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:0;transition:opacity .6s ease;display:block}
+.prod-img.has-gallery img.gl-active{opacity:1}
+.gallery-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+  display:flex;gap:5px;z-index:3;pointer-events:none}
+.gallery-dot{width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.5);transition:background .3s,transform .3s}
+.gallery-dot.gl-active{background:#fff;transform:scale(1.3);
+  box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .prod-badge{position:absolute;top:12px;left:12px;
   padding:4px 10px;border-radius:20px;
   background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
@@ -1611,12 +1622,22 @@ function renderProductGrid(gridId, items) {
     // forma de saberlo sin la sincronización en vivo.
     const agotado = typeof p.stock === 'number' && p.stock <= 0;
 
-    const imgBlock = p.img
-      ? `<div class="prod-img has-photo${agotado ? ' is-agotado' : ''}"${p.aspectRatio ? ` style="aspect-ratio:${p.aspectRatio}"` : ''}>
-           <img src="${p.img}" alt="${escapeHtml(p.imgAlt || p.name)}" loading="lazy">
-           ${badgeHtml}
-         </div>`
-      : `<div class="prod-img${agotado ? ' is-agotado' : ''}">${p.emoji || '🌸'}${badgeHtml}</div>`;
+    const allImgs   = (p.imgs && p.imgs.length) ? p.imgs : (p.img ? [p.img] : []);
+    const hasGallery = allImgs.length > 1;
+    const agotadoCls = agotado ? ' is-agotado' : '';
+    const imgBlock = allImgs.length
+      ? (hasGallery
+          ? `<div class="prod-img has-photo has-gallery${agotadoCls}">
+               ${allImgs.map((u, i) =>
+                 `<img src="${u}" alt="${escapeHtml(p.imgAlt || p.name)} ${i+1}" loading="lazy"${i===0?' class="gl-active"':''} data-gi="${i}">`
+               ).join('')}
+               <div class="gallery-dots">${allImgs.map((_,i) =>
+                 `<span class="gallery-dot${i===0?' gl-active':''}" data-gi="${i}"></span>`
+               ).join('')}</div>
+               ${badgeHtml}
+             </div>`
+          : `<div class="prod-img has-photo${agotadoCls}"${p.aspectRatio?` style="aspect-ratio:${p.aspectRatio}"`:''}><img src="${allImgs[0]}" alt="${escapeHtml(p.imgAlt||p.name)}" loading="lazy">${badgeHtml}</div>`)
+      : `<div class="prod-img${agotadoCls}">${p.emoji||'🌸'}${badgeHtml}</div>`;
 
     // Si está agotado, el mensaje de WhatsApp pregunta puntualmente por
     // disponibilidad en vez del genérico "me interesa" — así la clienta
@@ -1713,6 +1734,7 @@ function pintarPaginaCategoria_(categoria) {
 
   renderProductGrid('grid-' + categoria, paginaItems);
   renderPaginacion_('pagination-' + categoria, categoria, estado.page, totalPaginas);
+  initGalleries_(document.getElementById('grid-' + categoria));
 
   // Las tarjetas nuevas nacen con la clase "rev" (opacity:0) para la
   // animación de aparición al hacer scroll, pero el IntersectionObserver
@@ -1727,6 +1749,37 @@ function pintarPaginaCategoria_(categoria) {
       grid.querySelectorAll('.rev:not(.visible)').forEach(el => el.classList.add('visible'));
     });
   }
+}
+
+// Inicia el slideshow automático en tarjetas con múltiples imágenes dentro de `root`.
+// Se llama cada vez que `pintarPaginaCategoria_` actualiza el DOM.
+function initGalleries_(root) {
+  if (!root) return;
+  root.querySelectorAll('.prod-img.has-gallery').forEach(card => {
+    // Limpiar timer anterior si la tarjeta ya existía
+    if (card._glTimer) clearInterval(card._glTimer);
+
+    const imgs = card.querySelectorAll('img[data-gi]');
+    const dots = card.querySelectorAll('.gallery-dot[data-gi]');
+    if (imgs.length < 2) return;
+
+    let cur = 0;
+    function goTo(n) {
+      imgs[cur].classList.remove('gl-active');
+      dots[cur]?.classList.remove('gl-active');
+      cur = (n + imgs.length) % imgs.length;
+      imgs[cur].classList.add('gl-active');
+      dots[cur]?.classList.add('gl-active');
+    }
+
+    card._glTimer = setInterval(() => goTo(cur + 1), 2400);
+
+    // Pausar en hover para que el usuario pueda ver la imagen actual
+    card.addEventListener('mouseenter', () => clearInterval(card._glTimer));
+    card.addEventListener('mouseleave', () => {
+      card._glTimer = setInterval(() => goTo(cur + 1), 2400);
+    });
+  });
 }
 
 function irAPagina_(categoria, pagina) {
@@ -1784,16 +1837,18 @@ function mostrarCargandoCatalogo_() {
 }
 
 function mapearProductoSheet_(p) {
+  const fotos = (p.fotos && p.fotos.length) ? p.fotos : [];
   return {
     id: p.codigo || slugify_(`${p.marca} ${p.nombre}`),
     brand: p.marca,
     name: p.nombre,
     desc: p.descripcion,
-    img: (p.fotos && p.fotos[0]) || '',
+    imgs: fotos,
+    img: fotos[0] || '',
     modoUso: p.modoUso,
     beneficios: p.beneficios,
     precioVenta: p.precioVenta,
-    stock: p.stock, // para topar la cantidad que se puede agregar al carrito
+    stock: p.stock,
     waMsg: `Hola! Me interesa el producto ${p.nombre}${p.marca ? ' de ' + p.marca : ''} 🌸`
   };
 }
