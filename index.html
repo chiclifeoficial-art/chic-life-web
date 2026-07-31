@@ -327,8 +327,13 @@ section{padding:100px 32px}
 .tab-btn.active{background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
   color:var(--white);box-shadow:0 4px 16px rgba(255,20,147,.35)}
 .tab-pane{display:none}.tab-pane.active{display:block}
-/* Product grid */
-.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
+/* El catálogo usa más ancho que el resto del sitio en pantallas grandes,
+   para aprovechar el espacio disponible en computador/tablet. */
+.catalogo .container{max-width:1440px}
+/* Product grid — 4 columnas en escritorio/tablet ancha (6 filas x 4 = 24
+   productos por página, ver paginación en JS), y se reduce en pantallas
+   más angostas para seguir usando el ancho disponible sin apretar tarjetas. */
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .prod-card{
   background:var(--white);border:1px solid rgba(255,20,147,.1);
   border-radius:var(--r-md);overflow:hidden;
@@ -354,6 +359,24 @@ section{padding:100px 32px}
 .prod-desc{font-size:.82rem;color:var(--mist);line-height:1.6;margin-bottom:16px}
 .prod-price{font-family:var(--fd);font-size:1.3rem;font-weight:900;color:var(--fuchsia);margin-bottom:10px}
 .prod-empty{grid-column:1/-1;text-align:center;color:var(--mist);font-size:.88rem;padding:32px 0}
+/* Paginación del catálogo */
+.pagination{display:flex;align-items:center;justify-content:center;gap:8px;
+  flex-wrap:wrap;margin-top:36px}
+.page-btn{
+  min-width:38px;height:38px;padding:0 4px;border-radius:50%;
+  background:var(--white);border:1px solid rgba(255,20,147,.15);
+  color:var(--ink-s);font-size:.82rem;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .25s var(--ease);
+}
+.page-btn:hover:not(:disabled){border-color:var(--fuchsia);color:var(--fuchsia)}
+.page-btn.active{
+  background:linear-gradient(135deg,var(--fuchsia),#FF69B4);color:var(--white);
+  border-color:transparent;box-shadow:0 4px 16px rgba(255,20,147,.35)
+}
+.page-btn:disabled{opacity:.32;cursor:not-allowed}
+.page-btn.page-nav{width:auto;padding:0 16px;border-radius:30px}
+.page-ellipsis{color:var(--mist);padding:0 4px;font-size:.82rem}
 .prod-detalle{margin:2px 0 4px;border-top:1px solid rgba(255,20,147,.12);padding-top:10px}
 .prod-detalle summary{
   cursor:pointer;font-size:.76rem;font-weight:600;color:var(--fuchsia-d);
@@ -652,6 +675,8 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   .hero-sub{margin:0 auto 36px}
   .hero-btns{justify-content:center}
   .ritual-flow::before{display:none}
+  /* Tablet: 3 columnas, sigue usando todo el ancho disponible */
+  .prod-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:768px){
   .nav-links,.nav-cta{display:none}
@@ -665,11 +690,15 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
   .lunar-calendar{display:none}
   .hero-card-grid{grid-template-columns:1fr 1fr}
+  /* Tablet angosta / móvil grande: 2 columnas */
+  .prod-grid{grid-template-columns:1fr 1fr;gap:16px}
 }
 @media(max-width:480px){
   .hero h1{font-size:2.2rem}
   .footer-grid{grid-template-columns:1fr}
   .hero-card-grid{grid-template-columns:1fr 1fr;max-width:100%}
+  /* Móvil: 1 columna */
+  .prod-grid{grid-template-columns:1fr}
 }
 </style>
 
@@ -965,6 +994,7 @@ fbq('track', 'PageView');
     <!-- PESTAÑA: CAPILAR -->
     <div class="tab-pane active" id="pane-capilar" role="tabpanel" aria-labelledby="tab-capilar">
       <div class="prod-grid" id="grid-capilar"></div>
+      <div class="pagination" id="pagination-capilar"></div>
 
       <!-- Tip Chic (contenido dinámico: elige al azar un producto real del inventario en vivo) -->
       <div class="tip-chic rev" id="tip-chic-box">
@@ -983,16 +1013,19 @@ fbq('track', 'PageView');
     <!-- PESTAÑA: SKINCARE -->
     <div class="tab-pane" id="pane-skincare" role="tabpanel" aria-labelledby="tab-skincare">
       <div class="prod-grid" id="grid-skincare"></div>
+      <div class="pagination" id="pagination-skincare"></div>
     </div>
 
     <!-- PESTAÑA: CUIDADO CORPORAL -->
     <div class="tab-pane" id="pane-corporal" role="tabpanel" aria-labelledby="tab-corporal">
       <div class="prod-grid" id="grid-corporal"></div>
+      <div class="pagination" id="pagination-corporal"></div>
     </div>
 
     <!-- PESTAÑA: MAQUILLAJE -->
     <div class="tab-pane" id="pane-maquillaje" role="tabpanel" aria-labelledby="tab-maquillaje">
       <div class="prod-grid" id="grid-maquillaje"></div>
+      <div class="pagination" id="pagination-maquillaje"></div>
     </div>
 
     <div style="text-align:center;margin-top:48px" class="rev">
@@ -1606,6 +1639,74 @@ function renderProductGrid(gridId, items) {
 }
 
 // ═══════════════════════════════════════════════════════════
+// PAGINACIÓN DEL CATÁLOGO — 6 filas x 4 productos = 24 por página,
+// una página independiente por cada categoría/pestaña. renderProductGrid
+// sigue pintando solo los productos de la página activa; esta capa
+// guarda la lista completa por categoría y decide qué porción mostrar.
+// ═══════════════════════════════════════════════════════════
+const PROD_PAGE_SIZE = 24; // 6 filas x 4 columnas
+const catalogoState_ = {}; // { capilar: {items:[...], page:1}, ... }
+
+function renderCategoriaPaginada_(categoria, items) {
+  catalogoState_[categoria] = { items: items || [], page: 1 };
+  pintarPaginaCategoria_(categoria);
+}
+
+function pintarPaginaCategoria_(categoria) {
+  const estado = catalogoState_[categoria];
+  if (!estado) return;
+
+  const totalPaginas = Math.max(1, Math.ceil(estado.items.length / PROD_PAGE_SIZE));
+  estado.page = Math.min(Math.max(1, estado.page), totalPaginas);
+
+  const inicio = (estado.page - 1) * PROD_PAGE_SIZE;
+  const paginaItems = estado.items.slice(inicio, inicio + PROD_PAGE_SIZE);
+
+  renderProductGrid('grid-' + categoria, paginaItems);
+  renderPaginacion_('pagination-' + categoria, categoria, estado.page, totalPaginas);
+}
+
+function irAPagina_(categoria, pagina) {
+  const estado = catalogoState_[categoria];
+  if (!estado) return;
+  estado.page = pagina;
+  pintarPaginaCategoria_(categoria);
+  const grid = document.getElementById('grid-' + categoria);
+  if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Calcula qué números de página mostrar (con "…" cuando hay muchas),
+// siempre incluyendo primera, última y un rango alrededor de la actual.
+function paginasVisibles_(actual, total) {
+  const delta = 1;
+  const rango = [];
+  for (let i = Math.max(1, actual - delta); i <= Math.min(total, actual + delta); i++) rango.push(i);
+  if (rango[0] > 1) { if (rango[0] > 2) rango.unshift('…'); rango.unshift(1); }
+  if (rango[rango.length - 1] < total) { if (rango[rango.length - 1] < total - 1) rango.push('…'); rango.push(total); }
+  return rango;
+}
+
+function renderPaginacion_(containerId, categoria, paginaActual, totalPaginas) {
+  const cont = document.getElementById(containerId);
+  if (!cont) return;
+  if (totalPaginas <= 1) { cont.innerHTML = ''; return; }
+
+  let botones = `<button type="button" class="page-btn page-nav" ${paginaActual === 1 ? 'disabled' : ''} onclick="irAPagina_('${categoria}', ${paginaActual - 1})" aria-label="Página anterior">‹ Anterior</button>`;
+
+  paginasVisibles_(paginaActual, totalPaginas).forEach(p => {
+    if (p === '…') {
+      botones += `<span class="page-ellipsis">…</span>`;
+    } else {
+      botones += `<button type="button" class="page-btn${p === paginaActual ? ' active' : ''}" onclick="irAPagina_('${categoria}', ${p})" aria-label="Ir a página ${p}"${p === paginaActual ? ' aria-current="page"' : ''}>${p}</button>`;
+    }
+  });
+
+  botones += `<button type="button" class="page-btn page-nav" ${paginaActual === totalPaginas ? 'disabled' : ''} onclick="irAPagina_('${categoria}', ${paginaActual + 1})" aria-label="Página siguiente">Siguiente ›</button>`;
+
+  cont.innerHTML = botones;
+}
+
+// ═══════════════════════════════════════════════════════════
 // CARGA DEL CATÁLOGO EN VIVO (Apeiron ERP vía Google Sheets)
 // Si la carga falla por cualquier motivo (URL sin configurar, sin
 // internet, la hoja está vacía, etc.), el sitio cae automáticamente
@@ -1635,12 +1736,12 @@ function mapearProductoSheet_(p) {
 }
 
 function usarCatalogoRespaldo_() {
-  renderProductGrid('grid-capilar', PRODUCTS_RESPALDO.capilar);
-  renderProductGrid('grid-skincare', PRODUCTS_RESPALDO.skincare);
-  renderProductGrid('grid-corporal', PRODUCTS_RESPALDO.corporal);
+  renderCategoriaPaginada_('capilar', PRODUCTS_RESPALDO.capilar);
+  renderCategoriaPaginada_('skincare', PRODUCTS_RESPALDO.skincare);
+  renderCategoriaPaginada_('corporal', PRODUCTS_RESPALDO.corporal);
   // El catálogo de respaldo no trae productos de maquillaje todavía
   // (se agregó la categoría después) — muestra el mensaje vacío normal.
-  renderProductGrid('grid-maquillaje', PRODUCTS_RESPALDO.maquillaje);
+  renderCategoriaPaginada_('maquillaje', PRODUCTS_RESPALDO.maquillaje);
   armarCatalogoTips_({
     capilar: PRODUCTS_RESPALDO.capilar,
     skincare: PRODUCTS_RESPALDO.skincare,
@@ -1682,10 +1783,10 @@ function cargarInventario() {
         return;
       }
 
-      renderProductGrid('grid-capilar', porCategoria.capilar);
-      renderProductGrid('grid-skincare', porCategoria.skincare);
-      renderProductGrid('grid-corporal', porCategoria.corporal);
-      renderProductGrid('grid-maquillaje', porCategoria.maquillaje);
+      renderCategoriaPaginada_('capilar', porCategoria.capilar);
+      renderCategoriaPaginada_('skincare', porCategoria.skincare);
+      renderCategoriaPaginada_('corporal', porCategoria.corporal);
+      renderCategoriaPaginada_('maquillaje', porCategoria.maquillaje);
       armarCatalogoTips_(porCategoria);
     })
     .catch(err => {
