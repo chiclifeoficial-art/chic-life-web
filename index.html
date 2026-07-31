@@ -966,36 +966,7 @@ fbq('track', 'PageView');
     <div class="tab-pane active" id="pane-capilar" role="tabpanel" aria-labelledby="tab-capilar">
       <div class="prod-grid" id="grid-capilar"></div>
 
-      <!-- Sección Rizos -->
-      <div class="rizos-sec rev">
-        <div class="rizos-title">💫 Curaduría Especializada: Rizos Perfectos</div>
-        <div class="rizos-sub">Línea Ponto Hair Club — Vegana, liberada, sin sulfatos ni parabenos</div>
-        <div class="rizos-grid">
-          <div class="rizos-card">
-            <div class="rizos-img"><img src="images/ponto-champu.webp" alt="Ponto Champú 300ml - Ponto Hair Club" loading="lazy"></div>
-            <div class="rizos-body">
-              <h4>Ponto Champú</h4>
-              <p>Limpieza suave con aloe vera y agua micelar. Recupera los rizos sin resecar.</p>
-            </div>
-          </div>
-          <div class="rizos-card">
-            <div class="rizos-img"><img src="images/ponto-hidratacion-3en1.webp" alt="Ponto Hidratación 3en1 1000gr - Ponto Hair Club" loading="lazy"></div>
-            <div class="rizos-body">
-              <h4>Ponto Hidratación 3en1</h4>
-              <p>Mascarilla, acondicionador y crema de peinar en uno. Brillo, reparación y suavidad.</p>
-            </div>
-          </div>
-          <div class="rizos-card">
-            <div class="rizos-img"><img src="images/gelly-fest-fijacion-media.webp" alt="Gelly Fest Fijación Media - Ponto Hair Club" loading="lazy"></div>
-            <div class="rizos-body">
-              <h4>Gelly Fest Fijación Media</h4>
-              <p>Arándano y cereza para rizos definidos, flexibles y sin frizz. Sin sensación pegajosa.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tip Chic (contenido dinámico: cambia cada día según la fecha local del visitante) -->
+      <!-- Tip Chic (contenido dinámico: elige al azar un producto real del inventario en vivo) -->
       <div class="tip-chic rev" id="tip-chic-box">
         <div class="tip-icon" id="tip-chic-icon">💡</div>
         <div>
@@ -1012,114 +983,6 @@ fbq('track', 'PageView');
     <!-- PESTAÑA: SKINCARE -->
     <div class="tab-pane" id="pane-skincare" role="tabpanel" aria-labelledby="tab-skincare">
       <div class="prod-grid" id="grid-skincare"></div>
-
-      <div class="blush-card rev">
-        <div class="sec-label">Producto Estrella · Anyeluz</div>
-        <h3 style="font-family:var(--fd);font-size:1.6rem;font-weight:700">Liquid Blush</h3>
-        <p style="color:var(--mist);font-size:.88rem;margin-top:6px">Rubor líquido 2 en 1 para labios y mejillas. Acabado natural, efecto piel sana y duración todo el día.</p>
-
-        <div class="blush-media">
-          <div class="blush-video">
-            <video poster="images/liquid-blush-poster.jpg" controls muted loop playsinline preload="metadata">
-              <source src="videos/liquid-blush-demo.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="blush-gallery">
-            <img src="images/liquid-blush-tubo.webp" alt="Liquid Blush Anyeluz - envase 13ml" loading="lazy">
-            <img src="images/liquid-blush-modelo1.png" alt="Modelo sosteniendo Liquid Blush Anyeluz" loading="lazy">
-            <img src="images/liquid-blush-modelo2.png" alt="Aplicación de Liquid Blush en mejilla" loading="lazy">
-            <img src="images/liquid-blush-labios.png" alt="Liquid Blush aplicado en labios" loading="lazy">
-          </div>
-        </div>
-
-        <div style="margin-bottom:12px;font-size:.82rem;font-weight:600;color:var(--ink-s);letter-spacing:.06em;text-transform:uppercase">Elige tu tono</div>
-        <div class="blush-tones" role="radiogroup" aria-label="Tonos de blush">
-          <div class="tone active" role="radio" aria-checked="true" aria-label="Rosa durazno" tabindex="0"
-               style="background:linear-gradient(135deg,#FFB6C1,#FF69B4)"
-               data-color="linear-gradient(135deg,#FFB6C1,#FF69B4)"
-               data-name="Rosa Durazno" onclick="selectTone(this)"></div>
-          <div class="tone" role="radio" aria-checked="false" aria-label="Coral vibrante" tabindex="0"
-               style="background:linear-gradient(135deg,#FF7F50,#FF4500)"
-               data-color="linear-gradient(135deg,#FF7F50,#FF4500)"
-               data-name="Coral Vibrante" onclick="selectTone(this)"></div>
-          <div class="tone" role="radio" aria-checked="false" aria-label="Fucsia intenso" tabindex="0"
-               style="background:linear-gradient(135deg,#FF1493,#CC0070)"
-               data-color="linear-gradient(135deg,#FF1493,#CC0070)"
-               data-name="Fucsia Intenso" onclick="selectTone(this)"></div>
-          <div class="tone" role="radio" aria-checked="false" aria-label="Nude rosado" tabindex="0"
-               style="background:linear-gradient(135deg,#DEB887,#C8A882)"
-               data-color="linear-gradient(135deg,#DEB887,#C8A882)"
-               data-name="Nude Rosado" onclick="selectTone(this)"></div>
-          <div class="tone" role="radio" aria-checked="false" aria-label="Terracota" tabindex="0"
-               style="background:linear-gradient(135deg,#C8715A,#A0522D)"
-               data-color="linear-gradient(135deg,#C8715A,#A0522D)"
-               data-name="Terracota" onclick="selectTone(this)"></div>
-          <div class="tone" role="radio" aria-checked="false" aria-label="Durazno suave" tabindex="0"
-               style="background:linear-gradient(135deg,#FFB199,#FF8A65)"
-               data-color="linear-gradient(135deg,#FFB199,#FF8A65)"
-               data-name="Durazno Suave" onclick="selectTone(this)"></div>
-        </div>
-        <div id="tone-name" style="font-size:.82rem;color:var(--mist);margin-bottom:24px">Rosa Durazno — Glam natural</div>
-
-        <div class="blush-info">
-          <div>
-            <h4>Descripción</h4>
-            <p>Rubor líquido 2 en 1 para labios y mejillas, con aplicador de esponjita para una distribución uniforme y controlada. Su fórmula líquida se funde fácilmente con la piel para un acabado natural y luminoso. Disponible en 6 tonos.</p>
-          </div>
-          <div>
-            <h4>Modo de Uso</h4>
-            <ol>
-              <li>Aplica una pequeña cantidad en el centro de la mejilla y difumina hacia las sienes con los dedos o una brocha.</li>
-              <li>Con el mismo aplicador, distribúyelo sobre los labios desde el centro hacia las comisuras y difumina con los dedos.</li>
-            </ol>
-          </div>
-          <div>
-            <h4>Preguntas Frecuentes</h4>
-            <div class="blush-faq-item">
-              <strong>¿Qué beneficios ofrece?</strong>
-              <span>Color vibrante y duradero en mejillas y labios, con aplicación sencilla y precisa gracias al aplicador de esponjita.</span>
-            </div>
-            <div class="blush-faq-item">
-              <strong>¿Cuánto dura la pigmentación en la piel?</strong>
-              <span>Color duradero durante todo el día.</span>
-            </div>
-          </div>
-        </div>
-
-        <a href="https://wa.me/573226905702?text=Hola!%20Me%20interesa%20el%20Liquid%20Blush%20%F0%9F%92%8B"
-           target="_blank" class="btn-primary" style="display:inline-flex;gap:8px" rel="noopener">
-          💋 Pedir Liquid Blush
-        </a>
-      </div>
-
-      <!-- Ritual -->
-      <div style="margin-top:48px" class="rev d2">
-        <div class="sec-label">Ritual Diario</div>
-        <h3 style="font-family:var(--fd);font-size:1.5rem;font-weight:700;margin-bottom:32px">Tu Ritual Skincare <em style="color:var(--fuchsia);font-style:italic">Glowy</em></h3>
-        <div class="ritual-flow">
-          <div class="ritual-step">
-            <div class="step-circle">
-              <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            </div>
-            <h4>1. Limpieza</h4>
-            <p>Doble limpieza para piel luminosa y libre de impurezas</p>
-          </div>
-          <div class="ritual-step">
-            <div class="step-circle" style="background:linear-gradient(135deg,var(--gold),#F5C060)">
-              <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-            </div>
-            <h4>2. Hidratación</h4>
-            <p>Sérum y crema hidratante para una piel plump y saludable</p>
-          </div>
-          <div class="ritual-step">
-            <div class="step-circle" style="background:linear-gradient(135deg,var(--terracotta),var(--fuchsia))">
-              <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 100-16 8 8 0 000 16zM9 11.5C9 10.12 10.12 9 11.5 9S14 10.12 14 11.5 12.88 14 11.5 14 9 12.88 9 11.5zm5.5 0C14.5 10.12 15.62 9 17 9s2.5 1.12 2.5 2.5S18.38 14 17 14s-2.5-1.12-2.5-2.5z"/></svg>
-            </div>
-            <h4>3. Toque de Color</h4>
-            <p>Liquid Blush para un glow natural que dura todo el día</p>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- PESTAÑA: CUIDADO CORPORAL -->
@@ -1778,6 +1641,12 @@ function usarCatalogoRespaldo_() {
   // El catálogo de respaldo no trae productos de maquillaje todavía
   // (se agregó la categoría después) — muestra el mensaje vacío normal.
   renderProductGrid('grid-maquillaje', PRODUCTS_RESPALDO.maquillaje);
+  armarCatalogoTips_({
+    capilar: PRODUCTS_RESPALDO.capilar,
+    skincare: PRODUCTS_RESPALDO.skincare,
+    corporal: PRODUCTS_RESPALDO.corporal,
+    maquillaje: PRODUCTS_RESPALDO.maquillaje
+  });
 }
 
 function cargarInventario() {
@@ -1817,6 +1686,7 @@ function cargarInventario() {
       renderProductGrid('grid-skincare', porCategoria.skincare);
       renderProductGrid('grid-corporal', porCategoria.corporal);
       renderProductGrid('grid-maquillaje', porCategoria.maquillaje);
+      armarCatalogoTips_(porCategoria);
     })
     .catch(err => {
       console.warn('Chic Life: no se pudo cargar el inventario en vivo — usando catálogo de respaldo.', err);
@@ -1827,421 +1697,82 @@ function cargarInventario() {
 cargarInventario();
 
 // ═══════════════════════════════════════════════════════════
-// TIP CHIC 💕 — CATÁLOGO ANUAL DINÁMICO (366 tips, uno por día)
-// Cambia automáticamente según la fecha LOCAL del navegador del
-// visitante (zona horaria del dispositivo, sin depender de servidor).
+// TIP CHIC 💕 — arma un tip al azar usando un producto real del
+// catálogo que esté cargado en ese momento (en vivo desde Apeiron, o
+// el de respaldo si la sincronización falló). Ya no depende de una
+// lista fija de tips escritos a mano: esos mencionaban productos de
+// un catálogo antiguo que dejó de coincidir con el inventario real.
 // ═══════════════════════════════════════════════════════════
-const TIP_CHIC_CATALOG = [
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Shampoo de Miel 300ml</strong> de Click Hair reconstruye el brillo gracias a su alta carga de vitaminas y, al no llevar sal ni parabenos, es ideal justo después de un proceso químico. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Acondicionador 4 en 1 300ml</strong> de Click Hair entrega hidratación profunda desde el primer uso y devuelve la suavidad natural del cabello. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Mascarilla de Miel Brillo Intenso 300ml</strong> de Click Hair recupera la vitalidad y realza el color después de tratamientos químicos, dejando el cabello renovado. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Energizante Capilar 300ml</strong> de Click Hair acelera el metabolismo del cuero cabelludo y favorece un crecimiento saludable, gracias a su fórmula rica en proteínas y aminoácidos. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Miel Capilar con Argán 50ml</strong> de Click Hair con solo unas gotas cambia la textura del cabello: más sedoso, brillante y manejable, como recién salido del salón. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo Cabello Graso 300ml</strong> de Click Hair controla la caspa grasa y destapa el folículo piloso, permitiendo la oxigenación del cuero cabelludo y evitando la caída. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Perfume Capilar 120ml</strong> de Click Hair deja el cabello oliendo delicioso por más de 24 horas, con termoprotector que además reduce el frizz. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Perfume Capilar de Miel 100ml</strong> de Click Hair no solo perfuma: devuelve la suavidad perdida y aporta un brillo tipo espejo sin dejar sensación pesada. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Suero Reconstructor 120ml</strong> de Click Hair sella la hebra y la protege de la deshidratación y el maltrato de herramientas de calor, sol y químicos.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Kit Anticaída y Reparación</strong> de La Magia de Avrill formulado con CBD, hongo reishi, argán y pantenol, nutre desde la raíz y controla la caída — libre de sal, siliconas y parabenos. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Kit de Repolarización</strong> de La Magia de Avrill combina exactamente los nutrientes que tu cabello necesita para repararse de forma integral. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Cóctel Repolarizador 500ml</strong> de La Magia de Avrill reúne en un solo frasco los 4 pasos del kit de repolarización: proteína de arroz, nutri extreme, elixir de jojoba y cascada revitalizante. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Gotas de Luz 60ml</strong> de La Magia de Avrill este sérum nutre las capas internas del cabello y sella las cutículas con un cóctel de aceites naturales y aminoácidos. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Cascada Revitalizante 120ml</strong> de La Magia de Avrill es el tratamiento que aporta ese brillo y esa suavidad que se notan a distancia. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Kit Deluxe 280ml c/u</strong> de La Magia de Avrill trae los 3 pasos de la repolarización en tamaño completo, para una reparación de cabello sin atajos. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Bio Reestructurante Capilar 450ml</strong> de Yavalva es un pre-shampoo en seco que actúa desde el folículo hasta las puntas, ideal para cabello maltratado por químicos o calor. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Herbal 450ml</strong> de Yavalva limpia en profundidad, purifica y fortalece — es suave incluso para cueros cabelludos sensibles. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Shampoo Herbal Cabello Graso 450ml</strong> de Yavalva está formulado para equilibrar y controlar el exceso de grasa en el cuero cabelludo. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Tratamiento Natural Protector 450ml</strong> de Yavalva aporta sedosidad y alto brillo, sella las puntas y facilita el desenredado.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Loción Anticaída Bio Fertilizante 250ml</strong> de Yavalva controla la caída excesiva, estimula el crecimiento y fortalece el folículo. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Loción Bio Termoprotector Brisa Celestial 120ml</strong> de Yavalva protege del sol y del calor de planchas o secadores sin dejar residuos ni sensación pesada, y de paso perfuma. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Elixir de Jojoba</strong> de Yavalva origina la regeneración capilar y fortalece el cuero cabelludo con su cóctel de activos y aminoácidos. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Proteína de Arroz</strong> de Yavalva es una mascarilla reestructurante de acción inmediata para fibras que necesitan reparación urgente. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Nutri Extreme 280ml</strong> de Yavalva devuelve rápidamente la hidratación, suavidad y vitalidad al cabello deteriorado y desfibrado. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Serum Restaurador Capilar 60ml</strong> de Yavalva es liviano pero poderoso: repara, nutre e hidrata si luchas contra el frizz o las puntas abiertas. Anótalo en tu rutina de esta semana.`},
-  {icon:"🐾",cat:"mascotas",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo Pets Nutritivo</strong> de Yavalva limpia a fondo el pelaje de tus peludos sin irritar su piel, incluso la más delicada. Ese es el nivel Chic Life.`},
-  {icon:"🐾",cat:"mascotas",text:`La regla de oro de hoy: Nuestro/a <strong>Loción Pets Nutritiva</strong> de Yavalva fortalece el pelaje, facilita el peinado y protege a tu mascota de los rayos solares. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Shampoo Cebolla Roja 450ml</strong> de Fusión Selvática estimula el crecimiento y aporta brillo con un poder de limpieza justo, sin resecar el cuero cabelludo. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Shampoo Control Grasa 450ml</strong> de Fusión Selvática realiza una purificación profunda de la hebra, especial para cabello con tendencia grasa.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Shampoo Cremoso Cabello Rizado 450ml</strong> de Fusión Selvática fue creado, con una fórmula cremosa, específicamente para cabellos crespos y rizados. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Shampoo Control Frizz 450ml</strong> de Fusión Selvática fue creado para transformar tu rutina y dejar el cabello suave, brillante y sin frizz. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Acondicionador Capilar de Chocolate 450ml</strong> de Fusión Selvática con cacao orgánico y aceite de aguacate, entrega la humectación que facilita el peinado y elimina el frizz. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Crema para Peinar Crespos y Rizados</strong> de Fusión Selvática define sin enjuague con coco, argán, moringa y aceite de lino, protegiendo el cabello mientras lo fortalece. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Crema para Peinar Lisos y Finos</strong> de Fusión Selvática con argán y frambuesa orgánica define el peinado, controla el frizz y fortalece desde el interior. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Kit Adiós Frizz</strong> de Fusión Selvática en tres pasos le da a tu cabello un reinicio completo, devolviéndole el control y el brillo natural. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Tratamiento Nutrienzimas 500ml</strong> de Fusión Selvática combina fibras bioadhesivas, arginina, 11 aminoácidos y algas marinas en un tratamiento profesional. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Tratamiento Rescate 500ml</strong> de Fusión Selvática a base de chontaduro, es súper nutritivo para cabellos muy maltratados, secos o con procesos químicos. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Tratamiento Alimento para el Cabello 500ml</strong> de Fusión Selvática fortalece la hebra y ayuda a aumentar su densidad, previniendo rupturas y la falta de abundancia. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Shampoo Ponto 300ml</strong> de Ponto Hair Club con aloe vera y agua micelar limpia los crespos sin resecar las puntas — vegano y liberado.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Crema para Peinar Ondulada/Crespa 300ml</strong> de Ponto Hair Club con aloe vera y colágeno hidrata, define y da brillo a las texturas 2 y 3 sin dejar el pelo pesado. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Tratamiento 3en1 Hidratación 1000gr</strong> de Ponto Hair Club con aloe vera y pantenol hidrata profundamente y aporta muchísimo brillo al pelo seco y con frizz. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Tratamiento 3en1 Nutrición 1000gr</strong> de Ponto Hair Club con aceite de coco y ricino nutre profundamente y devuelve el brillo al cabello sin vida. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Tratamiento 3en1 Reparación 1000gr</strong> de Ponto Hair Club con queratina y proteínas es la solución para el cabello decolorado y maltratado. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Crema para Peinar Afro 300ml</strong> de Ponto Hair Club con aceite de ricino y aloe vera nutre, define y da brillo a las texturas 3C y 4 sin apelmazar. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Gel Ponto 300ml</strong> de Ponto Hair Club con aloe vera, colágeno y coco define los crespos y además los hidrata y llena de brillo. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Boom Antifrizz</strong> de Ponto Hair Club controla el frizz, protege, hidrata, desenreda, perfuma y sella la cutícula en un solo paso. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Mi Dulce Pelo — Ondulada</strong> de Ponto Hair Club funciona como mascarilla, acondicionador o crema de peinar para fortalecer, hidratar y reparar el pelo ondulado. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Mi Dulce Pelo — Crespa</strong> de Ponto Hair Club es un 3 en 1 diseñado especialmente para el cabello crespo, adaptándose a lo que tu rutina necesite ese día. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Mi Dulce Pelo — Lisa</strong> de Ponto Hair Club con proteína de trigo aporta elasticidad, hidratación profunda y manejabilidad al cabello liso.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Gelly Fest Fijación Ligera</strong> de Ponto Hair Club con vitamina B5, aloe vera y aroma a kiwi da volumen con acabado natural, sin residuos. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Gelly Fest Fijación Media</strong> de Ponto Hair Club con arándano y cereza mantiene los crespos definidos, flexibles y sin frizz, sin sensación pegajosa. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Stick Antifrizz</strong> de Ponto Hair Club desliza la barra sobre el cabello y peina como más te guste, controlando los pelitos rebeldes al instante. Pequeños gestos, grandes resultados.`},
-  {icon:"✨",cat:"facial",text:`Truco Chic express: Nuestro/a <strong>Maskadicta Antioxidante 21gr</strong> de Ponto Hair Club enriquecida con guanábana y vitamina A, combate los signos de envejecimiento y mejora la luminosidad de la piel. Así se nota la diferencia.`},
-  {icon:"✨",cat:"facial",text:`Ritual del día: Nuestro/a <strong>Maskadicta Antiarrugas 21gr</strong> de Ponto Hair Club reduce visiblemente la apariencia de arrugas y líneas de expresión. Constancia es la palabra clave.`},
-  {icon:"✨",cat:"facial",text:`Dato que cambia el juego: Nuestro/a <strong>Maskadicta Nutritivo 21gr</strong> de Ponto Hair Club con maracuyá, jojoba y girasol da a la piel un impulso de hidratación y nutrición profunda. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo S.O.S</strong> de Ritual Botánico con cebolla y argán repara, fortalece y disminuye la caída para un cabello fuerte y brillante. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Control Caspa</strong> de Ritual Botánico con menta y ají controla la descamación y fortalece desde la raíz. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Shampoo Control Grasa</strong> de Ritual Botánico con romero y eucalipto regula el exceso de grasa sin resecar, aportando frescura. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Tratamiento Intensivo Plex</strong> de Ritual Botánico con aguacate, banano y argán en fórmula 3 en 1 hidrata, repara y fortalece cabellos dañados.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Kit de Keratina Evolución 250ml</strong> de Ritual Botánico transforma el cabello con un alisado sin formol, orgánico, vegano y con 12 aceites naturales. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Mascarilla Bomba Botánica S.O.S</strong> de Ritual Botánico con colágeno y biotina repara profundamente, disminuye la caída y reduce el frizz hasta un 72%. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Perfume Termoprotector Desenredante</strong> de Ritual Botánico con feromonas y sin alcohol controla el frizz y deja un aroma floral y juvenil. Pequeños gestos, grandes resultados.`},
-  {icon:"🧴",cat:"corporal",text:`Truco Chic express: Nuestro/a <strong>Mantequilla Perfumada Corporal</strong> de Ritual Botánico con karité y feromonas hidrata, nutre y deja un brillo glow con aroma cautivador. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Shampoo de Reparación</strong> de Poción limpia a profundidad el cuero cabelludo sin resecarlo, mientras fortalece e hidrata desde la raíz. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Shampoo para Rizos Tongolé</strong> de Poción sin sulfatos, limpia suavemente sin eliminar los aceites naturales mientras define los rizos. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo Control Grasa</strong> de Poción con bicarbonato de sodio y bioactivos marinos regula el exceso de sebo y calma irritaciones. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Crecimiento y Control Caída</strong> de Poción reactiva los folículos con tecnología bioactiva y logra detener la caída hasta en un 81%. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Tratamiento Acondicionador 2en1</strong> de Poción desenreda, suaviza y aporta brillo sin dejar sensación pesada, gracias a su fórmula ligera. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Tratamiento para Rizos Tongolé</strong> de Poción restaura, suaviza y protege el cabello rizado, crespo o afro.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Dual Crema para Peinar de Reparación</strong> de Poción aporta hidratación, suavidad y control desde el primer uso, sirve tanto en cuero cabelludo seco como graso. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Crema para Peinar Leave On</strong> de Poción define, protege y suaviza los rizos manteniéndolos hidratados todo el día sin apelmazarlos. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Ancestral Mascarilla de Reparación</strong> de Poción repara intensamente la fibra y devuelve la vitalidad a cabellos dañados por químicos, calor o ambiente. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Mascarilla para Rizos Tongolé</strong> de Poción con aceites naturales y extractos botánicos brinda nutrición profunda a rizos resecos o con frizz. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Gel Definidor de Rizos</strong> de Poción define, hidrata y da forma natural a rizos y ondas sin dejar residuos ni rigidez. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Dutonic</strong> de Poción frena la caída y estimula el crecimiento desde la raíz con su dúo de tónicos, uno de noche y uno de día. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>B8 Óleo Capilar Multifuncional</strong> de Poción repara, nutre y sella el cabello protegiéndolo del daño físico y ambiental, gracias a su fórmula anti-quiebre. Ese es el nivel Chic Life.`},
-  {icon:"👶",cat:"kids",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Poción Kids</strong> de Poción Kids sin sulfatos, parabenos ni sal, limpia sin irritar el cuero cabelludo delicado de los más pequeños. Un paso más cerca de tu mejor versión.`},
-  {icon:"👶",cat:"kids",text:`Confesión de salón: Nuestro/a <strong>Acondicionador Poción Kids</strong> de Poción Kids libre de tóxicos, parabenos y siliconas, facilita el peinado infantil sin tirones. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"👶",cat:"kids",text:`Psst, entre nosotras: Nuestro/a <strong>Spray Anti-Nudos Poción Kids</strong> de Poción Kids desenreda sin jalones ni maltrato desde la primera aplicación, con fórmula ligera.`},
-  {icon:"👶",cat:"kids",text:`Tip de estilista: Nuestro/a <strong>Kit Sin Enredos para Niños</strong> de Poción Kids incluye shampoo, acondicionador y spray desenredante para el cuidado diario del cabello infantil. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Shampoo de Aguacate y CBD 450ml</strong> de Magia Natural estimula el crecimiento, controla la caspa y fortalece el folículo — un aliado real contra la caída. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Shampoo de Canas 450ml</strong> de Magia Natural ayuda a neutralizar los tonos amarillentos y aporta nutrición, fuerza y movimiento al cabello canoso. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Shampoo de Manzanilla 500ml</strong> de Magia Natural fortalece el folículo, humecta y ayuda a mantener vivos los tonos claros del cabello. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Shampoo de Romero y Quina 500ml</strong> de Magia Natural estimula la microcirculación capilar para prevenir la caída y acelerar el crecimiento en cabellos oscuros. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Shampoo Anticaída Cebolla y Cannabis 500ml</strong> de Magia Natural la sinergia entre el azufre de la cebolla y el cannabis estimula el flujo sanguíneo y desinflama el cuero cabelludo. Anótalo en tu rutina de esta semana.`},
-  {icon:"👶",cat:"kids",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo Kids Niñas 500ml</strong> de Magia Natural mantiene el cabello infantil hidratado y suave, fortaleciéndolo para prevenir rotura y puntas abiertas. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Acondicionador Anticaída Cebolla 500ml</strong> de Magia Natural complementa la rutina anticaída sellando la hidratación que el shampoo dejó en la fibra. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Acondicionador Romero y Quina 500ml</strong> de Magia Natural potencia el efecto fortalecedor del shampoo hermano, ideal para cabellos oscuros. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Acondicionador Manzanilla 500ml</strong> de Magia Natural aporta los nutrientes que previenen la rotura y ayudan a un crecimiento más vigoroso.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Tónico Capilar de Romero 250ml</strong> de Magia Natural con materias primas especializadas controla y previene la caída fortaleciendo los folículos del cuero cabelludo. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Tratamiento Bomba Capilar 300ml</strong> de Magia Natural sella la cutícula, aporta brillo y acondiciona sin dejar el cabello grasoso — libre de parabenos y sulfatos. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Tónico de Hombre 120ml</strong> de Magia Natural mantiene el cabello hidratado, fuerte y con un crecimiento más vigoroso, pensado para la rutina masculina. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Crema para Peinar Rizos 300ml</strong> de Magia Natural con linaza, argán, jojoba, coco y ácido hialurónico hidrata, da brillo y controla el frizz de los rizos. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Crema para Peinar Desenredante 250ml</strong> de Magia Natural con propiedades antioxidantes nutre las fibras y aporta brillo, flexibilidad e hidratación. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Tratamiento de Huevo y Aceite de Coco 300ml</strong> de Magia Natural nutre, hidrata y da fuerza al cabello mientras ayuda a disminuir la caída y estimular el crecimiento. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Gotas de Oro Aceite Antifrizz 60ml</strong> de Magia Natural sella la cutícula y retiene la humedad, controlando el frizz y evitando que la fibra se abra. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Loción Aclarante Viajero 60ml</strong> de Magia Natural aclara el cabello progresivamente con manzanilla, miel y canela — libre de amoniaco y parabenos. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Shampoo 500ml</strong> de Soy Rizos limpia y descongestiona el folículo favoreciendo un crecimiento sano de tus rizos. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Tratamiento Acondicionante 2en1 500ml</strong> de Soy Rizos cubre las tres necesidades del rizo en un paso: suavidad, reparación y brillo.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Crema para Peinar 500ml</strong> de Soy Rizos sostiene la definición y retiene la humedad natural del rizo, eliminando el frizz. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Aceite de Coco</strong> de Soy Rizos hidrata profundamente la hebra, evitando la sequedad, el frizz y la ruptura. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Extracto de Cebolla</strong> de Soy Rizos vasodilata los folículos capilares mejorando la circulación y nutriendo el cuero cabelludo desde la raíz. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Óleo Dorado Termoprotector</strong> de Soy Rizos repara, hidrata y aumenta el brillo mientras protege del calor hasta 230°C. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Shampoo Purify Nutrición 500ml</strong> de Amazónica Beleza limpia profundamente, elimina la oleosidad, evita la caída y promueve un crecimiento sano y acelerado. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Acondicionador Anti Caída y Grasa 500ml</strong> de Amazónica Beleza facilita el desenredo y sella el tratamiento, dejando el pelo manejable, sedoso y disciplinado. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Mascarilla Anti Caída y Grasa</strong> de Amazónica Beleza entrega a cada hebra los nutrientes que fortalecen el pelo sensibilizado por procesos químicos o mecánicos. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Argán Boom Hidratación</strong> de Amazónica Beleza rico en vitamina E y óleo de argán, conserva la hidratación y da un brillo intenso. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Acondicionador Argán Boom Hidratación</strong> de Amazónica Beleza con óleo de argán —el 'oro de Marruecos'— mantiene el pelo hidratado y con suavidad absoluta. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Mascarilla Argán Boom Hidratación</strong> de Amazónica Beleza entrega a cada hebra las propiedades que hidratan, dejando el pelo sedoso, brillante y suave.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Tónico Bulbo Forte Herbal Anticaspa</strong> de byspro controla la caspa, reduce la caída y purifica el cuero cabelludo eliminando bacterias y hongos. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Bulbo Forte Anagenxyl Bio-Activador</strong> de byspro es un poderoso bio-activador de folículos improductivos que reduce los espacios de escaso crecimiento. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Tónico Bulbo Forte Energy Crecimiento</strong> de byspro energiza el folículo de forma natural y aumenta hasta un 30% el crecimiento del cabello. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Liss Extend Bio Keratina Kit 120ml</strong> de byspro es un alisado progresivo 100% libre de formol que controla el frizz y el encrespamiento. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Fibras de Seda — Termoprotector</strong> de byspro reduce la porosidad y transforma el cabello seco en un cabello saludable, hidratado y sedoso. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Capiloplastia</strong> de byspro es una terapia de reparación intensiva que rellena la hebra de proteínas y aceites sin alisar ni dañar los rizos. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Hidro Complex Trat. Reparador Inteligente</strong> de byspro localiza el daño y lo restaura, controlando el volumen y el frizz incluso después de piscina o playa. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Hidro Complex Leche Activa-Rizos</strong> de byspro activa y define los rizos naturalmente, manteniéndolos hidratados 24/7. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Hidro Complex Óleo de Jojoba Antifrizz</strong> de byspro hidrata profundamente el cabello reseco logrando sedosidad y control del frizz real y duradero. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Bi Phase Spray Termoprotector</strong> de byspro acondiciona antes, acelera el secado durante y prolonga el brillo después del cepillado.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Fibras de Seda — Termoprotector Liso Inteligente</strong> de byspro protege la hebra del calor mientras prolonga el efecto liso controlando el frizz y el esponjamiento. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Hidro Complex Shampoo Control Frizz</strong> de byspro previene, gracias a su tecnología de limpieza, la pérdida de lípidos naturales mientras reduce el frizz. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Shampoo Rizzé Anti-Residuos y Anti-Frizz</strong> de byspro corrige los reflejos amarillos y naranjas del cabello rubio, dejando el color renovado y con brillo. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Rizzé Crema de Peinar y Definir Rizos T3/T4</strong> de byspro evita el frizz y el esponjamiento mientras hidrata y define sin apelmazar el cabello. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Gel Rizzé Máxima Definición</strong> de byspro 100% libre de alcohol, define ondas y rizos hasta por 24 horas sin resecar. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Mascarilla Rizzé Anti-Sponge T3 ABC</strong> de byspro logra rizos flexibles, suaves y llenos de brillo, perfectamente definidos y sin peso. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Mascarilla Rizzé Cabello Texturizado T4 ABC</strong> de byspro repone intensivamente los lípidos de cabellos afro-texturizados, finos y porosos. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Tratamiento Matizante</strong> de Prokpil mantiene vivo el color teñido evitando los tonos de desgaste, en 9 tonos distintos para cada necesidad. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Shampoo de Miel 300ml</strong> de Click Hair reconstruye el brillo gracias a su alta carga de vitaminas y, al no llevar sal ni parabenos, es ideal justo después de un proceso químico. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Acondicionador 4 en 1 300ml</strong> de Click Hair entrega hidratación profunda desde el primer uso y devuelve la suavidad natural del cabello. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Mascarilla de Miel Brillo Intenso 300ml</strong> de Click Hair recupera la vitalidad y realza el color después de tratamientos químicos, dejando el cabello renovado. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Energizante Capilar 300ml</strong> de Click Hair acelera el metabolismo del cuero cabelludo y favorece un crecimiento saludable, gracias a su fórmula rica en proteínas y aminoácidos. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Miel Capilar con Argán 50ml</strong> de Click Hair con solo unas gotas cambia la textura del cabello: más sedoso, brillante y manejable, como recién salido del salón. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo Cabello Graso 300ml</strong> de Click Hair controla la caspa grasa y destapa el folículo piloso, permitiendo la oxigenación del cuero cabelludo y evitando la caída. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Perfume Capilar 120ml</strong> de Click Hair deja el cabello oliendo delicioso por más de 24 horas, con termoprotector que además reduce el frizz.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Perfume Capilar de Miel 100ml</strong> de Click Hair no solo perfuma: devuelve la suavidad perdida y aporta un brillo tipo espejo sin dejar sensación pesada. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Suero Reconstructor 120ml</strong> de Click Hair sella la hebra y la protege de la deshidratación y el maltrato de herramientas de calor, sol y químicos. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Kit Anticaída y Reparación</strong> de La Magia de Avrill formulado con CBD, hongo reishi, argán y pantenol, nutre desde la raíz y controla la caída — libre de sal, siliconas y parabenos. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Kit de Repolarización</strong> de La Magia de Avrill combina exactamente los nutrientes que tu cabello necesita para repararse de forma integral. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Cóctel Repolarizador 500ml</strong> de La Magia de Avrill reúne en un solo frasco los 4 pasos del kit de repolarización: proteína de arroz, nutri extreme, elixir de jojoba y cascada revitalizante. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Gotas de Luz 60ml</strong> de La Magia de Avrill este sérum nutre las capas internas del cabello y sella las cutículas con un cóctel de aceites naturales y aminoácidos. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Cascada Revitalizante 120ml</strong> de La Magia de Avrill es el tratamiento que aporta ese brillo y esa suavidad que se notan a distancia. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Kit Deluxe 280ml c/u</strong> de La Magia de Avrill trae los 3 pasos de la repolarización en tamaño completo, para una reparación de cabello sin atajos. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Bio Reestructurante Capilar 450ml</strong> de Yavalva es un pre-shampoo en seco que actúa desde el folículo hasta las puntas, ideal para cabello maltratado por químicos o calor. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Herbal 450ml</strong> de Yavalva limpia en profundidad, purifica y fortalece — es suave incluso para cueros cabelludos sensibles.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Shampoo Herbal Cabello Graso 450ml</strong> de Yavalva está formulado para equilibrar y controlar el exceso de grasa en el cuero cabelludo. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Tratamiento Natural Protector 450ml</strong> de Yavalva aporta sedosidad y alto brillo, sella las puntas y facilita el desenredado. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Loción Anticaída Bio Fertilizante 250ml</strong> de Yavalva controla la caída excesiva, estimula el crecimiento y fortalece el folículo. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Loción Bio Termoprotector Brisa Celestial 120ml</strong> de Yavalva protege del sol y del calor de planchas o secadores sin dejar residuos ni sensación pesada, y de paso perfuma. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Elixir de Jojoba</strong> de Yavalva origina la regeneración capilar y fortalece el cuero cabelludo con su cóctel de activos y aminoácidos. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Proteína de Arroz</strong> de Yavalva es una mascarilla reestructurante de acción inmediata para fibras que necesitan reparación urgente. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Nutri Extreme 280ml</strong> de Yavalva devuelve rápidamente la hidratación, suavidad y vitalidad al cabello deteriorado y desfibrado. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Serum Restaurador Capilar 60ml</strong> de Yavalva es liviano pero poderoso: repara, nutre e hidrata si luchas contra el frizz o las puntas abiertas.`},
-  {icon:"🐾",cat:"mascotas",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo Pets Nutritivo</strong> de Yavalva limpia a fondo el pelaje de tus peludos sin irritar su piel, incluso la más delicada. Del click al corazón, siempre.`},
-  {icon:"🐾",cat:"mascotas",text:`La regla de oro de hoy: Nuestro/a <strong>Loción Pets Nutritiva</strong> de Yavalva fortalece el pelaje, facilita el peinado y protege a tu mascota de los rayos solares. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Shampoo Cebolla Roja 450ml</strong> de Fusión Selvática estimula el crecimiento y aporta brillo con un poder de limpieza justo, sin resecar el cuero cabelludo. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Shampoo Control Grasa 450ml</strong> de Fusión Selvática realiza una purificación profunda de la hebra, especial para cabello con tendencia grasa. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Shampoo Cremoso Cabello Rizado 450ml</strong> de Fusión Selvática fue creado, con una fórmula cremosa, específicamente para cabellos crespos y rizados. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Shampoo Control Frizz 450ml</strong> de Fusión Selvática fue creado para transformar tu rutina y dejar el cabello suave, brillante y sin frizz. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Acondicionador Capilar de Chocolate 450ml</strong> de Fusión Selvática con cacao orgánico y aceite de aguacate, entrega la humectación que facilita el peinado y elimina el frizz. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Crema para Peinar Crespos y Rizados</strong> de Fusión Selvática define sin enjuague con coco, argán, moringa y aceite de lino, protegiendo el cabello mientras lo fortalece. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Crema para Peinar Lisos y Finos</strong> de Fusión Selvática con argán y frambuesa orgánica define el peinado, controla el frizz y fortalece desde el interior. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Kit Adiós Frizz</strong> de Fusión Selvática en tres pasos le da a tu cabello un reinicio completo, devolviéndole el control y el brillo natural.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Tratamiento Nutrienzimas 500ml</strong> de Fusión Selvática combina fibras bioadhesivas, arginina, 11 aminoácidos y algas marinas en un tratamiento profesional. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Tratamiento Rescate 500ml</strong> de Fusión Selvática a base de chontaduro, es súper nutritivo para cabellos muy maltratados, secos o con procesos químicos. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Tratamiento Alimento para el Cabello 500ml</strong> de Fusión Selvática fortalece la hebra y ayuda a aumentar su densidad, previniendo rupturas y la falta de abundancia. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Shampoo Ponto 300ml</strong> de Ponto Hair Club con aloe vera y agua micelar limpia los crespos sin resecar las puntas — vegano y liberado. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Crema para Peinar Ondulada/Crespa 300ml</strong> de Ponto Hair Club con aloe vera y colágeno hidrata, define y da brillo a las texturas 2 y 3 sin dejar el pelo pesado. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Tratamiento 3en1 Hidratación 1000gr</strong> de Ponto Hair Club con aloe vera y pantenol hidrata profundamente y aporta muchísimo brillo al pelo seco y con frizz. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Tratamiento 3en1 Nutrición 1000gr</strong> de Ponto Hair Club con aceite de coco y ricino nutre profundamente y devuelve el brillo al cabello sin vida. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Tratamiento 3en1 Reparación 1000gr</strong> de Ponto Hair Club con queratina y proteínas es la solución para el cabello decolorado y maltratado. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Crema para Peinar Afro 300ml</strong> de Ponto Hair Club con aceite de ricino y aloe vera nutre, define y da brillo a las texturas 3C y 4 sin apelmazar. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Gel Ponto 300ml</strong> de Ponto Hair Club con aloe vera, colágeno y coco define los crespos y además los hidrata y llena de brillo.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Boom Antifrizz</strong> de Ponto Hair Club controla el frizz, protege, hidrata, desenreda, perfuma y sella la cutícula en un solo paso. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Mi Dulce Pelo — Ondulada</strong> de Ponto Hair Club funciona como mascarilla, acondicionador o crema de peinar para fortalecer, hidratar y reparar el pelo ondulado. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Mi Dulce Pelo — Crespa</strong> de Ponto Hair Club es un 3 en 1 diseñado especialmente para el cabello crespo, adaptándose a lo que tu rutina necesite ese día. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Mi Dulce Pelo — Lisa</strong> de Ponto Hair Club con proteína de trigo aporta elasticidad, hidratación profunda y manejabilidad al cabello liso. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Gelly Fest Fijación Ligera</strong> de Ponto Hair Club con vitamina B5, aloe vera y aroma a kiwi da volumen con acabado natural, sin residuos. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Gelly Fest Fijación Media</strong> de Ponto Hair Club con arándano y cereza mantiene los crespos definidos, flexibles y sin frizz, sin sensación pegajosa. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Stick Antifrizz</strong> de Ponto Hair Club desliza la barra sobre el cabello y peina como más te guste, controlando los pelitos rebeldes al instante. Ese es el nivel Chic Life.`},
-  {icon:"✨",cat:"facial",text:`Truco Chic express: Nuestro/a <strong>Maskadicta Antioxidante 21gr</strong> de Ponto Hair Club enriquecida con guanábana y vitamina A, combate los signos de envejecimiento y mejora la luminosidad de la piel. Un paso más cerca de tu mejor versión.`},
-  {icon:"✨",cat:"facial",text:`Ritual del día: Nuestro/a <strong>Maskadicta Antiarrugas 21gr</strong> de Ponto Hair Club reduce visiblemente la apariencia de arrugas y líneas de expresión. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"✨",cat:"facial",text:`Dato que cambia el juego: Nuestro/a <strong>Maskadicta Nutritivo 21gr</strong> de Ponto Hair Club con maracuyá, jojoba y girasol da a la piel un impulso de hidratación y nutrición profunda.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo S.O.S</strong> de Ritual Botánico con cebolla y argán repara, fortalece y disminuye la caída para un cabello fuerte y brillante. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Control Caspa</strong> de Ritual Botánico con menta y ají controla la descamación y fortalece desde la raíz. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Shampoo Control Grasa</strong> de Ritual Botánico con romero y eucalipto regula el exceso de grasa sin resecar, aportando frescura. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Tratamiento Intensivo Plex</strong> de Ritual Botánico con aguacate, banano y argán en fórmula 3 en 1 hidrata, repara y fortalece cabellos dañados. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Kit de Keratina Evolución 250ml</strong> de Ritual Botánico transforma el cabello con un alisado sin formol, orgánico, vegano y con 12 aceites naturales. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Mascarilla Bomba Botánica S.O.S</strong> de Ritual Botánico con colágeno y biotina repara profundamente, disminuye la caída y reduce el frizz hasta un 72%. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Perfume Termoprotector Desenredante</strong> de Ritual Botánico con feromonas y sin alcohol controla el frizz y deja un aroma floral y juvenil. Ese es el nivel Chic Life.`},
-  {icon:"🧴",cat:"corporal",text:`Truco Chic express: Nuestro/a <strong>Mantequilla Perfumada Corporal</strong> de Ritual Botánico con karité y feromonas hidrata, nutre y deja un brillo glow con aroma cautivador. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Shampoo de Reparación</strong> de Poción limpia a profundidad el cuero cabelludo sin resecarlo, mientras fortalece e hidrata desde la raíz. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Shampoo para Rizos Tongolé</strong> de Poción sin sulfatos, limpia suavemente sin eliminar los aceites naturales mientras define los rizos.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo Control Grasa</strong> de Poción con bicarbonato de sodio y bioactivos marinos regula el exceso de sebo y calma irritaciones. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Crecimiento y Control Caída</strong> de Poción reactiva los folículos con tecnología bioactiva y logra detener la caída hasta en un 81%. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Tratamiento Acondicionador 2en1</strong> de Poción desenreda, suaviza y aporta brillo sin dejar sensación pesada, gracias a su fórmula ligera. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Tratamiento para Rizos Tongolé</strong> de Poción restaura, suaviza y protege el cabello rizado, crespo o afro. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Dual Crema para Peinar de Reparación</strong> de Poción aporta hidratación, suavidad y control desde el primer uso, sirve tanto en cuero cabelludo seco como graso. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Crema para Peinar Leave On</strong> de Poción define, protege y suaviza los rizos manteniéndolos hidratados todo el día sin apelmazarlos. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Ancestral Mascarilla de Reparación</strong> de Poción repara intensamente la fibra y devuelve la vitalidad a cabellos dañados por químicos, calor o ambiente. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Mascarilla para Rizos Tongolé</strong> de Poción con aceites naturales y extractos botánicos brinda nutrición profunda a rizos resecos o con frizz. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Gel Definidor de Rizos</strong> de Poción define, hidrata y da forma natural a rizos y ondas sin dejar residuos ni rigidez. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Dutonic</strong> de Poción frena la caída y estimula el crecimiento desde la raíz con su dúo de tónicos, uno de noche y uno de día.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>B8 Óleo Capilar Multifuncional</strong> de Poción repara, nutre y sella el cabello protegiéndolo del daño físico y ambiental, gracias a su fórmula anti-quiebre. Del click al corazón, siempre.`},
-  {icon:"👶",cat:"kids",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Poción Kids</strong> de Poción Kids sin sulfatos, parabenos ni sal, limpia sin irritar el cuero cabelludo delicado de los más pequeños. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"👶",cat:"kids",text:`Confesión de salón: Nuestro/a <strong>Acondicionador Poción Kids</strong> de Poción Kids libre de tóxicos, parabenos y siliconas, facilita el peinado infantil sin tirones. Pequeños gestos, grandes resultados.`},
-  {icon:"👶",cat:"kids",text:`Psst, entre nosotras: Nuestro/a <strong>Spray Anti-Nudos Poción Kids</strong> de Poción Kids desenreda sin jalones ni maltrato desde la primera aplicación, con fórmula ligera. Así se nota la diferencia.`},
-  {icon:"👶",cat:"kids",text:`Tip de estilista: Nuestro/a <strong>Kit Sin Enredos para Niños</strong> de Poción Kids incluye shampoo, acondicionador y spray desenredante para el cuidado diario del cabello infantil. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Shampoo de Aguacate y CBD 450ml</strong> de Magia Natural estimula el crecimiento, controla la caspa y fortalece el folículo — un aliado real contra la caída. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Shampoo de Canas 450ml</strong> de Magia Natural ayuda a neutralizar los tonos amarillentos y aporta nutrición, fuerza y movimiento al cabello canoso. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Shampoo de Manzanilla 500ml</strong> de Magia Natural fortalece el folículo, humecta y ayuda a mantener vivos los tonos claros del cabello. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Shampoo de Romero y Quina 500ml</strong> de Magia Natural estimula la microcirculación capilar para prevenir la caída y acelerar el crecimiento en cabellos oscuros. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Shampoo Anticaída Cebolla y Cannabis 500ml</strong> de Magia Natural la sinergia entre el azufre de la cebolla y el cannabis estimula el flujo sanguíneo y desinflama el cuero cabelludo.`},
-  {icon:"👶",cat:"kids",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo Kids Niñas 500ml</strong> de Magia Natural mantiene el cabello infantil hidratado y suave, fortaleciéndolo para prevenir rotura y puntas abiertas. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Acondicionador Anticaída Cebolla 500ml</strong> de Magia Natural complementa la rutina anticaída sellando la hidratación que el shampoo dejó en la fibra. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Acondicionador Romero y Quina 500ml</strong> de Magia Natural potencia el efecto fortalecedor del shampoo hermano, ideal para cabellos oscuros. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Acondicionador Manzanilla 500ml</strong> de Magia Natural aporta los nutrientes que previenen la rotura y ayudan a un crecimiento más vigoroso. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Tónico Capilar de Romero 250ml</strong> de Magia Natural con materias primas especializadas controla y previene la caída fortaleciendo los folículos del cuero cabelludo. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Tratamiento Bomba Capilar 300ml</strong> de Magia Natural sella la cutícula, aporta brillo y acondiciona sin dejar el cabello grasoso — libre de parabenos y sulfatos. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Tónico de Hombre 120ml</strong> de Magia Natural mantiene el cabello hidratado, fuerte y con un crecimiento más vigoroso, pensado para la rutina masculina. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Crema para Peinar Rizos 300ml</strong> de Magia Natural con linaza, argán, jojoba, coco y ácido hialurónico hidrata, da brillo y controla el frizz de los rizos. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Crema para Peinar Desenredante 250ml</strong> de Magia Natural con propiedades antioxidantes nutre las fibras y aporta brillo, flexibilidad e hidratación. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Tratamiento de Huevo y Aceite de Coco 300ml</strong> de Magia Natural nutre, hidrata y da fuerza al cabello mientras ayuda a disminuir la caída y estimular el crecimiento.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Gotas de Oro Aceite Antifrizz 60ml</strong> de Magia Natural sella la cutícula y retiene la humedad, controlando el frizz y evitando que la fibra se abra. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Loción Aclarante Viajero 60ml</strong> de Magia Natural aclara el cabello progresivamente con manzanilla, miel y canela — libre de amoniaco y parabenos. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Shampoo 500ml</strong> de Soy Rizos limpia y descongestiona el folículo favoreciendo un crecimiento sano de tus rizos. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Tratamiento Acondicionante 2en1 500ml</strong> de Soy Rizos cubre las tres necesidades del rizo en un paso: suavidad, reparación y brillo. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Crema para Peinar 500ml</strong> de Soy Rizos sostiene la definición y retiene la humedad natural del rizo, eliminando el frizz. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Aceite de Coco</strong> de Soy Rizos hidrata profundamente la hebra, evitando la sequedad, el frizz y la ruptura. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Extracto de Cebolla</strong> de Soy Rizos vasodilata los folículos capilares mejorando la circulación y nutriendo el cuero cabelludo desde la raíz. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Óleo Dorado Termoprotector</strong> de Soy Rizos repara, hidrata y aumenta el brillo mientras protege del calor hasta 230°C. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Shampoo Purify Nutrición 500ml</strong> de Amazónica Beleza limpia profundamente, elimina la oleosidad, evita la caída y promueve un crecimiento sano y acelerado. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Acondicionador Anti Caída y Grasa 500ml</strong> de Amazónica Beleza facilita el desenredo y sella el tratamiento, dejando el pelo manejable, sedoso y disciplinado.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Mascarilla Anti Caída y Grasa</strong> de Amazónica Beleza entrega a cada hebra los nutrientes que fortalecen el pelo sensibilizado por procesos químicos o mecánicos. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Argán Boom Hidratación</strong> de Amazónica Beleza rico en vitamina E y óleo de argán, conserva la hidratación y da un brillo intenso. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Acondicionador Argán Boom Hidratación</strong> de Amazónica Beleza con óleo de argán —el 'oro de Marruecos'— mantiene el pelo hidratado y con suavidad absoluta. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Mascarilla Argán Boom Hidratación</strong> de Amazónica Beleza entrega a cada hebra las propiedades que hidratan, dejando el pelo sedoso, brillante y suave. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Tónico Bulbo Forte Herbal Anticaspa</strong> de byspro controla la caspa, reduce la caída y purifica el cuero cabelludo eliminando bacterias y hongos. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Bulbo Forte Anagenxyl Bio-Activador</strong> de byspro es un poderoso bio-activador de folículos improductivos que reduce los espacios de escaso crecimiento. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Tónico Bulbo Forte Energy Crecimiento</strong> de byspro energiza el folículo de forma natural y aumenta hasta un 30% el crecimiento del cabello. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Liss Extend Bio Keratina Kit 120ml</strong> de byspro es un alisado progresivo 100% libre de formol que controla el frizz y el encrespamiento. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Fibras de Seda — Termoprotector</strong> de byspro reduce la porosidad y transforma el cabello seco en un cabello saludable, hidratado y sedoso. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Capiloplastia</strong> de byspro es una terapia de reparación intensiva que rellena la hebra de proteínas y aceites sin alisar ni dañar los rizos.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Hidro Complex Trat. Reparador Inteligente</strong> de byspro localiza el daño y lo restaura, controlando el volumen y el frizz incluso después de piscina o playa. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Hidro Complex Leche Activa-Rizos</strong> de byspro activa y define los rizos naturalmente, manteniéndolos hidratados 24/7. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Hidro Complex Óleo de Jojoba Antifrizz</strong> de byspro hidrata profundamente el cabello reseco logrando sedosidad y control del frizz real y duradero. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Bi Phase Spray Termoprotector</strong> de byspro acondiciona antes, acelera el secado durante y prolonga el brillo después del cepillado. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Fibras de Seda — Termoprotector Liso Inteligente</strong> de byspro protege la hebra del calor mientras prolonga el efecto liso controlando el frizz y el esponjamiento. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Hidro Complex Shampoo Control Frizz</strong> de byspro previene, gracias a su tecnología de limpieza, la pérdida de lípidos naturales mientras reduce el frizz. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Shampoo Rizzé Anti-Residuos y Anti-Frizz</strong> de byspro corrige los reflejos amarillos y naranjas del cabello rubio, dejando el color renovado y con brillo. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Rizzé Crema de Peinar y Definir Rizos T3/T4</strong> de byspro evita el frizz y el esponjamiento mientras hidrata y define sin apelmazar el cabello. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Gel Rizzé Máxima Definición</strong> de byspro 100% libre de alcohol, define ondas y rizos hasta por 24 horas sin resecar. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Mascarilla Rizzé Anti-Sponge T3 ABC</strong> de byspro logra rizos flexibles, suaves y llenos de brillo, perfectamente definidos y sin peso.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Mascarilla Rizzé Cabello Texturizado T4 ABC</strong> de byspro repone intensivamente los lípidos de cabellos afro-texturizados, finos y porosos. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Tratamiento Matizante</strong> de Prokpil mantiene vivo el color teñido evitando los tonos de desgaste, en 9 tonos distintos para cada necesidad.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Shampoo de Miel 300ml</strong> de Click Hair reconstruye el brillo gracias a su alta carga de vitaminas y, al no llevar sal ni parabenos, es ideal justo después de un proceso químico. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Acondicionador 4 en 1 300ml</strong> de Click Hair entrega hidratación profunda desde el primer uso y devuelve la suavidad natural del cabello. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Mascarilla de Miel Brillo Intenso 300ml</strong> de Click Hair recupera la vitalidad y realza el color después de tratamientos químicos, dejando el cabello renovado. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Energizante Capilar 300ml</strong> de Click Hair acelera el metabolismo del cuero cabelludo y favorece un crecimiento saludable, gracias a su fórmula rica en proteínas y aminoácidos. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Miel Capilar con Argán 50ml</strong> de Click Hair con solo unas gotas cambia la textura del cabello: más sedoso, brillante y manejable, como recién salido del salón.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo Cabello Graso 300ml</strong> de Click Hair controla la caspa grasa y destapa el folículo piloso, permitiendo la oxigenación del cuero cabelludo y evitando la caída. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Perfume Capilar 120ml</strong> de Click Hair deja el cabello oliendo delicioso por más de 24 horas, con termoprotector que además reduce el frizz. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Perfume Capilar de Miel 100ml</strong> de Click Hair no solo perfuma: devuelve la suavidad perdida y aporta un brillo tipo espejo sin dejar sensación pesada. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Suero Reconstructor 120ml</strong> de Click Hair sella la hebra y la protege de la deshidratación y el maltrato de herramientas de calor, sol y químicos. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Kit Anticaída y Reparación</strong> de La Magia de Avrill formulado con CBD, hongo reishi, argán y pantenol, nutre desde la raíz y controla la caída — libre de sal, siliconas y parabenos. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Kit de Repolarización</strong> de La Magia de Avrill combina exactamente los nutrientes que tu cabello necesita para repararse de forma integral. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Cóctel Repolarizador 500ml</strong> de La Magia de Avrill reúne en un solo frasco los 4 pasos del kit de repolarización: proteína de arroz, nutri extreme, elixir de jojoba y cascada revitalizante. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Gotas de Luz 60ml</strong> de La Magia de Avrill este sérum nutre las capas internas del cabello y sella las cutículas con un cóctel de aceites naturales y aminoácidos. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Cascada Revitalizante 120ml</strong> de La Magia de Avrill es el tratamiento que aporta ese brillo y esa suavidad que se notan a distancia. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Kit Deluxe 280ml c/u</strong> de La Magia de Avrill trae los 3 pasos de la repolarización en tamaño completo, para una reparación de cabello sin atajos.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Bio Reestructurante Capilar 450ml</strong> de Yavalva es un pre-shampoo en seco que actúa desde el folículo hasta las puntas, ideal para cabello maltratado por químicos o calor. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Herbal 450ml</strong> de Yavalva limpia en profundidad, purifica y fortalece — es suave incluso para cueros cabelludos sensibles. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Shampoo Herbal Cabello Graso 450ml</strong> de Yavalva está formulado para equilibrar y controlar el exceso de grasa en el cuero cabelludo. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Tratamiento Natural Protector 450ml</strong> de Yavalva aporta sedosidad y alto brillo, sella las puntas y facilita el desenredado. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Loción Anticaída Bio Fertilizante 250ml</strong> de Yavalva controla la caída excesiva, estimula el crecimiento y fortalece el folículo. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Loción Bio Termoprotector Brisa Celestial 120ml</strong> de Yavalva protege del sol y del calor de planchas o secadores sin dejar residuos ni sensación pesada, y de paso perfuma. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Elixir de Jojoba</strong> de Yavalva origina la regeneración capilar y fortalece el cuero cabelludo con su cóctel de activos y aminoácidos. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Proteína de Arroz</strong> de Yavalva es una mascarilla reestructurante de acción inmediata para fibras que necesitan reparación urgente. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Nutri Extreme 280ml</strong> de Yavalva devuelve rápidamente la hidratación, suavidad y vitalidad al cabello deteriorado y desfibrado. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Serum Restaurador Capilar 60ml</strong> de Yavalva es liviano pero poderoso: repara, nutre e hidrata si luchas contra el frizz o las puntas abiertas.`},
-  {icon:"🐾",cat:"mascotas",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo Pets Nutritivo</strong> de Yavalva limpia a fondo el pelaje de tus peludos sin irritar su piel, incluso la más delicada. Del click al corazón, siempre.`},
-  {icon:"🐾",cat:"mascotas",text:`La regla de oro de hoy: Nuestro/a <strong>Loción Pets Nutritiva</strong> de Yavalva fortalece el pelaje, facilita el peinado y protege a tu mascota de los rayos solares. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Shampoo Cebolla Roja 450ml</strong> de Fusión Selvática estimula el crecimiento y aporta brillo con un poder de limpieza justo, sin resecar el cuero cabelludo. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Shampoo Control Grasa 450ml</strong> de Fusión Selvática realiza una purificación profunda de la hebra, especial para cabello con tendencia grasa. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Shampoo Cremoso Cabello Rizado 450ml</strong> de Fusión Selvática fue creado, con una fórmula cremosa, específicamente para cabellos crespos y rizados. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Shampoo Control Frizz 450ml</strong> de Fusión Selvática fue creado para transformar tu rutina y dejar el cabello suave, brillante y sin frizz. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Acondicionador Capilar de Chocolate 450ml</strong> de Fusión Selvática con cacao orgánico y aceite de aguacate, entrega la humectación que facilita el peinado y elimina el frizz. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Crema para Peinar Crespos y Rizados</strong> de Fusión Selvática define sin enjuague con coco, argán, moringa y aceite de lino, protegiendo el cabello mientras lo fortalece. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Crema para Peinar Lisos y Finos</strong> de Fusión Selvática con argán y frambuesa orgánica define el peinado, controla el frizz y fortalece desde el interior. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Kit Adiós Frizz</strong> de Fusión Selvática en tres pasos le da a tu cabello un reinicio completo, devolviéndole el control y el brillo natural.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Tratamiento Nutrienzimas 500ml</strong> de Fusión Selvática combina fibras bioadhesivas, arginina, 11 aminoácidos y algas marinas en un tratamiento profesional. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Tratamiento Rescate 500ml</strong> de Fusión Selvática a base de chontaduro, es súper nutritivo para cabellos muy maltratados, secos o con procesos químicos. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Tratamiento Alimento para el Cabello 500ml</strong> de Fusión Selvática fortalece la hebra y ayuda a aumentar su densidad, previniendo rupturas y la falta de abundancia. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Shampoo Ponto 300ml</strong> de Ponto Hair Club con aloe vera y agua micelar limpia los crespos sin resecar las puntas — vegano y liberado. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Crema para Peinar Ondulada/Crespa 300ml</strong> de Ponto Hair Club con aloe vera y colágeno hidrata, define y da brillo a las texturas 2 y 3 sin dejar el pelo pesado. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Tratamiento 3en1 Hidratación 1000gr</strong> de Ponto Hair Club con aloe vera y pantenol hidrata profundamente y aporta muchísimo brillo al pelo seco y con frizz. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Tratamiento 3en1 Nutrición 1000gr</strong> de Ponto Hair Club con aceite de coco y ricino nutre profundamente y devuelve el brillo al cabello sin vida. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Tratamiento 3en1 Reparación 1000gr</strong> de Ponto Hair Club con queratina y proteínas es la solución para el cabello decolorado y maltratado. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Crema para Peinar Afro 300ml</strong> de Ponto Hair Club con aceite de ricino y aloe vera nutre, define y da brillo a las texturas 3C y 4 sin apelmazar. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Gel Ponto 300ml</strong> de Ponto Hair Club con aloe vera, colágeno y coco define los crespos y además los hidrata y llena de brillo.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Boom Antifrizz</strong> de Ponto Hair Club controla el frizz, protege, hidrata, desenreda, perfuma y sella la cutícula en un solo paso. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Mi Dulce Pelo — Ondulada</strong> de Ponto Hair Club funciona como mascarilla, acondicionador o crema de peinar para fortalecer, hidratar y reparar el pelo ondulado. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Mi Dulce Pelo — Crespa</strong> de Ponto Hair Club es un 3 en 1 diseñado especialmente para el cabello crespo, adaptándose a lo que tu rutina necesite ese día. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Mi Dulce Pelo — Lisa</strong> de Ponto Hair Club con proteína de trigo aporta elasticidad, hidratación profunda y manejabilidad al cabello liso. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Gelly Fest Fijación Ligera</strong> de Ponto Hair Club con vitamina B5, aloe vera y aroma a kiwi da volumen con acabado natural, sin residuos. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Gelly Fest Fijación Media</strong> de Ponto Hair Club con arándano y cereza mantiene los crespos definidos, flexibles y sin frizz, sin sensación pegajosa. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Stick Antifrizz</strong> de Ponto Hair Club desliza la barra sobre el cabello y peina como más te guste, controlando los pelitos rebeldes al instante. Ese es el nivel Chic Life.`},
-  {icon:"✨",cat:"facial",text:`Truco Chic express: Nuestro/a <strong>Maskadicta Antioxidante 21gr</strong> de Ponto Hair Club enriquecida con guanábana y vitamina A, combate los signos de envejecimiento y mejora la luminosidad de la piel. Un paso más cerca de tu mejor versión.`},
-  {icon:"✨",cat:"facial",text:`Ritual del día: Nuestro/a <strong>Maskadicta Antiarrugas 21gr</strong> de Ponto Hair Club reduce visiblemente la apariencia de arrugas y líneas de expresión. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"✨",cat:"facial",text:`Dato que cambia el juego: Nuestro/a <strong>Maskadicta Nutritivo 21gr</strong> de Ponto Hair Club con maracuyá, jojoba y girasol da a la piel un impulso de hidratación y nutrición profunda.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo S.O.S</strong> de Ritual Botánico con cebolla y argán repara, fortalece y disminuye la caída para un cabello fuerte y brillante. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Control Caspa</strong> de Ritual Botánico con menta y ají controla la descamación y fortalece desde la raíz. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Shampoo Control Grasa</strong> de Ritual Botánico con romero y eucalipto regula el exceso de grasa sin resecar, aportando frescura. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Tratamiento Intensivo Plex</strong> de Ritual Botánico con aguacate, banano y argán en fórmula 3 en 1 hidrata, repara y fortalece cabellos dañados. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Kit de Keratina Evolución 250ml</strong> de Ritual Botánico transforma el cabello con un alisado sin formol, orgánico, vegano y con 12 aceites naturales. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Mascarilla Bomba Botánica S.O.S</strong> de Ritual Botánico con colágeno y biotina repara profundamente, disminuye la caída y reduce el frizz hasta un 72%. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Perfume Termoprotector Desenredante</strong> de Ritual Botánico con feromonas y sin alcohol controla el frizz y deja un aroma floral y juvenil. Ese es el nivel Chic Life.`},
-  {icon:"🧴",cat:"corporal",text:`Truco Chic express: Nuestro/a <strong>Mantequilla Perfumada Corporal</strong> de Ritual Botánico con karité y feromonas hidrata, nutre y deja un brillo glow con aroma cautivador. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Shampoo de Reparación</strong> de Poción limpia a profundidad el cuero cabelludo sin resecarlo, mientras fortalece e hidrata desde la raíz. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Shampoo para Rizos Tongolé</strong> de Poción sin sulfatos, limpia suavemente sin eliminar los aceites naturales mientras define los rizos.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo Control Grasa</strong> de Poción con bicarbonato de sodio y bioactivos marinos regula el exceso de sebo y calma irritaciones. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Crecimiento y Control Caída</strong> de Poción reactiva los folículos con tecnología bioactiva y logra detener la caída hasta en un 81%. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Tratamiento Acondicionador 2en1</strong> de Poción desenreda, suaviza y aporta brillo sin dejar sensación pesada, gracias a su fórmula ligera. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Tratamiento para Rizos Tongolé</strong> de Poción restaura, suaviza y protege el cabello rizado, crespo o afro. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Dual Crema para Peinar de Reparación</strong> de Poción aporta hidratación, suavidad y control desde el primer uso, sirve tanto en cuero cabelludo seco como graso. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Crema para Peinar Leave On</strong> de Poción define, protege y suaviza los rizos manteniéndolos hidratados todo el día sin apelmazarlos. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Ancestral Mascarilla de Reparación</strong> de Poción repara intensamente la fibra y devuelve la vitalidad a cabellos dañados por químicos, calor o ambiente. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Mascarilla para Rizos Tongolé</strong> de Poción con aceites naturales y extractos botánicos brinda nutrición profunda a rizos resecos o con frizz. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Gel Definidor de Rizos</strong> de Poción define, hidrata y da forma natural a rizos y ondas sin dejar residuos ni rigidez. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Dutonic</strong> de Poción frena la caída y estimula el crecimiento desde la raíz con su dúo de tónicos, uno de noche y uno de día.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>B8 Óleo Capilar Multifuncional</strong> de Poción repara, nutre y sella el cabello protegiéndolo del daño físico y ambiental, gracias a su fórmula anti-quiebre. Del click al corazón, siempre.`},
-  {icon:"👶",cat:"kids",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Poción Kids</strong> de Poción Kids sin sulfatos, parabenos ni sal, limpia sin irritar el cuero cabelludo delicado de los más pequeños. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"👶",cat:"kids",text:`Confesión de salón: Nuestro/a <strong>Acondicionador Poción Kids</strong> de Poción Kids libre de tóxicos, parabenos y siliconas, facilita el peinado infantil sin tirones. Pequeños gestos, grandes resultados.`},
-  {icon:"👶",cat:"kids",text:`Psst, entre nosotras: Nuestro/a <strong>Spray Anti-Nudos Poción Kids</strong> de Poción Kids desenreda sin jalones ni maltrato desde la primera aplicación, con fórmula ligera. Así se nota la diferencia.`},
-  {icon:"👶",cat:"kids",text:`Tip de estilista: Nuestro/a <strong>Kit Sin Enredos para Niños</strong> de Poción Kids incluye shampoo, acondicionador y spray desenredante para el cuidado diario del cabello infantil. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Shampoo de Aguacate y CBD 450ml</strong> de Magia Natural estimula el crecimiento, controla la caspa y fortalece el folículo — un aliado real contra la caída. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Shampoo de Canas 450ml</strong> de Magia Natural ayuda a neutralizar los tonos amarillentos y aporta nutrición, fuerza y movimiento al cabello canoso. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Shampoo de Manzanilla 500ml</strong> de Magia Natural fortalece el folículo, humecta y ayuda a mantener vivos los tonos claros del cabello. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Shampoo de Romero y Quina 500ml</strong> de Magia Natural estimula la microcirculación capilar para prevenir la caída y acelerar el crecimiento en cabellos oscuros. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Shampoo Anticaída Cebolla y Cannabis 500ml</strong> de Magia Natural la sinergia entre el azufre de la cebolla y el cannabis estimula el flujo sanguíneo y desinflama el cuero cabelludo.`},
-  {icon:"👶",cat:"kids",text:`Antes de salir de casa: Nuestro/a <strong>Shampoo Kids Niñas 500ml</strong> de Magia Natural mantiene el cabello infantil hidratado y suave, fortaleciéndolo para prevenir rotura y puntas abiertas. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Acondicionador Anticaída Cebolla 500ml</strong> de Magia Natural complementa la rutina anticaída sellando la hidratación que el shampoo dejó en la fibra. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Acondicionador Romero y Quina 500ml</strong> de Magia Natural potencia el efecto fortalecedor del shampoo hermano, ideal para cabellos oscuros. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Acondicionador Manzanilla 500ml</strong> de Magia Natural aporta los nutrientes que previenen la rotura y ayudan a un crecimiento más vigoroso. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Tónico Capilar de Romero 250ml</strong> de Magia Natural con materias primas especializadas controla y previene la caída fortaleciendo los folículos del cuero cabelludo. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Tratamiento Bomba Capilar 300ml</strong> de Magia Natural sella la cutícula, aporta brillo y acondiciona sin dejar el cabello grasoso — libre de parabenos y sulfatos. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Tónico de Hombre 120ml</strong> de Magia Natural mantiene el cabello hidratado, fuerte y con un crecimiento más vigoroso, pensado para la rutina masculina. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Crema para Peinar Rizos 300ml</strong> de Magia Natural con linaza, argán, jojoba, coco y ácido hialurónico hidrata, da brillo y controla el frizz de los rizos. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Crema para Peinar Desenredante 250ml</strong> de Magia Natural con propiedades antioxidantes nutre las fibras y aporta brillo, flexibilidad e hidratación. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Tratamiento de Huevo y Aceite de Coco 300ml</strong> de Magia Natural nutre, hidrata y da fuerza al cabello mientras ayuda a disminuir la caída y estimular el crecimiento.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Gotas de Oro Aceite Antifrizz 60ml</strong> de Magia Natural sella la cutícula y retiene la humedad, controlando el frizz y evitando que la fibra se abra. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Loción Aclarante Viajero 60ml</strong> de Magia Natural aclara el cabello progresivamente con manzanilla, miel y canela — libre de amoniaco y parabenos. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Shampoo 500ml</strong> de Soy Rizos limpia y descongestiona el folículo favoreciendo un crecimiento sano de tus rizos. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Tratamiento Acondicionante 2en1 500ml</strong> de Soy Rizos cubre las tres necesidades del rizo en un paso: suavidad, reparación y brillo. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Crema para Peinar 500ml</strong> de Soy Rizos sostiene la definición y retiene la humedad natural del rizo, eliminando el frizz. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Aceite de Coco</strong> de Soy Rizos hidrata profundamente la hebra, evitando la sequedad, el frizz y la ruptura. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Extracto de Cebolla</strong> de Soy Rizos vasodilata los folículos capilares mejorando la circulación y nutriendo el cuero cabelludo desde la raíz. Ese es el nivel Chic Life.`},
-  {icon:"💇",cat:"capilar",text:`Truco Chic express: Nuestro/a <strong>Óleo Dorado Termoprotector</strong> de Soy Rizos repara, hidrata y aumenta el brillo mientras protege del calor hasta 230°C. Un paso más cerca de tu mejor versión.`},
-  {icon:"💇",cat:"capilar",text:`Ritual del día: Nuestro/a <strong>Shampoo Purify Nutrición 500ml</strong> de Amazónica Beleza limpia profundamente, elimina la oleosidad, evita la caída y promueve un crecimiento sano y acelerado. Cuídate como lo que eres: una obra de arte.`},
-  {icon:"💇",cat:"capilar",text:`Dato que cambia el juego: Nuestro/a <strong>Acondicionador Anti Caída y Grasa 500ml</strong> de Amazónica Beleza facilita el desenredo y sella el tratamiento, dejando el pelo manejable, sedoso y disciplinado.`},
-  {icon:"💇",cat:"capilar",text:`Antes de salir de casa: Nuestro/a <strong>Mascarilla Anti Caída y Grasa</strong> de Amazónica Beleza entrega a cada hebra los nutrientes que fortalecen el pelo sensibilizado por procesos químicos o mecánicos. Del click al corazón, siempre.`},
-  {icon:"💇",cat:"capilar",text:`La regla de oro de hoy: Nuestro/a <strong>Shampoo Argán Boom Hidratación</strong> de Amazónica Beleza rico en vitamina E y óleo de argán, conserva la hidratación y da un brillo intenso. Tu yo del futuro te lo va a agradecer.`},
-  {icon:"💇",cat:"capilar",text:`Confesión de salón: Nuestro/a <strong>Acondicionador Argán Boom Hidratación</strong> de Amazónica Beleza con óleo de argán —el 'oro de Marruecos'— mantiene el pelo hidratado y con suavidad absoluta. Pequeños gestos, grandes resultados.`},
-  {icon:"💇",cat:"capilar",text:`Psst, entre nosotras: Nuestro/a <strong>Mascarilla Argán Boom Hidratación</strong> de Amazónica Beleza entrega a cada hebra las propiedades que hidratan, dejando el pelo sedoso, brillante y suave. Así se nota la diferencia.`},
-  {icon:"💇",cat:"capilar",text:`Tip de estilista: Nuestro/a <strong>Tónico Bulbo Forte Herbal Anticaspa</strong> de byspro controla la caspa, reduce la caída y purifica el cuero cabelludo eliminando bacterias y hongos. Constancia es la palabra clave.`},
-  {icon:"💇",cat:"capilar",text:`¿El secreto de las expertas? Nuestro/a <strong>Bulbo Forte Anagenxyl Bio-Activador</strong> de byspro es un poderoso bio-activador de folículos improductivos que reduce los espacios de escaso crecimiento. Anótalo en tu rutina de esta semana.`},
-  {icon:"💇",cat:"capilar",text:`¿Sabías esto? Nuestro/a <strong>Tónico Bulbo Forte Energy Crecimiento</strong> de byspro energiza el folículo de forma natural y aumenta hasta un 30% el crecimiento del cabello. Ese es el nivel Chic Life.`},
-];
 
-function dayOfYearLocal(d) {
-  const start = new Date(d.getFullYear(), 0, 1, 0, 0, 0, 0);
-  const diffMs = d - start;
-  return Math.floor(diffMs / 86400000) + 1; // 1..365/366
+const TIP_APERTURAS_ = [
+  '¿El secreto de las expertas?', '¿Sabías esto?', 'Truco Chic express:',
+  'Ritual del día:', 'Dato que cambia el juego:', 'Antes de salir de casa:',
+  'La regla de oro de hoy:', 'Confesión de salón:', 'Psst, entre nosotras:',
+  'Tip de estilista:'
+];
+const TIP_CIERRES_ = [
+  'Tu yo del futuro te lo va a agradecer.', 'Pequeños gestos, grandes resultados.',
+  'Así se nota la diferencia.', 'Constancia es la palabra clave.',
+  'Anótalo en tu rutina de esta semana.', 'Ese es el nivel Chic Life.',
+  'Un paso más cerca de tu mejor versión.', 'Cuídate como lo que eres: una obra de arte.',
+  'Del click al corazón, siempre.'
+];
+const TIP_CAT_LABELS_ = { capilar: 'Capilar', skincare: 'Facial', corporal: 'Corporal', maquillaje: 'Maquillaje' };
+
+let CATALOGO_TIPS_ = []; // se llena cuando termina de cargar el catálogo (en vivo o de respaldo)
+
+function azarDeLista_(lista) {
+  return lista[Math.floor(Math.random() * lista.length)];
+}
+
+// porCategoria: { capilar:[...], skincare:[...], corporal:[...], maquillaje:[...] }
+// cada item puede venir del inventario en vivo (brand/name/desc/beneficios/modoUso)
+// o del catálogo de respaldo (brand/name/desc) — se normalizan aquí.
+function armarCatalogoTips_(porCategoria) {
+  const items = [];
+  Object.keys(porCategoria || {}).forEach(cat => {
+    (porCategoria[cat] || []).forEach(p => {
+      const nombre = p.name || p.nombre || '';
+      if (!nombre) return;
+      items.push({
+        categoria: cat,
+        marca: p.brand || p.marca || '',
+        nombre: nombre,
+        blurb: p.beneficios || p.desc || p.descripcion || p.modoUso || ''
+      });
+    });
+  });
+  CATALOGO_TIPS_ = items;
+  renderTipChic();
 }
 
 function renderTipChic() {
-  const now = new Date();
-  const doy = dayOfYearLocal(now);
-  const idx = (doy - 1) % TIP_CHIC_CATALOG.length;
-  const tip = TIP_CHIC_CATALOG[idx];
-
   const iconEl = document.getElementById('tip-chic-icon');
   const textEl = document.getElementById('tip-chic-text');
   const dayEl  = document.getElementById('tip-chic-day');
   if (!iconEl || !textEl) return;
 
-  iconEl.textContent = tip.icon || '💡';
-  textEl.innerHTML = tip.text;
-  if (dayEl) {
-    const catLabels = { capilar:'Capilar', facial:'Facial', corporal:'Corporal', kids:'Kids', mascotas:'Mascotas' };
-    dayEl.textContent = '· ' + (catLabels[tip.cat] || '');
+  if (!CATALOGO_TIPS_.length) {
+    iconEl.textContent = '💡';
+    textEl.innerHTML = '<strong>Explora el catálogo</strong> — todos los días encontramos algo nuevo que amar. 🌸';
+    if (dayEl) dayEl.textContent = '';
+    return;
   }
+
+  const producto = azarDeLista_(CATALOGO_TIPS_);
+  const apertura = azarDeLista_(TIP_APERTURAS_);
+  const cierre = azarDeLista_(TIP_CIERRES_);
+
+  let frase = `${apertura} Nuestro/a <strong>${escapeHtml(producto.nombre)}</strong>`;
+  if (producto.marca) frase += ` de ${escapeHtml(producto.marca)}`;
+  frase += '.';
+  if (producto.blurb) frase += ` ${escapeHtml(producto.blurb)}`;
+  frase += ` ${cierre}`;
+
+  iconEl.textContent = '💡';
+  textEl.innerHTML = frase;
+  if (dayEl) dayEl.textContent = '· ' + (TIP_CAT_LABELS_[producto.categoria] || '');
 }
-
-renderTipChic();
-
-// Revisa cada minuto si cambió el día local (p.ej. la pestaña se dejó
-// abierta pasando la medianoche) y refresca el Tip Chic automáticamente.
-let __tipChicLastDoy = dayOfYearLocal(new Date());
-setInterval(() => {
-  const nowDoy = dayOfYearLocal(new Date());
-  if (nowDoy !== __tipChicLastDoy) {
-    __tipChicLastDoy = nowDoy;
-    renderTipChic();
-    const box = document.getElementById('tip-chic-box');
-    if (box) {
-      box.classList.remove('visible');
-      requestAnimationFrame(() => box.classList.add('visible'));
-    }
-  }
-}, 60000);
 
 // ═══════════════════════════════════════════════════════════
 // INTERSECTION OBSERVER — REVEAL ANIMATIONS
