@@ -1664,6 +1664,20 @@ function pintarPaginaCategoria_(categoria) {
 
   renderProductGrid('grid-' + categoria, paginaItems);
   renderPaginacion_('pagination-' + categoria, categoria, estado.page, totalPaginas);
+
+  // Las tarjetas nuevas nacen con la clase "rev" (opacity:0) para la
+  // animación de aparición al hacer scroll, pero el IntersectionObserver
+  // solo observó las que existían al cargar la página inicial — nunca ve
+  // estas, recién insertadas por innerHTML. Sin esto quedaban invisibles
+  // hasta que switchTab las forzaba visibles al re-hacer clic en la pestaña.
+  // Las mostramos directamente (con un pequeño delay para que se note el
+  // fundido) apenas se pinta la página, sin depender del scroll.
+  const grid = document.getElementById('grid-' + categoria);
+  if (grid) {
+    requestAnimationFrame(() => {
+      grid.querySelectorAll('.rev:not(.visible)').forEach(el => el.classList.add('visible'));
+    });
+  }
 }
 
 function irAPagina_(categoria, pagina) {
