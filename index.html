@@ -246,7 +246,7 @@ header.scrolled{box-shadow:0 4px 32px rgba(255,20,147,.1)}
 
 /* Story cards */
 .story-cards{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  display:grid;grid-template-columns:repeat(6,1fr);gap:20px;
   max-width:1280px;margin:0 auto;padding:0 32px;margin-top:80px;
   position:relative;z-index:1;
 }
@@ -255,8 +255,14 @@ header.scrolled{box-shadow:0 4px 32px rgba(255,20,147,.1)}
   height:380px;cursor:pointer;
   background:linear-gradient(135deg,var(--peach),var(--rose));
 }
+/* 5 cards: fila 1 → 3 iguales; fila 2 → 2 centradas */
+.story-card:nth-child(1),.story-card:nth-child(2),.story-card:nth-child(3){grid-column:span 2}
+.story-card:nth-child(4){grid-column:2/4}
+.story-card:nth-child(5){grid-column:4/6}
 .story-card:nth-child(2){background:linear-gradient(135deg,#F3E8FF,#FFD6E8)}
 .story-card:nth-child(3){background:linear-gradient(135deg,#E8F8FF,#E8E0FF)}
+.story-card:nth-child(4){background:linear-gradient(135deg,#FFE4F5,#FFCCE8)}
+.story-card:nth-child(5){background:linear-gradient(135deg,#E4F7E8,#D0F0DC)}
 .story-card-inner{position:absolute;inset:0;padding:36px 32px;
   display:flex;flex-direction:column;justify-content:flex-end;
   background:linear-gradient(to top,rgba(26,26,26,.65) 0%,transparent 55%);
@@ -713,7 +719,10 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
 @media(max-width:1024px){
   .hero-inner{grid-template-columns:1fr;text-align:center}
   .hero-card-grid{margin:0 auto}
-  .story-cards{grid-template-columns:1fr 1fr}
+  .story-cards{grid-template-columns:repeat(3,1fr)}
+  .story-card:nth-child(1),.story-card:nth-child(2),.story-card:nth-child(3){grid-column:span 1}
+  .story-card:nth-child(4){grid-column:1/2}
+  .story-card:nth-child(5){grid-column:2/3}
   .about-grid,.contact-layout,.lunar-layout{grid-template-columns:1fr}
   .pillars-grid{grid-template-columns:1fr 1fr}
   .rizos-grid{grid-template-columns:1fr 1fr}
@@ -816,6 +825,7 @@ fbq('track', 'PageView');
           <a href="#catalogo" role="menuitem" onclick="switchTab('skincare')">✨ Cuidado Facial</a>
           <a href="#catalogo" role="menuitem" onclick="switchTab('corporal')">🧴 Cuidado Corporal</a>
           <a href="#catalogo" role="menuitem" onclick="switchTab('maquillaje')">💄 Maquillaje</a>
+          <a href="#catalogo" role="menuitem" onclick="switchTab('vitaminas')">💊 Vitaminas</a>
         </div>
       </div>
       <a href="#nosotros">Sobre Nosotros</a>
@@ -847,6 +857,7 @@ fbq('track', 'PageView');
   <a href="#catalogo" class="mob-link" onclick="switchTab('skincare')">Cuidado Facial</a>
   <a href="#catalogo" class="mob-link" onclick="switchTab('corporal')">Cuidado Corporal</a>
   <a href="#catalogo" class="mob-link" onclick="switchTab('maquillaje')">Maquillaje</a>
+  <a href="#catalogo" class="mob-link" onclick="switchTab('vitaminas')">Vitaminas</a>
   <a href="#nosotros" class="mob-link">Sobre Nosotros</a>
   <a href="#lunar" class="mob-link">Comunidad Lunar</a>
   <a href="#contacto" class="mob-link">Contacto</a>
@@ -932,6 +943,21 @@ fbq('track', 'PageView');
       <h3>Cuidado Corporal</h3>
       <p>Ritual de piel suave y radiante</p>
       <span class="story-btn">Ver Productos →</span>
+    </div>
+  </a>
+  <a href="#catalogo" class="story-card rev d4" aria-label="Maquillaje" onclick="switchTab('maquillaje')"
+     style="background-image:url('images/liquid-blush-poster.jpg');background-size:cover;background-position:center top">
+    <div class="story-card-inner">
+      <h3>Maquillaje</h3>
+      <p>Color y acabado para realzar tu esencia</p>
+      <span class="story-btn">Ver Maquillaje →</span>
+    </div>
+  </a>
+  <a href="#catalogo" class="story-card rev d5" aria-label="Vitaminas" onclick="switchTab('vitaminas')">
+    <div class="story-card-inner">
+      <h3>Vitaminas</h3>
+      <p>Suplementos para tu bienestar</p>
+      <span class="story-btn">Explorar Vitaminas →</span>
     </div>
   </a>
 </div>
@@ -1042,6 +1068,9 @@ fbq('track', 'PageView');
       <button class="tab-btn" role="tab" aria-selected="false"
               aria-controls="pane-maquillaje" id="tab-maquillaje"
               onclick="switchTab('maquillaje')">💄 Maquillaje</button>
+      <button class="tab-btn" role="tab" aria-selected="false"
+              aria-controls="pane-vitaminas" id="tab-vitaminas"
+              onclick="switchTab('vitaminas')">💊 Vitaminas</button>
     </div>
 
     <!-- PESTAÑA: CAPILAR -->
@@ -1079,6 +1108,12 @@ fbq('track', 'PageView');
     <div class="tab-pane" id="pane-maquillaje" role="tabpanel" aria-labelledby="tab-maquillaje">
       <div class="prod-grid" id="grid-maquillaje"></div>
       <div class="pagination" id="pagination-maquillaje"></div>
+    </div>
+
+    <!-- PESTAÑA: VITAMINAS -->
+    <div class="tab-pane" id="pane-vitaminas" role="tabpanel" aria-labelledby="tab-vitaminas">
+      <div class="prod-grid" id="grid-vitaminas"></div>
+      <div class="pagination" id="pagination-vitaminas"></div>
     </div>
 
     <!-- PESTAÑA: RESULTADOS DE BÚSQUEDA -->
@@ -1334,6 +1369,7 @@ window.addEventListener('load', function () {
         <li><a href="#catalogo" onclick="switchTab('skincare')">Cuidado Facial</a></li>
         <li><a href="#catalogo" onclick="switchTab('corporal')">Cuidado Corporal</a></li>
         <li><a href="#catalogo" onclick="switchTab('maquillaje')">Maquillaje</a></li>
+        <li><a href="#catalogo" onclick="switchTab('vitaminas')">Vitaminas</a></li>
         <li><a href="#lunar">Calendario Lunar</a></li>
       </ul>
     </div>
