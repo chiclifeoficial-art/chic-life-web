@@ -1434,6 +1434,9 @@ window.addEventListener('load', function () {
 ═══════════════════════════════════════════════════════════ -->
 <script>
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBetfet3y-e6zdke8nirtkJLVBJsUPT0gaKqD5znydvRLq5Lbf1oeorYD5250J5Nb9/exec';
+  // URL del ERP Apeiron para cargar categorías no disponibles en el Apps Script.
+  // Cambia esta URL si el ERP está alojado públicamente.
+  const ERP_LOCAL_URL = 'http://localhost:3011';
 </script>
 
 <script>
@@ -1610,6 +1613,36 @@ const PRODUCTS_RESPALDO = {
       desc: 'Lograrás un bronceado de ensueño: una piel canela con destellos dorados, mientras la nutres e hidratas gracias a los extractos naturales de sus ingredientes. 200ml.',
       img: 'images/mantequilla-lluvia-estrellas.webp', imgAlt: 'Mantequilla Corporal Lluvia de Estrellas',
       aspectRatio: '3/4'
+    }
+  ],
+  vitaminas: [
+    {
+      id: 'APE-000547',
+      brand: 'Femme Cosmetics', name: 'Femme Biotina Pura 900 Mcg - 50 Capsulas',
+      desc: 'Biotina pura de alta concentración. Favorece el crecimiento del cabello, la salud de las uñas y la piel.',
+      imgs: [
+        'https://res.cloudinary.com/rok31n5e/image/upload/v1785536012/apeiron/productos/producto_c3983289-01a8-40a7-b6cf-e31a5b6841d8.png',
+        'https://res.cloudinary.com/rok31n5e/image/upload/v1785536014/apeiron/productos/producto_c3983289-01a8-40a7-b6cf-e31a5b6841d8_2.png',
+        'https://res.cloudinary.com/rok31n5e/image/upload/v1785536015/apeiron/productos/producto_c3983289-01a8-40a7-b6cf-e31a5b6841d8_3.png',
+        'https://res.cloudinary.com/rok31n5e/image/upload/v1785536016/apeiron/productos/producto_c3983289-01a8-40a7-b6cf-e31a5b6841d8_4.png'
+      ],
+      img: 'https://res.cloudinary.com/rok31n5e/image/upload/v1785536012/apeiron/productos/producto_c3983289-01a8-40a7-b6cf-e31a5b6841d8.png',
+      precioVenta: 58000, stock: 2,
+      waMsg: 'Hola! Me interesa el producto Femme Biotina Pura 900 Mcg - 50 Capsulas de Femme Cosmetics 🌸'
+    },
+    {
+      id: 'APE-000548',
+      brand: 'Femme Cosmetics', name: 'Femme Colágeno Hidrolizado Vainilla 400Gr',
+      desc: 'Colágeno hidrolizado con sabor a vainilla. Apoya la elasticidad de la piel, articulaciones y cabello.',
+      imgs: [
+        'https://res.cloudinary.com/rok31n5e/image/upload/v1785536019/apeiron/productos/producto_cca7029a-b7b8-49cb-9d76-ad847a22b30b.png',
+        'https://res.cloudinary.com/rok31n5e/image/upload/v1785536022/apeiron/productos/producto_cca7029a-b7b8-49cb-9d76-ad847a22b30b_2.png',
+        'https://res.cloudinary.com/rok31n5e/image/upload/v1785536024/apeiron/productos/producto_cca7029a-b7b8-49cb-9d76-ad847a22b30b_3.png',
+        'https://res.cloudinary.com/rok31n5e/image/upload/v1785536027/apeiron/productos/producto_cca7029a-b7b8-49cb-9d76-ad847a22b30b_4.png'
+      ],
+      img: 'https://res.cloudinary.com/rok31n5e/image/upload/v1785536019/apeiron/productos/producto_cca7029a-b7b8-49cb-9d76-ad847a22b30b.png',
+      precioVenta: 55000, stock: 2,
+      waMsg: 'Hola! Me interesa el producto Femme Colágeno Hidrolizado Vainilla 400Gr de Femme Cosmetics 🌸'
     }
   ]
 };
@@ -1866,7 +1899,7 @@ function renderPaginacion_(containerId, categoria, paginaActual, totalPaginas) {
 // ═══════════════════════════════════════════════════════════
 
 function mostrarCargandoCatalogo_() {
-  ['grid-capilar', 'grid-skincare', 'grid-corporal', 'grid-maquillaje'].forEach(id => {
+  ['grid-capilar', 'grid-skincare', 'grid-corporal', 'grid-maquillaje', 'grid-vitaminas'].forEach(id => {
     const grid = document.getElementById(id);
     if (grid) grid.innerHTML = '<p class="prod-empty">Cargando catálogo…</p>';
   });
@@ -1916,6 +1949,7 @@ function cargarInventario() {
   if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf('PEGA_AQUI') !== -1) {
     console.warn('Chic Life: APPS_SCRIPT_URL no configurado — usando catálogo de respaldo.');
     usarCatalogoRespaldo_();
+    cargarVitaminasDesdeERP_();
     return;
   }
 
@@ -1926,10 +1960,13 @@ function cargarInventario() {
         throw new Error(data.error || 'Respuesta de inventario inválida');
       }
 
-      const porCategoria = { capilar: [], skincare: [], corporal: [], maquillaje: [] };
+      const porCategoria = { capilar: [], skincare: [], corporal: [], maquillaje: [], vitaminas: [] };
       data.productos.forEach(p => {
-        if (porCategoria[p.categoria]) {
-          porCategoria[p.categoria].push(mapearProductoSheet_(p));
+        const cat = (p.categoria || '').toLowerCase();
+        if (cat.startsWith('vitaminas')) {
+          porCategoria.vitaminas.push(mapearProductoSheet_(p));
+        } else if (porCategoria[cat] !== undefined) {
+          porCategoria[cat].push(mapearProductoSheet_(p));
         }
       });
 
@@ -1940,6 +1977,7 @@ function cargarInventario() {
         // no una tienda real sin ningún producto — usamos el respaldo.
         console.warn('Chic Life: el inventario de Sheets respondió vacío — usando catálogo de respaldo.');
         usarCatalogoRespaldo_();
+        cargarVitaminasDesdeERP_();
         return;
       }
 
@@ -1954,10 +1992,51 @@ function cargarInventario() {
         ...porCategoria.corporal.map(p => ({...p, _cat: 'corporal'})),
         ...porCategoria.maquillaje.map(p => ({...p, _cat: 'maquillaje'}))
       ];
+
+      // Si el Apps Script ya devuelve vitaminas (futuro), usarlos directamente;
+      // si no, cargar desde el ERP local.
+      if (porCategoria.vitaminas.length > 0) {
+        renderCategoriaPaginada_('vitaminas', porCategoria.vitaminas);
+        window._catalogoSearch = [
+          ...window._catalogoSearch,
+          ...porCategoria.vitaminas.map(p => ({...p, _cat: 'vitaminas'}))
+        ];
+      } else {
+        cargarVitaminasDesdeERP_();
+      }
     })
     .catch(err => {
       console.warn('Chic Life: no se pudo cargar el inventario en vivo — usando catálogo de respaldo.', err);
       usarCatalogoRespaldo_();
+      cargarVitaminasDesdeERP_();
+    });
+}
+
+// Carga vitaminas directamente desde el ERP Apeiron (endpoint público).
+// Si el ERP no está disponible (visitantes externos), usa el catálogo de respaldo.
+function cargarVitaminasDesdeERP_() {
+  fetch(`${ERP_LOCAL_URL}/api/publico/catalogo?categoria=vitaminas`, {
+    signal: AbortSignal.timeout(5000)
+  })
+    .then(res => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+    .then(data => {
+      if (!data.success || !Array.isArray(data.productos) || data.productos.length === 0) {
+        throw new Error('Sin productos');
+      }
+      const vitaminas = data.productos.map(mapearProductoSheet_);
+      renderCategoriaPaginada_('vitaminas', vitaminas);
+      window._catalogoSearch = [
+        ...(window._catalogoSearch || []),
+        ...vitaminas.map(p => ({...p, _cat: 'vitaminas'}))
+      ];
+    })
+    .catch(() => {
+      const respaldo = PRODUCTS_RESPALDO.vitaminas || [];
+      renderCategoriaPaginada_('vitaminas', respaldo);
+      window._catalogoSearch = [
+        ...(window._catalogoSearch || []),
+        ...respaldo.map(p => ({...p, _cat: 'vitaminas'}))
+      ];
     });
 }
 
