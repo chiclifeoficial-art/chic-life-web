@@ -3570,6 +3570,110 @@ document.querySelectorAll('.tone').forEach(tone => {
 }
 .cl-cart-clear-btn:hover{color:var(--fuchsia-d)}
 .cl-cart-note{font-size:.7rem;color:var(--mist);text-align:center;margin-top:12px;line-height:1.5}
+.cl-cart-keep-btn{
+  width:100%;padding:11px;border-radius:var(--r-sm);
+  background:none;border:1.5px solid rgba(255,20,147,.28);
+  color:var(--fuchsia);font-size:.84rem;font-weight:600;cursor:pointer;transition:all .2s;
+}
+.cl-cart-keep-btn:hover{background:rgba(255,20,147,.06)}
+/* ── Checkout overlay ──────────────────────────────────────── */
+.cl-co-overlay{position:fixed;inset:0;z-index:1200;background:rgba(10,8,18,.68);
+  backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:16px}
+.cl-co-overlay.cl-co-open{display:flex}
+.cl-co-panel{background:var(--white);border-radius:24px;width:100%;max-width:560px;
+  max-height:92vh;overflow-y:auto;padding:32px 28px 28px;position:relative;
+  box-shadow:0 32px 80px rgba(0,0,0,.38);
+  opacity:0;transform:translateY(20px) scale(.97);transition:opacity .3s ease,transform .3s ease}
+.cl-co-overlay.cl-co-visible .cl-co-panel{opacity:1;transform:translateY(0) scale(1)}
+.cl-co-close{position:absolute;top:14px;right:18px;background:none;border:none;
+  font-size:1.5rem;color:var(--mist);cursor:pointer;line-height:1}
+/* Progress */
+.cl-co-progress{display:flex;align-items:flex-start;justify-content:center;gap:0;margin-bottom:26px}
+.cl-co-prog-col{display:flex;flex-direction:column;align-items:center;gap:4px}
+.cl-co-dot{width:30px;height:30px;border-radius:50%;background:var(--rose-l);color:var(--mist);
+  font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.cl-co-dot.active{background:var(--fuchsia);color:#fff;box-shadow:0 4px 14px rgba(255,20,147,.4)}
+.cl-co-dot.done{background:var(--fuchsia-d);color:#fff}
+.cl-co-prog-label{font-size:.6rem;color:var(--mist);white-space:nowrap}
+.cl-co-line{width:48px;height:2px;background:var(--rose-l);margin-top:14px;transition:background .3s;flex-shrink:0}
+.cl-co-line.done{background:var(--fuchsia-d)}
+/* Steps */
+.cl-co-step{display:none}
+.cl-co-step.active{display:block}
+.cl-co-title{font-family:var(--fd);font-size:1.25rem;font-weight:800;color:var(--ink);margin-bottom:4px}
+.cl-co-subtitle{font-size:.78rem;color:var(--mist);margin-bottom:18px;line-height:1.5}
+/* Order summary mini */
+.cl-co-order-summary{background:var(--rose-l);border-radius:12px;padding:12px 14px;
+  margin-bottom:18px;max-height:120px;overflow-y:auto}
+.cl-co-order-summary p{font-size:.73rem;color:var(--ink-s);margin-bottom:2px;line-height:1.4}
+.cl-co-order-total{font-family:var(--fd);font-size:1rem;font-weight:900;color:var(--fuchsia);margin-top:8px}
+/* Form */
+.cl-co-form{display:flex;flex-direction:column;gap:13px}
+.cl-co-row{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.cl-co-field label{display:block;font-size:.7rem;font-weight:600;color:var(--ink-s);
+  margin-bottom:4px;letter-spacing:.04em;text-transform:uppercase}
+.req{color:var(--fuchsia)}
+.cl-co-field input,.cl-co-field select,.cl-co-field textarea{
+  width:100%;padding:9px 11px;border-radius:10px;border:1.5px solid rgba(0,0,0,.12);
+  font-size:.84rem;color:var(--ink);background:var(--white);
+  transition:border-color .2s;outline:none;font-family:inherit}
+.cl-co-field input:focus,.cl-co-field select:focus,.cl-co-field textarea:focus{border-color:var(--fuchsia)}
+.cl-co-field input.error,.cl-co-field select.error,.cl-co-field textarea.error{border-color:#e53e3e}
+.cl-co-field textarea{resize:vertical;min-height:64px}
+/* Nav buttons */
+.cl-co-nav{display:flex;gap:10px;margin-top:20px}
+.cl-co-btn-pri{flex:1;padding:13px;border-radius:var(--r-sm);
+  background:linear-gradient(90deg,var(--fuchsia),var(--fuchsia-d));
+  color:#fff;font-weight:700;font-size:.88rem;border:none;cursor:pointer;transition:transform .2s}
+.cl-co-btn-pri:hover{transform:translateY(-1px)}
+.cl-co-btn-sec{padding:12px 14px;border-radius:var(--r-sm);
+  background:none;border:1.5px solid rgba(0,0,0,.12);
+  color:var(--ink-s);font-size:.82rem;font-weight:600;cursor:pointer;transition:border-color .2s;white-space:nowrap}
+.cl-co-btn-sec:hover{border-color:var(--fuchsia);color:var(--fuchsia)}
+/* Payment grid */
+.cl-co-payment-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:4px}
+.cl-co-pay-card{border:2px solid rgba(0,0,0,.1);border-radius:14px;padding:16px 12px;
+  cursor:pointer;transition:all .25s;display:flex;flex-direction:column;
+  align-items:center;gap:6px;background:var(--white)}
+.cl-co-pay-card:hover{border-color:var(--fuchsia);transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(255,20,147,.12)}
+.cl-co-pay-card.selected{border-color:var(--fuchsia);background:rgba(255,20,147,.04)}
+.cl-co-pay-icon{font-size:1.9rem}
+.cl-co-pay-name{font-weight:700;font-size:.86rem;color:var(--ink)}
+.cl-co-pay-desc{font-size:.66rem;color:var(--mist);text-align:center;line-height:1.35}
+/* QR panel */
+.cl-co-qr-panel{text-align:center}
+.cl-co-qr-img{width:190px;height:190px;object-fit:contain;border-radius:12px;
+  margin:0 auto 14px;display:block;background:#1a0d2e;padding:8px}
+.cl-co-qr-llave{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
+  border-radius:40px;background:#1a0d2e;color:#fff;font-size:.98rem;font-weight:700;
+  letter-spacing:.04em;cursor:pointer;transition:opacity .2s;border:none;margin-bottom:6px}
+.cl-co-qr-llave:hover{opacity:.85}
+.cl-co-copied{font-size:.72rem;color:var(--fuchsia);margin-bottom:12px;display:none}
+.cl-co-qr-steps{display:flex;gap:8px;justify-content:center;margin:14px 0}
+.cl-co-qr-step{background:var(--rose-l);border-radius:10px;padding:10px 8px;
+  text-align:center;flex:1;max-width:110px}
+.cl-co-qr-step-num{background:var(--fuchsia);color:#fff;width:20px;height:20px;
+  border-radius:50%;font-size:.65rem;font-weight:700;display:flex;
+  align-items:center;justify-content:center;margin:0 auto 5px}
+.cl-co-qr-step-txt{font-size:.64rem;color:var(--ink-s);line-height:1.3}
+/* BNPL */
+.cl-co-bnpl-box{background:var(--rose-l);border-radius:14px;padding:22px;
+  text-align:center;margin-bottom:18px}
+.cl-co-bnpl-icon{font-size:2.4rem;margin-bottom:8px}
+.cl-co-bnpl-title{font-weight:700;font-size:.95rem;color:var(--ink);margin-bottom:6px}
+.cl-co-bnpl-desc{font-size:.78rem;color:var(--mist);line-height:1.55}
+/* WhatsApp button */
+.cl-co-wa-btn{width:100%;padding:14px;border-radius:var(--r-sm);
+  background:#25D366;color:#fff;font-weight:700;font-size:.9rem;border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:transform .2s,filter .2s}
+.cl-co-wa-btn:hover{transform:translateY(-1px);filter:brightness(1.08)}
+@media(max-width:540px){
+  .cl-co-row{grid-template-columns:1fr}
+  .cl-co-payment-grid{grid-template-columns:1fr 1fr}
+  .cl-co-panel{padding:24px 18px 20px}
+}
 </style>
 
 <button type="button" class="cl-cart-float" id="cl-cart-float" aria-label="Ver carrito de compras">
@@ -3592,11 +3696,186 @@ document.querySelectorAll('.tone').forEach(tone => {
         <span class="cl-cart-total-num" id="cl-cart-total">$0</span>
       </div>
       <div class="cl-cart-actions">
-        <button type="button" class="cl-cart-checkout-btn" id="cl-cart-checkout">Finalizar compra por WhatsApp</button>
+        <button type="button" class="cl-cart-checkout-btn" id="cl-cart-checkout">Finalizar compra 🛒</button>
+        <button type="button" class="cl-cart-keep-btn" id="cl-cart-keep">← Seguir comprando</button>
         <button type="button" class="cl-cart-clear-btn" id="cl-cart-clear">Vaciar carrito</button>
       </div>
-      <p class="cl-cart-note">El pago no se procesa en el sitio — te escribimos por WhatsApp para coordinar el pago y el envío, igual que siempre.</p>
+      <p class="cl-cart-note">Nequi · Bre-B · Sistecrédito · Addi — coordinas el pago tras ingresar tus datos de envío.</p>
     </div>
+  </div>
+</div>
+
+<!-- ══ CHECKOUT OVERLAY ══════════════════════════════════════════ -->
+<div class="cl-co-overlay" id="cl-co-overlay">
+  <div class="cl-co-panel">
+    <button class="cl-co-close" id="cl-co-close" aria-label="Cerrar">&times;</button>
+
+    <!-- Barra de progreso -->
+    <div class="cl-co-progress">
+      <div class="cl-co-prog-col">
+        <div class="cl-co-dot active" id="cl-co-dot1">1</div>
+        <div class="cl-co-prog-label">Envío</div>
+      </div>
+      <div class="cl-co-line" id="cl-co-line1"></div>
+      <div class="cl-co-prog-col">
+        <div class="cl-co-dot" id="cl-co-dot2">2</div>
+        <div class="cl-co-prog-label">Pago</div>
+      </div>
+      <div class="cl-co-line" id="cl-co-line2"></div>
+      <div class="cl-co-prog-col">
+        <div class="cl-co-dot" id="cl-co-dot3">3</div>
+        <div class="cl-co-prog-label">Confirmar</div>
+      </div>
+    </div>
+
+    <!-- PASO 1: Datos de envío -->
+    <div class="cl-co-step active" id="cl-co-step1">
+      <div class="cl-co-title">Datos de envío 📦</div>
+      <div class="cl-co-subtitle">Diligencia correctamente para garantizar la entrega de tu pedido 🌸</div>
+      <div class="cl-co-order-summary" id="cl-co-summary1"></div>
+      <form class="cl-co-form" id="cl-co-form" novalidate>
+        <div class="cl-co-field">
+          <label>Nombre completo <span class="req">*</span></label>
+          <input type="text" id="co-nombre" placeholder="Nombre y apellido de quien recibe">
+        </div>
+        <div class="cl-co-row">
+          <div class="cl-co-field">
+            <label>Cédula / NIT / Pasaporte <span class="req">*</span></label>
+            <input type="text" id="co-cedula" placeholder="Ej. 1234567890">
+          </div>
+          <div class="cl-co-field">
+            <label>Teléfono celular <span class="req">*</span></label>
+            <input type="tel" id="co-telefono" placeholder="Ej. 3001234567">
+          </div>
+        </div>
+        <div class="cl-co-field">
+          <label>Dirección exacta <span class="req">*</span></label>
+          <input type="text" id="co-direccion" placeholder="Calle, carrera, número, apto/oficina/local...">
+        </div>
+        <div class="cl-co-row">
+          <div class="cl-co-field">
+            <label>Barrio <span class="req">*</span></label>
+            <input type="text" id="co-barrio" placeholder="Barrio o vereda">
+          </div>
+          <div class="cl-co-field">
+            <label>Municipio <span class="req">*</span></label>
+            <input type="text" id="co-municipio" placeholder="Ej. Medellín">
+          </div>
+        </div>
+        <div class="cl-co-row">
+          <div class="cl-co-field">
+            <label>Departamento <span class="req">*</span></label>
+            <input type="text" id="co-departamento" placeholder="Ej. Antioquia">
+          </div>
+          <div class="cl-co-field">
+            <label>Correo electrónico <span class="req">*</span></label>
+            <input type="email" id="co-email" placeholder="Para factura y número de guía">
+          </div>
+        </div>
+        <div class="cl-co-field">
+          <label>Indicaciones adicionales <span style="font-weight:400;text-transform:none;letter-spacing:0">(color fachada, conjunto cerrado, referencias…)</span></label>
+          <textarea id="co-indicaciones" placeholder="Ej. Casa blanca con reja verde, conjunto Los Pinos portería principal…"></textarea>
+        </div>
+        <div class="cl-co-field">
+          <label>Horario preferido de entrega</label>
+          <select id="co-horario">
+            <option value="Cualquier horario">Cualquier horario</option>
+            <option value="Mañana (8am – 12pm)">Mañana (8am – 12pm)</option>
+            <option value="Tarde (12pm – 6pm)">Tarde (12pm – 6pm)</option>
+            <option value="Horario de oficina (L–V 8am–5pm)">Horario de oficina (L–V 8am – 5pm)</option>
+          </select>
+        </div>
+      </form>
+      <div class="cl-co-nav">
+        <button class="cl-co-btn-sec" id="cl-co-back1">← Carrito</button>
+        <button class="cl-co-btn-pri" id="cl-co-next1">Continuar al pago →</button>
+      </div>
+    </div>
+
+    <!-- PASO 2: Método de pago -->
+    <div class="cl-co-step" id="cl-co-step2">
+      <div class="cl-co-title">Método de pago 💳</div>
+      <div class="cl-co-subtitle">Elige cómo prefieres pagar tu pedido</div>
+      <div class="cl-co-order-summary" id="cl-co-summary2"></div>
+      <div class="cl-co-payment-grid">
+        <button class="cl-co-pay-card" data-metodo="Nequi">
+          <span class="cl-co-pay-icon">🟣</span>
+          <span class="cl-co-pay-name">Nequi</span>
+          <span class="cl-co-pay-desc">Escanea el QR o transfiere con la llave</span>
+        </button>
+        <button class="cl-co-pay-card" data-metodo="Bre-B">
+          <span class="cl-co-pay-icon">🟢</span>
+          <span class="cl-co-pay-name">Bre-B</span>
+          <span class="cl-co-pay-desc">Envío con llaves desde la app de tu banco</span>
+        </button>
+        <button class="cl-co-pay-card" data-metodo="Sistecrédito">
+          <span class="cl-co-pay-icon">🟠</span>
+          <span class="cl-co-pay-name">Sistecrédito</span>
+          <span class="cl-co-pay-desc">Crédito directo — te enviamos el código</span>
+        </button>
+        <button class="cl-co-pay-card" data-metodo="Addi">
+          <span class="cl-co-pay-icon">🟡</span>
+          <span class="cl-co-pay-name">Addi</span>
+          <span class="cl-co-pay-desc">Compra ahora, paga después a cuotas</span>
+        </button>
+      </div>
+      <div class="cl-co-nav">
+        <button class="cl-co-btn-sec" id="cl-co-back2">← Datos de envío</button>
+      </div>
+    </div>
+
+    <!-- PASO 3A: QR Nequi / Bre-B -->
+    <div class="cl-co-step" id="cl-co-step3-qr">
+      <div class="cl-co-qr-panel">
+        <div class="cl-co-title" id="cl-co-qr-title">Paga con Nequi / Bre-B</div>
+        <div class="cl-co-subtitle">Escanea el QR o usa la llave para transferir desde tu app</div>
+        <img src="images/qr-nequi-breb.png" alt="QR Bre-B / Nequi — Chic Life" class="cl-co-qr-img">
+        <div style="font-size:.72rem;color:var(--mist);margin-bottom:6px">🔑 Toca la llave para copiarla</div>
+        <button class="cl-co-qr-llave" id="cl-co-copiar-llave">🔑 0091149105</button>
+        <div class="cl-co-copied" id="cl-co-copied-msg">¡Copiado al portapapeles! 📋</div>
+        <div class="cl-co-qr-steps">
+          <div class="cl-co-qr-step">
+            <div class="cl-co-qr-step-num">1</div>
+            <div class="cl-co-qr-step-txt">Entra a la app de tu banco</div>
+          </div>
+          <div class="cl-co-qr-step">
+            <div class="cl-co-qr-step-num">2</div>
+            <div class="cl-co-qr-step-txt">Selecciona "Envío con llaves"</div>
+          </div>
+          <div class="cl-co-qr-step">
+            <div class="cl-co-qr-step-num">3</div>
+            <div class="cl-co-qr-step-txt">Escribe la llave <strong>0091149105</strong></div>
+          </div>
+        </div>
+        <p style="font-size:.76rem;color:var(--mist);margin-bottom:14px">Destinatario: <strong>Chic Life · Nancy Bedoya</strong></p>
+        <div class="cl-co-order-summary" id="cl-co-summary3"></div>
+        <button class="cl-co-wa-btn" id="cl-co-wa-digital">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enviar comprobante por WhatsApp
+        </button>
+        <div class="cl-co-nav" style="margin-top:12px">
+          <button class="cl-co-btn-sec" id="cl-co-back3-qr">← Cambiar método de pago</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 3B: BNPL (Sistecrédito / Addi) -->
+    <div class="cl-co-step" id="cl-co-step3-bnpl">
+      <div class="cl-co-bnpl-box">
+        <div class="cl-co-bnpl-icon" id="cl-co-bnpl-icon">🟠</div>
+        <div class="cl-co-bnpl-title" id="cl-co-bnpl-title">Pago con Sistecrédito</div>
+        <div class="cl-co-bnpl-desc" id="cl-co-bnpl-desc">Escríbenos por WhatsApp con el detalle de tu pedido y te enviamos el código para validar tu compra directamente en la plataforma.</div>
+      </div>
+      <div class="cl-co-order-summary" id="cl-co-summary4"></div>
+      <button class="cl-co-wa-btn" id="cl-co-wa-bnpl">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Solicitar código por WhatsApp
+      </button>
+      <div class="cl-co-nav" style="margin-top:12px">
+        <button class="cl-co-btn-sec" id="cl-co-back3-bnpl">← Cambiar método de pago</button>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -3833,28 +4112,197 @@ document.querySelectorAll('.tone').forEach(tone => {
 
   checkoutBtn.addEventListener('click', function(){
     if (!carrito.length) return;
-
-    let total = 0;
-    const lineas = carrito.map(it => {
-      const subtotal = it.precioVenta * it.cantidad;
-      total += subtotal;
-      return `• ${it.nombre} x${it.cantidad} — ${formatearCOP_(subtotal)}`;
-    });
-
-    const mensaje = 'Hola Chic Life! 🌸 Quiero hacer este pedido:\n\n' +
-      lineas.join('\n') +
-      `\n\nTotal: ${formatearCOP_(total)}` +
-      '\n\n¿Me ayudas a coordinar el pago y el envío?';
-
-    enviarSnapshotCarrito_('Enviado a WhatsApp');
-    window.open(`https://wa.me/${WA_PHONE}?text=${encodeURIComponent(mensaje)}`, '_blank');
-
-    // Se vacía apenas se manda a WhatsApp — si la clienta quiere seguir
-    // comprando después, empieza un carrito nuevo.
-    carrito = [];
-    guardarCarrito_(carrito);
-    renderCarrito_();
+    abrirCheckout_();
   });
+
+  // ── "Seguir comprando" ──────────────────────────────────────
+  document.getElementById('cl-cart-keep').addEventListener('click', cerrarOverlay_);
+
+  // ══════════════════════════════════════════════════════════════
+  // FLUJO DE CHECKOUT — datos de envío → método de pago → confirmar
+  // ══════════════════════════════════════════════════════════════
+  var coOverlay = document.getElementById('cl-co-overlay');
+  var coClose   = document.getElementById('cl-co-close');
+  var datosEnvio_ = {};
+  var metodoSeleccionado_ = '';
+
+  function abrirCheckout_() {
+    cerrarOverlay_();
+    actualizarResumen_('cl-co-summary1');
+    coOverlay.classList.add('cl-co-open');
+    requestAnimationFrame(function(){ coOverlay.classList.add('cl-co-visible'); });
+    document.body.style.overflow = 'hidden';
+    irPaso_(1);
+  }
+
+  function cerrarCheckout_() {
+    coOverlay.classList.remove('cl-co-visible');
+    document.body.style.overflow = '';
+    setTimeout(function(){ coOverlay.classList.remove('cl-co-open'); }, 350);
+  }
+
+  function actualizarResumen_(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var total = 0;
+    var html = carrito.map(function(it){
+      var sub = it.precioVenta * it.cantidad;
+      total += sub;
+      return '<p>• ' + escapeHtml(it.nombre) + ' x' + it.cantidad + ' — ' + formatearCOP_(sub) + '</p>';
+    }).join('');
+    el.innerHTML = html + '<div class="cl-co-order-total">Total: ' + formatearCOP_(total) + '</div>';
+  }
+
+  function irPaso_(n) {
+    // Puntos de progreso
+    [1, 2, 3].forEach(function(i){
+      var dot = document.getElementById('cl-co-dot' + i);
+      if (!dot) return;
+      dot.classList.remove('active', 'done');
+      if (i < Math.ceil(n)) dot.classList.add('done');
+      else if (i === Math.ceil(n)) dot.classList.add('active');
+    });
+    [1, 2].forEach(function(i){
+      var line = document.getElementById('cl-co-line' + i);
+      if (!line) return;
+      if (i < Math.ceil(n)) line.classList.add('done');
+      else line.classList.remove('done');
+    });
+    // Steps visibles
+    document.querySelectorAll('.cl-co-step').forEach(function(s){ s.classList.remove('active'); });
+    if (n === 1)   document.getElementById('cl-co-step1').classList.add('active');
+    if (n === 2)  { document.getElementById('cl-co-step2').classList.add('active'); actualizarResumen_('cl-co-summary2'); }
+    if (n === 3.1){ document.getElementById('cl-co-step3-qr').classList.add('active'); actualizarResumen_('cl-co-summary3'); }
+    if (n === 3.2){ document.getElementById('cl-co-step3-bnpl').classList.add('active'); actualizarResumen_('cl-co-summary4'); }
+    // Scroll al tope del panel
+    var panel = coOverlay.querySelector('.cl-co-panel');
+    if (panel) panel.scrollTop = 0;
+  }
+
+  function validarFormulario_() {
+    var campos = ['co-nombre','co-cedula','co-telefono','co-direccion','co-barrio','co-municipio','co-departamento','co-email'];
+    var ok = true;
+    campos.forEach(function(id){
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.classList.remove('error');
+      if (!el.value.trim()){ el.classList.add('error'); ok = false; }
+    });
+    var email = document.getElementById('co-email');
+    if (email && email.value.trim() && !/^[^@]+@[^@]+\.[^@]+$/.test(email.value.trim())){
+      email.classList.add('error'); ok = false;
+    }
+    return ok;
+  }
+
+  function leerDatosEnvio_() {
+    datosEnvio_ = {
+      nombre:       document.getElementById('co-nombre').value.trim(),
+      cedula:       document.getElementById('co-cedula').value.trim(),
+      telefono:     document.getElementById('co-telefono').value.trim(),
+      direccion:    document.getElementById('co-direccion').value.trim(),
+      barrio:       document.getElementById('co-barrio').value.trim(),
+      municipio:    document.getElementById('co-municipio').value.trim(),
+      departamento: document.getElementById('co-departamento').value.trim(),
+      email:        document.getElementById('co-email').value.trim(),
+      indicaciones: document.getElementById('co-indicaciones').value.trim(),
+      horario:      document.getElementById('co-horario').value
+    };
+  }
+
+  function armarMensajeWA_(metodo) {
+    var total = 0;
+    var lineas = carrito.map(function(it){
+      var sub = it.precioVenta * it.cantidad;
+      total += sub;
+      return '• ' + it.nombre + ' x' + it.cantidad + ' — ' + formatearCOP_(sub);
+    });
+    var digital = metodo === 'Nequi' || metodo === 'Bre-B';
+    var msg = 'Hola Chic Life! 🌸 ';
+    if (digital) msg += 'Acabo de transferir por *' + metodo + '*. Te adjunto el comprobante de pago.\n\n';
+    else msg += 'Quiero pagar con *' + metodo + '*. Por favor envíame el código para validar mi compra.\n\n';
+    msg += '🛒 *MI PEDIDO:*\n' + lineas.join('\n') + '\n*Total: ' + formatearCOP_(total) + '*\n\n';
+    msg += '📦 *DATOS DE ENVÍO:*\n';
+    msg += '• Nombre: ' + datosEnvio_.nombre + '\n';
+    msg += '• Cédula/ID: ' + datosEnvio_.cedula + '\n';
+    msg += '• Dirección: ' + datosEnvio_.direccion + '\n';
+    msg += '• Barrio: ' + datosEnvio_.barrio + '\n';
+    msg += '• Municipio: ' + datosEnvio_.municipio + ', ' + datosEnvio_.departamento + '\n';
+    msg += '• Teléfono: ' + datosEnvio_.telefono + '\n';
+    msg += '• Email: ' + datosEnvio_.email + '\n';
+    if (datosEnvio_.indicaciones) msg += '• Indicaciones: ' + datosEnvio_.indicaciones + '\n';
+    msg += '• Horario preferido: ' + datosEnvio_.horario;
+    return msg;
+  }
+
+  function finalizarCompra_(metodo) {
+    var msg = armarMensajeWA_(metodo);
+    enviarSnapshotCarrito_('Enviado a WhatsApp');
+    window.open('https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(msg), '_blank');
+    carrito = []; guardarCarrito_(carrito); renderCarrito_();
+    cerrarCheckout_();
+  }
+
+  // Cierre overlay
+  coClose.addEventListener('click', cerrarCheckout_);
+  coOverlay.addEventListener('click', function(e){ if (e.target === coOverlay) cerrarCheckout_(); });
+
+  // Paso 1 → nav
+  document.getElementById('cl-co-back1').addEventListener('click', function(){
+    cerrarCheckout_();
+    setTimeout(function(){ renderCarrito_(); abrirOverlay_(); }, 120);
+  });
+  document.getElementById('cl-co-next1').addEventListener('click', function(){
+    if (!validarFormulario_()){
+      var firstErr = document.querySelector('.cl-co-field input.error, .cl-co-field select.error, .cl-co-field textarea.error');
+      if (firstErr) firstErr.focus();
+      return;
+    }
+    leerDatosEnvio_();
+    irPaso_(2);
+  });
+
+  // Paso 2 → nav
+  document.getElementById('cl-co-back2').addEventListener('click', function(){ irPaso_(1); });
+  document.querySelectorAll('.cl-co-pay-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      metodoSeleccionado_ = this.dataset.metodo;
+      document.querySelectorAll('.cl-co-pay-card').forEach(function(c){ c.classList.remove('selected'); });
+      this.classList.add('selected');
+      if (metodoSeleccionado_ === 'Nequi' || metodoSeleccionado_ === 'Bre-B'){
+        document.getElementById('cl-co-qr-title').textContent = 'Paga con ' + metodoSeleccionado_;
+        irPaso_(3.1);
+      } else {
+        var info = {
+          'Sistecrédito': { icon:'🟠', desc:'Escríbenos por WhatsApp con el detalle de tu pedido y te enviamos el código para que valides tu compra directamente en la plataforma de Sistecrédito.' },
+          'Addi':         { icon:'🟡', desc:'Escríbenos por WhatsApp con el detalle de tu pedido y te enviamos el enlace de Addi para que completes la compra a cuotas sin interés.' }
+        }[metodoSeleccionado_] || { icon:'💳', desc:'' };
+        document.getElementById('cl-co-bnpl-icon').textContent  = info.icon;
+        document.getElementById('cl-co-bnpl-title').textContent = 'Pago con ' + metodoSeleccionado_;
+        document.getElementById('cl-co-bnpl-desc').textContent  = info.desc;
+        irPaso_(3.2);
+      }
+    });
+  });
+
+  // Paso 3 → nav
+  document.getElementById('cl-co-back3-qr').addEventListener('click',  function(){ irPaso_(2); });
+  document.getElementById('cl-co-back3-bnpl').addEventListener('click', function(){ irPaso_(2); });
+
+  // Copiar llave
+  document.getElementById('cl-co-copiar-llave').addEventListener('click', function(){
+    if (navigator.clipboard){
+      navigator.clipboard.writeText('0091149105').then(function(){
+        var m = document.getElementById('cl-co-copied-msg');
+        m.style.display = 'block';
+        setTimeout(function(){ m.style.display = 'none'; }, 2500);
+      });
+    }
+  });
+
+  // WhatsApp buttons
+  document.getElementById('cl-co-wa-digital').addEventListener('click', function(){ finalizarCompra_(metodoSeleccionado_); });
+  document.getElementById('cl-co-wa-bnpl').addEventListener('click',    function(){ finalizarCompra_(metodoSeleccionado_); });
 
   renderCarrito_();
 })();
