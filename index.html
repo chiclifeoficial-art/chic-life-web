@@ -408,7 +408,9 @@ section{padding:100px 32px}
 .prod-brand{font-size:.68rem;font-weight:600;letter-spacing:.14em;
   text-transform:uppercase;color:var(--fuchsia);margin-bottom:6px}
 .prod-name{font-family:var(--fd);font-size:1.1rem;font-weight:700;margin-bottom:8px;color:var(--ink)}
-.prod-desc{font-size:.82rem;color:var(--mist);line-height:1.6;margin-bottom:16px}
+.prod-desc{font-size:.82rem;color:var(--mist);line-height:1.6;margin-bottom:8px;
+  display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.prod-desc.det-open{display:none}
 .prod-price{font-family:var(--fd);font-size:1.3rem;font-weight:900;color:var(--fuchsia);margin-bottom:10px}
 .prod-empty{grid-column:1/-1;text-align:center;color:var(--mist);font-size:.88rem;padding:32px 0}
 /* Paginación del catálogo */
@@ -1728,11 +1730,12 @@ function renderProductGrid(gridId, items) {
       ? `<div class="prod-agotado">Agotado — consulta disponibilidad</div>`
       : '';
 
-    const tieneDetalle = p.modoUso || p.beneficios;
+    const tieneDetalle = p.desc || p.modoUso || p.beneficios;
     const detalleHtml = tieneDetalle ? `
         <details class="prod-detalle">
-          <summary>Modo de uso y beneficios</summary>
+          <summary>Descripción y beneficios</summary>
           <div class="prod-detalle-body">
+            ${p.desc ? `<p>${escapeHtml(p.desc)}</p>` : ''}
             ${p.modoUso ? `<h5>Modo de uso</h5><p>${escapeHtml(p.modoUso)}</p>` : ''}
             ${p.beneficios ? `<h5>Beneficios</h5><p>${escapeHtml(p.beneficios)}</p>` : ''}
           </div>
@@ -2040,6 +2043,17 @@ function cargarVitaminasDesdeERP_() {
 }
 
 cargarInventario();
+
+// ═══════════════════════════════════════════════════════════
+// TOGGLE DESCRIPCIÓN: oculta el preview de 1 línea cuando el
+// details se expande y lo restaura al cerrarse.
+// Usa fase capture porque el evento 'toggle' no burbujea.
+// ═══════════════════════════════════════════════════════════
+document.addEventListener('toggle', function(e) {
+  if (!e.target.matches('details.prod-detalle')) return;
+  const desc = e.target.closest('.prod-body') && e.target.closest('.prod-body').querySelector('.prod-desc');
+  if (desc) desc.classList.toggle('det-open', e.target.open);
+}, true);
 
 // ═══════════════════════════════════════════════════════════
 // TIP CHIC 💕 — arma un tip al azar usando un producto real del
