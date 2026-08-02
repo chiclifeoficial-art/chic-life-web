@@ -281,28 +281,28 @@ header.scrolled{box-shadow:0 4px 32px rgba(255,20,147,.1)}
   background:var(--fuchsia);color:var(--white)}
 /* ── Hover preview de categoría ─── */
 #story-preview{
-  position:fixed;top:50%;left:50%;
+  position:fixed;
   transform:translate(-50%,-50%) scale(.88);
   z-index:9999;pointer-events:none;
-  opacity:0;transition:opacity .28s ease,transform .28s ease;
+  opacity:0;transition:opacity .28s ease,transform .28s ease,left .22s ease,top .22s ease;
   border-radius:20px;overflow:hidden;
-  box-shadow:0 32px 100px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.08);
-  max-width:min(660px,90vw);max-height:88vh;
+  box-shadow:0 32px 100px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.1);
+  width:min(780px,88vw);
   background:#111;
 }
 #story-preview.sp-visible{opacity:1;transform:translate(-50%,-50%) scale(1)}
-#story-preview img{display:block;width:100%;height:100%;max-height:88vh;object-fit:contain}
+#story-preview img{display:block;width:100%;height:auto;max-height:90vh;object-fit:cover}
 #story-preview-caption{
-  position:absolute;bottom:0;left:0;right:0;padding:18px 24px;
-  background:linear-gradient(to top,rgba(0,0,0,.72),transparent);
-  color:#fff;font-family:var(--fd);font-size:1.15rem;font-weight:700;
+  position:absolute;bottom:0;left:0;right:0;padding:20px 28px;
+  background:linear-gradient(to top,rgba(0,0,0,.75),transparent);
+  color:#fff;font-family:var(--fd);font-size:1.25rem;font-weight:700;
   letter-spacing:.01em;opacity:0;transition:opacity .2s .1s;
 }
 #story-preview.sp-visible #story-preview-caption{opacity:1}
 /* Overlay oscuro detrás del preview */
 #story-preview-bg{
   position:fixed;inset:0;z-index:9998;
-  background:rgba(10,8,18,.55);backdrop-filter:blur(3px);
+  background:rgba(10,8,18,.5);backdrop-filter:blur(4px);
   opacity:0;pointer-events:none;
   transition:opacity .28s ease;
 }
@@ -3875,14 +3875,39 @@ document.querySelectorAll('.tone').forEach(tone => {
   const caption = document.getElementById('story-preview-caption');
   let hideTimer;
 
+  function posicionarSobreCard(card) {
+    const r   = card.getBoundingClientRect();
+    const cx  = r.left + r.width  / 2;
+    const cy  = r.top  + r.height / 2;
+    const pw  = Math.min(780, window.innerWidth * 0.88);
+    const ph  = img.naturalHeight ? pw * (img.naturalHeight / img.naturalWidth) : pw * 0.72;
+    /* Clamp para que no salga de la ventana */
+    const halfW = pw  / 2;
+    const halfH = ph  / 2;
+    const margin = 12;
+    const left = Math.min(Math.max(cx, halfW + margin), window.innerWidth  - halfW - margin);
+    const top  = Math.min(Math.max(cy, halfH + margin), window.innerHeight - halfH - margin);
+    panel.style.left = left + 'px';
+    panel.style.top  = top  + 'px';
+  }
+
   document.querySelectorAll('.story-card[data-img]').forEach(function(card){
     card.addEventListener('mouseenter', function(){
       clearTimeout(hideTimer);
-      img.src        = this.dataset.img;
-      img.alt        = this.dataset.caption || '';
-      caption.textContent = this.dataset.caption || '';
+      img.src              = this.dataset.img;
+      img.alt              = this.dataset.caption || '';
+      caption.textContent  = this.dataset.caption || '';
+      /* Posicionar antes de mostrar para evitar salto */
+      const r  = this.getBoundingClientRect();
+      panel.style.left = (r.left + r.width  / 2) + 'px';
+      panel.style.top  = (r.top  + r.height / 2) + 'px';
       bg.classList.add('sp-visible');
       panel.classList.add('sp-visible');
+    });
+    /* Reposicionar cuando la imagen carga (tamaño real disponible) */
+    img.addEventListener('load', function(){
+      const active = document.querySelector('.story-card[data-img]:hover');
+      if (active) posicionarSobreCard(active);
     });
     card.addEventListener('mouseleave', function(){
       hideTimer = setTimeout(function(){
@@ -3892,7 +3917,6 @@ document.querySelectorAll('.tone').forEach(tone => {
     });
   });
 
-  /* Clic en el fondo cierra el preview sin navegar */
   bg.addEventListener('click', function(){
     panel.classList.remove('sp-visible');
     bg.classList.remove('sp-visible');
