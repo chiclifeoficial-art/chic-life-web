@@ -279,6 +279,34 @@ header.scrolled{box-shadow:0 4px 32px rgba(255,20,147,.1)}
   transform:translateY(6px);opacity:.9;transition:all .3s}
 .story-card:hover .story-btn{transform:translateY(0);opacity:1;
   background:var(--fuchsia);color:var(--white)}
+/* ── Hover preview de categoría ─── */
+#story-preview{
+  position:fixed;top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(.88);
+  z-index:9999;pointer-events:none;
+  opacity:0;transition:opacity .28s ease,transform .28s ease;
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 32px 100px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.08);
+  max-width:min(660px,90vw);max-height:88vh;
+  background:#111;
+}
+#story-preview.sp-visible{opacity:1;transform:translate(-50%,-50%) scale(1)}
+#story-preview img{display:block;width:100%;height:100%;max-height:88vh;object-fit:contain}
+#story-preview-caption{
+  position:absolute;bottom:0;left:0;right:0;padding:18px 24px;
+  background:linear-gradient(to top,rgba(0,0,0,.72),transparent);
+  color:#fff;font-family:var(--fd);font-size:1.15rem;font-weight:700;
+  letter-spacing:.01em;opacity:0;transition:opacity .2s .1s;
+}
+#story-preview.sp-visible #story-preview-caption{opacity:1}
+/* Overlay oscuro detrás del preview */
+#story-preview-bg{
+  position:fixed;inset:0;z-index:9998;
+  background:rgba(10,8,18,.55);backdrop-filter:blur(3px);
+  opacity:0;pointer-events:none;
+  transition:opacity .28s ease;
+}
+#story-preview-bg.sp-visible{opacity:1}
 
 /* ═══════════════════════════════════════════════════════════
    SECTIONS COMMON
@@ -925,6 +953,7 @@ fbq('track', 'PageView');
 <!-- STORY CARDS -->
 <div class="story-cards">
   <a href="#catalogo" class="story-card rev d1" aria-label="Cuidado Capilar" onclick="switchTab('capilar')"
+     data-img="images/categoria-capilar.png" data-caption="Cuidado Capilar"
      style="background-image:url('images/categoria-capilar.png');background-size:cover;background-position:center top">
     <div class="story-card-inner">
       <h3>Cuidado Capilar</h3>
@@ -933,6 +962,7 @@ fbq('track', 'PageView');
     </div>
   </a>
   <a href="#catalogo" class="story-card rev d2" aria-label="Cuidado Facial" onclick="switchTab('skincare')"
+     data-img="images/categoria-facial.png" data-caption="Cuidado Facial"
      style="background-image:url('images/categoria-facial.png');background-size:cover;background-position:center top">
     <div class="story-card-inner">
       <h3>Cuidado Facial</h3>
@@ -941,6 +971,7 @@ fbq('track', 'PageView');
     </div>
   </a>
   <a href="#catalogo" class="story-card rev d3" aria-label="Cuidado Corporal" onclick="switchTab('corporal')"
+     data-img="images/categoria-corporal.png" data-caption="Cuidado Corporal"
      style="background-image:url('images/categoria-corporal.png');background-size:cover;background-position:center top">
     <div class="story-card-inner">
       <h3>Cuidado Corporal</h3>
@@ -949,6 +980,7 @@ fbq('track', 'PageView');
     </div>
   </a>
   <a href="#catalogo" class="story-card rev d4" aria-label="Maquillaje" onclick="switchTab('maquillaje')"
+     data-img="images/categoria-maquillaje.png" data-caption="Maquillaje"
      style="background-image:url('images/categoria-maquillaje.png');background-size:cover;background-position:center top">
     <div class="story-card-inner">
       <h3>Maquillaje</h3>
@@ -957,6 +989,7 @@ fbq('track', 'PageView');
     </div>
   </a>
   <a href="#catalogo" class="story-card rev d5" aria-label="Vitaminas" onclick="switchTab('vitaminas')"
+     data-img="images/categoria-vitaminas.png" data-caption="Vitaminas"
      style="background-image:url('images/categoria-vitaminas.png');background-size:cover;background-position:center top">
     <div class="story-card-inner">
       <h3>Vitaminas</h3>
@@ -3824,6 +3857,46 @@ document.querySelectorAll('.tone').forEach(tone => {
   });
 
   renderCarrito_();
+})();
+</script>
+
+<!-- ── Story-card hover preview ───────────────────────────────── -->
+<div id="story-preview-bg"></div>
+<div id="story-preview">
+  <img src="" alt="" id="story-preview-img">
+  <div id="story-preview-caption"></div>
+</div>
+
+<script>
+(function(){
+  const bg      = document.getElementById('story-preview-bg');
+  const panel   = document.getElementById('story-preview');
+  const img     = document.getElementById('story-preview-img');
+  const caption = document.getElementById('story-preview-caption');
+  let hideTimer;
+
+  document.querySelectorAll('.story-card[data-img]').forEach(function(card){
+    card.addEventListener('mouseenter', function(){
+      clearTimeout(hideTimer);
+      img.src        = this.dataset.img;
+      img.alt        = this.dataset.caption || '';
+      caption.textContent = this.dataset.caption || '';
+      bg.classList.add('sp-visible');
+      panel.classList.add('sp-visible');
+    });
+    card.addEventListener('mouseleave', function(){
+      hideTimer = setTimeout(function(){
+        panel.classList.remove('sp-visible');
+        bg.classList.remove('sp-visible');
+      }, 120);
+    });
+  });
+
+  /* Clic en el fondo cierra el preview sin navegar */
+  bg.addEventListener('click', function(){
+    panel.classList.remove('sp-visible');
+    bg.classList.remove('sp-visible');
+  });
 })();
 </script>
 
