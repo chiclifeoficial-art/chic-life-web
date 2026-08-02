@@ -416,6 +416,7 @@ section{padding:100px 32px}
 /* Paginación del catálogo */
 .pagination{display:flex;align-items:center;justify-content:center;gap:8px;
   flex-wrap:wrap;margin-top:36px}
+.pagination-top{margin-top:0;margin-bottom:24px}
 .page-btn{
   min-width:38px;height:38px;padding:0 4px;border-radius:50%;
   background:var(--white);border:1px solid rgba(255,20,147,.15);
@@ -1078,6 +1079,7 @@ fbq('track', 'PageView');
 
     <!-- PESTAÑA: CAPILAR -->
     <div class="tab-pane active" id="pane-capilar" role="tabpanel" aria-labelledby="tab-capilar">
+      <div class="pagination pagination-top" id="pagination-capilar-top"></div>
       <div class="prod-grid" id="grid-capilar"></div>
       <div class="pagination" id="pagination-capilar"></div>
 
@@ -1097,24 +1099,28 @@ fbq('track', 'PageView');
 
     <!-- PESTAÑA: SKINCARE -->
     <div class="tab-pane" id="pane-skincare" role="tabpanel" aria-labelledby="tab-skincare">
+      <div class="pagination pagination-top" id="pagination-skincare-top"></div>
       <div class="prod-grid" id="grid-skincare"></div>
       <div class="pagination" id="pagination-skincare"></div>
     </div>
 
     <!-- PESTAÑA: CUIDADO CORPORAL -->
     <div class="tab-pane" id="pane-corporal" role="tabpanel" aria-labelledby="tab-corporal">
+      <div class="pagination pagination-top" id="pagination-corporal-top"></div>
       <div class="prod-grid" id="grid-corporal"></div>
       <div class="pagination" id="pagination-corporal"></div>
     </div>
 
     <!-- PESTAÑA: MAQUILLAJE -->
     <div class="tab-pane" id="pane-maquillaje" role="tabpanel" aria-labelledby="tab-maquillaje">
+      <div class="pagination pagination-top" id="pagination-maquillaje-top"></div>
       <div class="prod-grid" id="grid-maquillaje"></div>
       <div class="pagination" id="pagination-maquillaje"></div>
     </div>
 
     <!-- PESTAÑA: VITAMINAS -->
     <div class="tab-pane" id="pane-vitaminas" role="tabpanel" aria-labelledby="tab-vitaminas">
+      <div class="pagination pagination-top" id="pagination-vitaminas-top"></div>
       <div class="prod-grid" id="grid-vitaminas"></div>
       <div class="pagination" id="pagination-vitaminas"></div>
     </div>
@@ -1125,6 +1131,7 @@ fbq('track', 'PageView');
         <span class="search-results-count" id="search-count"></span>
         <button class="search-back-btn" onclick="cerrarBusqueda_()">← Volver al catálogo</button>
       </div>
+      <div class="pagination pagination-top" id="pagination-busqueda-top"></div>
       <div class="prod-grid" id="grid-busqueda"></div>
       <div class="pagination" id="pagination-busqueda"></div>
       <div class="search-empty" id="search-empty" style="display:none">
@@ -1875,8 +1882,13 @@ function paginasVisibles_(actual, total) {
 
 function renderPaginacion_(containerId, categoria, paginaActual, totalPaginas) {
   const cont = document.getElementById(containerId);
+  const contTop = document.getElementById(containerId + '-top');
   if (!cont) return;
-  if (totalPaginas <= 1) { cont.innerHTML = ''; return; }
+  if (totalPaginas <= 1) {
+    cont.innerHTML = '';
+    if (contTop) contTop.innerHTML = '';
+    return;
+  }
 
   let botones = `<button type="button" class="page-btn page-nav" ${paginaActual === 1 ? 'disabled' : ''} onclick="irAPagina_('${categoria}', ${paginaActual - 1})" aria-label="Página anterior">‹ Anterior</button>`;
 
@@ -1891,6 +1903,7 @@ function renderPaginacion_(containerId, categoria, paginaActual, totalPaginas) {
   botones += `<button type="button" class="page-btn page-nav" ${paginaActual === totalPaginas ? 'disabled' : ''} onclick="irAPagina_('${categoria}', ${paginaActual + 1})" aria-label="Página siguiente">Siguiente ›</button>`;
 
   cont.innerHTML = botones;
+  if (contTop) contTop.innerHTML = botones;
 }
 
 // ═══════════════════════════════════════════════════════════
