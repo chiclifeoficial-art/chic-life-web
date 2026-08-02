@@ -4249,7 +4249,7 @@ document.querySelectorAll('.tone').forEach(tone => {
     var ahora = new Date();
     var pad = function(n){ return n < 10 ? '0'+n : ''+n; };
     var numeroPedido = 'CL-' + ahora.getFullYear() + pad(ahora.getMonth()+1) + pad(ahora.getDate()) + '-' + Math.floor(Math.random()*9000+1000);
-    var total = carrito.reduce(function(s, it){ return s + (it.precio||0) * (it.cantidad||1); }, 0);
+    var total = carrito.reduce(function(s, it){ return s + (it.precioVenta||0) * (it.cantidad||1); }, 0);
     var payload = JSON.stringify({
       accion: 'pedido',
       numeroPedido: numeroPedido,
@@ -4273,8 +4273,8 @@ document.querySelectorAll('.tone').forEach(tone => {
           id: it.id || '',
           nombre: it.nombre || '',
           cantidad: it.cantidad || 1,
-          precio: it.precio || 0,
-          total: (it.precio||0) * (it.cantidad||1)
+          precio: it.precioVenta || 0,
+          total: (it.precioVenta||0) * (it.cantidad||1)
         };
       }),
       totalItems: carrito.reduce(function(s,it){ return s+(it.cantidad||1); }, 0),
