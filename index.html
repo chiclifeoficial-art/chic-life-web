@@ -1106,9 +1106,9 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   }
 
   /* Sombra en textos para legibilidad sin fondo */
-  .prod-brand{text-shadow:0 1px 4px rgba(0,0,0,.8)}
-  .prod-name{text-shadow:0 1px 6px rgba(0,0,0,.85)!important}
-  .prod-price{text-shadow:0 1px 5px rgba(0,0,0,.8)}
+  .prod-brand{text-shadow:0 0 8px rgba(0,0,0,1),0 2px 6px rgba(0,0,0,.95)}
+  .prod-name{text-shadow:0 0 10px rgba(0,0,0,1),0 2px 8px rgba(0,0,0,1)!important}
+  .prod-price{text-shadow:0 0 8px rgba(0,0,0,1),0 2px 6px rgba(0,0,0,.95)}
 
   /* Cuando "Descripción y beneficios" está abierto:
      fondo semitransparente solo bajo el texto para legibilidad */
@@ -1162,13 +1162,22 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
                z-index 0s;
   }
   .prod-card:hover{
-    transform:scale(1.18);
+    transform:scale(1.28);
     z-index:20;
-    box-shadow:0 24px 60px rgba(0,0,0,.32),
-               0 0 0 2px rgba(255,20,147,.28);
+    box-shadow:0 28px 70px rgba(0,0,0,.38),
+               0 0 0 2px rgba(255,20,147,.32);
     transition:transform .38s cubic-bezier(.34,1.4,.64,1),
                box-shadow .38s ease,
                z-index 0s 0s;
+  }
+
+  /* Pulso en "+ Descripción y beneficios" al activar la burbuja zoom */
+  @keyframes cl-det-pulse{
+    0%,100%{opacity:1;text-shadow:0 0 4px rgba(255,20,147,.5)}
+    50%{opacity:.55;text-shadow:0 0 14px rgba(255,20,147,1),0 0 6px rgba(255,20,147,.7)}
+  }
+  .prod-card:hover .prod-detalle:not([open]) summary{
+    animation:cl-det-pulse 1.3s ease-in-out infinite;
   }
 
   /* Textos visibles sobre fondo oscuro */
