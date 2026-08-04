@@ -470,12 +470,12 @@ section{padding:100px 32px}
 }
 .prod-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-f);
   border-color:rgba(255,20,147,.3)}
-.prod-img{height:170px;display:flex;align-items:center;justify-content:center;
+.prod-img{height:150px;display:flex;align-items:center;justify-content:center;
   font-size:4rem;background:var(--rose-l);position:relative;overflow:hidden}
 .prod-img::after{content:'';position:absolute;inset:0;
   background:linear-gradient(135deg,rgba(255,20,147,.06),rgba(212,169,106,.08))}
 .prod-img.has-photo::after{content:none}
-.prod-img.has-photo{height:auto;aspect-ratio:4/5;background:var(--rose-l)}
+.prod-img.has-photo{height:auto;aspect-ratio:4/5;max-height:175px;background:var(--rose-l)}
 .prod-img.has-photo img{width:100%;height:100%;object-fit:contain;display:block}
 /* ── Galería multi-imagen ── */
 .prod-img.has-gallery{position:relative}
@@ -492,14 +492,13 @@ section{padding:100px 32px}
   padding:4px 10px;border-radius:20px;
   background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
   color:var(--white);font-size:.65rem;font-weight:700;letter-spacing:.08em;z-index:1}
-.prod-body{padding:13px 15px}
+.prod-body{padding:9px 12px}
 .prod-brand{font-size:.65rem;font-weight:600;letter-spacing:.14em;
   text-transform:uppercase;color:var(--fuchsia);margin-bottom:3px}
-.prod-name{font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:5px;color:var(--ink)}
-.prod-desc{font-size:.82rem;color:var(--mist);line-height:1.6;margin-bottom:8px;
-  display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.prod-name{font-family:var(--fd);font-size:.92rem;font-weight:700;margin-bottom:3px;color:var(--ink)}
+.prod-desc{display:none}
 .prod-desc.det-open{display:none}
-.prod-price{font-family:var(--fd);font-size:1.1rem;font-weight:900;color:var(--fuchsia);margin-bottom:6px}
+.prod-price{font-family:var(--fd);font-size:1rem;font-weight:900;color:var(--fuchsia);margin-bottom:4px}
 .prod-empty{grid-column:1/-1;text-align:center;color:var(--mist);font-size:.88rem;padding:32px 0}
 /* Paginación del catálogo */
 .pagination{display:flex;align-items:center;justify-content:center;gap:8px;
@@ -520,10 +519,10 @@ section{padding:100px 32px}
 .page-btn:disabled{opacity:.32;cursor:not-allowed}
 .page-btn.page-nav{width:auto;padding:0 16px;border-radius:30px}
 .page-ellipsis{color:var(--mist);padding:0 4px;font-size:.82rem}
-.prod-detalle{margin:2px 0 4px;border-top:1px solid rgba(255,20,147,.12);padding-top:10px}
+.prod-detalle{margin:0 0 2px;border-top:1px solid rgba(255,20,147,.12);padding-top:7px}
 .prod-detalle summary{
-  cursor:pointer;font-size:.76rem;font-weight:600;color:var(--fuchsia-d);
-  letter-spacing:.02em;list-style:none;display:flex;align-items:center;gap:6px;
+  cursor:pointer;font-size:.7rem;font-weight:600;color:var(--fuchsia-d);
+  letter-spacing:.02em;list-style:none;display:flex;align-items:center;gap:5px;
 }
 .prod-detalle summary::-webkit-details-marker{display:none}
 .prod-detalle summary::before{content:'+';font-size:1rem;line-height:1;transition:transform .2s}
@@ -533,22 +532,22 @@ section{padding:100px 32px}
   text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px}
 .prod-detalle-body h5:first-child{margin-top:0}
 .prod-cta{
-  width:100%;padding:8px;border-radius:30px;margin-top:0;
-  background:var(--rose-l);color:var(--fuchsia);font-weight:600;font-size:.78rem;
-  transition:all .3s;letter-spacing:.06em;display:block;text-align:center;
+  flex:1;min-width:0;padding:7px 4px;border-radius:30px;margin-top:0;
+  background:var(--rose-l);color:var(--fuchsia);font-weight:600;font-size:.72rem;
+  transition:all .3s;letter-spacing:.04em;display:flex;align-items:center;justify-content:center;text-align:center;
 }
 .prod-cta:hover{background:linear-gradient(135deg,var(--fuchsia),#FF69B4);color:var(--white)}
 .prod-img.is-agotado img{filter:grayscale(55%);opacity:.82}
 .prod-agotado{
-  display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.03em;
+  display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.03em;
   color:var(--terracotta);background:var(--peach);
-  padding:3px 11px;border-radius:20px;margin-bottom:10px;
+  padding:2px 9px;border-radius:20px;margin-bottom:5px;
 }
-.prod-actions{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+.prod-actions{display:flex;flex-direction:row;gap:5px;margin-top:5px;flex-wrap:wrap}
 .prod-cart-btn{
-  width:100%;padding:9px;border-radius:30px;
+  flex:1;min-width:0;padding:7px 4px;border-radius:30px;
   background:linear-gradient(90deg,var(--fuchsia),var(--fuchsia-d));
-  color:var(--white);font-weight:600;font-size:.78rem;letter-spacing:.06em;
+  color:var(--white);font-weight:600;font-size:.72rem;letter-spacing:.04em;
   transition:transform .2s,opacity .2s;
 }
 .prod-cart-btn:hover{transform:translateY(-1px)}
@@ -939,6 +938,8 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   .cl-cart-float{bottom:20px;left:16px;width:52px;height:52px;font-size:1.4rem}
   .wa-float{bottom:20px;right:16px;width:52px;height:52px}
   .wa-float svg{width:22px;height:22px}
+  /* Ocultar estrellas/reseñas en móvil — ocupa demasiado espacio en tarjetas compactas */
+  .cl-rev-badge{display:none!important}
 }
 
 /* ── Cart popup — bottom sheet en móvil ──────── */
@@ -3114,11 +3115,14 @@ document.querySelectorAll('.tone').forEach(tone => {
 
   closeBtn.addEventListener('click', closeBubble);
 
-  /* Cierra al detectar scroll / swipe */
-  document.addEventListener('touchmove', function() {
-    if (overlay.classList.contains('cl-det-open')) closeBubble();
+  /* Cierra solo si el swipe es FUERA de la burbuja (backdrop) */
+  document.addEventListener('touchmove', function(e) {
+    if (overlay.classList.contains('cl-det-open') && !bubble.contains(e.target)) {
+      closeBubble();
+    }
   }, { passive: true });
 
+  /* Cierra si el usuario logra hacer scroll en la página (escritorio) */
   document.addEventListener('scroll', function() {
     if (overlay.classList.contains('cl-det-open')) closeBubble();
   }, { passive: true });
@@ -3276,12 +3280,12 @@ document.querySelectorAll('.tone').forEach(tone => {
 <style>
 /* Badge de calificación en cada tarjeta de producto */
 .cl-rev-badge{
-  display:flex;align-items:center;gap:8px;
-  background:none;border:none;padding:4px 0;margin:2px 0 11px;
+  display:flex;align-items:center;gap:5px;
+  background:none;border:none;padding:2px 0;margin:1px 0 5px;
   cursor:pointer;text-align:left;width:fit-content;
 }
-.cl-rev-stars{color:var(--gold);font-size:1.05rem;letter-spacing:1.5px;line-height:1}
-.cl-rev-text{font-size:.78rem;color:var(--mist);text-decoration:underline;text-underline-offset:2px}
+.cl-rev-stars{color:var(--gold);font-size:.82rem;letter-spacing:1px;line-height:1}
+.cl-rev-text{font-size:.68rem;color:var(--mist);text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
 .cl-rev-badge:hover .cl-rev-text{color:var(--fuchsia-d)}
 
 /* Modal ancho (resumen + lista de reseñas) */
