@@ -549,6 +549,7 @@ section{padding:100px 32px}
   background:linear-gradient(90deg,var(--fuchsia),var(--fuchsia-d));
   color:var(--white);font-weight:600;font-size:.65rem;letter-spacing:.03em;
   transition:transform .2s,opacity .2s;
+  display:flex;align-items:center;justify-content:center;text-align:center;
 }
 .prod-cart-btn:hover{transform:translateY(-1px)}
 .prod-cart-btn:active{transform:translateY(0)}
@@ -2218,10 +2219,6 @@ function renderProductGrid(gridId, items) {
         data-modo="${escapeHtml(p.modoUso||'')}"
         data-benef="${escapeHtml(p.beneficios||'')}">+ Descripción y beneficios</button>` : '';
 
-    // El botón "Agregar al carrito" solo aparece si hay un precio real
-    // publicado Y no está agotado (productos del catálogo de respaldo,
-    // sin Precio Venta, o sin stock actual se quedan solo con "Pedir
-    // por WhatsApp" para consultar disponibilidad).
     const cartBtnHtml = (p.precioVenta && !agotado)
       ? `<button type="button" class="prod-cart-btn cl-cart-add"
           data-id="${escapeHtml(productoId)}"
@@ -2229,6 +2226,11 @@ function renderProductGrid(gridId, items) {
           data-img="${escapeHtml(p.img || '')}"
           data-precio="${p.precioVenta}"
           data-stock="${Number.isFinite(p.stock) ? p.stock : ''}">🛍️ Agregar al carrito</button>`
+      : '';
+
+    // "Consultar disponibilidad" vía WA solo cuando no hay botón de carrito
+    const waCtaHtml = !cartBtnHtml
+      ? `<a href="https://wa.me/${WA_PHONE}${waText}" target="_blank" class="prod-cta" rel="noopener">Consultar disponibilidad</a>`
       : '';
 
     return `<div class="prod-card rev ${revClass}">
@@ -2250,7 +2252,7 @@ function renderProductGrid(gridId, items) {
         ${detalleHtml}
         <div class="prod-actions">
           ${cartBtnHtml}
-          <a href="https://wa.me/${WA_PHONE}${waText}" target="_blank" class="prod-cta" rel="noopener">${agotado ? 'Consultar disponibilidad' : 'Pedir por WhatsApp'}</a>
+          ${waCtaHtml}
         </div>
       </div>
     </div>`;
