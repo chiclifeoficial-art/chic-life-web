@@ -11,7 +11,7 @@
 <title>Chic Life: Del Click al Corazón</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════════
    CSS CUSTOM PROPERTIES
@@ -271,6 +271,39 @@ header.scrolled{box-shadow:0 4px 32px rgba(255,20,147,.1)}
 /* Valle SVG deco */
 .valle-deco{width:100%;max-width:340px;opacity:.18;position:absolute;
   top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+
+/* ── Logo mark hero ─────────────────────────────── */
+.hero-logo-mark{
+  display:flex;align-items:center;gap:0;
+  margin-bottom:28px;
+}
+.hero-logo-text{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(3rem,6.5vw,4.6rem);
+  background:linear-gradient(135deg,#D4006A 0%,#FF4DB8 45%,#E5007A 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;letter-spacing:.01em;
+  filter:drop-shadow(0 2px 8px rgba(212,0,106,.18));
+}
+.hero-logo-butterfly{
+  width:72px;height:66px;
+  margin-top:-4px;flex-shrink:0;
+  animation:cl-logo-float 5s ease-in-out infinite;
+}
+@keyframes cl-logo-float{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  40%{transform:translateY(-5px) rotate(1.2deg)}
+  70%{transform:translateY(-2px) rotate(-.6deg)}
+}
+@media(max-width:768px){
+  .hero-logo-text{font-size:2.6rem}
+  .hero-logo-butterfly{width:56px;height:52px}
+}
+@media(max-width:480px){
+  .hero-logo-mark{margin-bottom:18px}
+  .hero-logo-text{font-size:2.2rem}
+  .hero-logo-butterfly{width:44px;height:40px}
+}
 
 /* Story cards */
 .story-cards{
@@ -1096,11 +1129,45 @@ fbq('track', 'PageView');
 <section id="inicio" class="hero">
   <div class="hero-inner">
     <div class="hero-content">
+
+      <!-- LOGO MARK -->
+      <div class="hero-logo-mark rev">
+        <span class="hero-logo-text">Chic life</span>
+        <svg class="hero-logo-butterfly" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 65" aria-hidden="true">
+          <defs>
+            <linearGradient id="hlg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FF79C6"/>
+              <stop offset="100%" stop-color="#C2005A"/>
+            </linearGradient>
+            <filter id="hlf" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="2" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- Ala superior izquierda -->
+          <path d="M35,34 C30,20 8,12 10,28 C12,40 26,42 35,37Z" fill="url(#hlg)" filter="url(#hlf)"/>
+          <!-- Ala superior derecha -->
+          <path d="M35,34 C40,20 62,12 60,28 C58,40 44,42 35,37Z" fill="url(#hlg)" filter="url(#hlf)"/>
+          <!-- Ala inferior izquierda -->
+          <path d="M35,37 C26,42 12,50 16,56 C20,60 30,55 35,46Z" fill="#C2005A" opacity=".82"/>
+          <!-- Ala inferior derecha -->
+          <path d="M35,37 C44,42 58,50 54,56 C50,60 40,55 35,46Z" fill="#C2005A" opacity=".82"/>
+          <!-- Cuerpo -->
+          <ellipse cx="35" cy="41" rx="2.1" ry="9.5" fill="#8B003C"/>
+          <circle cx="35" cy="31" r="2.8" fill="#8B003C"/>
+          <!-- Antenas -->
+          <path d="M33.5,28.5 C28,19 22,13 18,9" stroke="#8B003C" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <circle cx="18" cy="9" r="2.2" fill="#FF1493"/>
+          <path d="M36.5,28.5 C42,19 48,13 52,9" stroke="#8B003C" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <circle cx="52" cy="9" r="2.2" fill="#FF1493"/>
+        </svg>
+      </div>
+
       <div class="hero-badge rev">
         🌸 Cosmética Colombiana de Autor
       </div>
       <h1 class="rev d1">
-        Chic Life:<br><em>Del Click al Corazón</em>
+        <em>Del Click al Corazón</em>
       </h1>
       <p class="hero-sub rev d2">
         Vivir con estilo no es un lujo, es una actitud que todos merecemos.
@@ -4725,70 +4792,3 @@ document.querySelectorAll('.tone').forEach(tone => {
     <!-- Cabeza -->
     <circle cx="30" cy="27" r="2.8" fill="#7A0038"/>
 
-    <!-- ANTENA IZQUIERDA -->
-    <path d="M28.6,24.4 C24,17 20,12 16,8"
-          stroke="#7A0038" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-    <circle class="cl-at1" cx="16" cy="8" r="2.2" fill="#FF1493"/>
-
-    <!-- ANTENA DERECHA -->
-    <path d="M31.4,24.4 C36,17 40,12 44,8"
-          stroke="#7A0038" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-    <circle class="cl-at2" cx="44" cy="8" r="2.2" fill="#FF1493"/>
-  </svg>
-</div>
-
-<script>
-(function(){
-  /* Solo activar en dispositivos con mouse */
-  if(!window.matchMedia('(pointer:fine)').matches)return;
-  var el=document.getElementById('cl-bcursor');
-  if(!el)return;
-
-  var mx=window.innerWidth/2, my=window.innerHeight/2;
-  var cx=mx, cy=my;
-  var prevX=mx, prevY=my;
-  var fastTimer=null;
-
-  /* Seguir ratón */
-  document.addEventListener('mousemove',function(e){
-    mx=e.clientX; my=e.clientY;
-    el.classList.add('cl-vis');
-
-    /* Detectar velocidad para aleteo rápido */
-    var dx=mx-prevX, dy=my-prevY;
-    prevX=mx; prevY=my;
-    if(dx*dx+dy*dy>20){
-      el.classList.add('cl-fast');
-      clearTimeout(fastTimer);
-      fastTimer=setTimeout(function(){el.classList.remove('cl-fast');},420);
-    }
-  },true);
-
-  /* Ocultar al salir de la ventana */
-  document.addEventListener('mouseleave',function(){el.classList.remove('cl-vis');});
-  document.addEventListener('mouseenter',function(){el.classList.add('cl-vis');});
-
-  /* Destello rosado al hacer clic */
-  document.addEventListener('click',function(e){
-    var sp=document.createElement('div');
-    sp.className='cl-spark';
-    sp.style.left=e.clientX+'px';
-    sp.style.top=e.clientY+'px';
-    document.body.appendChild(sp);
-    setTimeout(function(){sp.parentNode&&sp.parentNode.removeChild(sp);},600);
-  });
-
-  /* Loop de animación suave (inercia 14 %) */
-  (function frame(){
-    cx+=(mx-cx)*0.14;
-    cy+=(my-cy)*0.14;
-    el.style.left=Math.round(cx)+'px';
-    el.style.top=Math.round(cy)+'px';
-    requestAnimationFrame(frame);
-  })();
-})();
-</script>
-<!-- ===== FIN CURSOR MARIPOSA ===== -->
-
-</body>
-</html>
