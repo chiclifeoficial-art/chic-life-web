@@ -789,6 +789,155 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
 </style>
 
 <!-- ═══════════════════════════════════════════════════════════
+     RESPONSIVE COMPLETO — MÓVIL & TABLET
+════════════════════════════════════════════════════════════ -->
+<style>
+/* ── Nav ──────────────────────────────────────────── */
+@media(max-width:768px){
+  .nav-wrap{padding:0 14px}
+}
+
+/* ── Hero ─────────────────────────────────────────── */
+@media(max-width:768px){
+  .hero-inner{padding:0 16px;gap:28px;padding-top:20px}
+  .hero h1{font-size:2.3rem;line-height:1.18}
+  .hero-card-grid{gap:10px}
+}
+@media(max-width:480px){
+  .hero h1{font-size:1.9rem}
+  .hero-sub{font-size:.9rem;line-height:1.65}
+  .hero-btns{flex-direction:column;align-items:stretch;gap:10px}
+  .btn-primary,.btn-secondary{text-align:center;justify-content:center;width:100%}
+}
+
+/* ── Tabs del catálogo — scroll horizontal en móvil ── */
+@media(max-width:768px){
+  .tabs{
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;width:100%;max-width:100%;
+    margin:24px 0 18px;border-radius:50px;
+  }
+  .tabs::-webkit-scrollbar{display:none}
+  .tab-btn{white-space:nowrap;flex-shrink:0;padding:9px 15px;font-size:.76rem}
+}
+
+/* ── Story cards — carrusel horizontal en móvil ─── */
+@media(max-width:768px){
+  .story-cards{
+    display:flex!important;
+    grid-template-columns:unset!important;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;
+    gap:14px;padding:0 16px 10px;
+    scrollbar-width:none;
+  }
+  .story-cards::-webkit-scrollbar{display:none}
+  .story-card{
+    flex:0 0 250px!important;height:310px;
+    scroll-snap-align:start;border-radius:16px;
+    grid-column:unset!important;
+  }
+  .story-card:nth-child(n){grid-column:unset!important}
+}
+
+/* ── Hover preview — desactivado en dispositivos táctiles ── */
+@media(hover:none),(pointer:coarse){
+  #story-preview,#story-preview-bg{display:none!important}
+}
+
+/* ── Secciones ──────────────────────────────────── */
+@media(max-width:768px){
+  section{padding:60px 16px}
+  .rizos-sec{padding:28px 18px;border-radius:14px}
+  .blush-card{padding:22px 16px;border-radius:14px}
+  .sec-title{font-size:1.8rem}
+  .sec-lead{font-size:.9rem}
+  .lunar-welcome{padding:18px 14px;font-size:1rem}
+}
+@media(max-width:480px){
+  section{padding:48px 14px}
+  .sec-title{font-size:1.5rem}
+}
+
+/* ── Tone swatches — área táctil más generosa ── */
+@media(max-width:768px){
+  .tone{width:42px;height:42px}
+}
+
+/* ── Footer ─────────────────────────────────────── */
+@media(max-width:768px){
+  footer{padding:48px 16px 24px}
+  .footer-grid{gap:24px}
+}
+@media(max-width:480px){
+  footer{padding:38px 14px 20px}
+  .footer-grid{grid-template-columns:1fr;gap:26px}
+}
+
+/* ── Botones flotantes — sin superposición ─────── */
+@media(max-width:768px){
+  .cl-cart-float{bottom:20px;left:16px;width:52px;height:52px;font-size:1.4rem}
+  .wa-float{bottom:20px;right:16px;width:52px;height:52px}
+  .wa-float svg{width:22px;height:22px}
+}
+
+/* ── Cart popup — bottom sheet en móvil ──────── */
+@media(max-width:600px){
+  .cl-popup-overlay{padding:0;align-items:flex-end}
+  .cl-popup,.cl-popup--wide{
+    border-radius:24px 24px 0 0;
+    max-width:100%;
+    padding:28px 18px 36px;
+    max-height:92vh;
+    text-align:left;
+  }
+}
+
+/* ── Checkout — bottom sheet en móvil ────────── */
+@media(max-width:600px){
+  .cl-co-overlay{padding:0;align-items:flex-end}
+  .cl-co-panel{
+    border-radius:24px 24px 0 0;
+    max-width:100%;
+    max-height:96vh;
+    padding:20px 16px 40px;
+  }
+  .cl-co-qr-img{width:155px;height:155px}
+  .cl-co-qr-steps{flex-direction:column;align-items:stretch;gap:8px}
+  .cl-co-qr-step{
+    max-width:100%;display:flex;flex-direction:row;
+    align-items:center;gap:10px;
+    text-align:left;padding:8px 12px;
+  }
+  .cl-co-qr-step-num{margin:0;flex-shrink:0}
+}
+@media(max-width:480px){
+  .cl-co-row{grid-template-columns:1fr}
+  .cl-co-panel{padding:18px 14px 44px}
+}
+
+/* ── Catálogo — 2 cols entre 480px y 768px ────── */
+@media(min-width:481px) and (max-width:767px){
+  .prod-grid{grid-template-columns:1fr 1fr!important;gap:12px}
+}
+@media(max-width:480px){
+  .prod-body{padding:14px 12px}
+  .prod-name{font-size:.88rem}
+  .prod-price{font-size:1.1rem;margin-bottom:8px}
+  .prod-cart-btn,.prod-cta{font-size:.74rem;padding:9px 8px}
+}
+
+/* ── Reviews modal ── */
+@media(max-width:600px){
+  .cl-popup-overlay#cl-reviews-overlay{padding:0;align-items:flex-end}
+  .cl-popup-overlay#cl-reviews-overlay .cl-popup{
+    border-radius:24px 24px 0 0;max-width:100%;
+    padding:24px 18px 36px;max-height:92vh;
+  }
+}
+</style>
+
+<!-- ═══════════════════════════════════════════════════════════
      GOOGLE ANALYTICS 4
      ⚠️ REEMPLAZA "G-XXXXXXXXXX" POR TU ID DE MEDICIÓN REAL.
      Lo obtienes en analytics.google.com → Admin → Flujos de datos
@@ -4269,152 +4418,3 @@ document.querySelectorAll('.tone').forEach(tone => {
         horario: datosEnvio_.horario || ''
       },
       productos: carrito.map(function(it){
-        return {
-          id: it.id || '',
-          nombre: it.nombre || '',
-          cantidad: it.cantidad || 1,
-          precio: it.precioVenta || 0,
-          total: (it.precioVenta||0) * (it.cantidad||1)
-        };
-      }),
-      totalItems: carrito.reduce(function(s,it){ return s+(it.cantidad||1); }, 0),
-      total: total
-    });
-    fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: payload
-    }).catch(function(){});
-  }
-
-  // Cierre overlay
-  coClose.addEventListener('click', cerrarCheckout_);
-  coOverlay.addEventListener('click', function(e){ if (e.target === coOverlay) cerrarCheckout_(); });
-
-  // Paso 1 → nav
-  document.getElementById('cl-co-back1').addEventListener('click', function(){
-    cerrarCheckout_();
-    setTimeout(function(){ renderCarrito_(); abrirOverlay_(); }, 120);
-  });
-  document.getElementById('cl-co-next1').addEventListener('click', function(){
-    if (!validarFormulario_()){
-      var firstErr = document.querySelector('.cl-co-field input.error, .cl-co-field select.error, .cl-co-field textarea.error');
-      if (firstErr) firstErr.focus();
-      return;
-    }
-    leerDatosEnvio_();
-    irPaso_(2);
-  });
-
-  // Paso 2 → nav
-  document.getElementById('cl-co-back2').addEventListener('click', function(){ irPaso_(1); });
-  document.querySelectorAll('.cl-co-pay-card').forEach(function(card){
-    card.addEventListener('click', function(){
-      metodoSeleccionado_ = this.dataset.metodo;
-      document.querySelectorAll('.cl-co-pay-card').forEach(function(c){ c.classList.remove('selected'); });
-      this.classList.add('selected');
-      if (metodoSeleccionado_ === 'Nequi' || metodoSeleccionado_ === 'Bre-B'){
-        document.getElementById('cl-co-qr-title').textContent = 'Paga con ' + metodoSeleccionado_;
-        irPaso_(3.1);
-      } else {
-        var info = {
-          'Sistecrédito': { icon:'🟠', desc:'Escríbenos por WhatsApp con el detalle de tu pedido y te enviamos el código para que valides tu compra directamente en la plataforma de Sistecrédito.' },
-          'Addi':         { icon:'🟡', desc:'Escríbenos por WhatsApp con el detalle de tu pedido y te enviamos el enlace de Addi para que completes la compra a cuotas sin interés.' }
-        }[metodoSeleccionado_] || { icon:'💳', desc:'' };
-        document.getElementById('cl-co-bnpl-icon').textContent  = info.icon;
-        document.getElementById('cl-co-bnpl-title').textContent = 'Pago con ' + metodoSeleccionado_;
-        document.getElementById('cl-co-bnpl-desc').textContent  = info.desc;
-        irPaso_(3.2);
-      }
-    });
-  });
-
-  // Paso 3 → nav
-  document.getElementById('cl-co-back3-qr').addEventListener('click',  function(){ irPaso_(2); });
-  document.getElementById('cl-co-back3-bnpl').addEventListener('click', function(){ irPaso_(2); });
-
-  // Copiar llave
-  document.getElementById('cl-co-copiar-llave').addEventListener('click', function(){
-    if (navigator.clipboard){
-      navigator.clipboard.writeText('0091149105').then(function(){
-        var m = document.getElementById('cl-co-copied-msg');
-        m.style.display = 'block';
-        setTimeout(function(){ m.style.display = 'none'; }, 2500);
-      });
-    }
-  });
-
-  // WhatsApp buttons
-  document.getElementById('cl-co-wa-digital').addEventListener('click', function(){ finalizarCompra_(metodoSeleccionado_); });
-  document.getElementById('cl-co-wa-bnpl').addEventListener('click',    function(){ finalizarCompra_(metodoSeleccionado_); });
-
-  renderCarrito_();
-})();
-</script>
-
-<!-- ── Story-card hover preview ───────────────────────────────── -->
-<div id="story-preview-bg"></div>
-<div id="story-preview">
-  <img src="" alt="" id="story-preview-img">
-  <div id="story-preview-caption"></div>
-</div>
-
-<script>
-(function(){
-  const bg      = document.getElementById('story-preview-bg');
-  const panel   = document.getElementById('story-preview');
-  const img     = document.getElementById('story-preview-img');
-  const caption = document.getElementById('story-preview-caption');
-  let hideTimer;
-
-  function posicionarSobreCard(card) {
-    const r   = card.getBoundingClientRect();
-    const cx  = r.left + r.width  / 2;
-    const cy  = r.top  + r.height / 2;
-    const pw  = Math.min(780, window.innerWidth * 0.88);
-    const ph  = img.naturalHeight ? pw * (img.naturalHeight / img.naturalWidth) : pw * 0.72;
-    /* Clamp para que no salga de la ventana */
-    const halfW = pw  / 2;
-    const halfH = ph  / 2;
-    const margin = 12;
-    const left = Math.min(Math.max(cx, halfW + margin), window.innerWidth  - halfW - margin);
-    const top  = Math.min(Math.max(cy, halfH + margin), window.innerHeight - halfH - margin);
-    panel.style.left = left + 'px';
-    panel.style.top  = top  + 'px';
-  }
-
-  document.querySelectorAll('.story-card[data-img]').forEach(function(card){
-    card.addEventListener('mouseenter', function(){
-      clearTimeout(hideTimer);
-      img.src              = this.dataset.img;
-      img.alt              = this.dataset.caption || '';
-      caption.textContent  = this.dataset.caption || '';
-      /* Posicionar antes de mostrar para evitar salto */
-      const r  = this.getBoundingClientRect();
-      panel.style.left = (r.left + r.width  / 2) + 'px';
-      panel.style.top  = (r.top  + r.height / 2) + 'px';
-      bg.classList.add('sp-visible');
-      panel.classList.add('sp-visible');
-    });
-    /* Reposicionar cuando la imagen carga (tamaño real disponible) */
-    img.addEventListener('load', function(){
-      const active = document.querySelector('.story-card[data-img]:hover');
-      if (active) posicionarSobreCard(active);
-    });
-    card.addEventListener('mouseleave', function(){
-      hideTimer = setTimeout(function(){
-        panel.classList.remove('sp-visible');
-        bg.classList.remove('sp-visible');
-      }, 120);
-    });
-  });
-
-  bg.addEventListener('click', function(){
-    panel.classList.remove('sp-visible');
-    bg.classList.remove('sp-visible');
-  });
-})();
-</script>
-
-</body>
-</html>
