@@ -494,12 +494,12 @@ section{padding:100px 32px}
   background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
   color:var(--white);font-size:.65rem;font-weight:700;letter-spacing:.08em;z-index:1}
 .prod-body{padding:9px 12px}
-.prod-brand{font-size:.65rem;font-weight:600;letter-spacing:.14em;
+.prod-brand{font-size:.65rem;font-weight:700;letter-spacing:.14em;
   text-transform:uppercase;color:var(--fuchsia);margin-bottom:3px}
-.prod-name{font-family:var(--fd);font-size:.92rem;font-weight:700;margin-bottom:3px;color:var(--ink)}
+.prod-name{font-family:var(--fd);font-size:.92rem;font-weight:800;margin-bottom:3px;color:var(--ink)}
 .prod-desc{display:none}
 .prod-desc.det-open{display:none}
-.prod-price{font-family:var(--fd);font-size:1rem;font-weight:900;color:var(--fuchsia);margin-bottom:4px}
+.prod-price{font-family:var(--fd);font-size:1.05rem;font-weight:900;color:#CC0070;margin-bottom:4px}
 .prod-empty{grid-column:1/-1;text-align:center;color:var(--mist);font-size:.88rem;padding:32px 0}
 /* Paginación del catálogo */
 .pagination{display:flex;align-items:center;justify-content:center;gap:8px;
@@ -528,8 +528,8 @@ section{padding:100px 32px}
 .prod-detalle summary::-webkit-details-marker{display:none}
 .prod-detalle summary::before{content:'+';font-size:1rem;line-height:1;transition:transform .2s}
 .prod-detalle[open] summary::before{content:'–'}
-.prod-detalle-body{padding:10px 2px 2px;font-size:.78rem;color:var(--ink-s);line-height:1.6}
-.prod-detalle-body h5{font-family:var(--fb);font-size:.72rem;font-weight:700;color:var(--fuchsia-d);
+.prod-detalle-body{padding:10px 2px 2px;font-size:.78rem;color:var(--ink);line-height:1.6;font-weight:500}
+.prod-detalle-body h5{font-family:var(--fb);font-size:.72rem;font-weight:800;color:var(--fuchsia-d);
   text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px}
 .prod-detalle-body h5:first-child{margin-top:0}
 .prod-cta{
@@ -1108,9 +1108,9 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   }
 
   /* Sombra en textos para legibilidad sin fondo */
-  .prod-brand{text-shadow:0 0 8px rgba(0,0,0,1),0 2px 6px rgba(0,0,0,.95)}
-  .prod-name{text-shadow:0 0 10px rgba(0,0,0,1),0 2px 8px rgba(0,0,0,1)!important}
-  .prod-price{text-shadow:0 0 8px rgba(0,0,0,1),0 2px 6px rgba(0,0,0,.95)}
+  .prod-brand{text-shadow:0 0 10px rgba(0,0,0,1),0 0 4px rgba(0,0,0,1),0 2px 8px rgba(0,0,0,1)}
+  .prod-name{text-shadow:0 0 12px rgba(0,0,0,1),0 0 5px rgba(0,0,0,1),0 2px 10px rgba(0,0,0,1)!important}
+  .prod-price{text-shadow:0 0 10px rgba(0,0,0,1),0 0 4px rgba(0,0,0,1),0 2px 8px rgba(0,0,0,1)}
 
   /* Cuando "Descripción y beneficios" está abierto:
      fondo semitransparente solo bajo el texto para legibilidad */
@@ -1182,12 +1182,13 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
     animation:cl-det-pulse 1.3s ease-in-out infinite;
   }
 
-  /* Textos visibles sobre fondo oscuro */
-  .prod-brand{color:rgba(255,148,200,.9)}
-  .prod-name{color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.6)}
-  .prod-price{color:#ff6eb8}
-  .prod-detalle summary{color:rgba(255,148,200,.82)}
-  .prod-detalle-body{color:rgba(255,255,255,.8)}
+  /* Textos visibles sobre fondo oscuro — máximo contraste */
+  .prod-brand{color:#fff}
+  .prod-name{color:#fff}
+  .prod-price{color:#fff;font-size:1.1rem}
+  .prod-detalle summary{color:#fff;font-weight:700}
+  .prod-detalle-body{color:#fff;font-weight:500}
+  .prod-detalle-body h5{color:#ffb3d9}
   .cl-rev-stars{color:#ffc845}
   .cl-rev-text{color:rgba(210,160,190,.8)}
   .prod-agotado{
