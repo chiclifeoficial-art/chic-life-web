@@ -281,7 +281,8 @@ header.scrolled{box-shadow:0 4px 32px rgba(255,20,147,.1)}
 .hero-logo-img{
   max-width:420px;width:78%;height:auto;
   mix-blend-mode:multiply;
-  filter:drop-shadow(0 4px 24px rgba(212,0,106,.18));
+  /* brightness empuja el gris del PNG → blanco puro → desaparece con multiply */
+  filter:brightness(1.45) saturate(1.08) contrast(1.05);
   animation:cl-logo-float 5s ease-in-out infinite;
   user-select:none;-webkit-user-select:none;
   pointer-events:none;display:block;
