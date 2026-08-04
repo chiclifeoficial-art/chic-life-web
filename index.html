@@ -1103,40 +1103,12 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
     background:transparent;
     border-top:none;
     box-shadow:none;
-    transition:opacity .38s ease, transform .38s ease;
-    will-change:opacity, transform;
   }
 
   /* Sombra en textos para legibilidad sin fondo */
   .prod-brand{text-shadow:0 1px 4px rgba(0,0,0,.8)}
   .prod-name{text-shadow:0 1px 6px rgba(0,0,0,.85)!important}
   .prod-price{text-shadow:0 1px 5px rgba(0,0,0,.8)}
-
-  /* Transiciones individuales para control granular por elemento */
-  .prod-brand,.prod-name,.prod-price,
-  .cl-rev-badge,.prod-detalle,.prod-actions{
-    transition:opacity .38s ease;
-  }
-
-  /* Hover: el body permanece en opacity:1 pero controlamos cada hijo */
-  .prod-card:hover .prod-body{
-    opacity:1;
-    pointer-events:auto;
-  }
-
-  /* Hover — Marca, Nombre, Precio: se ocultan completamente */
-  .prod-card:hover .prod-brand,
-  .prod-card:hover .prod-name,
-  .prod-card:hover .prod-price{
-    opacity:0;
-  }
-
-  /* Hover — Elementos interactivos: traslúcidos pero más visibles */
-  .prod-card:hover .cl-rev-badge,
-  .prod-card:hover .prod-detalle,
-  .prod-card:hover .prod-actions{
-    opacity:0.50;
-  }
 
   /* Cuando "Descripción y beneficios" está abierto:
      fondo semitransparente solo bajo el texto para legibilidad */
@@ -1181,9 +1153,23 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
     z-index:1;
   }
 
-  /* Zoom sutil en la imagen al hacer hover */
-  .prod-img{transition:transform .45s ease}
-  .prod-card:hover .prod-img{transform:scale(1.03)}
+  /* Zoom flotante al pasar el cursor — la lámina completa flota como burbuja */
+  .prod-card{
+    position:relative;
+    z-index:1;
+    transition:transform .38s cubic-bezier(.34,1.4,.64,1),
+               box-shadow .38s ease,
+               z-index 0s;
+  }
+  .prod-card:hover{
+    transform:scale(1.18);
+    z-index:20;
+    box-shadow:0 24px 60px rgba(0,0,0,.32),
+               0 0 0 2px rgba(255,20,147,.28);
+    transition:transform .38s cubic-bezier(.34,1.4,.64,1),
+               box-shadow .38s ease,
+               z-index 0s 0s;
+  }
 
   /* Textos visibles sobre fondo oscuro */
   .prod-brand{color:rgba(255,148,200,.9)}
