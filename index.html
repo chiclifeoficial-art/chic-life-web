@@ -1114,14 +1114,34 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
     will-change:opacity, transform;
   }
 
-  /* Hover: body se vuelve traslúcido (visible e interactivo) */
+  /* Transiciones individuales para control granular por elemento */
+  .prod-brand,.prod-name,.prod-price,
+  .cl-rev-badge,.prod-detalle,.prod-actions{
+    transition:opacity .38s ease;
+  }
+
+  /* Hover: el body permanece en opacity:1 pero controlamos cada hijo */
   .prod-card:hover .prod-body{
-    opacity:0.38;
+    opacity:1;
     pointer-events:auto;
   }
 
+  /* Hover — Marca, Nombre, Precio: se ocultan completamente */
+  .prod-card:hover .prod-brand,
+  .prod-card:hover .prod-name,
+  .prod-card:hover .prod-price{
+    opacity:0;
+  }
+
+  /* Hover — Elementos interactivos: quedan traslúcidos (más que antes) */
+  .prod-card:hover .cl-rev-badge,
+  .prod-card:hover .prod-detalle,
+  .prod-card:hover .prod-actions{
+    opacity:0.28;
+  }
+
   /* Cuando "Descripción y beneficios" está abierto:
-     body vuelve a opacidad total para leer sin esfuerzo */
+     todo el body vuelve a opacidad total para leer sin esfuerzo */
   .prod-card .prod-body:has(.prod-detalle[open]),
   .prod-card:hover .prod-body:has(.prod-detalle[open]){
     opacity:1;
@@ -1134,6 +1154,16 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
       rgba(90,0,80,.55)  94%,
       rgba(120,0,90,.25) 100%
     );
+  }
+
+  /* Con detalle abierto: todos los hijos vuelven a opacity:1 */
+  .prod-body:has(.prod-detalle[open]) .prod-brand,
+  .prod-body:has(.prod-detalle[open]) .prod-name,
+  .prod-body:has(.prod-detalle[open]) .prod-price,
+  .prod-body:has(.prod-detalle[open]) .cl-rev-badge,
+  .prod-body:has(.prod-detalle[open]) .prod-detalle,
+  .prod-body:has(.prod-detalle[open]) .prod-actions{
+    opacity:1;
   }
 
   /* Scroll vertical dentro del cuerpo de la descripción */
@@ -3269,7 +3299,7 @@ document.querySelectorAll('.tone').forEach(tone => {
     if (el.open) {
       el._autoClose = setTimeout(function(){
         el.open = false;
-      }, 10000);
+      }, 120000);
     }
   }, true); /* capture:true para que el evento toggle llegue desde el shadow */
 })();
