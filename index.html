@@ -134,8 +134,36 @@ header.scrolled{box-shadow:0 4px 32px rgba(255,20,147,.1)}
    BUSCADOR
 ═══════════════════════════════════════════════════════════ */
 .search-toggle{background:none;border:none;cursor:pointer;padding:8px 10px;
-  color:var(--ink-s);display:flex;align-items:center;transition:color .25s;border-radius:50px}
-.search-toggle:hover,.search-toggle.active{color:var(--fuchsia);background:rgba(255,20,147,.06)}
+  color:var(--ink-s);display:flex;align-items:center;border-radius:50px;
+  animation:cl-lupa-pulse 2s ease-in-out infinite}
+.search-toggle:hover,.search-toggle.active{
+  animation:none;color:var(--fuchsia);background:rgba(255,20,147,.1)}
+@keyframes cl-lupa-pulse{
+  0%,100%{
+    color:var(--ink-s);
+    background:none;
+    box-shadow:0 0 0 0 rgba(255,20,147,0);
+    transform:scale(1)
+  }
+  40%{
+    color:var(--fuchsia);
+    background:rgba(255,20,147,.12);
+    box-shadow:0 0 0 7px rgba(255,20,147,.18),0 0 0 14px rgba(255,20,147,.06);
+    transform:scale(1.12)
+  }
+  55%{
+    color:var(--fuchsia);
+    background:rgba(255,20,147,.08);
+    box-shadow:0 0 0 10px rgba(255,20,147,.1),0 0 0 20px rgba(255,20,147,.03);
+    transform:scale(1.08)
+  }
+  70%,100%{
+    color:var(--ink-s);
+    background:none;
+    box-shadow:0 0 0 0 rgba(255,20,147,0);
+    transform:scale(1)
+  }
+}
 .search-bar{position:fixed;top:68px;left:0;right:0;z-index:850;
   background:rgba(254,250,247,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
   border-bottom:2px solid rgba(255,20,147,.15);padding:14px 32px;
@@ -783,8 +811,8 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   .hero h1{font-size:2.2rem}
   .footer-grid{grid-template-columns:1fr}
   .hero-card-grid{grid-template-columns:1fr 1fr;max-width:100%}
-  /* Móvil: 1 columna */
-  .prod-grid{grid-template-columns:1fr}
+  /* Móvil: siempre 2 columnas compactas */
+  .prod-grid{grid-template-columns:1fr 1fr;gap:8px}
 }
 </style>
 
@@ -919,12 +947,33 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
 /* ── Catálogo — 2 cols entre 480px y 768px ────── */
 @media(min-width:481px) and (max-width:767px){
   .prod-grid{grid-template-columns:1fr 1fr!important;gap:12px}
+  .prod-body{padding:16px 14px}
+  .prod-name{font-size:.9rem}
+  .prod-img{height:160px}
+  .prod-img.has-photo{aspect-ratio:3/4}
 }
+/* ── Catálogo — tarjetas compactas en móvil pequeño ≤480px ── */
 @media(max-width:480px){
-  .prod-body{padding:14px 12px}
-  .prod-name{font-size:.88rem}
-  .prod-price{font-size:1.1rem;margin-bottom:8px}
-  .prod-cart-btn,.prod-cta{font-size:.74rem;padding:9px 8px}
+  /* Imagen más baja */
+  .prod-img{height:120px;font-size:2.6rem}
+  .prod-img.has-photo{aspect-ratio:3/4}
+  /* Cuerpo ultra-compacto */
+  .prod-body{padding:9px 8px}
+  .prod-brand{font-size:.58rem;margin-bottom:2px}
+  .prod-name{font-size:.78rem;line-height:1.25;margin-bottom:4px}
+  .prod-desc{display:none}
+  .prod-price{font-size:.92rem;margin-bottom:6px}
+  .prod-cart-btn,.prod-cta{font-size:.66rem;padding:7px 6px;letter-spacing:.02em}
+  .prod-detalle{display:none}
+  /* Badge de oferta más pequeño */
+  .prod-badge{font-size:.56rem;padding:3px 6px;top:6px;left:6px}
+  /* Puntos de galería más pequeños */
+  .gallery-dots{bottom:4px;gap:3px}
+  .gallery-dot{width:4px;height:4px}
+  /* Paginación compacta */
+  .pagination{gap:5px;margin-top:24px}
+  .page-btn{min-width:32px;height:32px;font-size:.72rem}
+  .page-btn.page-nav{padding:0 10px;font-size:.72rem}
 }
 
 /* ── Reviews modal ── */
@@ -4418,3 +4467,328 @@ document.querySelectorAll('.tone').forEach(tone => {
         horario: datosEnvio_.horario || ''
       },
       productos: carrito.map(function(it){
+        return {
+          id: it.id || '',
+          nombre: it.nombre || '',
+          cantidad: it.cantidad || 1,
+          precio: it.precioVenta || 0,
+          total: (it.precioVenta||0) * (it.cantidad||1)
+        };
+      }),
+      totalItems: carrito.reduce(function(s,it){ return s+(it.cantidad||1); }, 0),
+      total: total
+    });
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: payload
+    }).catch(function(){});
+  }
+
+  // Cierre overlay
+  coClose.addEventListener('click', cerrarCheckout_);
+  coOverlay.addEventListener('click', function(e){ if (e.target === coOverlay) cerrarCheckout_(); });
+
+  // Paso 1 → nav
+  document.getElementById('cl-co-back1').addEventListener('click', function(){
+    cerrarCheckout_();
+    setTimeout(function(){ renderCarrito_(); abrirOverlay_(); }, 120);
+  });
+  document.getElementById('cl-co-next1').addEventListener('click', function(){
+    if (!validarFormulario_()){
+      var firstErr = document.querySelector('.cl-co-field input.error, .cl-co-field select.error, .cl-co-field textarea.error');
+      if (firstErr) firstErr.focus();
+      return;
+    }
+    leerDatosEnvio_();
+    irPaso_(2);
+  });
+
+  // Paso 2 → nav
+  document.getElementById('cl-co-back2').addEventListener('click', function(){ irPaso_(1); });
+  document.querySelectorAll('.cl-co-pay-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      metodoSeleccionado_ = this.dataset.metodo;
+      document.querySelectorAll('.cl-co-pay-card').forEach(function(c){ c.classList.remove('selected'); });
+      this.classList.add('selected');
+      if (metodoSeleccionado_ === 'Nequi' || metodoSeleccionado_ === 'Bre-B'){
+        document.getElementById('cl-co-qr-title').textContent = 'Paga con ' + metodoSeleccionado_;
+        irPaso_(3.1);
+      } else {
+        var info = {
+          'Sistecrédito': { icon:'🟠', desc:'Escríbenos por WhatsApp con el detalle de tu pedido y te enviamos el código para que valides tu compra directamente en la plataforma de Sistecrédito.' },
+          'Addi':         { icon:'🟡', desc:'Escríbenos por WhatsApp con el detalle de tu pedido y te enviamos el enlace de Addi para que completes la compra a cuotas sin interés.' }
+        }[metodoSeleccionado_] || { icon:'💳', desc:'' };
+        document.getElementById('cl-co-bnpl-icon').textContent  = info.icon;
+        document.getElementById('cl-co-bnpl-title').textContent = 'Pago con ' + metodoSeleccionado_;
+        document.getElementById('cl-co-bnpl-desc').textContent  = info.desc;
+        irPaso_(3.2);
+      }
+    });
+  });
+
+  // Paso 3 → nav
+  document.getElementById('cl-co-back3-qr').addEventListener('click',  function(){ irPaso_(2); });
+  document.getElementById('cl-co-back3-bnpl').addEventListener('click', function(){ irPaso_(2); });
+
+  // Copiar llave
+  document.getElementById('cl-co-copiar-llave').addEventListener('click', function(){
+    if (navigator.clipboard){
+      navigator.clipboard.writeText('0091149105').then(function(){
+        var m = document.getElementById('cl-co-copied-msg');
+        m.style.display = 'block';
+        setTimeout(function(){ m.style.display = 'none'; }, 2500);
+      });
+    }
+  });
+
+  // WhatsApp buttons
+  document.getElementById('cl-co-wa-digital').addEventListener('click', function(){ finalizarCompra_(metodoSeleccionado_); });
+  document.getElementById('cl-co-wa-bnpl').addEventListener('click',    function(){ finalizarCompra_(metodoSeleccionado_); });
+
+  renderCarrito_();
+})();
+</script>
+
+<!-- ── Story-card hover preview ───────────────────────────────── -->
+<div id="story-preview-bg"></div>
+<div id="story-preview">
+  <img src="" alt="" id="story-preview-img">
+  <div id="story-preview-caption"></div>
+</div>
+
+<script>
+(function(){
+  const bg      = document.getElementById('story-preview-bg');
+  const panel   = document.getElementById('story-preview');
+  const img     = document.getElementById('story-preview-img');
+  const caption = document.getElementById('story-preview-caption');
+  let hideTimer;
+
+  function posicionarSobreCard(card) {
+    const r   = card.getBoundingClientRect();
+    const cx  = r.left + r.width  / 2;
+    const cy  = r.top  + r.height / 2;
+    const pw  = Math.min(780, window.innerWidth * 0.88);
+    const ph  = img.naturalHeight ? pw * (img.naturalHeight / img.naturalWidth) : pw * 0.72;
+    /* Clamp para que no salga de la ventana */
+    const halfW = pw  / 2;
+    const halfH = ph  / 2;
+    const margin = 12;
+    const left = Math.min(Math.max(cx, halfW + margin), window.innerWidth  - halfW - margin);
+    const top  = Math.min(Math.max(cy, halfH + margin), window.innerHeight - halfH - margin);
+    panel.style.left = left + 'px';
+    panel.style.top  = top  + 'px';
+  }
+
+  document.querySelectorAll('.story-card[data-img]').forEach(function(card){
+    card.addEventListener('mouseenter', function(){
+      clearTimeout(hideTimer);
+      img.src              = this.dataset.img;
+      img.alt              = this.dataset.caption || '';
+      caption.textContent  = this.dataset.caption || '';
+      /* Posicionar antes de mostrar para evitar salto */
+      const r  = this.getBoundingClientRect();
+      panel.style.left = (r.left + r.width  / 2) + 'px';
+      panel.style.top  = (r.top  + r.height / 2) + 'px';
+      bg.classList.add('sp-visible');
+      panel.classList.add('sp-visible');
+    });
+    /* Reposicionar cuando la imagen carga (tamaño real disponible) */
+    img.addEventListener('load', function(){
+      const active = document.querySelector('.story-card[data-img]:hover');
+      if (active) posicionarSobreCard(active);
+    });
+    card.addEventListener('mouseleave', function(){
+      hideTimer = setTimeout(function(){
+        panel.classList.remove('sp-visible');
+        bg.classList.remove('sp-visible');
+      }, 120);
+    });
+  });
+
+  bg.addEventListener('click', function(){
+    panel.classList.remove('sp-visible');
+    bg.classList.remove('sp-visible');
+  });
+})();
+</script>
+
+<!-- ===== CURSOR MARIPOSA CHIC LIFE ===== -->
+<style>
+/* Solo en dispositivos con puntero fino (mouse) */
+@media(pointer:fine){
+  body,body *{cursor:none!important}
+}
+/* Contenedor cursor */
+#cl-bcursor{
+  position:fixed;
+  top:0;left:0;
+  width:52px;height:52px;
+  pointer-events:none;
+  z-index:2147483647;
+  transform:translate(-50%,-60%);
+  opacity:0;
+  transition:opacity .35s ease;
+  will-change:left,top;
+}
+#cl-bcursor.cl-vis{opacity:1}
+/* Animación de aleteo — ambas alas comparten los mismos keyframes */
+#cl-bcursor .cl-wl,
+#cl-bcursor .cl-wr{
+  transform-origin:30px 32px;
+  animation:cl-flap 1.1s cubic-bezier(.45,0,.55,1) infinite;
+}
+/* Aleteo rápido al mover el ratón */
+#cl-bcursor.cl-fast .cl-wl,
+#cl-bcursor.cl-fast .cl-wr{
+  animation-duration:.24s;
+}
+@keyframes cl-flap{
+  0%,100%{transform:scaleX(1)}
+  50%{transform:scaleX(.08)}
+}
+/* Desfase suave entre ala izquierda y derecha */
+#cl-bcursor .cl-wr{animation-delay:.06s}
+/* Pulso en puntas de antenas */
+#cl-bcursor .cl-at1{animation:cl-pulse 2.2s ease-in-out infinite}
+#cl-bcursor .cl-at2{animation:cl-pulse 2.2s ease-in-out 1.1s infinite}
+@keyframes cl-pulse{
+  0%,100%{opacity:1;r:2.2}
+  50%{opacity:.35;r:3.2}
+}
+/* Destellos al hacer clic */
+.cl-spark{
+  position:fixed;
+  pointer-events:none;
+  z-index:2147483646;
+  width:18px;height:18px;
+  border-radius:50%;
+  transform:translate(-50%,-50%) scale(.2);
+  background:radial-gradient(circle,rgba(255,20,147,.9) 0%,transparent 70%);
+  animation:cl-spark-out .55s ease-out forwards;
+}
+@keyframes cl-spark-out{
+  0%{transform:translate(-50%,-50%) scale(.2);opacity:1}
+  100%{transform:translate(-50%,-50%) scale(3);opacity:0}
+}
+</style>
+
+<div id="cl-bcursor" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="52" height="52">
+    <defs>
+      <!-- Degradado ala izquierda -->
+      <linearGradient id="clg-l" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FF79C6"/>
+        <stop offset="100%" stop-color="#C2005A"/>
+      </linearGradient>
+      <!-- Degradado ala derecha -->
+      <linearGradient id="clg-r" x1="100%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#FF79C6"/>
+        <stop offset="100%" stop-color="#C2005A"/>
+      </linearGradient>
+      <!-- Brillo suave tipo logo -->
+      <filter id="cl-glow" x="-25%" y="-25%" width="150%" height="150%">
+        <feGaussianBlur stdDeviation="1.4" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- ALA IZQUIERDA (superior + inferior) -->
+    <g class="cl-wl">
+      <!-- ala superior izquierda — forma hoja curvada como logo -->
+      <path d="M30,31 C24,20 6,6 8,24 C10,38 23,40 30,34Z"
+            fill="url(#clg-l)" filter="url(#cl-glow)"/>
+      <!-- vena interna decorativa -->
+      <path d="M30,33 C22,30 14,22 10,26"
+            stroke="#9B004A" stroke-width=".7" fill="none" stroke-linecap="round" opacity=".5"/>
+      <!-- ala inferior izquierda -->
+      <path d="M30,34 C21,38 9,46 13,52 C17,56 26,50 30,41Z"
+            fill="#B8005A" opacity=".82"/>
+    </g>
+
+    <!-- ALA DERECHA (superior + inferior) -->
+    <g class="cl-wr">
+      <!-- ala superior derecha -->
+      <path d="M30,31 C36,20 54,6 52,24 C50,38 37,40 30,34Z"
+            fill="url(#clg-r)" filter="url(#cl-glow)"/>
+      <!-- vena interna decorativa -->
+      <path d="M30,33 C38,30 46,22 50,26"
+            stroke="#9B004A" stroke-width=".7" fill="none" stroke-linecap="round" opacity=".5"/>
+      <!-- ala inferior derecha -->
+      <path d="M30,34 C39,38 51,46 47,52 C43,56 34,50 30,41Z"
+            fill="#B8005A" opacity=".82"/>
+    </g>
+
+    <!-- CUERPO -->
+    <ellipse cx="30" cy="36" rx="2.1" ry="9" fill="#7A0038"/>
+    <!-- Cabeza -->
+    <circle cx="30" cy="27" r="2.8" fill="#7A0038"/>
+
+    <!-- ANTENA IZQUIERDA -->
+    <path d="M28.6,24.4 C24,17 20,12 16,8"
+          stroke="#7A0038" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    <circle class="cl-at1" cx="16" cy="8" r="2.2" fill="#FF1493"/>
+
+    <!-- ANTENA DERECHA -->
+    <path d="M31.4,24.4 C36,17 40,12 44,8"
+          stroke="#7A0038" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    <circle class="cl-at2" cx="44" cy="8" r="2.2" fill="#FF1493"/>
+  </svg>
+</div>
+
+<script>
+(function(){
+  /* Solo activar en dispositivos con mouse */
+  if(!window.matchMedia('(pointer:fine)').matches)return;
+  var el=document.getElementById('cl-bcursor');
+  if(!el)return;
+
+  var mx=window.innerWidth/2, my=window.innerHeight/2;
+  var cx=mx, cy=my;
+  var prevX=mx, prevY=my;
+  var fastTimer=null;
+
+  /* Seguir ratón */
+  document.addEventListener('mousemove',function(e){
+    mx=e.clientX; my=e.clientY;
+    el.classList.add('cl-vis');
+
+    /* Detectar velocidad para aleteo rápido */
+    var dx=mx-prevX, dy=my-prevY;
+    prevX=mx; prevY=my;
+    if(dx*dx+dy*dy>20){
+      el.classList.add('cl-fast');
+      clearTimeout(fastTimer);
+      fastTimer=setTimeout(function(){el.classList.remove('cl-fast');},420);
+    }
+  },true);
+
+  /* Ocultar al salir de la ventana */
+  document.addEventListener('mouseleave',function(){el.classList.remove('cl-vis');});
+  document.addEventListener('mouseenter',function(){el.classList.add('cl-vis');});
+
+  /* Destello rosado al hacer clic */
+  document.addEventListener('click',function(e){
+    var sp=document.createElement('div');
+    sp.className='cl-spark';
+    sp.style.left=e.clientX+'px';
+    sp.style.top=e.clientY+'px';
+    document.body.appendChild(sp);
+    setTimeout(function(){sp.parentNode&&sp.parentNode.removeChild(sp);},600);
+  });
+
+  /* Loop de animación suave (inercia 14 %) */
+  (function frame(){
+    cx+=(mx-cx)*0.14;
+    cy+=(my-cy)*0.14;
+    el.style.left=Math.round(cx)+'px';
+    el.style.top=Math.round(cy)+'px';
+    requestAnimationFrame(frame);
+  })();
+})();
+</script>
+<!-- ===== FIN CURSOR MARIPOSA ===== -->
+
+</body>
+</html>
