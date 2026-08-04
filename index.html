@@ -470,7 +470,7 @@ section{padding:100px 32px}
 }
 .prod-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-f);
   border-color:rgba(255,20,147,.3)}
-.prod-img{height:200px;display:flex;align-items:center;justify-content:center;
+.prod-img{height:170px;display:flex;align-items:center;justify-content:center;
   font-size:4rem;background:var(--rose-l);position:relative;overflow:hidden}
 .prod-img::after{content:'';position:absolute;inset:0;
   background:linear-gradient(135deg,rgba(255,20,147,.06),rgba(212,169,106,.08))}
@@ -492,14 +492,14 @@ section{padding:100px 32px}
   padding:4px 10px;border-radius:20px;
   background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
   color:var(--white);font-size:.65rem;font-weight:700;letter-spacing:.08em;z-index:1}
-.prod-body{padding:22px}
-.prod-brand{font-size:.68rem;font-weight:600;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--fuchsia);margin-bottom:6px}
-.prod-name{font-family:var(--fd);font-size:1.1rem;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.prod-body{padding:13px 15px}
+.prod-brand{font-size:.65rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--fuchsia);margin-bottom:3px}
+.prod-name{font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:5px;color:var(--ink)}
 .prod-desc{font-size:.82rem;color:var(--mist);line-height:1.6;margin-bottom:8px;
   display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
 .prod-desc.det-open{display:none}
-.prod-price{font-family:var(--fd);font-size:1.3rem;font-weight:900;color:var(--fuchsia);margin-bottom:10px}
+.prod-price{font-family:var(--fd);font-size:1.1rem;font-weight:900;color:var(--fuchsia);margin-bottom:6px}
 .prod-empty{grid-column:1/-1;text-align:center;color:var(--mist);font-size:.88rem;padding:32px 0}
 /* Paginación del catálogo */
 .pagination{display:flex;align-items:center;justify-content:center;gap:8px;
@@ -533,8 +533,8 @@ section{padding:100px 32px}
   text-transform:uppercase;letter-spacing:.06em;margin:10px 0 4px}
 .prod-detalle-body h5:first-child{margin-top:0}
 .prod-cta{
-  width:100%;padding:10px;border-radius:30px;margin-top:0;
-  background:var(--rose-l);color:var(--fuchsia);font-weight:600;font-size:.8rem;
+  width:100%;padding:8px;border-radius:30px;margin-top:0;
+  background:var(--rose-l);color:var(--fuchsia);font-weight:600;font-size:.78rem;
   transition:all .3s;letter-spacing:.06em;display:block;text-align:center;
 }
 .prod-cta:hover{background:linear-gradient(135deg,var(--fuchsia),#FF69B4);color:var(--white)}
@@ -544,11 +544,11 @@ section{padding:100px 32px}
   color:var(--terracotta);background:var(--peach);
   padding:3px 11px;border-radius:20px;margin-bottom:10px;
 }
-.prod-actions{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.prod-actions{display:flex;flex-direction:column;gap:5px;margin-top:8px}
 .prod-cart-btn{
-  width:100%;padding:11px;border-radius:30px;
+  width:100%;padding:9px;border-radius:30px;
   background:linear-gradient(90deg,var(--fuchsia),var(--fuchsia-d));
-  color:var(--white);font-weight:600;font-size:.8rem;letter-spacing:.06em;
+  color:var(--white);font-weight:600;font-size:.78rem;letter-spacing:.06em;
   transition:transform .2s,opacity .2s;
 }
 .prod-cart-btn:hover{transform:translateY(-1px)}
@@ -843,8 +843,8 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   .hero h1{font-size:2.2rem}
   .footer-grid{grid-template-columns:1fr}
   .hero-card-grid{grid-template-columns:1fr 1fr;max-width:100%}
-  /* Móvil: siempre 2 columnas compactas */
-  .prod-grid{grid-template-columns:1fr 1fr;gap:8px}
+  /* Móvil: 3 columnas para ver 9 productos en pantalla */
+  .prod-grid{grid-template-columns:1fr 1fr 1fr;gap:5px}
 }
 </style>
 
@@ -984,28 +984,36 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   .prod-img{height:160px}
   .prod-img.has-photo{aspect-ratio:3/4}
 }
-/* ── Catálogo — tarjetas compactas en móvil pequeño ≤480px ── */
+/* ── Catálogo — 3 columnas ultra-compactas en móvil ≤480px ── */
 @media(max-width:480px){
-  /* Imagen más baja */
-  .prod-img{height:120px;font-size:2.6rem}
-  .prod-img.has-photo{aspect-ratio:3/4}
-  /* Cuerpo ultra-compacto */
-  .prod-body{padding:9px 8px}
-  .prod-brand{font-size:.58rem;margin-bottom:2px}
-  .prod-name{font-size:.78rem;line-height:1.25;margin-bottom:4px}
+  /* Grid ya definido en el bloque anterior */
+  /* Imagen cuadrada y baja para caber 3 filas en pantalla */
+  .prod-img{height:88px;font-size:2rem}
+  .prod-img.has-photo{height:88px;aspect-ratio:unset}
+  /* Cuerpo ultra-compacto 3-col */
+  .prod-body{padding:5px 5px 6px}
+  .prod-brand{font-size:.5rem;margin-bottom:1px;letter-spacing:.08em}
+  .prod-name{font-size:.62rem;line-height:1.2;margin-bottom:2px;
+    -webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
   .prod-desc{display:none}
-  .prod-price{font-size:.92rem;margin-bottom:6px}
-  .prod-cart-btn,.prod-cta{font-size:.66rem;padding:7px 6px;letter-spacing:.02em}
+  .prod-price{font-size:.72rem;margin-bottom:3px}
+  /* Solo el primer botón de acción */
+  .prod-actions{gap:3px;margin-top:4px}
+  .prod-actions>:not(:first-child){display:none}
+  .prod-cart-btn,.prod-cta{font-size:.56rem;padding:5px 3px;letter-spacing:.01em}
+  /* Ocultar elementos que no caben en 3-col */
   .prod-detalle{display:none}
+  .prod-agotado{font-size:.5rem;padding:2px 6px;margin-bottom:3px}
+  .cl-rev-badge{display:none}
   /* Badge de oferta más pequeño */
-  .prod-badge{font-size:.56rem;padding:3px 6px;top:6px;left:6px}
+  .prod-badge{font-size:.5rem;padding:2px 5px;top:4px;left:4px}
   /* Puntos de galería más pequeños */
-  .gallery-dots{bottom:4px;gap:3px}
-  .gallery-dot{width:4px;height:4px}
+  .gallery-dots{bottom:3px;gap:2px}
+  .gallery-dot{width:3px;height:3px}
   /* Paginación compacta */
-  .pagination{gap:5px;margin-top:24px}
-  .page-btn{min-width:32px;height:32px;font-size:.72rem}
-  .page-btn.page-nav{padding:0 10px;font-size:.72rem}
+  .pagination{gap:5px;margin-top:20px}
+  .page-btn{min-width:30px;height:30px;font-size:.7rem}
+  .page-btn.page-nav{padding:0 10px;font-size:.7rem}
 }
 
 /* ── Reviews modal ── */
@@ -1015,6 +1023,56 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
     border-radius:24px 24px 0 0;max-width:100%;
     padding:24px 18px 36px;max-height:92vh;
   }
+}
+
+/* ── Botón "+" de detalle en tarjeta — solo visible en móvil 3-col ── */
+.cl-mob-det-btn{
+  display:none;
+  width:100%;padding:3px 4px;margin-bottom:2px;
+  background:rgba(255,20,147,.08);border:1px solid rgba(255,20,147,.25);
+  border-radius:20px;font-size:.55rem;font-weight:700;
+  color:var(--fuchsia);cursor:pointer;text-align:center;line-height:1;
+}
+@media(max-width:480px){.cl-mob-det-btn{display:block}}
+
+/* ── Overlay / burbuja flotante de detalle ── */
+#cl-det-overlay{
+  display:none;position:fixed;inset:0;z-index:9000;
+  background:rgba(0,0,0,.38);align-items:flex-end;justify-content:center;
+}
+#cl-det-overlay.cl-det-open{display:flex}
+#cl-det-bubble{
+  width:100%;max-height:58vh;
+  background:var(--white);border-radius:22px 22px 0 0;
+  padding:20px 18px 36px;overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  animation:cl-det-slide-up .25s ease;
+}
+@keyframes cl-det-slide-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.cl-det-header{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  margin-bottom:14px;
+}
+.cl-det-header strong{
+  font-family:var(--fd);font-size:.95rem;font-weight:700;
+  color:var(--ink);line-height:1.3;flex:1;padding-right:12px;
+}
+#cl-det-close{
+  flex-shrink:0;width:28px;height:28px;border-radius:50%;
+  background:var(--rose-l);color:var(--fuchsia);
+  font-size:1.1rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+#cl-det-content{font-size:.83rem;color:var(--ink-s);line-height:1.65}
+#cl-det-content p{margin-bottom:8px}
+#cl-det-content h5{
+  font-family:var(--fb);font-size:.72rem;font-weight:700;
+  color:var(--fuchsia-d);text-transform:uppercase;
+  letter-spacing:.06em;margin:12px 0 4px;
+}
+.cl-det-tip{
+  text-align:center;font-size:.65rem;color:var(--mist);
+  margin-top:14px;letter-spacing:.04em;
 }
 </style>
 
@@ -2015,6 +2073,11 @@ function renderProductGrid(gridId, items) {
             ${p.beneficios ? `<h5>Beneficios</h5><p>${escapeHtml(p.beneficios)}</p>` : ''}
           </div>
         </details>` : '';
+    const mobDetBtn = tieneDetalle ? `<button type="button" class="cl-mob-det-btn"
+        data-nombre="${escapeHtml(p.name)}"
+        data-desc="${escapeHtml(p.desc||'')}"
+        data-modo="${escapeHtml(p.modoUso||'')}"
+        data-benef="${escapeHtml(p.beneficios||'')}">+ Descripción y beneficios</button>` : '';
 
     // El botón "Agregar al carrito" solo aparece si hay un precio real
     // publicado Y no está agotado (productos del catálogo de respaldo,
@@ -2044,6 +2107,7 @@ function renderProductGrid(gridId, items) {
           <span class="cl-rev-stars" data-role="stars">☆☆☆☆☆</span>
           <span class="cl-rev-text" data-role="text">Sé la primera en opinar</span>
         </button>
+        ${mobDetBtn}
         ${detalleHtml}
         <div class="prod-actions">
           ${cartBtnHtml}
@@ -2963,6 +3027,7 @@ document.querySelectorAll('.tone').forEach(tone => {
     <div id="cl-view-form">
       <p class="cl-popup-eyebrow" id="cl-popup-heading">¡Conoce nuestras novedades!</p>
       <h3>Y disfruta un 10% OFF en tu primera compra.</h3>
+      <p style="font-size:.78rem;color:var(--mist);margin:-4px 0 12px;font-style:italic;">Vigencia: 30 días desde tu registro.</p>
       <form id="cl-popup-form" novalidate>
         <input class="cl-popup-form-el" type="text" name="nombre" placeholder="Nombre" required>
         <input class="cl-popup-form-el" type="email" name="email" placeholder="Correo electrónico" required>
@@ -2992,11 +3057,73 @@ document.querySelectorAll('.tone').forEach(tone => {
         <button type="button" id="cl-copy-btn" aria-label="Copiar código">📋</button>
       </div>
       <p class="cl-popup-cta-text">Copia el código y disfruta tu 10% off.</p>
-      <p class="cl-popup-fine">Este código es único y personal — está ligado a tu correo, así que consérvalo para tu primera compra.</p>
+      <p class="cl-popup-fine">Este código es único y personal — está ligado a tu correo, así que consérvalo para tu primera compra.<br><strong>Vigencia: 30 días desde tu registro.</strong></p>
       <a href="#catalogo" class="cl-popup-submit" id="cl-popup-shop-link">Ir al catálogo</a>
     </div>
   </div>
 </div>
+
+<!-- ── Burbuja flotante de detalle de producto (móvil) ── -->
+<div id="cl-det-overlay" role="dialog" aria-modal="true" aria-label="Detalle del producto">
+  <div id="cl-det-bubble">
+    <div class="cl-det-header">
+      <strong id="cl-det-nombre"></strong>
+      <button type="button" id="cl-det-close" aria-label="Cerrar">×</button>
+    </div>
+    <div id="cl-det-content"></div>
+    <p class="cl-det-tip">Desliza para cerrar</p>
+  </div>
+</div>
+<script>
+(function(){
+  var overlay   = document.getElementById('cl-det-overlay');
+  var bubble    = document.getElementById('cl-det-bubble');
+  var closeBtn  = document.getElementById('cl-det-close');
+  var nombreEl  = document.getElementById('cl-det-nombre');
+  var contentEl = document.getElementById('cl-det-content');
+  if (!overlay) return;
+
+  function esc(s){
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function openBubble(btn) {
+    nombreEl.textContent = btn.dataset.nombre || '';
+    var html = '';
+    if (btn.dataset.desc)  html += '<p>' + esc(btn.dataset.desc) + '</p>';
+    if (btn.dataset.modo)  html += '<h5>Modo de uso</h5><p>' + esc(btn.dataset.modo) + '</p>';
+    if (btn.dataset.benef) html += '<h5>Beneficios</h5><p>' + esc(btn.dataset.benef) + '</p>';
+    if (!html) html = '<p><em>Sin descripción disponible.</em></p>';
+    contentEl.innerHTML = html;
+    overlay.classList.add('cl-det-open');
+  }
+
+  function closeBubble() {
+    overlay.classList.remove('cl-det-open');
+  }
+
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest ? e.target.closest('.cl-mob-det-btn') : null;
+    if (btn) { e.stopPropagation(); openBubble(btn); return; }
+    if (overlay.classList.contains('cl-det-open') && !bubble.contains(e.target)) {
+      closeBubble();
+    }
+  });
+
+  closeBtn.addEventListener('click', closeBubble);
+
+  /* Cierra al detectar scroll / swipe */
+  document.addEventListener('touchmove', function() {
+    if (overlay.classList.contains('cl-det-open')) closeBubble();
+  }, { passive: true });
+
+  document.addEventListener('scroll', function() {
+    if (overlay.classList.contains('cl-det-open')) closeBubble();
+  }, { passive: true });
+})();
+</script>
 
 <script>
 (function(){
