@@ -392,7 +392,8 @@ section{padding:100px 32px}
 /* ═══════════════════════════════════════════════════════════
    SOBRE NOSOTROS
 ═══════════════════════════════════════════════════════════ */
-.about{background:var(--white)}
+.about{background:var(--white);display:none}
+.about.nosotros-visible{display:block}
 .about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;margin-top:56px}
 .about-visual{
   position:relative;border-radius:var(--r-lg);overflow:hidden;
@@ -5122,6 +5123,26 @@ document.querySelectorAll('.tone').forEach(tone => {
 })();
 </script>
 <!-- ===== FIN CURSOR MARIPOSA ===== -->
+
+<script>
+(function(){
+  var sec = document.getElementById('nosotros');
+
+  // Mostrar si la página se carga con #nosotros en la URL
+  if (location.hash === '#nosotros') sec.classList.add('nosotros-visible');
+
+  // Interceptar todos los links que apuntan a #nosotros (desktop y móvil)
+  document.querySelectorAll('a[href="#nosotros"]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      var abierto = sec.classList.toggle('nosotros-visible');
+      if (abierto) {
+        setTimeout(function(){ sec.scrollIntoView({ behavior:'smooth', block:'start' }); }, 30);
+      }
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
