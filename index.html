@@ -1114,11 +1114,50 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
     will-change:opacity, transform;
   }
 
-  /* Hover: el carrusel toma toda la lámina — body se desvanece */
+  /* Hover: body se vuelve traslúcido (visible e interactivo) */
   .prod-card:hover .prod-body{
-    opacity:0;
-    transform:translateY(10px);
-    pointer-events:none;
+    opacity:0.38;
+    pointer-events:auto;
+  }
+
+  /* Cuando "Descripción y beneficios" está abierto:
+     body vuelve a opacidad total para leer sin esfuerzo */
+  .prod-card .prod-body:has(.prod-detalle[open]),
+  .prod-card:hover .prod-body:has(.prod-detalle[open]){
+    opacity:1;
+    background:linear-gradient(
+      to top,
+      rgba(4,0,12,.99)   0%,
+      rgba(10,0,22,.97)  40%,
+      rgba(22,0,40,.94)  65%,
+      rgba(50,0,65,.84)  82%,
+      rgba(90,0,80,.55)  94%,
+      rgba(120,0,90,.25) 100%
+    );
+  }
+
+  /* Scroll vertical dentro del cuerpo de la descripción */
+  .prod-detalle[open] .prod-detalle-body{
+    max-height:130px;
+    overflow-y:auto;
+    padding-right:5px;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(255,20,147,.5) transparent;
+  }
+  .prod-detalle[open] .prod-detalle-body::-webkit-scrollbar{width:3px}
+  .prod-detalle[open] .prod-detalle-body::-webkit-scrollbar-track{background:transparent}
+  .prod-detalle[open] .prod-detalle-body::-webkit-scrollbar-thumb{
+    background:rgba(255,20,147,.5);border-radius:3px
+  }
+
+  /* Summary siempre visible (pegado, no desplazado con el scroll) */
+  .prod-detalle[open] summary{
+    position:sticky;top:0;
+    background:rgba(4,0,12,.65);
+    backdrop-filter:blur(4px);
+    padding:3px 0 4px;
+    border-radius:4px;
+    z-index:1;
   }
 
   /* Zoom sutil en la imagen al hacer hover */
@@ -3213,6 +3252,26 @@ document.querySelectorAll('.tone').forEach(tone => {
   document.addEventListener('scroll', function() {
     if (overlay.classList.contains('cl-det-open')) closeBubble();
   }, { passive: true });
+})();
+</script>
+
+<script>
+/* ── Auto-cierre de "Descripción y beneficios" tras 10 s ─────────────
+   Si la clienta abre el detalle pero no lo cierra manualmente,
+   se colapsa solo después de 10 segundos. El temporizador se
+   reinicia cada vez que se abre de nuevo. El ícono +/– siempre
+   queda visible (sticky) para cerrar manualmente. */
+(function(){
+  document.addEventListener('toggle', function(e){
+    var el = e.target;
+    if (!el.classList.contains('prod-detalle')) return;
+    clearTimeout(el._autoClose);
+    if (el.open) {
+      el._autoClose = setTimeout(function(){
+        el.open = false;
+      }, 10000);
+    }
+  }, true); /* capture:true para que el evento toggle llegue desde el shadow */
 })();
 </script>
 
