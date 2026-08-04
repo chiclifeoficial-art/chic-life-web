@@ -1110,7 +1110,20 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
     );
     border-top:1px solid rgba(255,20,147,.3);
     box-shadow:0 -3px 18px rgba(255,20,147,.12);
+    transition:opacity .38s ease, transform .38s ease;
+    will-change:opacity, transform;
   }
+
+  /* Hover: el carrusel toma toda la lámina — body se desvanece */
+  .prod-card:hover .prod-body{
+    opacity:0;
+    transform:translateY(10px);
+    pointer-events:none;
+  }
+
+  /* Zoom sutil en la imagen al hacer hover */
+  .prod-img{transition:transform .45s ease}
+  .prod-card:hover .prod-img{transform:scale(1.03)}
 
   /* Textos visibles sobre fondo oscuro */
   .prod-brand{color:rgba(255,148,200,.9)}
@@ -2255,9 +2268,13 @@ function initGalleries_(root) {
 
     card._glTimer = setInterval(() => goTo(cur + 1), 2400);
 
-    // Pausar en hover para que el usuario pueda ver la imagen actual
-    card.addEventListener('mouseenter', () => clearInterval(card._glTimer));
+    // En hover: acelerar carrusel para que se vea la animación
+    card.addEventListener('mouseenter', () => {
+      clearInterval(card._glTimer);
+      card._glTimer = setInterval(() => goTo(cur + 1), 1100);
+    });
     card.addEventListener('mouseleave', () => {
+      clearInterval(card._glTimer);
       card._glTimer = setInterval(() => goTo(cur + 1), 2400);
     });
   });
