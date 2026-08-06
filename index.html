@@ -2621,10 +2621,11 @@ function renderTipChic() {
   const apertura = azarDeLista_(TIP_APERTURAS_);
   const cierre = azarDeLista_(TIP_CIERRES_);
 
+  const esMobil = window.innerWidth <= 768;
   let frase = `${apertura} Nuestro/a <strong>${escapeHtml(producto.nombre)}</strong>`;
   if (producto.marca) frase += ` de ${escapeHtml(producto.marca)}`;
   frase += '.';
-  if (producto.blurb) frase += ` ${escapeHtml(producto.blurb)}`;
+  if (!esMobil && producto.blurb) frase += ` ${escapeHtml(producto.blurb)}`;
   frase += ` ${cierre}`;
 
   iconEl.textContent = '💡';
