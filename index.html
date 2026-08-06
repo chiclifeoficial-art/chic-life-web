@@ -835,7 +835,14 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   .blush-media{grid-template-columns:1fr}
   .pillars-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
-  .lunar-calendar{display:none}
+  .lunar-calendar{display:grid;gap:10px 3px;padding:16px 8px;
+    grid-template-columns:repeat(7,1fr)}
+  .cal-day-moon-wrap{width:30px;height:30px}
+  .cal-day-header{font-size:.72rem;padding:2px}
+  .cal-day{gap:3px}
+  .cal-day-num{font-size:.62rem}
+  .cal-month-header{font-size:1.05rem;padding:4px 0 3px}
+  .lunar-calendar-caption{font-size:.65rem;margin-top:8px;padding-top:10px}
   .hero-card-grid{grid-template-columns:1fr 1fr}
   /* Tablet angosta / móvil grande: 2 columnas */
   .prod-grid{grid-template-columns:1fr 1fr;gap:16px}
@@ -1105,29 +1112,37 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   /* 4 columnas compactas, gap ajustado para laptop */
   .prod-grid{grid-template-columns:repeat(4,1fr)!important;gap:18px}
 
-  /* Imagen proporcional — NO ocupa toda la lámina */
+  /* Imagen más alta — se acerca al tamaño original */
   .prod-img,
   .prod-img.has-photo{
-    height:185px;
+    height:230px;
     aspect-ratio:unset;
     max-height:none;
+    overflow:hidden;
   }
+  .prod-img img{transition:transform .4s ease}
+  .prod-card:hover .prod-img img{transform:scale(1.07)}
   .prod-img.has-photo img{object-fit:cover}
 
   /* Cuerpo DEBAJO de la imagen — layout apilado como móvil */
   .prod-body{
     position:static;
     bottom:auto;left:auto;right:auto;
-    padding:10px 12px 12px;
+    padding:7px 10px 10px;
     background:var(--white);
     border-top:1px solid rgba(255,20,147,.08);
     box-shadow:none;
   }
 
   /* Colores normales — texto oscuro sobre fondo blanco */
-  .prod-brand{color:var(--mist);text-shadow:none}
-  .prod-name{color:var(--ink);text-shadow:none!important;font-size:.88rem}
-  .prod-price{color:#CC0070;text-shadow:none;font-size:.98rem}
+  .prod-brand{color:var(--mist);text-shadow:none;font-size:.6rem;margin-bottom:1px}
+  .prod-name{
+    color:var(--ink);text-shadow:none!important;font-size:.82rem;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+    overflow:hidden;margin-bottom:2px;line-height:1.3
+  }
+  .prod-price{color:#CC0070;text-shadow:none;font-size:.92rem;margin-bottom:2px}
+  .cl-rev-badge{display:none!important}
   .prod-detalle summary{color:var(--fuchsia);font-weight:600}
   .prod-detalle-body{color:var(--ink);font-weight:400}
   .prod-detalle-body h5{color:#CC0070}
