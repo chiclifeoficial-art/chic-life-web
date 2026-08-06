@@ -393,6 +393,7 @@ section{padding:100px 32px}
    SOBRE NOSOTROS
 ═══════════════════════════════════════════════════════════ */
 .about{background:var(--white);display:none}
+.reel-ig{display:none}
 .about.nosotros-visible{display:block}
 .about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;margin-top:56px}
 .about-visual{
@@ -1298,6 +1299,7 @@ fbq('track', 'PageView');
       </div>
       <a href="#nosotros">Sobre Nosotros</a>
       <a href="#lunar">Comunidad Lunar</a>
+      <a href="#reel" onclick="mostrarReel();return false;">En Acción</a>
       <a href="#contacto">Contacto</a>
       <a href="https://wa.me/573226905702?text=Hola%20Chic%20Life!%20Me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20productos%20%F0%9F%8C%B8"
          target="_blank" class="nav-cta" rel="noopener">Pedir ahora</a>
@@ -1328,6 +1330,7 @@ fbq('track', 'PageView');
   <a href="#catalogo" class="mob-link" onclick="switchTab('vitaminas')">Vitaminas</a>
   <a href="#nosotros" class="mob-link">Sobre Nosotros</a>
   <a href="#lunar" class="mob-link">Comunidad Lunar</a>
+  <a href="#reel" class="mob-link" onclick="mostrarReel()">En Acción</a>
   <a href="#contacto" class="mob-link">Contacto</a>
 </nav>
 
@@ -1950,6 +1953,14 @@ document.querySelectorAll('.mob-link').forEach(link => {
     document.body.style.overflow = '';
   });
 });
+
+// ── Míranos en acción — mostrar sección oculta desde nav ──────────────────────
+function mostrarReel() {
+  const sec = document.getElementById('reel');
+  if (!sec) return;
+  sec.style.display = 'block';
+  setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+}
 
 // ═══════════════════════════════════════════════════════════
 // TRACKING DE INTENCIÓN — CLICS EN WHATSAPP
