@@ -1958,8 +1958,13 @@ document.querySelectorAll('.mob-link').forEach(link => {
 function mostrarReel() {
   const sec = document.getElementById('reel');
   if (!sec) return;
-  sec.style.display = 'block';
-  setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  const visible = sec.style.display === 'block';
+  if (visible) {
+    sec.style.display = 'none';
+  } else {
+    sec.style.display = 'block';
+    setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
 }
 
 // ═══════════════════════════════════════════════════════════
