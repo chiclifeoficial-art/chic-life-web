@@ -1097,139 +1097,115 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
 
 <style>
 /* ════════════════════════════════════════════════════════════
-   DESKTOP ≥769px — Imagen full-card + cuerpo holográfico
-   El .prod-body flota superpuesto en la parte inferior de la
-   imagen con gradiente oscuro semitransparente tipo holograma.
-   En mobile/tablet el layout vuelve a ser apilado (stacked).
+   DESKTOP ≥769px — Layout apilado (imagen arriba, texto abajo)
+   4 columnas adaptadas a portátil 14". Hover: elevación suave.
    ════════════════════════════════════════════════════════════ */
 @media(min-width:769px){
 
-  /* Imagen ocupa toda la lámina */
+  /* 4 columnas compactas, gap ajustado para laptop */
+  .prod-grid{grid-template-columns:repeat(4,1fr)!important;gap:18px}
+
+  /* Imagen proporcional — NO ocupa toda la lámina */
   .prod-img,
   .prod-img.has-photo{
-    height:300px;
+    height:185px;
     aspect-ratio:unset;
     max-height:none;
   }
   .prod-img.has-photo img{object-fit:cover}
 
-  /* Cuerpo superpuesto — sin gradiente, imagen totalmente visible */
+  /* Cuerpo DEBAJO de la imagen — layout apilado como móvil */
   .prod-body{
-    position:absolute;
-    bottom:0;left:0;right:0;
+    position:static;
+    bottom:auto;left:auto;right:auto;
     padding:10px 12px 12px;
-    background:transparent;
-    border-top:none;
+    background:var(--white);
+    border-top:1px solid rgba(255,20,147,.08);
     box-shadow:none;
   }
 
-  /* Sombra en textos para legibilidad sin fondo */
-  .prod-brand{text-shadow:0 0 10px rgba(0,0,0,1),0 0 4px rgba(0,0,0,1),0 2px 8px rgba(0,0,0,1)}
-  .prod-name{text-shadow:0 0 12px rgba(0,0,0,1),0 0 5px rgba(0,0,0,1),0 2px 10px rgba(0,0,0,1)!important}
-  .prod-price{text-shadow:0 0 10px rgba(0,0,0,1),0 0 4px rgba(0,0,0,1),0 2px 8px rgba(0,0,0,1)}
+  /* Colores normales — texto oscuro sobre fondo blanco */
+  .prod-brand{color:var(--mist);text-shadow:none}
+  .prod-name{color:var(--ink);text-shadow:none!important;font-size:.88rem}
+  .prod-price{color:#CC0070;text-shadow:none;font-size:.98rem}
+  .prod-detalle summary{color:var(--fuchsia);font-weight:600}
+  .prod-detalle-body{color:var(--ink);font-weight:400}
+  .prod-detalle-body h5{color:#CC0070}
+  .cl-rev-stars{color:#ffc845}
+  .cl-rev-text{color:var(--mist)}
+  .prod-agotado{
+    background:rgba(255,60,60,.1);color:#c0392b;
+    border:1px solid rgba(255,80,80,.2);
+  }
 
-  /* Cuando "Descripción y beneficios" está abierto:
-     fondo semitransparente solo bajo el texto para legibilidad */
+  /* Hover: leve elevación, sin escala agresiva */
+  .prod-card{
+    position:relative;
+    z-index:1;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .prod-card:hover{
+    transform:translateY(-5px);
+    z-index:5;
+    box-shadow:0 14px 36px rgba(0,0,0,.13),
+               0 0 0 2px rgba(255,20,147,.22);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+
+  /* Botones normales (igual que móvil) */
+  .prod-cart-btn{
+    background:linear-gradient(90deg,var(--fuchsia),#FF69B4);
+    border:none;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+  .prod-cta{
+    background:transparent;
+    border:1.5px solid var(--fuchsia);
+    color:var(--fuchsia);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+  .prod-cta:hover{
+    background:linear-gradient(135deg,var(--fuchsia),#FF69B4);
+    color:var(--white);
+    border-color:var(--fuchsia);
+  }
+
+  /* Con detalle abierto: fondo blanco normal */
   .prod-card .prod-body:has(.prod-detalle[open]),
   .prod-card:hover .prod-body:has(.prod-detalle[open]){
     opacity:1;
-    background:rgba(4,0,14,.72);
+    background:var(--white);
     border-radius:0 0 var(--r-md) var(--r-md);
   }
-
-  /* Con detalle abierto: todos los hijos vuelven a opacity:1 */
   .prod-body:has(.prod-detalle[open]) .prod-brand,
   .prod-body:has(.prod-detalle[open]) .prod-name,
   .prod-body:has(.prod-detalle[open]) .prod-price,
   .prod-body:has(.prod-detalle[open]) .cl-rev-badge,
   .prod-body:has(.prod-detalle[open]) .prod-detalle,
-  .prod-body:has(.prod-detalle[open]) .prod-actions{
-    opacity:1;
-  }
+  .prod-body:has(.prod-detalle[open]) .prod-actions{opacity:1}
 
-  /* Scroll vertical dentro del cuerpo de la descripción */
+  /* Scroll vertical en descripción expandida */
   .prod-detalle[open] .prod-detalle-body{
-    max-height:130px;
+    max-height:120px;
     overflow-y:auto;
     padding-right:5px;
     scrollbar-width:thin;
-    scrollbar-color:rgba(255,20,147,.5) transparent;
+    scrollbar-color:rgba(255,20,147,.4) transparent;
   }
   .prod-detalle[open] .prod-detalle-body::-webkit-scrollbar{width:3px}
   .prod-detalle[open] .prod-detalle-body::-webkit-scrollbar-track{background:transparent}
   .prod-detalle[open] .prod-detalle-body::-webkit-scrollbar-thumb{
-    background:rgba(255,20,147,.5);border-radius:3px
+    background:rgba(255,20,147,.4);border-radius:3px
   }
-
-  /* Summary siempre visible (pegado, no desplazado con el scroll) */
   .prod-detalle[open] summary{
     position:sticky;top:0;
-    background:rgba(4,0,12,.65);
+    background:rgba(255,255,255,.95);
     backdrop-filter:blur(4px);
     padding:3px 0 4px;
     border-radius:4px;
     z-index:1;
-  }
-
-  /* Zoom flotante al pasar el cursor — la lámina completa flota como burbuja */
-  .prod-card{
-    position:relative;
-    z-index:1;
-    transition:transform .38s cubic-bezier(.34,1.4,.64,1),
-               box-shadow .38s ease,
-               z-index 0s;
-  }
-  .prod-card:hover{
-    transform:scale(1.28);
-    z-index:20;
-    box-shadow:0 28px 70px rgba(0,0,0,.38),
-               0 0 0 2px rgba(255,20,147,.32);
-    transition:transform .38s cubic-bezier(.34,1.4,.64,1),
-               box-shadow .38s ease,
-               z-index 0s 0s;
-  }
-
-  /* Pulso en "+ Descripción y beneficios" al activar la burbuja zoom */
-  @keyframes cl-det-pulse{
-    0%,100%{opacity:1;text-shadow:0 0 4px rgba(255,20,147,.5)}
-    50%{opacity:.55;text-shadow:0 0 14px rgba(255,20,147,1),0 0 6px rgba(255,20,147,.7)}
-  }
-  .prod-card:hover .prod-detalle:not([open]) summary{
-    animation:cl-det-pulse 1.3s ease-in-out infinite;
-  }
-
-  /* Textos visibles sobre fondo oscuro — máximo contraste */
-  .prod-brand{color:#fff}
-  .prod-name{color:#fff}
-  .prod-price{color:#fff;font-size:1.1rem}
-  .prod-detalle summary{color:#fff;font-weight:700}
-  .prod-detalle-body{color:#fff;font-weight:500}
-  .prod-detalle-body h5{color:#ffb3d9}
-  .cl-rev-stars{color:#ffc845}
-  .cl-rev-text{color:rgba(210,160,190,.8)}
-  .prod-agotado{
-    background:rgba(255,60,60,.18);color:#ff9898;
-    border:1px solid rgba(255,80,80,.3);
-  }
-
-  /* Botones holográficos semitransparentes */
-  .prod-cart-btn{
-    background:linear-gradient(90deg,rgba(255,20,147,.9),rgba(160,0,90,.9));
-    border:1px solid rgba(255,110,185,.35);
-    backdrop-filter:blur(6px);
-    -webkit-backdrop-filter:blur(6px);
-  }
-  .prod-cta{
-    background:rgba(255,255,255,.1);
-    border:1px solid rgba(255,140,195,.3);
-    color:rgba(255,175,215,1);
-    backdrop-filter:blur(6px);
-    -webkit-backdrop-filter:blur(6px);
-  }
-  .prod-cta:hover{
-    background:rgba(255,20,147,.3);
-    color:#fff;
-    border-color:rgba(255,110,185,.55);
   }
 }
 </style>
