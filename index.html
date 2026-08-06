@@ -347,7 +347,7 @@ header.scrolled{box-shadow:0 4px 32px rgba(255,20,147,.1)}
   opacity:0;transition:opacity .28s ease,transform .28s ease,left .22s ease,top .22s ease;
   border-radius:20px;overflow:hidden;
   box-shadow:0 32px 100px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.1);
-  width:min(780px,88vw);
+  width:min(460px,58vw);
   background:#111;
 }
 #story-preview.sp-visible{opacity:1;transform:translate(-50%,-50%) scale(1)}
@@ -871,34 +871,50 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   .btn-primary,.btn-secondary{text-align:center;justify-content:center;width:100%}
 }
 
-/* ── Tabs del catálogo — scroll horizontal en móvil ── */
-@media(max-width:768px){
-  .tabs{
-    overflow-x:auto;-webkit-overflow-scrolling:touch;
-    scrollbar-width:none;width:100%;max-width:100%;
-    margin:24px 0 18px;border-radius:50px;
-  }
-  .tabs::-webkit-scrollbar{display:none}
-  .tab-btn{white-space:nowrap;flex-shrink:0;padding:9px 15px;font-size:.76rem}
+/* ── Laptop 14" (1025–1400px): cards más compactas ── */
+@media(min-width:1025px) and (max-width:1400px){
+  .story-card{height:260px}
+  .story-card h3{font-size:1.2rem}
+  .story-card-inner{padding:24px 22px}
+  .story-icon{font-size:2.8rem;top:20px;right:20px}
 }
 
-/* ── Story cards — carrusel horizontal en móvil ─── */
+/* ── Tabs del catálogo — wrap en móvil ── */
+@media(max-width:768px){
+  .tabs{
+    flex-wrap:wrap;justify-content:center;
+    overflow-x:unset;-webkit-overflow-scrolling:unset;
+    scrollbar-width:unset;width:100%;max-width:100%;
+    margin:20px 0 14px;border-radius:16px;gap:6px;padding:8px;
+  }
+  .tabs::-webkit-scrollbar{display:none}
+  .tab-btn{white-space:nowrap;flex-shrink:0;padding:7px 12px;font-size:.73rem}
+}
+
+/* ── Story cards — cuadrícula 2 col en móvil, todo en pantalla ─── */
 @media(max-width:768px){
   .story-cards{
-    display:flex!important;
-    grid-template-columns:unset!important;
-    overflow-x:auto;-webkit-overflow-scrolling:touch;
-    scroll-snap-type:x mandatory;
-    gap:14px;padding:0 16px 10px;
-    scrollbar-width:none;
+    display:grid!important;
+    grid-template-columns:1fr 1fr;
+    overflow-x:unset;-webkit-overflow-scrolling:unset;
+    scroll-snap-type:unset;
+    gap:10px;padding:0 16px;
+    scrollbar-width:unset;
+    margin-top:32px;
   }
   .story-cards::-webkit-scrollbar{display:none}
   .story-card{
-    flex:0 0 250px!important;height:310px;
-    scroll-snap-align:start;border-radius:16px;
+    flex:unset!important;height:145px;
+    scroll-snap-align:unset;border-radius:14px;
     grid-column:unset!important;
   }
   .story-card:nth-child(n){grid-column:unset!important}
+  .story-card:nth-child(5){grid-column:1/-1;height:110px}
+  .story-card h3{font-size:1.05rem;margin-bottom:4px}
+  .story-card p{font-size:.75rem;margin-bottom:10px}
+  .story-icon{font-size:2.2rem;top:14px;right:14px}
+  .story-card-inner{padding:16px 14px}
+  .story-btn{padding:6px 13px;font-size:.72rem}
 }
 
 /* ── Hover preview — desactivado en dispositivos táctiles ── */
