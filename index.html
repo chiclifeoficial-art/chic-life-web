@@ -73,6 +73,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
   animation:marquee 18s linear infinite}
 @keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-30%)}}
+@keyframes moonFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-5px) scale(1.03)}}
 
 /* ═══════════════════════════════════════════════════════════
    HEADER / NAV
@@ -679,11 +680,23 @@ section{padding:100px 32px}
 .cal-day-header{text-align:center;font-size:.85rem;font-weight:700;letter-spacing:.05em;
   color:rgba(204,0,112,.55);text-transform:uppercase;padding:4px}
 .cal-day{display:flex;flex-direction:column;align-items:center;gap:6px}
-.cal-day-moon-wrap{width:32px;height:32px;border-radius:50%;
+.cal-day-moon-wrap{width:44px;height:44px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;transition:box-shadow .2s,transform .2s}
-.cal-day-moon-wrap.moon-crecimiento{background:rgba(90,23,53,.1);box-shadow:inset 0 0 0 1.5px rgba(140,37,88,.3)}
-.cal-day-moon-wrap.moon-rapido{background:rgba(255,20,147,.14);box-shadow:inset 0 0 0 1.5px rgba(255,20,147,.65)}
-.cal-day-moon-wrap.moon-depilacion{background:rgba(212,169,106,.18);box-shadow:inset 0 0 0 1.5px rgba(212,169,106,.6)}
+.cal-day-moon-wrap svg{
+  animation:moonFloat 4s ease-in-out infinite;
+  will-change:transform;
+  filter:drop-shadow(0 4px 8px rgba(90,23,53,.32)) drop-shadow(0 1px 3px rgba(0,0,0,.18))
+}
+/* Delays escalonados para efecto orgánico */
+.cal-day:nth-child(7n+2) .cal-day-moon-wrap svg{animation-delay:-.57s}
+.cal-day:nth-child(7n+3) .cal-day-moon-wrap svg{animation-delay:-1.14s}
+.cal-day:nth-child(7n+4) .cal-day-moon-wrap svg{animation-delay:-1.71s}
+.cal-day:nth-child(7n+5) .cal-day-moon-wrap svg{animation-delay:-2.28s}
+.cal-day:nth-child(7n+6) .cal-day-moon-wrap svg{animation-delay:-2.85s}
+.cal-day:nth-child(7n)   .cal-day-moon-wrap svg{animation-delay:-3.43s}
+.cal-day-moon-wrap.moon-crecimiento{background:rgba(90,23,53,.1);box-shadow:inset 0 0 0 2px rgba(140,37,88,.3)}
+.cal-day-moon-wrap.moon-rapido{background:rgba(255,20,147,.12);box-shadow:inset 0 0 0 2px rgba(255,20,147,.6)}
+.cal-day-moon-wrap.moon-depilacion{background:rgba(212,169,106,.15);box-shadow:inset 0 0 0 2px rgba(212,169,106,.55)}
 .cal-day-num{font-size:.7rem;color:rgba(90,23,53,.6);letter-spacing:.02em}
 .cal-day.active-highlight .cal-day-moon-wrap{
   box-shadow:0 0 0 2px var(--fuchsia),0 0 16px rgba(255,20,147,.45);transform:scale(1.1)}
@@ -841,7 +854,7 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
   .lunar-calendar{display:grid;gap:10px 3px;padding:16px 8px;
     grid-template-columns:repeat(7,1fr)}
-  .cal-day-moon-wrap{width:30px;height:30px}
+  .cal-day-moon-wrap{width:38px;height:38px}
   .cal-day-header{font-size:.72rem;padding:2px}
   .cal-day{gap:3px}
   .cal-day-num{font-size:.62rem}
@@ -1268,6 +1281,17 @@ fbq('track', 'PageView');
 
 </head>
 <body>
+<!-- Defs SVG globales para gradientes de las lunas del calendario -->
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <radialGradient id="moonFaceGrad" cx="34%" cy="27%" r="70%">
+      <stop offset="0%"   stop-color="#FFFEF8"/>
+      <stop offset="38%"  stop-color="#F5E5C0"/>
+      <stop offset="80%"  stop-color="#D4B080"/>
+      <stop offset="100%" stop-color="#B8905A"/>
+    </radialGradient>
+  </defs>
+</svg>
 
 <!-- BARRA DE ANUNCIO -->
 <div class="announce" role="banner">
@@ -2982,11 +3006,18 @@ function getMoonPhasePath(phase, r) {
 }
 
 function moonIconSVG(phase) {
-  const r = 13;
+  const r = 18;
+  const pad = 4;
+  const vb = r * 2 + pad * 2; // viewBox size = 44
   const path = getMoonPhasePath(phase, r);
-  return `<svg viewBox="0 0 ${r * 2} ${r * 2}" width="32" height="32">
-    <circle cx="${r}" cy="${r}" r="${r - 0.6}" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
-    <path d="${path}" fill="#FDF3E3"/>
+  // Brillo especular: esquina superior-izquierda del disco
+  const hx = r - 5;
+  const hy = r - 6;
+  const hrx = Math.round(r * 0.26);
+  const hry = Math.round(r * 0.14);
+  return `<svg viewBox="${-pad} ${-pad} ${vb} ${vb}" width="42" height="42" aria-hidden="true">
+    <path d="${path}" fill="url(#moonFaceGrad)"/>
+    <ellipse cx="${hx}" cy="${hy}" rx="${hrx}" ry="${hry}" fill="rgba(255,255,255,.58)" transform="rotate(-24,${hx},${hy})"/>
   </svg>`;
 }
 
