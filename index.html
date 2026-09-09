@@ -871,6 +871,122 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
   /* Móvil: 3 columnas para ver 9 productos en pantalla */
   .prod-grid{grid-template-columns:1fr 1fr 1fr;gap:5px}
 }
+
+/* ── Tutorial Lunar Modal ─────────────────────────── */
+.tut-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  margin:24px auto 0;padding:12px 26px;border-radius:50px;
+  border:2px solid rgba(255,255,255,.55);
+  background:rgba(255,255,255,.12);
+  color:#fff;font-family:var(--body);font-size:.92rem;font-weight:600;
+  cursor:pointer;letter-spacing:.04em;backdrop-filter:blur(6px);
+  transition:background .25s,border-color .25s,transform .18s;
+}
+.tut-btn:hover{background:rgba(255,20,147,.22);border-color:rgba(255,20,147,.7);transform:scale(1.04)}
+.tut-btn svg{flex-shrink:0}
+
+.tut-overlay{
+  position:fixed;inset:0;z-index:9200;
+  background:rgba(30,5,20,.72);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;padding:16px;
+  opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
+}
+.tut-overlay.tut-open{opacity:1;visibility:visible}
+
+.tut-panel{
+  width:100%;max-width:480px;max-height:90vh;overflow-y:auto;
+  background:linear-gradient(145deg,#3d0d28,#6b1a42);
+  border:1.5px solid rgba(255,20,147,.35);border-radius:20px;
+  padding:0;box-shadow:0 24px 80px rgba(0,0,0,.55);
+  transform:translateY(30px) scale(.96);transition:transform .3s;
+  scrollbar-width:thin;scrollbar-color:rgba(255,20,147,.4) transparent;
+}
+.tut-overlay.tut-open .tut-panel{transform:none}
+
+.tut-header{
+  position:sticky;top:0;z-index:2;
+  background:linear-gradient(135deg,#5A1735,#8C2558);
+  padding:20px 24px 18px;border-radius:20px 20px 0 0;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(255,20,147,.25);
+}
+.tut-header-title{font-family:var(--fd);font-size:1.2rem;font-weight:700;color:#fff;line-height:1.2}
+.tut-header-sub{font-size:.72rem;color:rgba(255,182,193,.7);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+.tut-close{
+  background:rgba(255,255,255,.12);border:none;border-radius:50%;width:32px;height:32px;
+  color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .2s;flex-shrink:0;margin-left:12px;
+}
+.tut-close:hover{background:rgba(255,20,147,.45)}
+
+/* Slides */
+.tut-slides{display:flex;overflow:hidden;width:100%;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.tut-slide{min-width:100%;padding:22px 24px 28px;box-sizing:border-box}
+
+.tut-slide-num{
+  font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(212,169,106,.75);margin-bottom:6px;font-weight:600;
+}
+.tut-slide h3{
+  font-family:var(--fd);font-size:1.12rem;font-weight:700;color:#fff;
+  margin:0 0 10px;line-height:1.3;
+}
+.tut-slide p{font-size:.88rem;color:rgba(255,255,255,.8);line-height:1.55;margin:0 0 12px}
+
+.tut-moon-card{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,.07);border-radius:12px;padding:12px 14px;margin-bottom:10px;
+  border:1px solid rgba(255,255,255,.1);
+}
+.tut-moon-icon{width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.tut-moon-card h4{margin:0 0 2px;font-size:.9rem;color:#fff;font-weight:700}
+.tut-moon-card p{margin:0;font-size:.78rem;color:rgba(255,255,255,.65)}
+
+.tut-step{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+.tut-step-num{
+  width:26px;height:26px;border-radius:50%;background:rgba(255,20,147,.22);
+  color:var(--fuchsia);font-weight:800;font-size:.78rem;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(255,20,147,.5);
+  margin-top:1px;
+}
+.tut-step p{margin:0;font-size:.86rem;color:rgba(255,255,255,.82);line-height:1.5}
+
+.tut-tip{
+  background:rgba(212,169,106,.12);border-left:3px solid #D4A96A;
+  border-radius:0 8px 8px 0;padding:10px 14px;margin-top:12px;
+  font-size:.82rem;color:rgba(255,255,255,.8);line-height:1.5;
+}
+
+/* Nav dots + arrows */
+.tut-nav{
+  display:flex;align-items:center;justify-content:center;gap:16px;
+  padding:16px 24px 22px;border-top:1px solid rgba(255,255,255,.08);
+}
+.tut-nav-btn{
+  background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);
+  border-radius:50%;width:36px;height:36px;color:#fff;font-size:1rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;
+}
+.tut-nav-btn:hover:not(:disabled){background:rgba(255,20,147,.35);border-color:rgba(255,20,147,.6)}
+.tut-nav-btn:disabled{opacity:.3;cursor:default}
+.tut-dots{display:flex;gap:6px}
+.tut-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.25);transition:background .2s,transform .2s;cursor:pointer}
+.tut-dot.active{background:#FF1493;transform:scale(1.3)}
+
+/* CTA slide */
+.tut-cta-badge{
+  display:inline-block;background:linear-gradient(135deg,#FF1493,#CC0070);
+  color:#fff;font-weight:700;font-size:.8rem;border-radius:50px;
+  padding:6px 16px;letter-spacing:.04em;margin-bottom:14px;
+}
+
+@media(max-width:600px){
+  .tut-panel{max-width:100%;max-height:88vh}
+  .tut-slide{padding:18px 18px 22px}
+  .tut-header{padding:16px 18px 14px}
+  .tut-nav{padding:12px 18px 18px}
+}
 </style>
 
 <!-- ═══════════════════════════════════════════════════════════
@@ -1738,6 +1854,13 @@ fbq('track', 'PageView');
           <div id="phase-warning"></div>
         </div>
       </div>
+    </div>
+
+    <div style="text-align:center;margin-top:32px">
+      <button class="tut-btn" onclick="openLunarTutorial()" aria-label="Ver tutorial del calendario lunar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        ¿Cómo leer el calendario?
+      </button>
     </div>
 
     <p class="lunar-disclaimer rev">
@@ -5200,6 +5323,205 @@ document.querySelectorAll('.tone').forEach(tone => {
       }
     });
   });
+})();
+</script>
+
+<!-- ── Tutorial Lunar Burbuja ─────────────────────── -->
+<div class="tut-overlay" id="tut-overlay" role="dialog" aria-modal="true" aria-label="Tutorial Calendario Lunar">
+  <div class="tut-panel">
+    <div class="tut-header">
+      <div>
+        <div class="tut-header-title">🌙 Tutorial para Dummies</div>
+        <div class="tut-header-sub">Cómo leer el Calendario Lunar Chic Life</div>
+      </div>
+      <button class="tut-close" onclick="closeLunarTutorial()" aria-label="Cerrar tutorial">✕</button>
+    </div>
+
+    <div class="tut-slides" id="tut-slides">
+
+      <!-- Slide 1: ¿Qué es? -->
+      <div class="tut-slide">
+        <div class="tut-slide-num">Paso 1 de 6</div>
+        <h3>✨ ¿Qué es el Calendario Lunar?</h3>
+        <p>El calendario lunar de Chic Life te dice cuál es el mejor <strong>día del mes</strong> para hacerte el cabello o depilarte, según la fase real de la luna de hoy.</p>
+        <p>La luna tiene 4 fases que cambian cada semana. Cada fase influye diferente en tu cuerpo — y eso se traduce en resultados más duraderos y bonitos. 🌙</p>
+        <div class="tut-tip">💡 El calendario se recalcula automáticamente cada vez que abres la página, siempre con las fases reales de este mes.</div>
+      </div>
+
+      <!-- Slide 2: 3 tipos de luna -->
+      <div class="tut-slide">
+        <div class="tut-slide-num">Paso 2 de 6</div>
+        <h3>🌒 Los 3 Tipos de Luna</h3>
+        <p>En el calendario verás 3 colores de luna. Cada color es un tipo de servicio:</p>
+        <div class="tut-moon-card">
+          <div class="tut-moon-icon" style="background:rgba(90,23,53,.3);border:2px solid rgba(140,37,88,.4)">⚫</div>
+          <div>
+            <h4>Crecimiento Fuerte</h4>
+            <p>Cuarto creciente · El cabello crece más denso, grueso y resistente</p>
+          </div>
+        </div>
+        <div class="tut-moon-card">
+          <div class="tut-moon-icon" style="background:rgba(255,20,147,.15);border:2px solid rgba(255,20,147,.5)">🔴</div>
+          <div>
+            <h4>Crecimiento Rápido</h4>
+            <p>Luna nueva · El cabello crece más rápido, ideal para cambios de look</p>
+          </div>
+        </div>
+        <div class="tut-moon-card">
+          <div class="tut-moon-icon" style="background:rgba(212,169,106,.18);border:2px solid rgba(212,169,106,.5)">⚪</div>
+          <div>
+            <h4>Depilación</h4>
+            <p>Luna llena o menguante · El vello tarda más en volver y sale más fino</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Elige tu objetivo -->
+      <div class="tut-slide">
+        <div class="tut-slide-num">Paso 3 de 6</div>
+        <h3>🎯 Elige Tu Objetivo</h3>
+        <p>En la columna izquierda del calendario hay <strong>3 botones</strong>. Selecciona el que coincida con lo que quieres lograr:</p>
+        <div class="tut-step">
+          <div class="tut-step-num">1</div>
+          <p><strong>Crecimiento Fuerte</strong> — quieres cabello más grueso y denso, o un corte que dure más tiempo sin crecer tan rápido.</p>
+        </div>
+        <div class="tut-step">
+          <div class="tut-step-num">2</div>
+          <p><strong>Crecimiento Rápido</strong> — quieres que el cabello te crezca lo más rápido posible, por ejemplo después de un corte corto.</p>
+        </div>
+        <div class="tut-step">
+          <div class="tut-step-num">3</div>
+          <p><strong>Depilación</strong> — quieres que el vello tarde más en volver y que salga más delgado y suave.</p>
+        </div>
+        <div class="tut-tip">💡 Selecciona <strong>uno solo</strong> según lo que necesitas este mes. Puedes cambiarlo cuando quieras.</div>
+      </div>
+
+      <!-- Slide 4: Lee el calendario -->
+      <div class="tut-slide">
+        <div class="tut-slide-num">Paso 4 de 6</div>
+        <h3>📅 Lee el Calendario</h3>
+        <p>El calendario muestra los <strong>próximos 30 días</strong>. Cada casilla es un día del mes con su luna:</p>
+        <div class="tut-step">
+          <div class="tut-step-num">1</div>
+          <p>El <strong>número</strong> es la fecha del mes (1, 2, 3…)</p>
+        </div>
+        <div class="tut-step">
+          <div class="tut-step-num">2</div>
+          <p>La <strong>luna coloreada</strong> te dice si ese día es bueno para tu objetivo elegido</p>
+        </div>
+        <div class="tut-step">
+          <div class="tut-step-num">3</div>
+          <p>Los días <strong>resaltados con borde fucsia</strong> son los mejores días del mes para tu objetivo</p>
+        </div>
+        <div class="tut-step">
+          <div class="tut-step-num">4</div>
+          <p>El día de <strong>hoy</strong> aparece con un contorno brillante especial</p>
+        </div>
+      </div>
+
+      <!-- Slide 5: Usa la info de la luna -->
+      <div class="tut-slide">
+        <div class="tut-slide-num">Paso 5 de 6</div>
+        <h3>🌕 Usa la Info de la Luna</h3>
+        <p>A la derecha del calendario hay una <strong>luna grande animada</strong> con información del día de hoy:</p>
+        <div class="tut-step">
+          <div class="tut-step-num">1</div>
+          <p><strong>Fase actual</strong> — te dice en qué fase está la luna hoy (nueva, creciente, llena, menguante)</p>
+        </div>
+        <div class="tut-step">
+          <div class="tut-step-num">2</div>
+          <p><strong>Recomendación</strong> — qué tipo de servicio o tratamiento sacar el máximo provecho hoy</p>
+        </div>
+        <div class="tut-step">
+          <div class="tut-step-num">3</div>
+          <p><strong>Productos</strong> — sugerencias de productos Chic Life perfectos para usar en esta fase</p>
+        </div>
+        <div class="tut-tip">💡 Haz clic en cualquier luna del calendario para ver la info específica de ese día.</div>
+      </div>
+
+      <!-- Slide 6: CTA -->
+      <div class="tut-slide" style="text-align:center;padding-top:32px">
+        <div class="tut-slide-num">Paso 6 de 6</div>
+        <div style="font-size:3rem;margin-bottom:12px">🌙</div>
+        <h3 style="font-size:1.3rem">¡Ya eres una experta lunar!</h3>
+        <p>Ahora sabes cómo usar el Calendario Lunar Chic Life para sacar el máximo provecho de cada servicio.</p>
+        <div class="tut-cta-badge">✨ Tu ritual, sincronizado con la luna</div>
+        <p style="font-size:.82rem;color:rgba(255,182,193,.7);margin-top:8px">Agenda tu cita en el mejor día del mes y nota la diferencia 🌸</p>
+        <button onclick="closeLunarTutorial()" style="
+          margin-top:20px;padding:13px 32px;border-radius:50px;
+          background:linear-gradient(135deg,#FF1493,#CC0070);border:none;
+          color:#fff;font-weight:700;font-size:.95rem;cursor:pointer;
+          letter-spacing:.04em;box-shadow:0 8px 24px rgba(255,20,147,.35);
+          transition:transform .2s;
+        " onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform=''">
+          ¡Entendido! Ir al calendario 🌙
+        </button>
+      </div>
+
+    </div><!-- /slides -->
+
+    <div class="tut-nav">
+      <button class="tut-nav-btn" id="tut-prev" onclick="tutNav(-1)" disabled aria-label="Anterior">&#8592;</button>
+      <div class="tut-dots" id="tut-dots"></div>
+      <button class="tut-nav-btn" id="tut-next" onclick="tutNav(1)" aria-label="Siguiente">&#8594;</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var overlay=document.getElementById('tut-overlay');
+  var slidesWrap=document.getElementById('tut-slides');
+  var dotsWrap=document.getElementById('tut-dots');
+  var prev=document.getElementById('tut-prev');
+  var next=document.getElementById('tut-next');
+  var slides=slidesWrap?Array.from(slidesWrap.querySelectorAll('.tut-slide')):[];
+  var cur=0;
+
+  function buildDots(){
+    if(!dotsWrap)return;
+    dotsWrap.innerHTML='';
+    slides.forEach(function(_,i){
+      var d=document.createElement('button');
+      d.className='tut-dot'+(i===0?' active':'');
+      d.setAttribute('aria-label','Ir al paso '+(i+1));
+      d.addEventListener('click',function(){goTo(i)});
+      dotsWrap.appendChild(d);
+    });
+  }
+
+  function goTo(n){
+    cur=Math.max(0,Math.min(n,slides.length-1));
+    slidesWrap.style.transform='translateX(-'+cur+'00%)';
+    Array.from(dotsWrap.children).forEach(function(d,i){d.classList.toggle('active',i===cur)});
+    prev.disabled=cur===0;
+    next.disabled=cur===slides.length-1;
+  }
+
+  window.tutNav=function(d){goTo(cur+d)};
+
+  window.openLunarTutorial=function(){
+    cur=0;
+    buildDots();
+    if(slidesWrap)slidesWrap.style.transform='translateX(0)';
+    if(prev)prev.disabled=true;
+    if(next)next.disabled=false;
+    if(overlay){overlay.classList.add('tut-open');document.body.style.overflow='hidden';}
+  };
+
+  window.closeLunarTutorial=function(){
+    if(overlay){overlay.classList.remove('tut-open');document.body.style.overflow='';}
+  };
+
+  if(overlay){
+    overlay.addEventListener('click',function(e){if(e.target===overlay)closeLunarTutorial()});
+    document.addEventListener('keydown',function(e){
+      if(!overlay.classList.contains('tut-open'))return;
+      if(e.key==='Escape')closeLunarTutorial();
+      if(e.key==='ArrowRight')tutNav(1);
+      if(e.key==='ArrowLeft')tutNav(-1);
+    });
+  }
 })();
 </script>
 
