@@ -634,12 +634,13 @@ section{padding:100px 32px}
    CALENDARIO LUNAR
 ═══════════════════════════════════════════════════════════ */
 .lunar{
-  background:linear-gradient(160deg,#0D0A1A,#1A0A2E,#0D0A1A);
+  background:linear-gradient(160deg,#2D0A1E,#4B1535,#2D0A1E);
   color:var(--white);position:relative;overflow:hidden;
 }
 .lunar::before{content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 60% 40% at 70% 30%,rgba(255,20,147,.15),transparent),
-              radial-gradient(ellipse 40% 60% at 20% 70%,rgba(212,169,106,.1),transparent)}
+  background:radial-gradient(ellipse 60% 40% at 70% 25%,rgba(212,169,106,.14),transparent),
+              radial-gradient(ellipse 40% 60% at 15% 75%,rgba(255,20,147,.18),transparent),
+              radial-gradient(ellipse 30% 30% at 85% 80%,rgba(255,105,180,.10),transparent)}
 .lunar .sec-label{color:#FFB6C1}
 .lunar .sec-title{color:var(--white)}
 .lunar .sec-title em{color:#FFB6C1}
@@ -672,27 +673,29 @@ section{padding:100px 32px}
 .phase-icon-lg{font-size:3rem;margin-bottom:12px}
 .phase-rec{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.7}
 .lunar-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:16px 4px;margin-top:28px;
-  background:#0A0812;border:1px solid rgba(255,255,255,.08);border-radius:var(--r-md);padding:24px 12px}
+  background:linear-gradient(145deg,#FEF0FA,#FDF5FC,#FBE8F5);
+  border:1px solid rgba(255,20,147,.18);border-radius:var(--r-md);padding:24px 12px;
+  box-shadow:0 8px 40px rgba(75,21,53,.25),inset 0 1px 0 rgba(255,255,255,.8)}
 .cal-day-header{text-align:center;font-size:.85rem;font-weight:700;letter-spacing:.05em;
-  color:rgba(255,255,255,.4);text-transform:uppercase;padding:4px}
+  color:rgba(120,30,75,.5);text-transform:uppercase;padding:4px}
 .cal-day{display:flex;flex-direction:column;align-items:center;gap:6px}
 .cal-day-moon-wrap{width:32px;height:32px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;transition:box-shadow .2s,transform .2s}
-.cal-day-moon-wrap.moon-crecimiento{background:rgba(26,26,26,.55);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
-.cal-day-moon-wrap.moon-rapido{background:rgba(199,44,111,.32);box-shadow:inset 0 0 0 1px rgba(199,44,111,.7)}
-.cal-day-moon-wrap.moon-depilacion{background:rgba(224,224,224,.2);box-shadow:inset 0 0 0 1px rgba(224,224,224,.6)}
-.cal-day-num{font-size:.7rem;color:rgba(255,255,255,.55);letter-spacing:.02em}
+.cal-day-moon-wrap.moon-crecimiento{background:rgba(75,21,53,.12);box-shadow:inset 0 0 0 1.5px rgba(100,30,70,.32)}
+.cal-day-moon-wrap.moon-rapido{background:rgba(199,44,111,.18);box-shadow:inset 0 0 0 1.5px rgba(199,44,111,.65)}
+.cal-day-moon-wrap.moon-depilacion{background:rgba(210,170,200,.28);box-shadow:inset 0 0 0 1px rgba(180,100,150,.4)}
+.cal-day-num{font-size:.7rem;color:rgba(75,21,53,.6);letter-spacing:.02em}
 .cal-day.active-highlight .cal-day-moon-wrap{
-  box-shadow:0 0 0 2px var(--fuchsia),0 0 14px rgba(255,20,147,.55);transform:scale(1.1)}
-.cal-day.today .cal-day-moon-wrap{outline:2px solid #FFB6C1;outline-offset:2px}
-.cal-day.today .cal-day-num{color:#FFB6C1;font-weight:700}
+  box-shadow:0 0 0 2px var(--fuchsia),0 0 14px rgba(255,20,147,.4);transform:scale(1.1)}
+.cal-day.today .cal-day-moon-wrap{outline:2px solid var(--fuchsia);outline-offset:2px}
+.cal-day.today .cal-day-num{color:var(--fuchsia);font-weight:700}
 .cal-month-header{grid-column:1/-1;text-align:center;font-family:var(--fd);
-  font-size:1.3rem;font-weight:700;color:var(--white);padding:8px 0 6px;
+  font-size:1.3rem;font-weight:700;color:#4B1535;padding:8px 0 6px;
   letter-spacing:.04em;text-transform:uppercase}
 .lunar-calendar-caption{grid-column:1/-1;text-align:center;font-size:.72rem;
-  color:rgba(255,255,255,.4);margin-top:12px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
-.lunar-calendar-caption b{color:#FFB6C1}
-.lunar-disclaimer{text-align:center;font-size:.72rem;color:rgba(255,255,255,.4);
+  color:rgba(75,21,53,.55);margin-top:12px;padding-top:14px;border-top:1px solid rgba(255,20,147,.12)}
+.lunar-calendar-caption b{color:var(--fuchsia-d)}
+.lunar-disclaimer{text-align:center;font-size:.72rem;color:rgba(255,220,240,.45);
   margin-top:40px;font-style:italic;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.7}
 .phase-extra-row{display:flex;align-items:flex-start;gap:8px}
 .phase-extra-row .pe-icon{flex-shrink:0}
@@ -1686,7 +1689,7 @@ fbq('track', 'PageView');
           <circle cx="110" cy="100" r="12" fill="#C4A57A" opacity=".25"/>
           <circle cx="75" cy="115" r="5" fill="#C4A57A" opacity=".3"/>
           <!-- Shadow overlay (phase) -->
-          <ellipse id="moon-shadow" cx="110" cy="90" rx="40" ry="80" fill="#0D0A1A" opacity=".82"/>
+          <ellipse id="moon-shadow" cx="110" cy="90" rx="40" ry="80" fill="#2D0A1E" opacity=".82"/>
           <!-- Glow -->
           <circle cx="90" cy="90" r="82" fill="none" stroke="rgba(255,248,220,0.3)" stroke-width="6"/>
         </svg>
