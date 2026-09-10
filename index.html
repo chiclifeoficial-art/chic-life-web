@@ -3358,6 +3358,74 @@ document.querySelectorAll('.tone').forEach(tone => {
 @media(max-width:480px){.cl-popup{padding:30px 22px 24px}}
 </style>
 
+<style>
+/* ── Tab lateral de bienvenida ──────────────────────────────────────────── */
+#cl-bienvenida-wrap{
+  position:fixed;top:50%;left:0;
+  transform:translateY(-50%);
+  z-index:9999;display:flex;
+  align-items:stretch;
+}
+#cl-side-tab{
+  order:2;
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  background:#FF1493;
+  color:#fff;
+  border:none;
+  padding:20px 11px;
+  border-radius:0 10px 10px 0;
+  cursor:pointer;
+  font-weight:700;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  font-family:var(--fd,'Playfair Display',serif);
+  box-shadow:3px 2px 16px rgba(255,20,147,.45);
+  transition:padding .2s,box-shadow .2s;
+  align-self:center;
+  line-height:1.3;
+}
+#cl-side-tab:hover{padding:24px 13px;box-shadow:4px 3px 20px rgba(255,20,147,.55)}
+
+/* Panel lateral: reemplaza el overlay de pantalla completa */
+#cl-popup-overlay{
+  order:1;
+  position:relative!important;
+  inset:auto!important;
+  background:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  z-index:auto!important;
+  padding:0!important;
+  opacity:1!important;
+  display:block!important;
+  overflow:hidden;
+  width:0;
+  transition:width .38s cubic-bezier(.4,0,.2,1);
+}
+#cl-popup-overlay.cl-open{
+  width:min(370px,calc(100vw - 52px));
+}
+#cl-popup-overlay .cl-popup{
+  transform:none!important;
+  border-radius:0 var(--r-lg,16px) var(--r-lg,16px) 0!important;
+  width:370px;
+  max-width:none!important;
+  box-shadow:6px 0 28px rgba(0,0,0,.14)!important;
+  max-height:85vh;
+}
+@media(max-width:480px){
+  #cl-side-tab{font-size:.72rem;padding:16px 9px}
+  #cl-popup-overlay.cl-open{width:calc(100vw - 44px)}
+  #cl-popup-overlay .cl-popup{padding:28px 18px 20px!important}
+}
+</style>
+
+<!-- Tab lateral + panel de bienvenida -->
+<div id="cl-bienvenida-wrap">
+  <button id="cl-side-tab" aria-label="Abrir oferta de bienvenida" aria-expanded="false">
+    ¡Conoce nuestras novedades!
+  </button>
 <div class="cl-popup-overlay" id="cl-popup-overlay">
   <div class="cl-popup" role="dialog" aria-modal="true" aria-labelledby="cl-popup-heading">
     <button class="cl-popup-close" id="cl-popup-close" aria-label="Cerrar">&times;</button>
@@ -3400,6 +3468,7 @@ document.querySelectorAll('.tone').forEach(tone => {
     </div>
   </div>
 </div>
+</div><!-- /cl-bienvenida-wrap -->
 
 <!-- ── Burbuja flotante de detalle de producto (móvil) ── -->
 <div id="cl-det-overlay" role="dialog" aria-modal="true" aria-label="Detalle del producto">
@@ -3503,25 +3572,20 @@ document.querySelectorAll('.tone').forEach(tone => {
   const codeText = document.getElementById('cl-code-text');
   const copyBtn = document.getElementById('cl-copy-btn');
 
-  // El popup se muestra cada vez que se carga/actualiza la página
-  // (sin memoria entre visitas — a propósito, por instrucción explícita).
+  const sideTab = document.getElementById('cl-side-tab');
+
   function abrirPopup(){
     overlay.classList.add('cl-open');
-    requestAnimationFrame(() => overlay.classList.add('cl-visible'));
-    document.body.style.overflow = 'hidden';
+    sideTab.setAttribute('aria-expanded','true');
   }
   function cerrarPopup(){
-    overlay.classList.remove('cl-visible');
+    overlay.classList.remove('cl-open');
     document.body.style.overflow = '';
-    setTimeout(() => overlay.classList.remove('cl-open'), 350);
+    sideTab.setAttribute('aria-expanded','false');
   }
 
-  setTimeout(abrirPopup, 4000);
-
+  sideTab.addEventListener('click', abrirPopup);
   closeBtn.addEventListener('click', cerrarPopup);
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) cerrarPopup();
-  });
 
   function mostrarError(msg){
     errorEl.textContent = msg;
