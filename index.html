@@ -920,7 +920,8 @@ footer{background:#111;color:rgba(255,255,255,.7);padding:72px 32px 32px}
 .tut-close:hover{background:rgba(255,20,147,.45)}
 
 /* Slides */
-.tut-slides{display:flex;overflow:hidden;width:100%;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.tut-slides{overflow:hidden;width:100%}
+.tut-slides-inner{display:flex;width:100%;transition:transform .35s cubic-bezier(.4,0,.2,1)}
 .tut-slide{min-width:100%;padding:22px 24px 28px;box-sizing:border-box}
 
 .tut-slide-num{
@@ -5338,6 +5339,7 @@ document.querySelectorAll('.tone').forEach(tone => {
     </div>
 
     <div class="tut-slides" id="tut-slides">
+      <div class="tut-slides-inner" id="tut-slides-inner">
 
       <!-- Slide 1: ¿Qué es? -->
       <div class="tut-slide">
@@ -5458,6 +5460,7 @@ document.querySelectorAll('.tone').forEach(tone => {
         </button>
       </div>
 
+      </div><!-- /slides-inner -->
     </div><!-- /slides -->
 
     <div class="tut-nav">
@@ -5471,7 +5474,7 @@ document.querySelectorAll('.tone').forEach(tone => {
 <script>
 (function(){
   var overlay=document.getElementById('tut-overlay');
-  var slidesWrap=document.getElementById('tut-slides');
+  var slidesWrap=document.getElementById('tut-slides-inner');
   var dotsWrap=document.getElementById('tut-dots');
   var prev=document.getElementById('tut-prev');
   var next=document.getElementById('tut-next');
