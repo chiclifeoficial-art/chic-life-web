@@ -5886,6 +5886,7 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
         inscMsg.className = 'cl-insc-msg ok';
         inscMsg.textContent = '¡Te inscribiste exitosamente! 🌸';
         inscBtn.textContent = '¡Listo!';
+        setTimeout(cerrarInscripcion, 2500);
       } else {
         inscMsg.className = 'cl-insc-msg err';
         inscMsg.textContent = (res.data && res.data.error) || 'Error al procesar. Intenta de nuevo.';
