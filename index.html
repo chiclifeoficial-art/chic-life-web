@@ -5839,7 +5839,14 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
 
   inscForm.addEventListener('submit', function(e){
     e.preventDefault();
-    if (!_inscCampana || !_inscCampana.api_url) {
+    if (!_inscCampana) {
+      inscMsg.className = 'cl-insc-msg err';
+      inscMsg.textContent = 'Error: campaña no identificada.';
+      return;
+    }
+    var _appsOk = APPS_SCRIPT_URL && APPS_SCRIPT_URL.indexOf('PEGA_AQUI') === -1;
+    var _erpOk  = !!_inscCampana.api_url;
+    if (!_appsOk && !_erpOk) {
       inscMsg.className = 'cl-insc-msg err';
       inscMsg.textContent = 'El formulario no está disponible en este momento.';
       return;
@@ -5852,20 +5859,36 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
       inscMsg.className = 'cl-insc-msg err'; inscMsg.textContent = 'Por favor completa todos los campos.'; return;
     }
     inscBtn.disabled = true; inscBtn.textContent = 'Enviando…';
-    fetch(_inscCampana.api_url + '/api/publico/campanas/' + _inscCampana.id + '/inscribir', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre: nombre, documento: doc, whatsapp: ws, email: email }),
-    })
+
+    var fetchUrl, fetchOpts;
+    if (_appsOk) {
+      // Enviar al Apps Script como relay 24/7 (POST urlencoded = sin preflight CORS)
+      var params = new URLSearchParams({
+        accion: 'inscribir',
+        campana_id: _inscCampana.id,
+        campana_nombre: _inscCampana.titulo || '',
+        nombre: nombre, documento: doc, whatsapp: ws, email: email,
+        vigencia_hasta: _inscCampana.fecha_fin || ''
+      });
+      fetchUrl  = APPS_SCRIPT_URL;
+      fetchOpts = { method: 'POST', body: params };
+    } else {
+      // Fallback directo al ERP si no hay Apps Script configurado
+      fetchUrl  = _inscCampana.api_url + '/api/publico/campanas/' + _inscCampana.id + '/inscribir';
+      fetchOpts = { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombre: nombre, documento: doc, whatsapp: ws, email: email }) };
+    }
+
+    fetch(fetchUrl, fetchOpts)
     .then(function(r){ return r.json().then(function(d){ return { ok: r.ok, data: d }; }); })
     .then(function(res){
-      if (res.ok) {
+      if (res.ok && res.data.ok !== false) {
         inscMsg.className = 'cl-insc-msg ok';
         inscMsg.textContent = '¡Te inscribiste exitosamente! 🌸';
         inscBtn.textContent = '¡Listo!';
       } else {
         inscMsg.className = 'cl-insc-msg err';
-        inscMsg.textContent = res.data.error || 'Error al procesar. Intenta de nuevo.';
+        inscMsg.textContent = (res.data && res.data.error) || 'Error al procesar. Intenta de nuevo.';
         inscBtn.disabled = false; inscBtn.textContent = '¡Quiero inscribirme!';
       }
     })
