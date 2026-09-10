@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<!-- iOS: se abre como mini-app sin barra de Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Tutorial Lunar Chic Life">
+
+<!-- Android: color de barra de Chrome -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1A0410">
+
+<!-- Compartir en redes -->
+<meta name="description" content="Aprende a leer el Calendario Lunar Chic Life en 7 pasos simples. ¡Sin complicaciones!">
+<meta property="og:title" content="Tutorial Lunar · Chic Life">
+<meta property="og:description" content="Aprende a leer el Calendario Lunar Chic Life en 7 pasos simples.">
+<meta property="og:type" content="website">
+
+<title>Tutorial Lunar · Chic Life</title>
+
+<!-- Google Fonts — carga si hay internet, si no usa los fallbacks -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@300;400;700&display=swap">
+
+<style>
+/* ── Variables de marca ───────────────────────────────── */
+:root{
+  --fuchsia:#FF1493;
+  --fuchsia-d:#CC0070;
+  --gold:#D4A96A;
+  --gold-l:#F0D5A0;
+  --rose:#FFB6C1;
+  --cream:#FEFAF7;
+  --bg-deep:#2A0819;
+  --bg-mid:#5A1735;
+  --bg-light:#8C2558;
+  --text:#fff;
+  --text-dim:rgba(255,255,255,.75);
+  --text-muted:rgba(255,255,255,.45);
+  --fd:'Playfair Display',Georgia,'Times New Roman',serif;
+  --body:'Lato','Helvetica Neue',Arial,sans-serif;
+}
+
+/* ── Reset ────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{height:100%;-webkit-text-size-adjust:100%}
+
+/* ── Body — ocupa toda la pantalla del celular ─────────── */
+body{
+  font-family:var(--body);
+  background:#1A0410;
+  min-height:100%;
+  min-height:100dvh;          /* dynamic viewport height — respeta barra iOS */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:env(safe-area-inset-top,16px) 16px env(safe-area-inset-bottom,16px);
+  color:var(--text);
+  overscroll-behavior:none;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;-webkit-user-select:none;
+}
+
+/* ── Wrapper del carrusel ─────────────────────────────── */
+.carousel-wrap{
+  width:100%;
+  max-width:480px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+}
+
+.carousel-label{
+  font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(212,169,106,.65);font-weight:700;
+  text-align:center;
+}
+
+/* ── Marco cuadrado 1:1 ───────────────────────────────── */
+.slide-frame{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 20px 70px rgba(0,0,0,.65),0 0 0 1px rgba(255,20,147,.18);
+  touch-action:none;           /* iOS: deja que JS maneje TODO el toque dentro del carrusel */
+  cursor:grab;
+}
+
+.slide-inner{
+  display:flex;
+  width:100%;
+  height:100%;
+  transition:transform .42s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+}
+
+/* ── Cada slide ───────────────────────────────────────── */
+.slide{
+  min-width:100%;height:100%;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  padding:clamp(20px,5vw,40px);
+  background:linear-gradient(155deg,var(--bg-deep) 0%,var(--bg-mid) 55%,var(--bg-light) 100%);
+}
+
+.deco{position:absolute;border-radius:50%;pointer-events:none}
+
+/* ── Etiqueta de marca ───────────────────────────────── */
+.brand-tag{
+  display:flex;align-items:center;gap:6px;
+  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(212,169,106,.8);font-weight:700;font-family:var(--body);
+  z-index:2;position:relative;margin-bottom:auto;
+}
+.brand-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+
+/* ── Portada ─────────────────────────────────────────── */
+.s1-moon{
+  position:absolute;right:-40px;bottom:-40px;
+  width:min(260px,65%);height:min(260px,65%);
+  background:radial-gradient(circle at 35% 30%,rgba(255,248,220,.18),transparent 60%),
+             radial-gradient(circle at 65% 70%,rgba(90,23,53,.6),transparent);
+  border-radius:50%;
+  border:1.5px solid rgba(212,169,106,.2);
+  box-shadow:0 0 80px rgba(212,169,106,.12);
+}
+.s1-glow{
+  position:absolute;left:-80px;top:-60px;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(255,20,147,.12),transparent 70%);
+  border-radius:50%;
+}
+.s1-stars{position:absolute;z-index:1;inset:0}
+.s1-stars span{
+  position:absolute;color:rgba(212,169,106,.5);
+  font-size:.5rem;animation:twinkle 3s ease-in-out infinite;
+}
+@keyframes twinkle{0%,100%{opacity:.3}50%{opacity:1}}
+
+.s1-eyebrow{
+  font-size:clamp(.6rem,.9vw,.7rem);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);font-weight:700;margin-bottom:8px;position:relative;z-index:2;
+}
+.s1-title{
+  font-family:var(--fd);
+  font-size:clamp(1.6rem,6vw,2.5rem);
+  font-weight:900;line-height:1.1;
+  position:relative;z-index:2;margin-bottom:10px;
+}
+.s1-title em{font-style:italic;color:var(--fuchsia)}
+.s1-sub{
+  font-size:clamp(.78rem,2.5vw,.9rem);color:var(--text-dim);
+  line-height:1.45;position:relative;z-index:2;max-width:68%;
+}
+.s1-badge{
+  position:relative;z-index:2;margin-top:auto;
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,20,147,.15);border:1.5px solid rgba(255,20,147,.4);
+  border-radius:50px;padding:8px 16px;font-size:.72rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--rose);
+  width:fit-content;
+  /* target táctil grande */
+  min-height:44px;
+}
+
+/* ── Slides de contenido ─────────────────────────────── */
+.slide-num{
+  font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(212,169,106,.55);font-weight:700;margin-bottom:6px;
+  position:relative;z-index:2;
+}
+.slide-title{
+  font-family:var(--fd);
+  font-size:clamp(1.05rem,4.5vw,1.5rem);
+  font-weight:700;line-height:1.2;color:var(--cream);
+  margin-bottom:9px;position:relative;z-index:2;
+}
+.slide-title em{color:var(--fuchsia);font-style:italic}
+.slide-body{
+  font-size:clamp(.76rem,2.5vw,.9rem);color:var(--text-dim);
+  line-height:1.58;position:relative;z-index:2;flex:1;
+  overflow:hidden;
+}
+
+/* ── Tarjetas de tipos de luna ───────────────────────── */
+.moon-card{
+  display:flex;align-items:flex-start;gap:11px;
+  background:rgba(255,255,255,.06);border-radius:10px;
+  padding:10px 12px;margin-bottom:7px;border-left:3px solid;
+  position:relative;z-index:2;
+}
+.moon-card.fuerte{border-color:rgba(140,37,88,.7)}
+.moon-card.rapido{border-color:var(--fuchsia)}
+.moon-card.depilacion{border-color:var(--gold)}
+.moon-icon-wrap{
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+}
+.moon-icon-wrap.fuerte{background:rgba(90,23,53,.4);border:1.5px solid rgba(140,37,88,.5)}
+.moon-icon-wrap.rapido{background:rgba(255,20,147,.15);border:1.5px solid rgba(255,20,147,.5)}
+.moon-icon-wrap.depilacion{background:rgba(212,169,106,.15);border:1.5px solid rgba(212,169,106,.45)}
+.moon-card h4{font-size:.82rem;color:var(--cream);font-weight:700;margin-bottom:2px;line-height:1.2}
+.moon-card p{font-size:.7rem;color:var(--text-dim);line-height:1.4}
+
+/* ── Pasos numerados ─────────────────────────────────── */
+.step{display:flex;gap:9px;margin-bottom:8px;align-items:flex-start;position:relative;z-index:2}
+.step-num{
+  width:24px;height:24px;min-width:24px;border-radius:50%;
+  background:rgba(255,20,147,.2);border:1.5px solid rgba(255,20,147,.5);
+  color:var(--fuchsia);font-weight:800;font-size:.7rem;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.step p{font-size:clamp(.73rem,2.4vw,.84rem);color:var(--text-dim);line-height:1.48}
+.step strong{color:var(--cream)}
+
+/* ── Caja de tip ─────────────────────────────────────── */
+.tip-box{
+  background:rgba(212,169,106,.1);border-left:3px solid var(--gold);
+  border-radius:0 8px 8px 0;padding:8px 11px;margin-top:9px;
+  font-size:.73rem;color:rgba(255,255,255,.78);line-height:1.5;
+  position:relative;z-index:2;
+}
+
+/* ── Luna decorativa de fondo ────────────────────────── */
+.feature-moon{
+  position:absolute;right:-20px;bottom:-20px;
+  width:min(200px,50%);height:min(200px,50%);border-radius:50%;opacity:.35;
+}
+.feature-moon.fuerte{background:radial-gradient(circle at 35% 30%,#8C2558,#2A0819)}
+.feature-moon.rapido{background:radial-gradient(circle at 35% 30%,#FF1493,#4B1535)}
+
+/* ── Slide CTA ───────────────────────────────────────── */
+.cta-glow{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(255,20,147,.18),transparent);
+  pointer-events:none;
+}
+.cta-title{
+  font-family:var(--fd);font-size:clamp(1.4rem,5.5vw,2.1rem);
+  font-weight:900;line-height:1.15;color:var(--cream);
+  text-align:center;position:relative;z-index:2;margin-bottom:8px;
+}
+.cta-title em{color:var(--fuchsia);font-style:italic}
+.cta-sub{
+  font-size:clamp(.78rem,2.6vw,.9rem);color:var(--text-dim);
+  text-align:center;line-height:1.5;position:relative;z-index:2;margin-bottom:14px;
+}
+.cta-btn{
+  display:block;background:linear-gradient(135deg,var(--fuchsia),var(--fuchsia-d));
+  color:#fff;font-weight:700;font-size:clamp(.82rem,2.8vw,.95rem);
+  padding:13px 30px;border-radius:50px;text-align:center;
+  letter-spacing:.06em;text-transform:uppercase;
+  position:relative;z-index:2;
+  box-shadow:0 8px 28px rgba(255,20,147,.4);
+  width:fit-content;margin:0 auto;
+  min-height:48px;             /* target táctil iOS/Android */
+  text-decoration:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.cta-url{
+  font-size:.68rem;color:rgba(212,169,106,.55);text-align:center;
+  margin-top:10px;position:relative;z-index:2;letter-spacing:.05em;
+}
+.cta-moon-row{
+  display:flex;gap:8px;justify-content:center;margin:12px 0;position:relative;z-index:2;
+}
+.cta-moon-row span{font-size:1.5rem;animation:moonFloat 3.5s ease-in-out infinite}
+.cta-moon-row span:nth-child(2){animation-delay:-.8s}
+.cta-moon-row span:nth-child(3){animation-delay:-1.6s}
+@keyframes moonFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* ── Navegación ──────────────────────────────────────── */
+.nav-row{
+  display:flex;align-items:center;gap:10px;width:100%;max-width:480px;
+  justify-content:center;
+}
+.nav-btn{
+  width:44px;height:44px;border-radius:50%;            /* 44px = mínimo iOS HIG */
+  background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);
+  color:#fff;font-size:.95rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,border-color .2s;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.nav-btn:active{background:rgba(255,20,147,.35);border-color:rgba(255,20,147,.6)}
+.nav-btn:disabled{opacity:.22;cursor:default}
+
+.dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.22);cursor:pointer;
+  transition:background .2s,transform .2s;
+  /* zona de toque expandida */
+  padding:6px;margin:-6px;
+  background-clip:content-box;
+  -webkit-tap-highlight-color:transparent;
+}
+.dot.on{background:var(--fuchsia);background-clip:content-box;transform:scale(1.3)}
+
+.slide-counter{
+  font-size:.62rem;letter-spacing:.1em;color:rgba(255,255,255,.3);
+  font-weight:700;min-width:34px;text-align:center;
+}
+
+.hint{
+  font-size:.58rem;color:rgba(255,255,255,.2);letter-spacing:.07em;
+  text-align:center;padding-bottom:4px;
+}
+
+/* ── Accesibilidad: reduce motion ─────────────────────── */
+@media(prefers-reduced-motion:reduce){
+  .slide-inner{transition:none}
+  .cta-moon-row span,.s1-stars span{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div class="carousel-wrap">
+  <div class="carousel-label">Tutorial · Calendario Lunar · Chic Life</div>
+
+  <div class="slide-frame">
+    <div class="slide-inner" id="slides">
+
+      <!-- SLIDE 1: Portada -->
+      <div class="slide">
+        <div class="s1-glow"></div>
+        <div class="s1-moon"></div>
+        <div class="s1-stars">
+          <span style="top:12%;left:8%;animation-delay:0s">✦</span>
+          <span style="top:25%;left:55%;font-size:.65rem;animation-delay:.7s">✦</span>
+          <span style="top:60%;left:15%;animation-delay:1.2s">✦</span>
+          <span style="top:80%;left:40%;animation-delay:.3s">✦</span>
+          <span style="top:40%;left:78%;animation-delay:1.8s">✦</span>
+          <span style="top:72%;left:72%;animation-delay:.9s">✦</span>
+        </div>
+
+        <div class="brand-tag"><div class="brand-dot"></div>Chic Life · Tutorial</div>
+
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:6px">
+          <div class="s1-eyebrow">🌙 Guía para Dummies</div>
+          <div class="s1-title">Aprende a leer<br>tu <em>Calendario</em><br>Lunar</div>
+          <div class="s1-sub" style="margin-top:8px">Todo lo que necesitas saber en 7 simples pasos. ¡Sin complicaciones! 🌸</div>
+        </div>
+
+        <div class="s1-badge">
+          <span>🌕</span><span>Desliza para aprender →</span>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: ¿Qué es? -->
+      <div class="slide">
+        <div class="deco" style="width:170px;height:170px;right:-55px;top:-45px;background:radial-gradient(circle,rgba(255,20,147,.12),transparent)"></div>
+
+        <div class="brand-tag"><div class="brand-dot"></div>Chic Life · Paso 1</div>
+        <div class="slide-num" style="margin-top:7px">01 / 07</div>
+        <div class="slide-title">¿Qué es el<br>Calendario Lunar<br><em>Chic Life</em>?</div>
+
+        <div class="slide-body">
+          <p style="margin-bottom:9px">Es una herramienta <strong style="color:var(--cream)">gratuita en nuestra página web</strong> que te dice cuál es el <strong style="color:var(--cream)">mejor día del mes</strong> para hacerte el cabello o depilarte. 📅</p>
+          <p style="margin-bottom:11px">La luna tiene 4 fases que cambian cada semana. Cada fase <strong style="color:var(--cream)">influye en tu cuerpo</strong> y en cómo reacciona el cabello al corte o la depilación.</p>
+          <div class="tip-box">💡 El calendario se actualiza <strong>solo</strong> cada vez que abres la página, con las fases reales de hoy.</div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: Los 3 tipos -->
+      <div class="slide">
+        <div class="deco" style="width:140px;height:140px;right:-45px;bottom:-45px;background:radial-gradient(circle,rgba(212,169,106,.08),transparent)"></div>
+
+        <div class="brand-tag"><div class="brand-dot"></div>Chic Life · Paso 2</div>
+        <div class="slide-num" style="margin-top:7px">02 / 07</div>
+        <div class="slide-title">Los 3 tipos<br>de luna 🌙</div>
+
+        <div class="slide-body">
+          <p style="margin-bottom:11px">En el calendario verás <strong style="color:var(--cream)">3 colores de luna</strong>. Cada color es un objetivo diferente:</p>
+          <div class="moon-card fuerte">
+            <div class="moon-icon-wrap fuerte">⚫</div>
+            <div><h4>Crecimiento Fuerte</h4><p>Cuarto creciente · Cabello más denso, grueso y resistente</p></div>
+          </div>
+          <div class="moon-card rapido">
+            <div class="moon-icon-wrap rapido">🔴</div>
+            <div><h4>Crecimiento Rápido</h4><p>Luna nueva · Cabello crece más rápido</p></div>
+          </div>
+          <div class="moon-card depilacion">
+            <div class="moon-icon-wrap depilacion">⚪</div>
+            <div><h4>Depilación</h4><p>Luna llena/menguante · Vello tarda más en volver</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: Elige tu objetivo -->
+      <div class="slide">
+        <div class="feature-moon rapido"></div>
+
+        <div class="brand-tag"><div class="brand-dot"></div>Chic Life · Paso 3</div>
+        <div class="slide-num" style="margin-top:7px">03 / 07</div>
+        <div class="slide-title">🎯 Elige tu<br><em>objetivo</em></div>
+
+        <div class="slide-body">
+          <p style="margin-bottom:11px">En la página, a la izquierda del calendario hay <strong style="color:var(--cream)">3 botones</strong>. Toca el que más necesitas ahora:</p>
+          <div class="step">
+            <div class="step-num">1</div>
+            <p>⚫ <strong>Crecimiento Fuerte</strong> — cabello más grueso, denso o corte duradero</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <p>🔴 <strong>Crecimiento Rápido</strong> — cabello que crece lo más rápido posible</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <p>⚪ <strong>Depilación</strong> — vello que tarde más en volver y salga más fino</p>
+          </div>
+          <div class="tip-box" style="margin-top:10px">💡 Elige <strong>uno solo</strong> por mes. Puedes cambiarlo cuando quieras.</div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: Lee el calendario -->
+      <div class="slide">
+        <div class="deco" style="width:180px;height:180px;left:-65px;bottom:-55px;background:radial-gradient(circle,rgba(255,20,147,.1),transparent)"></div>
+
+        <div class="brand-tag"><div class="brand-dot"></div>Chic Life · Paso 4</div>
+        <div class="slide-num" style="margin-top:7px">04 / 07</div>
+        <div class="slide-title">📅 Lee el<br>calendario</div>
+
+        <div class="slide-body">
+          <p style="margin-bottom:11px">El calendario muestra los <strong style="color:var(--cream)">próximos 30 días</strong>. Cada casilla tiene:</p>
+          <div class="step">
+            <div class="step-num">1</div>
+            <p>El <strong>número del día</strong> del mes (1, 2, 3…)</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <p>Una <strong>luna coloreada</strong> según el tipo de objetivo del día</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <p>Días con <strong style="color:var(--fuchsia)">borde fucsia brillante</strong> = los mejores días del mes para ti</p>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <p>El <strong>día de hoy</strong> tiene un contorno especial para identificarlo rápido</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: La luna grande -->
+      <div class="slide">
+        <div class="feature-moon fuerte" style="opacity:.22"></div>
+
+        <div class="brand-tag"><div class="brand-dot"></div>Chic Life · Paso 5</div>
+        <div class="slide-num" style="margin-top:7px">05 / 07</div>
+        <div class="slide-title">🌕 La luna<br>grande te habla</div>
+
+        <div class="slide-body">
+          <p style="margin-bottom:11px">A la derecha del calendario hay una <strong style="color:var(--cream)">luna animada</strong> con info de hoy:</p>
+          <div class="moon-card" style="border-color:rgba(212,169,106,.4);margin-bottom:7px">
+            <div style="font-size:1.2rem;flex-shrink:0">🌙</div>
+            <div><h4>Fase actual</h4><p>Qué fase de la luna es hoy y cómo afecta tu servicio</p></div>
+          </div>
+          <div class="moon-card" style="border-color:rgba(255,20,147,.4);margin-bottom:7px">
+            <div style="font-size:1.2rem;flex-shrink:0">💆‍♀️</div>
+            <div><h4>Recomendación del día</h4><p>Qué tratamientos aprovechar hoy al máximo</p></div>
+          </div>
+          <div class="moon-card" style="border-color:rgba(255,182,193,.3)">
+            <div style="font-size:1.2rem;flex-shrink:0">🛒</div>
+            <div><h4>Productos sugeridos</h4><p>Productos Chic Life perfectos para esta fase lunar</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 7: Truco -->
+      <div class="slide">
+        <div class="deco" style="width:200px;height:200px;right:-55px;top:-55px;background:radial-gradient(circle,rgba(212,169,106,.1),transparent)"></div>
+
+        <div class="brand-tag"><div class="brand-dot"></div>Chic Life · Paso 6</div>
+        <div class="slide-num" style="margin-top:7px">06 / 07</div>
+        <div class="slide-title">✨ Truco<br>para sacarle<br><em>el máximo</em></div>
+
+        <div class="slide-body">
+          <p style="margin-bottom:12px">Planifica tu cita con anticipación:</p>
+          <div class="step">
+            <div class="step-num">1</div>
+            <p>En el último slide toca <strong>"Ver el calendario"</strong></p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <p>Elige tu objetivo del mes (crecimiento o depilación)</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <p>Busca el día con <strong style="color:var(--fuchsia)">borde fucsia</strong> más cercano a hoy</p>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <p>¡Agenda tu cita en Chic Life y nota la diferencia! 🌸</p>
+          </div>
+          <div class="tip-box" style="margin-top:10px">🌙 <strong>Tip:</strong> Toca cualquier luna del calendario para ver la info detallada de ese día.</div>
+        </div>
+      </div>
+
+      <!-- SLIDE 8: CTA -->
+      <div class="slide" style="justify-content:center;align-items:center;text-align:center">
+        <div class="cta-glow"></div>
+        <div class="deco" style="width:240px;height:240px;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,20,147,.08),transparent)"></div>
+
+        <div class="brand-tag" style="justify-content:center;width:100%;margin-bottom:0">
+          <div class="brand-dot"></div>Chic Life · Paso 7 / 07
+        </div>
+
+        <div class="cta-moon-row" style="margin-top:10px">
+          <span>🌑</span><span>🌒</span><span>🌕</span><span>🌘</span>
+        </div>
+
+        <div class="cta-title">¡Ya eres una<br>experta <em>lunar</em>! 🌙</div>
+        <div class="cta-sub">Agenda tu cita en el mejor día del mes con el Calendario Lunar Chic Life.</div>
+
+        <a class="cta-btn"
+           href="https://chiclifeoficial-art.github.io/chic-life-web/#lunar"
+           target="_blank"
+           rel="noopener"
+           onclick="try{window.open(this.href,'_blank')}catch(e){window.location.href=this.href};return false;">
+          Ver el calendario →
+        </a>
+        <div class="cta-url">chiclifeoficial-art.github.io · Sección Calendario Lunar</div>
+
+        <div style="margin-top:14px;position:relative;z-index:2">
+          <div style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(212,169,106,.4);margin-bottom:5px">síguenos</div>
+          <div style="font-size:.74rem;color:rgba(255,255,255,.35)">@chiclife · instagram · facebook · tiktok</div>
+        </div>
+      </div>
+
+    </div><!-- /slide-inner -->
+  </div><!-- /slide-frame -->
+
+  <!-- Navegación -->
+  <div class="nav-row">
+    <button class="nav-btn" id="prev" onclick="nav(-1)" disabled aria-label="Anterior">&#8592;</button>
+    <div class="dots" id="dots"></div>
+    <div class="slide-counter" id="counter">1 / 8</div>
+    <button class="nav-btn" id="next" onclick="nav(1)" aria-label="Siguiente">&#8594;</button>
+  </div>
+
+  <div class="hint">← Desliza o usa las flechas para navegar →</div>
+</div>
+
+<script>
+(function(){
+  var inner   = document.getElementById('slides');
+  var dotsEl  = document.getElementById('dots');
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var ctrEl   = document.getElementById('counter');
+  var items   = inner.querySelectorAll('.slide');
+  var total   = items.length;
+  var cur     = 0;
+
+  /* dots */
+  for(var i=0;i<total;i++){
+    var d=document.createElement('button');
+    d.className='dot'+(i===0?' on':'');
+    d.setAttribute('aria-label','Slide '+(i+1));
+    d.dataset.i=i;
+    d.addEventListener('click',function(){goTo(+this.dataset.i)});
+    dotsEl.appendChild(d);
+  }
+
+  function goTo(n){
+    cur=Math.max(0,Math.min(n,total-1));
+    inner.style.transform='translateX(-'+cur+'00%)';
+    Array.from(dotsEl.children).forEach(function(d,i){d.classList.toggle('on',i===cur)});
+    prevBtn.disabled=(cur===0);
+    nextBtn.disabled=(cur===total-1);
+    ctrEl.textContent=(cur+1)+' / '+total;
+  }
+  window.nav=function(d){goTo(cur+d)};
+
+  /* swipe táctil — listeners en el FRAME (no en inner) para compatibilidad iOS Safari */
+  var frame = document.querySelector('.slide-frame');
+  var tx=0, ty=0, swiping=false;
+
+  frame.addEventListener('touchstart',function(e){
+    tx = e.touches[0].pageX;
+    ty = e.touches[0].pageY;
+    swiping = true;
+  },{passive:true});
+
+  frame.addEventListener('touchmove',function(e){
+    /* no-op — necesario para que touchend se dispare en iOS */
+  },{passive:true});
+
+  frame.addEventListener('touchend',function(e){
+    if(!swiping) return;
+    swiping = false;
+    var dx = e.changedTouches[0].pageX - tx;
+    var dy = e.changedTouches[0].pageY - ty;
+    /* solo swipe si el movimiento horizontal supera al vertical */
+    if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 35) nav(dx < 0 ? 1 : -1);
+  },{passive:true});
+
+  frame.addEventListener('touchcancel',function(){ swiping=false; },{passive:true});
+
+  /* teclado */
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown') nav(1);
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp')   nav(-1);
+  });
+})();
+</script>
+</body>
+</html>
