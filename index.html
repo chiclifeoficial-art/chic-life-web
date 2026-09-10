@@ -5521,7 +5521,7 @@ document.querySelectorAll('.tone').forEach(tone => {
         <h3 style="font-size:1.3rem">¡Ya eres una experta lunar!</h3>
         <p>Ahora sabes cómo usar el Calendario Lunar Chic Life para sacar el máximo provecho de cada servicio.</p>
         <div class="tut-cta-badge">✨ Tu ritual, sincronizado con la luna</div>
-        <p style="font-size:.82rem;color:rgba(255,182,193,.7);margin-top:8px">¿Qué productos usar en cada fase lunar? Pídenos asesoría y transforma tu rutina ✨</p>
+        <p style="font-size:.82rem;color:rgba(255,182,193,.7);margin-top:8px">Agenda tu cita en el mejor día del mes y nota la diferencia 🌸</p>
         <button onclick="closeLunarTutorial()" style="
           margin-top:20px;padding:13px 32px;border-radius:50px;
           background:linear-gradient(135deg,#FF1493,#CC0070);border:none;
@@ -5734,10 +5734,158 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
 }
 </style>
 
+<style>
+/* ── Modal inscripción a campaña ──────────────────────────────────────────── */
+#cl-inscripcion-overlay{
+  display:none;position:fixed;inset:0;z-index:11000;
+  background:rgba(10,0,20,.6);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;padding:20px;
+  animation:clFadeInBg .25s ease both;
+}
+#cl-inscripcion-overlay.cl-open{display:flex}
+.cl-insc-box{
+  width:100%;max-width:420px;border-radius:20px;overflow:hidden;
+  background:#fff;box-shadow:0 24px 64px rgba(0,0,0,.4);
+}
+.cl-insc-header{
+  padding:22px 24px 16px;background:#FF1493;color:#fff;position:relative;
+}
+.cl-insc-header h3{font-size:1.05rem;font-weight:700;margin:0 0 4px}
+.cl-insc-header p{font-size:.78rem;opacity:.85;margin:0}
+.cl-insc-close{
+  position:absolute;top:14px;right:16px;background:rgba(255,255,255,.2);
+  border:none;color:#fff;width:28px;height:28px;border-radius:50%;
+  font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.cl-insc-close:hover{background:rgba(255,255,255,.35)}
+.cl-insc-body{padding:20px 24px 24px}
+.cl-insc-campo{
+  width:100%;padding:11px 14px;margin-bottom:12px;
+  border:1.5px solid rgba(255,20,147,.2);border-radius:10px;
+  font-size:.88rem;font-family:inherit;background:#fff;color:#2d2d2d;
+  outline:none;transition:border-color .2s;box-sizing:border-box;
+}
+.cl-insc-campo:focus{border-color:#FF1493}
+.cl-insc-submit{
+  width:100%;padding:13px;border-radius:10px;border:none;
+  background:#FF1493;color:#fff;font-size:.9rem;font-weight:700;
+  cursor:pointer;transition:opacity .2s,transform .2s;margin-top:4px;
+}
+.cl-insc-submit:hover{transform:translateY(-1px)}
+.cl-insc-submit:disabled{opacity:.65;cursor:not-allowed;transform:none}
+.cl-insc-legal{
+  font-size:.68rem;color:#888;margin-top:12px;line-height:1.5;text-align:center;
+}
+.cl-insc-legal a{color:#FF1493}
+.cl-insc-msg{
+  padding:10px 14px;border-radius:10px;font-size:.8rem;margin-top:8px;
+  text-align:center;font-weight:600;display:none;
+}
+.cl-insc-msg.ok{background:#d1fae5;color:#065f46;display:block}
+.cl-insc-msg.err{background:#fee2e2;color:#991b1b;display:block}
+@media(max-width:480px){.cl-insc-box{border-radius:20px 20px 0 0;margin-top:auto}}
+</style>
+
+<!-- Modal de inscripción a campaña (reutilizable) -->
+<div id="cl-inscripcion-overlay" role="dialog" aria-modal="true" aria-label="Formulario de inscripción">
+  <div class="cl-insc-box">
+    <div class="cl-insc-header">
+      <button class="cl-insc-close" id="cl-insc-close-btn" aria-label="Cerrar">×</button>
+      <h3 id="cl-insc-titulo">Inscríbete a la promoción</h3>
+      <p id="cl-insc-subtitulo"></p>
+    </div>
+    <div class="cl-insc-body">
+      <form id="cl-insc-form" novalidate>
+        <input class="cl-insc-campo" type="text"  id="cl-insc-nombre"   placeholder="Nombre completo *" required autocomplete="name">
+        <input class="cl-insc-campo" type="text"  id="cl-insc-doc"      placeholder="Documento de identidad *" required inputmode="numeric">
+        <input class="cl-insc-campo" type="tel"   id="cl-insc-ws"       placeholder="WhatsApp (ej: 3001234567) *" required inputmode="numeric" autocomplete="tel">
+        <input class="cl-insc-campo" type="email" id="cl-insc-email"    placeholder="Correo electrónico *" required autocomplete="email">
+        <button type="submit" class="cl-insc-submit" id="cl-insc-btn">¡Quiero inscribirme!</button>
+        <div class="cl-insc-msg" id="cl-insc-msg"></div>
+        <p class="cl-insc-legal">
+          Al inscribirte aceptas que Chic Life almacene y use tus datos personales conforme a nuestra
+          <a href="#politica-privacidad" onclick="document.getElementById('cl-inscripcion-overlay').classList.remove('cl-open')">Política de Privacidad</a>.
+          Tus datos se usarán únicamente para gestionar tu participación en esta promoción.
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   var CAMPANAS_URL = 'https://chiclifeoficial-art.github.io/chic-life-web/campanas.json';
   var POPUP_DELAY  = 4000; // ms antes de mostrar el popup
+
+  // ── Modal de inscripción ──────────────────────────────────────────────────
+  var _inscCampana = null;
+  var inscOverlay = document.getElementById('cl-inscripcion-overlay');
+  var inscForm    = document.getElementById('cl-insc-form');
+  var inscMsg     = document.getElementById('cl-insc-msg');
+  var inscBtn     = document.getElementById('cl-insc-btn');
+
+  function abrirInscripcion(c) {
+    _inscCampana = c;
+    document.getElementById('cl-insc-titulo').textContent = c.titulo || 'Inscríbete a la promoción';
+    document.getElementById('cl-insc-subtitulo').textContent = c.subtitulo || (c.fecha_fin ? 'Vigencia hasta ' + new Date(c.fecha_fin).toLocaleDateString('es-CO',{day:'2-digit',month:'long',year:'numeric'}) : '');
+    inscMsg.className = 'cl-insc-msg'; inscMsg.textContent = '';
+    inscForm.reset(); inscBtn.disabled = false; inscBtn.textContent = '¡Quiero inscribirme!';
+    inscOverlay.classList.add('cl-open');
+  }
+  function cerrarInscripcion() { inscOverlay.classList.remove('cl-open'); }
+
+  document.getElementById('cl-insc-close-btn').addEventListener('click', cerrarInscripcion);
+  inscOverlay.addEventListener('click', function(e){ if(e.target===inscOverlay) cerrarInscripcion(); });
+
+  inscForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (!_inscCampana || !_inscCampana.api_url) {
+      inscMsg.className = 'cl-insc-msg err';
+      inscMsg.textContent = 'El formulario no está disponible en este momento.';
+      return;
+    }
+    var nombre = document.getElementById('cl-insc-nombre').value.trim();
+    var doc    = document.getElementById('cl-insc-doc').value.trim();
+    var ws     = document.getElementById('cl-insc-ws').value.trim();
+    var email  = document.getElementById('cl-insc-email').value.trim();
+    if (!nombre || !doc || !ws || !email) {
+      inscMsg.className = 'cl-insc-msg err'; inscMsg.textContent = 'Por favor completa todos los campos.'; return;
+    }
+    inscBtn.disabled = true; inscBtn.textContent = 'Enviando…';
+    fetch(_inscCampana.api_url + '/api/publico/campanas/' + _inscCampana.id + '/inscribir', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: nombre, documento: doc, whatsapp: ws, email: email }),
+    })
+    .then(function(r){ return r.json().then(function(d){ return { ok: r.ok, data: d }; }); })
+    .then(function(res){
+      if (res.ok) {
+        inscMsg.className = 'cl-insc-msg ok';
+        inscMsg.textContent = '¡Te inscribiste exitosamente! 🌸';
+        inscBtn.textContent = '¡Listo!';
+      } else {
+        inscMsg.className = 'cl-insc-msg err';
+        inscMsg.textContent = res.data.error || 'Error al procesar. Intenta de nuevo.';
+        inscBtn.disabled = false; inscBtn.textContent = '¡Quiero inscribirme!';
+      }
+    })
+    .catch(function(){
+      inscMsg.className = 'cl-insc-msg err';
+      inscMsg.textContent = 'No se pudo conectar. Intenta de nuevo.';
+      inscBtn.disabled = false; inscBtn.textContent = '¡Quiero inscribirme!';
+    });
+  });
+
+  function ctaInsc(c, colorTexto) {
+    return '<button class="cl-insc-trigger" data-id="'+c.id+'" style="background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.4);color:'+colorTexto+';padding:9px 22px;border-radius:50px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;transition:background .2s">'+
+      (c.texto_cta || '¡Inscríbete!') + ' →</button>';
+  }
+
+  function registrarTriggers(el, c) {
+    el.querySelectorAll('.cl-insc-trigger').forEach(function(btn){
+      btn.addEventListener('click', function(){ abrirInscripcion(c); });
+    });
+  }
 
   function fmt(c) {
     return {
@@ -5759,16 +5907,18 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
     bar.className = 'cl-sticky-bar';
     bar.style.background = f.fondo;
     bar.style.color = f.texto;
+    var ctaHtml = c.requiere_inscripcion
+      ? ctaInsc(c, f.texto)
+      : (f.url !== '#' ? '<a class="cl-sb-cta" href="'+f.url+'" style="color:'+f.fondo+'" target="_blank" rel="noopener" onclick="try{window.open(this.href,\'_blank\')}catch(e){window.location.href=this.href};return false;">'+f.cta+'</a>' : '');
     bar.innerHTML =
       (f.pct ? '<span class="cl-sb-pct">'+f.pct+'</span>' : '') +
-      '<span class="cl-sb-texto">'+f.titulo+'</span>' +
-      (f.url !== '#' ? '<a class="cl-sb-cta" href="'+f.url+'" style="color:'+f.fondo+'" target="_blank" rel="noopener"'+
-        ' onclick="try{window.open(this.href,\'_blank\')}catch(e){window.location.href=this.href};return false;">'+f.cta+'</a>' : '') +
+      '<span class="cl-sb-texto">'+f.titulo+'</span>' + ctaHtml +
       '<button class="cl-sb-close" aria-label="Cerrar">✕</button>';
     bar.querySelector('.cl-sb-close').onclick = function(){
       bar.style.animation = 'clSlideDown .3s reverse both';
       setTimeout(function(){ bar.remove(); document.body.classList.remove('cl-has-sticky'); }, 320);
     };
+    if (c.requiere_inscripcion) registrarTriggers(bar, c);
     document.getElementById('cl-campana-sticky').appendChild(bar);
     document.body.classList.add('cl-has-sticky');
   }
@@ -5781,13 +5931,15 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
       ? 'linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)), url('+f.img+') center/cover'
       : f.fondo;
     el.style.color = f.texto;
+    var ctaHtml = c.requiere_inscripcion
+      ? ctaInsc(c, f.texto)
+      : (f.url !== '#' ? '<a class="cl-hb-cta" href="'+f.url+'" style="color:'+f.texto+'" target="_blank" rel="noopener" onclick="try{window.open(this.href,\'_blank\')}catch(e){window.location.href=this.href};return false;">'+f.cta+' →</a>' : '');
     el.innerHTML =
       (f.img ? '<img class="cl-hb-img" src="'+f.img+'" alt="" aria-hidden="true">' : '') +
       (f.pct ? '<p class="cl-hb-pct">'+f.pct+'</p>' : '') +
       '<h2 class="cl-hb-titulo">'+f.titulo+'</h2>' +
-      (f.sub ? '<p class="cl-hb-sub">'+f.sub+'</p>' : '') +
-      (f.url !== '#' ? '<a class="cl-hb-cta" href="'+f.url+'" style="color:'+f.texto+'" target="_blank" rel="noopener"'+
-        ' onclick="try{window.open(this.href,\'_blank\')}catch(e){window.location.href=this.href};return false;">'+f.cta+' →</a>' : '');
+      (f.sub ? '<p class="cl-hb-sub">'+f.sub+'</p>' : '') + ctaHtml;
+    if (c.requiere_inscripcion) registrarTriggers(el, c);
     document.getElementById('cl-campana-hero').appendChild(el);
   }
 
@@ -5797,18 +5949,19 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
     el.className = 'cl-footer-banner';
     el.style.background = f.fondo;
     el.style.color = f.texto;
+    var ctaHtml = c.requiere_inscripcion
+      ? ctaInsc(c, f.texto)
+      : (f.url !== '#' ? '<a class="cl-fb-cta" href="'+f.url+'" style="color:'+f.texto+'" target="_blank" rel="noopener" onclick="try{window.open(this.href,\'_blank\')}catch(e){window.location.href=this.href};return false;">'+f.cta+' →</a>' : '');
     el.innerHTML =
       (f.pct ? '<p class="cl-fb-pct">'+f.pct+'</p>' : '') +
       '<h2 class="cl-fb-titulo">'+f.titulo+'</h2>' +
-      (f.sub ? '<p class="cl-fb-sub">'+f.sub+'</p>' : '') +
-      (f.url !== '#' ? '<a class="cl-fb-cta" href="'+f.url+'" style="color:'+f.texto+'" target="_blank" rel="noopener"'+
-        ' onclick="try{window.open(this.href,\'_blank\')}catch(e){window.location.href=this.href};return false;">'+f.cta+' →</a>' : '');
+      (f.sub ? '<p class="cl-fb-sub">'+f.sub+'</p>' : '') + ctaHtml;
+    if (c.requiere_inscripcion) registrarTriggers(el, c);
     document.getElementById('cl-campana-footer').appendChild(el);
   }
 
   function renderPopup(c) {
     var f = fmt(c);
-    // Evitar mostrar el mismo popup dos veces por sesión
     var seen = sessionStorage.getItem('cl_popup_'+c.id);
     if (seen) return;
     setTimeout(function(){
@@ -5816,6 +5969,9 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
       overlay.className = 'cl-popup-overlay';
       var box = document.createElement('div');
       box.className = 'cl-popup-box';
+      var ctaHtml = c.requiere_inscripcion
+        ? ctaInsc(c, f.texto)
+        : (f.url !== '#' ? '<a class="cl-pp-cta" href="'+f.url+'" style="color:'+f.texto+'" target="_blank" rel="noopener" onclick="try{window.open(this.href,\'_blank\')}catch(e){window.location.href=this.href};return false;">'+f.cta+' →</a>' : '');
       box.innerHTML =
         '<div class="cl-popup-body" style="background:'+f.fondo+';color:'+f.texto+'">' +
           (f.img ? '<img class="cl-pp-img" src="'+f.img+'" alt="" aria-hidden="true">' : '') +
@@ -5823,8 +5979,7 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
           '<p class="cl-pp-titulo">'+f.titulo+'</p>' +
           (f.sub  ? '<p class="cl-pp-sub">'+f.sub+'</p>'   : '') +
           (f.desc ? '<p class="cl-pp-desc">'+f.desc+'</p>' : '') +
-          (f.url !== '#' ? '<a class="cl-pp-cta" href="'+f.url+'" style="color:'+f.texto+'" target="_blank" rel="noopener"'+
-            ' onclick="try{window.open(this.href,\'_blank\')}catch(e){window.location.href=this.href};return false;">'+f.cta+' →</a>' : '') +
+          ctaHtml +
         '</div>' +
         '<div class="cl-popup-footer" style="background:'+f.fondo+';color:'+f.texto+'">' +
           '<button style="color:'+f.texto+'">No, gracias — cerrar</button>' +
@@ -5832,6 +5987,7 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
       overlay.appendChild(box);
       document.getElementById('cl-campana-popup').appendChild(overlay);
       sessionStorage.setItem('cl_popup_'+c.id, '1');
+      if (c.requiere_inscripcion) registrarTriggers(box, c);
 
       var close = function(){
         overlay.style.opacity = '0';
