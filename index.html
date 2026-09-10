@@ -1398,6 +1398,9 @@ fbq('track', 'PageView');
 
 </head>
 <body>
+<!-- ── Campañas Chic Life: barra sticky ─────────────────────────────────── -->
+<div id="cl-campana-sticky"></div>
+
 <!-- Defs SVG globales para gradientes de las lunas del calendario -->
 <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
   <defs>
@@ -1479,6 +1482,9 @@ fbq('track', 'PageView');
 </nav>
 
 <!-- HERO -->
+<!-- ── Campañas Chic Life: banner hero ──────────────────────────────────── -->
+<div id="cl-campana-hero"></div>
+
 <section id="inicio" class="hero">
   <div class="hero-inner">
     <!-- LOGO OFICIAL CHIC LIFE — embebido como base64 -->
@@ -1995,6 +2001,9 @@ window.addEventListener('load', function () {
 </section>
 
 <!-- FOOTER -->
+<!-- ── Campañas Chic Life: banner footer ─────────────────────────────────── -->
+<div id="cl-campana-footer"></div>
+
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
@@ -5525,6 +5534,272 @@ document.querySelectorAll('.tone').forEach(tone => {
       if(e.key==='ArrowLeft')tutNav(-1);
     });
   }
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     CAMPAÑAS / PROMOCIONES — Sistema dinámico Apeiron ERP → GitHub Pages
+     Lee campanas.json y renderiza banners activos sin recargar la página.
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<div id="cl-campana-popup"></div>
+
+<style>
+/* ── Barra sticky de campaña ─────────────────────────────────────────────── */
+#cl-campana-sticky .cl-sticky-bar{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  padding:10px 20px;font-family:'Lato',sans-serif;font-size:.88rem;
+  line-height:1.2;box-shadow:0 2px 12px rgba(0,0,0,.18);
+  animation:clSlideDown .4s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes clSlideDown{from{transform:translateY(-100%);opacity:0}to{transform:none;opacity:1}}
+.cl-sticky-bar .cl-sb-texto{font-weight:700;letter-spacing:.02em}
+.cl-sticky-bar .cl-sb-pct{
+  font-weight:900;font-size:1.05rem;padding:2px 10px;
+  border-radius:20px;background:rgba(255,255,255,.22);
+}
+.cl-sticky-bar .cl-sb-cta{
+  padding:5px 16px;border-radius:20px;font-weight:700;font-size:.82rem;
+  background:rgba(255,255,255,.95);text-decoration:none;
+  transition:opacity .2s;white-space:nowrap;
+}
+.cl-sticky-bar .cl-sb-cta:hover{opacity:.85}
+.cl-sticky-bar .cl-sb-close{
+  margin-left:auto;background:none;border:none;cursor:pointer;
+  font-size:1.1rem;line-height:1;opacity:.7;padding:2px 6px;
+  transition:opacity .2s;
+}
+.cl-sticky-bar .cl-sb-close:hover{opacity:1}
+/* Empuja el header cuando la sticky está visible */
+body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
+
+/* ── Banner hero ─────────────────────────────────────────────────────────── */
+#cl-campana-hero .cl-hero-banner{
+  width:100%;padding:32px 24px;display:flex;align-items:center;
+  justify-content:center;text-align:center;flex-direction:column;gap:10px;
+  font-family:'Lato',sans-serif;position:relative;overflow:hidden;
+  animation:clFadeIn .6s ease both;
+}
+@keyframes clFadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.cl-hero-banner .cl-hb-pct{
+  font-size:2.8rem;font-weight:900;line-height:1;
+  font-family:'Playfair Display',serif;
+}
+.cl-hero-banner .cl-hb-titulo{font-size:1.4rem;font-weight:700;margin:0}
+.cl-hero-banner .cl-hb-sub{font-size:1rem;opacity:.82;margin:0}
+.cl-hero-banner .cl-hb-cta{
+  display:inline-block;margin-top:6px;padding:10px 28px;border-radius:28px;
+  font-weight:700;font-size:.9rem;text-decoration:none;
+  background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.5);
+  transition:background .2s,transform .2s;
+}
+.cl-hero-banner .cl-hb-cta:hover{background:rgba(255,255,255,.35);transform:scale(1.03)}
+.cl-hero-banner .cl-hb-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:.25;pointer-events:none;
+}
+
+/* ── Banner footer ───────────────────────────────────────────────────────── */
+#cl-campana-footer .cl-footer-banner{
+  padding:40px 24px;text-align:center;font-family:'Lato',sans-serif;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  animation:clFadeIn .6s ease both;
+}
+.cl-footer-banner .cl-fb-pct{
+  font-size:3rem;font-weight:900;font-family:'Playfair Display',serif;line-height:1;
+}
+.cl-footer-banner .cl-fb-titulo{font-size:1.5rem;font-weight:700;margin:0}
+.cl-footer-banner .cl-fb-sub{font-size:1rem;opacity:.8;margin:0;max-width:520px}
+.cl-footer-banner .cl-fb-cta{
+  display:inline-block;margin-top:4px;padding:12px 34px;border-radius:30px;
+  font-weight:700;font-size:.95rem;text-decoration:none;
+  background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);
+  transition:background .2s,transform .2s;
+}
+.cl-footer-banner .cl-fb-cta:hover{background:rgba(255,255,255,.35);transform:scale(1.03)}
+
+/* ── Popup overlay ───────────────────────────────────────────────────────── */
+#cl-campana-popup .cl-popup-overlay{
+  position:fixed;inset:0;z-index:10000;
+  background:rgba(10,0,20,.55);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  animation:clFadeInBg .3s ease both;
+}
+@keyframes clFadeInBg{from{opacity:0}to{opacity:1}}
+#cl-campana-popup .cl-popup-box{
+  width:100%;max-width:440px;border-radius:20px;overflow:hidden;
+  box-shadow:0 24px 64px rgba(0,0,0,.4);
+  animation:clPopIn .4s cubic-bezier(.34,1.56,.64,1) both;
+  font-family:'Lato',sans-serif;
+}
+@keyframes clPopIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+.cl-popup-body{
+  padding:40px 32px 32px;display:flex;flex-direction:column;
+  align-items:center;text-align:center;gap:10px;position:relative;
+}
+.cl-popup-body .cl-pp-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:.2;pointer-events:none;
+}
+.cl-popup-body .cl-pp-pct{
+  font-size:3.2rem;font-weight:900;line-height:1;
+  font-family:'Playfair Display',serif;position:relative;
+}
+.cl-popup-body .cl-pp-titulo{font-size:1.45rem;font-weight:700;margin:0;position:relative}
+.cl-popup-body .cl-pp-sub{font-size:.95rem;opacity:.82;margin:0;max-width:320px;position:relative}
+.cl-popup-body .cl-pp-desc{font-size:.85rem;opacity:.7;margin:0;max-width:320px;position:relative}
+.cl-popup-body .cl-pp-cta{
+  display:inline-block;margin-top:8px;padding:12px 32px;border-radius:30px;
+  font-weight:700;font-size:.9rem;text-decoration:none;position:relative;
+  background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.45);
+  transition:background .2s,transform .2s;
+}
+.cl-popup-body .cl-pp-cta:hover{background:rgba(255,255,255,.35);transform:scale(1.03)}
+.cl-popup-footer{
+  padding:10px 16px;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.18);
+}
+.cl-popup-footer button{
+  background:none;border:none;cursor:pointer;font-size:.82rem;
+  opacity:.7;font-family:'Lato',sans-serif;transition:opacity .2s;
+}
+.cl-popup-footer button:hover{opacity:1}
+@media(max-width:480px){
+  .cl-sticky-bar{flex-wrap:wrap;font-size:.8rem}
+  .cl-hero-banner .cl-hb-pct,.cl-footer-banner .cl-fb-pct,.cl-popup-body .cl-pp-pct{font-size:2.2rem}
+}
+</style>
+
+<script>
+(function(){
+  var CAMPANAS_URL = 'https://chiclifeoficial-art.github.io/chic-life-web/campanas.json';
+  var POPUP_DELAY  = 4000; // ms antes de mostrar el popup
+
+  function fmt(c) {
+    return {
+      fondo : c.color_fondo || '#FF1493',
+      texto : c.color_texto || '#FFFFFF',
+      pct   : c.descuento_pct > 0 ? c.descuento_pct + '% OFF' : '',
+      titulo: c.titulo || '',
+      sub   : c.subtitulo || '',
+      desc  : c.descripcion || '',
+      cta   : c.texto_cta || 'Ver más',
+      url   : c.url_cta || '#',
+      img   : c.imagen_url || '',
+    };
+  }
+
+  function renderSticky(c) {
+    var f = fmt(c);
+    var bar = document.createElement('div');
+    bar.className = 'cl-sticky-bar';
+    bar.style.background = f.fondo;
+    bar.style.color = f.texto;
+    bar.innerHTML =
+      (f.pct ? '<span class="cl-sb-pct">'+f.pct+'</span>' : '') +
+      '<span class="cl-sb-texto">'+f.titulo+'</span>' +
+      (f.url !== '#' ? '<a class="cl-sb-cta" href="'+f.url+'" style="color:'+f.fondo+'" target="_blank" rel="noopener"'+
+        ' onclick="try{window.open(this.href,\'_blank\')}catch(e){window.location.href=this.href};return false;">'+f.cta+'</a>' : '') +
+      '<button class="cl-sb-close" aria-label="Cerrar">✕</button>';
+    bar.querySelector('.cl-sb-close').onclick = function(){
+      bar.style.animation = 'clSlideDown .3s reverse both';
+      setTimeout(function(){ bar.remove(); document.body.classList.remove('cl-has-sticky'); }, 320);
+    };
+    document.getElementById('cl-campana-sticky').appendChild(bar);
+    document.body.classList.add('cl-has-sticky');
+  }
+
+  function renderHero(c) {
+    var f = fmt(c);
+    var el = document.createElement('div');
+    el.className = 'cl-hero-banner';
+    el.style.background = f.img
+      ? 'linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)), url('+f.img+') center/cover'
+      : f.fondo;
+    el.style.color = f.texto;
+    el.innerHTML =
+      (f.img ? '<img class="cl-hb-img" src="'+f.img+'" alt="" aria-hidden="true">' : '') +
+      (f.pct ? '<p class="cl-hb-pct">'+f.pct+'</p>' : '') +
+      '<h2 class="cl-hb-titulo">'+f.titulo+'</h2>' +
+      (f.sub ? '<p class="cl-hb-sub">'+f.sub+'</p>' : '') +
+      (f.url !== '#' ? '<a class="cl-hb-cta" href="'+f.url+'" style="color:'+f.texto+'" target="_blank" rel="noopener"'+
+        ' onclick="try{window.open(this.href,\'_blank\')}catch(e){window.location.href=this.href};return false;">'+f.cta+' →</a>' : '');
+    document.getElementById('cl-campana-hero').appendChild(el);
+  }
+
+  function renderFooter(c) {
+    var f = fmt(c);
+    var el = document.createElement('div');
+    el.className = 'cl-footer-banner';
+    el.style.background = f.fondo;
+    el.style.color = f.texto;
+    el.innerHTML =
+      (f.pct ? '<p class="cl-fb-pct">'+f.pct+'</p>' : '') +
+      '<h2 class="cl-fb-titulo">'+f.titulo+'</h2>' +
+      (f.sub ? '<p class="cl-fb-sub">'+f.sub+'</p>' : '') +
+      (f.url !== '#' ? '<a class="cl-fb-cta" href="'+f.url+'" style="color:'+f.texto+'" target="_blank" rel="noopener"'+
+        ' onclick="try{window.open(this.href,\'_blank\')}catch(e){window.location.href=this.href};return false;">'+f.cta+' →</a>' : '');
+    document.getElementById('cl-campana-footer').appendChild(el);
+  }
+
+  function renderPopup(c) {
+    var f = fmt(c);
+    // Evitar mostrar el mismo popup dos veces por sesión
+    var seen = sessionStorage.getItem('cl_popup_'+c.id);
+    if (seen) return;
+    setTimeout(function(){
+      var overlay = document.createElement('div');
+      overlay.className = 'cl-popup-overlay';
+      var box = document.createElement('div');
+      box.className = 'cl-popup-box';
+      box.innerHTML =
+        '<div class="cl-popup-body" style="background:'+f.fondo+';color:'+f.texto+'">' +
+          (f.img ? '<img class="cl-pp-img" src="'+f.img+'" alt="" aria-hidden="true">' : '') +
+          (f.pct ? '<p class="cl-pp-pct">'+f.pct+'</p>' : '') +
+          '<p class="cl-pp-titulo">'+f.titulo+'</p>' +
+          (f.sub  ? '<p class="cl-pp-sub">'+f.sub+'</p>'   : '') +
+          (f.desc ? '<p class="cl-pp-desc">'+f.desc+'</p>' : '') +
+          (f.url !== '#' ? '<a class="cl-pp-cta" href="'+f.url+'" style="color:'+f.texto+'" target="_blank" rel="noopener"'+
+            ' onclick="try{window.open(this.href,\'_blank\')}catch(e){window.location.href=this.href};return false;">'+f.cta+' →</a>' : '') +
+        '</div>' +
+        '<div class="cl-popup-footer" style="background:'+f.fondo+';color:'+f.texto+'">' +
+          '<button style="color:'+f.texto+'">No, gracias — cerrar</button>' +
+        '</div>';
+      overlay.appendChild(box);
+      document.getElementById('cl-campana-popup').appendChild(overlay);
+      sessionStorage.setItem('cl_popup_'+c.id, '1');
+
+      var close = function(){
+        overlay.style.opacity = '0';
+        overlay.style.transition = 'opacity .25s';
+        setTimeout(function(){ overlay.remove(); }, 260);
+      };
+      overlay.addEventListener('click', function(e){ if(e.target===overlay) close(); });
+      box.querySelector('.cl-popup-footer button').addEventListener('click', close);
+      document.addEventListener('keydown', function esc(e){ if(e.key==='Escape'){ close(); document.removeEventListener('keydown',esc); } });
+    }, POPUP_DELAY);
+  }
+
+  // ── Fetch y render ────────────────────────────────────────────────────────
+  fetch(CAMPANAS_URL, { cache: 'no-store' })
+    .then(function(r){ return r.ok ? r.json() : []; })
+    .then(function(lista){
+      if (!Array.isArray(lista)) return;
+      var ahora = new Date();
+      var activas = lista.filter(function(c){
+        return new Date(c.fecha_inicio) <= ahora && new Date(c.fecha_fin) >= ahora;
+      });
+      activas.forEach(function(c){
+        switch(c.posicion){
+          case 'sticky':  renderSticky(c); break;
+          case 'hero':    renderHero(c);   break;
+          case 'footer':  renderFooter(c); break;
+          case 'popup':   renderPopup(c);  break;
+          default:        renderHero(c);   break;
+        }
+      });
+    })
+    .catch(function(){/* sin campañas activas — silencioso */});
 })();
 </script>
 
