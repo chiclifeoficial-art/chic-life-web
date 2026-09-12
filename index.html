@@ -1413,7 +1413,7 @@ fbq('track', 'PageView');
     <strong style="color:#FF1493;font-size:.9rem">🍪 Privacidad y Cookies</strong><br>
     Usamos cookies para mejorar tu experiencia y mostrar publicidad personalizada (remarketing).
     Al continuar, aceptas nuestra <a href="#politica-privacidad" style="color:#FFB6C1;text-decoration:underline"
-    onclick="document.getElementById('cl-cookie-banner').hidden=true">Política de Privacidad</a>
+    onclick="document.getElementById('cl-cookie-banner').style.display='none'">Política de Privacidad</a>
     conforme a la <strong>Ley 1581 de 2012</strong>. Tienes derecho a revocar tu consentimiento en cualquier momento.
   </div>
   <div style="display:flex;gap:10px;flex-shrink:0">
@@ -6123,9 +6123,11 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
   var consent = '';
   try { consent = localStorage.getItem('cl_cookie_consent') || ''; } catch(_){}
 
+  function ocultarBanner_() { if (banner) banner.style.display = 'none'; }
+
   // Mostrar banner si aún no hay decisión
   if (!consent) {
-    if (banner) banner.hidden = false;
+    if (banner) banner.style.display = 'flex';
   }
 
   // Inicializar Meta Pixel con consentimiento
@@ -6152,7 +6154,7 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
   if (btnAceptar) {
     btnAceptar.addEventListener('click', function(){
       try { localStorage.setItem('cl_cookie_consent', 'accepted'); } catch(_){}
-      if (banner) banner.hidden = true;
+      ocultarBanner_();
       initMetaPixel_();
     });
   }
@@ -6162,7 +6164,7 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
   if (btnRechazar) {
     btnRechazar.addEventListener('click', function(){
       try { localStorage.setItem('cl_cookie_consent', 'rejected'); } catch(_){}
-      if (banner) banner.hidden = true;
+      ocultarBanner_();
     });
   }
 
