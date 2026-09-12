@@ -1398,6 +1398,35 @@ fbq('track', 'PageView');
 
 </head>
 <body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BANNER DE CONSENTIMIENTO DE COOKIES — Ley 1581 de 2012
+     ═══════════════════════════════════════════════════════════ -->
+<div id="cl-cookie-banner" hidden role="dialog" aria-label="Consentimiento de cookies" style="
+  position:fixed;bottom:0;left:0;right:0;z-index:99999;
+  background:#1A0410;color:#fff;padding:18px 24px;
+  border-top:2px solid #FF1493;
+  font-family:'Poppins',sans-serif;font-size:.84rem;line-height:1.5;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:14px;box-shadow:0 -4px 32px rgba(255,20,147,.18);">
+  <div style="flex:1;min-width:260px">
+    <strong style="color:#FF1493;font-size:.9rem">🍪 Privacidad y Cookies</strong><br>
+    Usamos cookies para mejorar tu experiencia y mostrar publicidad personalizada (remarketing).
+    Al continuar, aceptas nuestra <a href="#politica-privacidad" style="color:#FFB6C1;text-decoration:underline"
+    onclick="document.getElementById('cl-cookie-banner').hidden=true">Política de Privacidad</a>
+    conforme a la <strong>Ley 1581 de 2012</strong>. Tienes derecho a revocar tu consentimiento en cualquier momento.
+  </div>
+  <div style="display:flex;gap:10px;flex-shrink:0">
+    <button id="cl-cookie-reject" style="
+      background:transparent;border:1px solid rgba(255,255,255,.4);color:rgba(255,255,255,.8);
+      padding:9px 18px;border-radius:20px;font-family:'Poppins',sans-serif;
+      font-size:.8rem;cursor:pointer">Solo necesarias</button>
+    <button id="cl-cookie-accept" style="
+      background:#FF1493;color:#fff;border:none;
+      padding:9px 22px;border-radius:20px;font-family:'Poppins',sans-serif;
+      font-size:.8rem;font-weight:600;cursor:pointer">Aceptar todo</button>
+  </div>
+</div>
 <!-- ── Campañas Chic Life: barra sticky ─────────────────────────────────── -->
 <div id="cl-campana-sticky"></div>
 
@@ -2083,6 +2112,9 @@ window.addEventListener('load', function () {
   // URL del ERP Apeiron para cargar categorías no disponibles en el Apps Script.
   // Cambia esta URL si el ERP está alojado públicamente.
   const ERP_LOCAL_URL = 'http://localhost:3011';
+  // ── Meta Pixel ──────────────────────────────────────────────────
+  // Reemplaza con tu Meta Pixel ID (Meta Business → Events Manager → Pixel)
+  const META_PIXEL_ID = 'TU_PIXEL_ID_AQUI';
 </script>
 
 <script>
@@ -4802,6 +4834,16 @@ document.querySelectorAll('.tone').forEach(tone => {
     }
     guardarCarrito_(carrito);
     renderCarrito_();
+    // Meta Pixel — AddToCart
+    if (typeof fbq === 'function') {
+      fbq('track', 'AddToCart', {
+        content_ids: [prod.id],
+        content_name: prod.nombre,
+        content_type: 'product',
+        value: prod.precioVenta || 0,
+        currency: 'COP'
+      });
+    }
   }
 
   document.addEventListener('click', function(e){
@@ -4920,6 +4962,15 @@ document.querySelectorAll('.tone').forEach(tone => {
     requestAnimationFrame(function(){ coOverlay.classList.add('cl-co-visible'); });
     document.body.style.overflow = 'hidden';
     irPaso_(1);
+    // Meta Pixel — InitiateCheckout
+    if (typeof fbq === 'function') {
+      fbq('track', 'InitiateCheckout', {
+        content_ids: carrito.map(function(it){ return it.id; }),
+        num_items: carrito.reduce(function(s,it){ return s+it.cantidad; }, 0),
+        value: carrito.reduce(function(s,it){ return s+it.precioVenta*it.cantidad; }, 0),
+        currency: 'COP'
+      });
+    }
   }
 
   function cerrarCheckout_() {
@@ -5024,8 +5075,20 @@ document.querySelectorAll('.tone').forEach(tone => {
 
   function finalizarCompra_(metodo) {
     var msg = armarMensajeWA_(metodo);
+    var totalCompra = carrito.reduce(function(s,it){ return s+(it.precioVenta||0)*(it.cantidad||1); }, 0);
+    var idsCompra   = carrito.map(function(it){ return it.id; });
     registrarPedido_(metodo);
     enviarSnapshotCarrito_('Compra finalizada');
+    // Meta Pixel — Purchase
+    if (typeof fbq === 'function') {
+      fbq('track', 'Purchase', {
+        content_ids: idsCompra,
+        content_type: 'product',
+        value: totalCompra,
+        currency: 'COP',
+        num_items: carrito.reduce(function(s,it){ return s+(it.cantidad||1); }, 0)
+      });
+    }
     window.open('https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(msg), '_blank');
     carrito = []; guardarCarrito_(carrito); renderCarrito_();
     cerrarCheckout_();
@@ -6048,6 +6111,63 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
       });
     })
     .catch(function(){/* sin campañas activas — silencioso */});
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════
+     META PIXEL + CONSENTIMIENTO DE COOKIES (Ley 1581)
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  var banner  = document.getElementById('cl-cookie-banner');
+  var consent = '';
+  try { consent = localStorage.getItem('cl_cookie_consent') || ''; } catch(_){}
+
+  // Mostrar banner si aún no hay decisión
+  if (!consent) {
+    if (banner) banner.hidden = false;
+  }
+
+  // Inicializar Meta Pixel con consentimiento
+  function initMetaPixel_() {
+    if (!META_PIXEL_ID || META_PIXEL_ID.indexOf('TU_') !== -1) return;
+    if (typeof fbq === 'function') { fbq('track', 'PageView'); return; }
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', META_PIXEL_ID);
+    fbq('track', 'PageView');
+  }
+
+  // Si ya había dado consentimiento antes, iniciar pixel directamente
+  if (consent === 'accepted') initMetaPixel_();
+
+  // Botón "Aceptar todo"
+  var btnAceptar = document.getElementById('cl-cookie-accept');
+  if (btnAceptar) {
+    btnAceptar.addEventListener('click', function(){
+      try { localStorage.setItem('cl_cookie_consent', 'accepted'); } catch(_){}
+      if (banner) banner.hidden = true;
+      initMetaPixel_();
+    });
+  }
+
+  // Botón "Solo necesarias"
+  var btnRechazar = document.getElementById('cl-cookie-reject');
+  if (btnRechazar) {
+    btnRechazar.addEventListener('click', function(){
+      try { localStorage.setItem('cl_cookie_consent', 'rejected'); } catch(_){}
+      if (banner) banner.hidden = true;
+    });
+  }
+
+  // Exponer función globalmente para que otros scripts puedan usar el pixel
+  window._clPixelConsent = function(){ return consent === 'accepted'; };
 })();
 </script>
 
