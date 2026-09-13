@@ -3695,6 +3695,10 @@ document.querySelectorAll('.tone').forEach(tone => {
         viewForm.hidden = true;
         viewCode.hidden = false;
 
+        try {
+          localStorage.setItem('cl_contacto', JSON.stringify({ nombre: nombre, email: email, whatsapp: payload.whatsapp }));
+        } catch(_) {}
+
         if (typeof gtag === 'function') {
           gtag('event', 'generate_lead', { method: 'Popup 10% OFF' });
           gtag('event', 'sign_up', { method: 'Popup' });
@@ -4911,12 +4915,18 @@ document.querySelectorAll('.tone').forEach(tone => {
     if (huella === ultimaHuellaEnviada_) return; // sin cambios desde el último envío
     ultimaHuellaEnviada_ = huella;
 
+    var contacto_ = {};
+    try { contacto_ = JSON.parse(localStorage.getItem('cl_contacto') || '{}'); } catch(_) {}
+
     const payload = JSON.stringify({
       accion: 'carrito',
       sesionId: obtenerSesionId_(),
       productos: carrito.map(it => ({ nombre: it.nombre, cantidad: it.cantidad })),
       total: calcularTotal_(),
-      estado: estado
+      estado: estado,
+      nombre: contacto_.nombre || '',
+      email: contacto_.email || '',
+      whatsapp: contacto_.whatsapp || ''
     });
 
     if (estado === 'Abandonado' && navigator.sendBeacon) {
@@ -5046,6 +5056,17 @@ document.querySelectorAll('.tone').forEach(tone => {
       indicaciones: document.getElementById('co-indicaciones').value.trim(),
       horario:      document.getElementById('co-horario').value
     };
+    try {
+      var n = datosEnvio_.nombre, e = datosEnvio_.email, w = datosEnvio_.telefono;
+      if (n || e || w) {
+        var prev = JSON.parse(localStorage.getItem('cl_contacto') || '{}');
+        localStorage.setItem('cl_contacto', JSON.stringify({
+          nombre: n || prev.nombre || '',
+          email:  e || prev.email  || '',
+          whatsapp: w ? '57' + w.replace(/\D/g,'') : (prev.whatsapp || '')
+        }));
+      }
+    } catch(_) {}
   }
 
   function armarMensajeWA_(metodo) {
