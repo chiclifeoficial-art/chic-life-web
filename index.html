@@ -4380,6 +4380,22 @@ document.querySelectorAll('.tone').forEach(tone => {
 .cl-cart-total-label{font-size:.82rem;color:var(--ink-s);font-weight:600}
 .cl-cart-total-num{font-family:var(--fd);font-size:1.4rem;font-weight:900;color:var(--fuchsia)}
 .cl-cart-actions{display:flex;flex-direction:column;gap:10px}
+.cl-cart-contacto{
+  background:linear-gradient(135deg,rgba(255,20,147,.05),rgba(255,20,147,.10));
+  border:1px solid rgba(255,20,147,.18);border-radius:var(--r-sm);
+  padding:12px 14px;margin-bottom:14px;
+}
+.cl-cart-contacto-label{
+  font-size:.76rem;font-weight:600;color:var(--fuchsia-d);margin-bottom:8px;
+}
+.cl-cart-contacto-fields{display:flex;flex-direction:column;gap:7px}
+.cl-cart-contacto-input{
+  width:100%;padding:9px 12px;border-radius:8px;
+  border:1px solid rgba(255,20,147,.25);background:var(--white);
+  font-size:.82rem;color:var(--ink);outline:none;box-sizing:border-box;
+  transition:border-color .2s;
+}
+.cl-cart-contacto-input:focus{border-color:var(--fuchsia);}
 .cl-cart-checkout-btn{
   width:100%;padding:14px;border-radius:var(--r-sm);
   background:linear-gradient(90deg,var(--fuchsia),var(--fuchsia-d));
@@ -4518,6 +4534,16 @@ document.querySelectorAll('.tone').forEach(tone => {
         <span class="cl-cart-total-label">Total</span>
         <span class="cl-cart-total-num" id="cl-cart-total">$0</span>
       </div>
+
+      <!-- Captura de contacto en el carrito -->
+      <div class="cl-cart-contacto" id="cl-cart-contacto">
+        <p class="cl-cart-contacto-label">🎁 Reserva tu carrito y recibe tu código de descuento</p>
+        <div class="cl-cart-contacto-fields">
+          <input type="text" id="cl-cart-nombre" placeholder="Tu nombre" autocomplete="given-name" class="cl-cart-contacto-input">
+          <input type="email" id="cl-cart-email" placeholder="Tu email" autocomplete="email" class="cl-cart-contacto-input">
+        </div>
+      </div>
+
       <div class="cl-cart-actions">
         <button type="button" class="cl-cart-checkout-btn" id="cl-cart-checkout">Finalizar compra 🛒</button>
         <button type="button" class="cl-cart-keep-btn" id="cl-cart-keep">← Seguir comprando</button>
@@ -4918,6 +4944,14 @@ document.querySelectorAll('.tone').forEach(tone => {
     var contacto_ = {};
     try { contacto_ = JSON.parse(localStorage.getItem('cl_contacto') || '{}'); } catch(_) {}
 
+    // Leer también los campos del carrito si están llenos
+    var cartNombre = (document.getElementById('cl-cart-nombre') || {}).value || '';
+    var cartEmail  = (document.getElementById('cl-cart-email')  || {}).value || '';
+    if (cartNombre || cartEmail) {
+      contacto_.nombre = cartNombre || contacto_.nombre || '';
+      contacto_.email  = cartEmail  || contacto_.email  || '';
+    }
+
     const payload = JSON.stringify({
       accion: 'carrito',
       sesionId: obtenerSesionId_(),
@@ -4949,8 +4983,42 @@ document.querySelectorAll('.tone').forEach(tone => {
     enviarSnapshotCarrito_('Abandonado');
   });
 
+  // Pre-llenar campos del carrito desde localStorage
+  (function(){
+    try {
+      var c = JSON.parse(localStorage.getItem('cl_contacto') || '{}');
+      var n = document.getElementById('cl-cart-nombre');
+      var e = document.getElementById('cl-cart-email');
+      if (n && c.nombre) n.value = c.nombre;
+      if (e && c.email)  e.value = c.email;
+    } catch(_) {}
+  })();
+
+  // Guardar en localStorage al salir de cada campo
+  ['cl-cart-nombre','cl-cart-email'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('blur', function(){
+      try {
+        var prev = JSON.parse(localStorage.getItem('cl_contacto') || '{}');
+        if (id === 'cl-cart-nombre' && el.value.trim()) prev.nombre = el.value.trim();
+        if (id === 'cl-cart-email'  && el.value.trim()) prev.email  = el.value.trim();
+        localStorage.setItem('cl_contacto', JSON.stringify(prev));
+      } catch(_) {}
+    });
+  });
+
   checkoutBtn.addEventListener('click', function(){
     if (!carrito.length) return;
+    // Guardar contacto del carrito antes de abrir checkout
+    try {
+      var prev = JSON.parse(localStorage.getItem('cl_contacto') || '{}');
+      var n = (document.getElementById('cl-cart-nombre') || {}).value || '';
+      var e = (document.getElementById('cl-cart-email')  || {}).value || '';
+      if (n) prev.nombre = n.trim();
+      if (e) prev.email  = e.trim();
+      localStorage.setItem('cl_contacto', JSON.stringify(prev));
+    } catch(_) {}
     abrirCheckout_();
   });
 
