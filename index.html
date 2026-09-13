@@ -9,6 +9,13 @@
 <meta property="og:description" content="Vivir con estilo no es un lujo, es una actitud que todos merecemos.">
 <meta property="og:type" content="website">
 <title>Chic Life: Del Click al Corazón</title>
+<!-- Brevo Tracker -->
+<script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
+<script>
+window.Brevo = window.Brevo || [];
+Brevo.push(['init', { client_key: 'jo66n5inzphpwf6flzq349ta' }]);
+</script>
+<!-- /Brevo Tracker -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -5004,6 +5011,16 @@ document.querySelectorAll('.tone').forEach(tone => {
         if (id === 'cl-cart-nombre' && el.value.trim()) prev.nombre = el.value.trim();
         if (id === 'cl-cart-email'  && el.value.trim()) prev.email  = el.value.trim();
         localStorage.setItem('cl_contacto', JSON.stringify(prev));
+        // Identificar en Brevo cuando se escribe el email
+        if (id === 'cl-cart-email' && prev.email) {
+          try {
+            window.Brevo = window.Brevo || [];
+            Brevo.push(['identify', {
+              email: prev.email,
+              attributes: { NOMBRE: prev.nombre || '', WHATSAPP: prev.whatsapp || '' }
+            }]);
+          } catch(_) {}
+        }
       } catch(_) {}
     });
   });
