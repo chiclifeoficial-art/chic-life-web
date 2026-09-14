@@ -4548,6 +4548,7 @@ document.querySelectorAll('.tone').forEach(tone => {
         <div class="cl-cart-contacto-fields">
           <input type="text" id="cl-cart-nombre" placeholder="Tu nombre" autocomplete="given-name" class="cl-cart-contacto-input">
           <input type="email" id="cl-cart-email" placeholder="Tu email" autocomplete="email" class="cl-cart-contacto-input">
+          <input type="tel" id="cl-cart-whatsapp" placeholder="WhatsApp (ej: 3001234567)" autocomplete="tel" class="cl-cart-contacto-input">
         </div>
       </div>
 
@@ -4952,12 +4953,12 @@ document.querySelectorAll('.tone').forEach(tone => {
     try { contacto_ = JSON.parse(localStorage.getItem('cl_contacto') || '{}'); } catch(_) {}
 
     // Leer también los campos del carrito si están llenos
-    var cartNombre = (document.getElementById('cl-cart-nombre') || {}).value || '';
-    var cartEmail  = (document.getElementById('cl-cart-email')  || {}).value || '';
-    if (cartNombre || cartEmail) {
-      contacto_.nombre = cartNombre || contacto_.nombre || '';
-      contacto_.email  = cartEmail  || contacto_.email  || '';
-    }
+    var cartNombre    = (document.getElementById('cl-cart-nombre')    || {}).value || '';
+    var cartEmail     = (document.getElementById('cl-cart-email')     || {}).value || '';
+    var cartWhatsapp  = (document.getElementById('cl-cart-whatsapp')  || {}).value || '';
+    if (cartNombre)   contacto_.nombre    = cartNombre;
+    if (cartEmail)    contacto_.email     = cartEmail;
+    if (cartWhatsapp) contacto_.whatsapp  = cartWhatsapp;
 
     const payload = JSON.stringify({
       accion: 'carrito',
@@ -4996,31 +4997,48 @@ document.querySelectorAll('.tone').forEach(tone => {
       var c = JSON.parse(localStorage.getItem('cl_contacto') || '{}');
       var n = document.getElementById('cl-cart-nombre');
       var e = document.getElementById('cl-cart-email');
-      if (n && c.nombre) n.value = c.nombre;
-      if (e && c.email)  e.value = c.email;
+      var w = document.getElementById('cl-cart-whatsapp');
+      if (n && c.nombre)    n.value = c.nombre;
+      if (e && c.email)     e.value = c.email;
+      if (w && c.whatsapp)  w.value = c.whatsapp;
     } catch(_) {}
   })();
 
-  // Guardar en localStorage al salir de cada campo
-  ['cl-cart-nombre','cl-cart-email'].forEach(function(id){
+  function _breveIdentify(prev) {
+    try {
+      if (!prev.email && !prev.whatsapp) return;
+      window.Brevo = window.Brevo || [];
+      Brevo.push(['identify', {
+        email: prev.email || undefined,
+        attributes: {
+          NOMBRE:    prev.nombre    || '',
+          WHATSAPP:  prev.whatsapp  || '',
+          SMS:       prev.whatsapp  || ''
+        }
+      }]);
+    } catch(_) {}
+  }
+
+  // Al hacer CLIC en cualquier campo del carrito → identificar con lo que ya hay guardado
+  ['cl-cart-nombre','cl-cart-email','cl-cart-whatsapp'].forEach(function(id){
     var el = document.getElementById(id);
     if (!el) return;
+
+    el.addEventListener('focus', function(){
+      try {
+        var prev = JSON.parse(localStorage.getItem('cl_contacto') || '{}');
+        _breveIdentify(prev);
+      } catch(_) {}
+    });
+
     el.addEventListener('blur', function(){
       try {
         var prev = JSON.parse(localStorage.getItem('cl_contacto') || '{}');
-        if (id === 'cl-cart-nombre' && el.value.trim()) prev.nombre = el.value.trim();
-        if (id === 'cl-cart-email'  && el.value.trim()) prev.email  = el.value.trim();
+        if (id === 'cl-cart-nombre'   && el.value.trim()) prev.nombre   = el.value.trim();
+        if (id === 'cl-cart-email'    && el.value.trim()) prev.email    = el.value.trim().toLowerCase();
+        if (id === 'cl-cart-whatsapp' && el.value.trim()) prev.whatsapp = el.value.trim();
         localStorage.setItem('cl_contacto', JSON.stringify(prev));
-        // Identificar en Brevo cuando se escribe el email
-        if (id === 'cl-cart-email' && prev.email) {
-          try {
-            window.Brevo = window.Brevo || [];
-            Brevo.push(['identify', {
-              email: prev.email,
-              attributes: { NOMBRE: prev.nombre || '', WHATSAPP: prev.whatsapp || '' }
-            }]);
-          } catch(_) {}
-        }
+        _breveIdentify(prev);
       } catch(_) {}
     });
   });
@@ -5030,11 +5048,14 @@ document.querySelectorAll('.tone').forEach(tone => {
     // Guardar contacto del carrito antes de abrir checkout
     try {
       var prev = JSON.parse(localStorage.getItem('cl_contacto') || '{}');
-      var n = (document.getElementById('cl-cart-nombre') || {}).value || '';
-      var e = (document.getElementById('cl-cart-email')  || {}).value || '';
-      if (n) prev.nombre = n.trim();
-      if (e) prev.email  = e.trim();
+      var n = (document.getElementById('cl-cart-nombre')    || {}).value || '';
+      var e = (document.getElementById('cl-cart-email')     || {}).value || '';
+      var w = (document.getElementById('cl-cart-whatsapp')  || {}).value || '';
+      if (n) prev.nombre   = n.trim();
+      if (e) prev.email    = e.trim().toLowerCase();
+      if (w) prev.whatsapp = w.trim();
       localStorage.setItem('cl_contacto', JSON.stringify(prev));
+      _breveIdentify(prev);
     } catch(_) {}
     abrirCheckout_();
   });
