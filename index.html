@@ -4972,15 +4972,32 @@ document.querySelectorAll('.tone').forEach(tone => {
     });
 
     if (estado === 'Abandonado' && navigator.sendBeacon) {
-      // sendBeacon: pensado justo para "la pestaña se está cerrando",
-      // no se cancela como podría pasarle a un fetch normal.
       navigator.sendBeacon(APPS_SCRIPT_URL, payload);
     } else {
       fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: payload
-      }).catch(() => {}); // no bloquea el flujo si falla
+      }).catch(() => {});
+    }
+
+    // Notificar a Brevo para disparar la automatización de carrito abandonado
+    if (estado === 'Abandonado') {
+      try {
+        var payObj = JSON.parse(payload);
+        window.Brevo = window.Brevo || [];
+        if (payObj.email) {
+          Brevo.push(['identify', {
+            email: payObj.email,
+            attributes: { NOMBRE: payObj.nombre || '', WHATSAPP: payObj.whatsapp || '' }
+          }]);
+        }
+        Brevo.push(['track', 'cart_abandoned', {
+          total:     payObj.total || 0,
+          productos: payObj.productos ? payObj.productos.map(function(p){ return p.nombre; }).join(', ') : '',
+          sesion_id: payObj.sesionId || ''
+        }]);
+      } catch(_) {}
     }
   }
 
