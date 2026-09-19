@@ -3474,11 +3474,11 @@ document.querySelectorAll('.tone').forEach(tone => {
       <h3>Y disfruta un 10% OFF en tu primera compra.</h3>
       <p style="font-size:.78rem;color:var(--mist);margin:-4px 0 12px;font-style:italic;">Vigencia: 30 días desde tu registro.</p>
       <form id="cl-popup-form" novalidate>
-        <input class="cl-popup-form-el" type="text" name="nombre" placeholder="Nombre" required>
-        <input class="cl-popup-form-el" type="email" name="email" placeholder="Correo electrónico" required>
+        <input class="cl-popup-form-el" type="text" name="nombre" placeholder="Nombre" required autocomplete="given-name">
+        <input class="cl-popup-form-el" type="email" name="email" placeholder="Correo electrónico" required autocomplete="email">
         <div class="cl-popup-phone">
           <span class="cl-popup-flag">🇨🇴 +57</span>
-          <input class="cl-popup-form-el" type="tel" name="whatsapp" placeholder="WhatsApp" inputmode="numeric" required>
+          <input class="cl-popup-form-el" type="tel" name="whatsapp" placeholder="WhatsApp" inputmode="numeric" required autocomplete="tel-national">
         </div>
         <p class="cl-popup-label">Fecha de nacimiento</p>
         <div class="cl-popup-dob">
@@ -3616,6 +3616,12 @@ document.querySelectorAll('.tone').forEach(tone => {
   function abrirPopup(){
     overlay.classList.add('cl-open');
     sideTab.setAttribute('aria-expanded','true');
+    try {
+      var c = JSON.parse(localStorage.getItem('cl_contacto') || '{}');
+      if (c.nombre)    form.querySelector('[name="nombre"]').value   = c.nombre;
+      if (c.email)     form.querySelector('[name="email"]').value    = c.email;
+      if (c.whatsapp)  form.querySelector('[name="whatsapp"]').value = c.whatsapp.replace(/^57/, '');
+    } catch(_) {}
   }
   function cerrarPopup(){
     overlay.classList.remove('cl-open');
@@ -6037,6 +6043,12 @@ body.cl-has-sticky #site-header{top:42px!important;transition:top .3s}
     document.getElementById('cl-insc-subtitulo').textContent = c.subtitulo || (c.fecha_fin ? 'Vigencia hasta ' + new Date(c.fecha_fin).toLocaleDateString('es-CO',{day:'2-digit',month:'long',year:'numeric'}) : '');
     inscMsg.className = 'cl-insc-msg'; inscMsg.textContent = '';
     inscForm.reset(); inscBtn.disabled = false; inscBtn.textContent = '¡Quiero inscribirme!';
+    try {
+      var _c = JSON.parse(localStorage.getItem('cl_contacto') || '{}');
+      if (_c.nombre)   document.getElementById('cl-insc-nombre').value = _c.nombre;
+      if (_c.whatsapp) document.getElementById('cl-insc-ws').value     = _c.whatsapp.replace(/^57/, '');
+      if (_c.email)    document.getElementById('cl-insc-email').value  = _c.email;
+    } catch(_) {}
     inscOverlay.classList.add('cl-open');
   }
   function cerrarInscripcion() { inscOverlay.classList.remove('cl-open'); }
