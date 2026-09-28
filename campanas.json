@@ -72,24 +72,6 @@
     "api_url": null
   },
   {
-    "id": "bcc3ea93-33f5-4a82-89c4-4ca4736c6b5a",
-    "titulo": "Redescubre tu brillo natural con Chic Life",
-    "subtitulo": "Consejos personalizados para realzar tu belleza auténtica",
-    "descripcion": "Hola, somos Chic Life y queremos acompañarte en tu camino de cuidado personal. En esta edición te compartimos rutinas sencillas, trucos de expertos y los mejores ingredientes naturales para que tu piel y cabello luzcan radiantes día a día. Descubre cómo pequeños cambios pueden transformar tu rutina y potenciar tu confianza.",
-    "tipo": "contenido",
-    "imagen_url": "",
-    "texto_cta": "Explora nuestros tips exclusivos",
-    "url_cta": "",
-    "descuento_pct": 0,
-    "color_fondo": "#BE185D",
-    "color_texto": "#FFFFFF",
-    "posicion": "hero",
-    "fecha_inicio": "2026-09-21T15:22:21.490Z",
-    "fecha_fin": "2026-09-28T15:22:21.490Z",
-    "requiere_inscripcion": 0,
-    "api_url": null
-  },
-  {
     "id": "c0a0b0ab-329a-4ede-8d6b-875c9b52f827",
     "titulo": "¡Bienvenida a Chic Life!",
     "subtitulo": "Descubre la belleza que te hace brillar",
@@ -104,24 +86,6 @@
     "posicion": "hero",
     "fecha_inicio": "2026-09-21T15:22:03.645Z",
     "fecha_fin": "2026-10-05T15:22:03.645Z",
-    "requiere_inscripcion": 0,
-    "api_url": null
-  },
-  {
-    "id": "4acdc1c2-a3fc-4bd4-aa26-f6d6ba4f9c16",
-    "titulo": "Descubre tu mejor versión con Chic Life",
-    "subtitulo": "Consejos personalizados para realzar tu belleza natural",
-    "descripcion": "Hola, sabemos que la rutina de cuidado personal a veces se queda en pausa. Por eso hemos preparado una serie de recursos gratuitos pensados en ti: guías paso a paso para una piel radiante, trucos para fortalecer tu cabello y rituales de bienestar que puedes incorporar sin complicaciones. Cada consejo está respaldado por nuestras expertas en belleza y está diseñado para adaptarse a tu estilo de vida. ¡Déjanos acompañarte en este viaje de autocuidado y transformación!",
-    "tipo": "contenido",
-    "imagen_url": "",
-    "texto_cta": "Explora nuestras guías y comienza tu rutina de belleza hoy",
-    "url_cta": "",
-    "descuento_pct": 0,
-    "color_fondo": "#BE185D",
-    "color_texto": "#FFFFFF",
-    "posicion": "hero",
-    "fecha_inicio": "2026-09-21T15:22:03.666Z",
-    "fecha_fin": "2026-09-28T15:22:03.666Z",
     "requiere_inscripcion": 0,
     "api_url": null
   }
