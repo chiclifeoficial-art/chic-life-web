@@ -52,23 +52,5 @@
     "fecha_fin": "2026-10-06T17:02:06.408Z",
     "requiere_inscripcion": 0,
     "api_url": null
-  },
-  {
-    "id": "5af64e25-9226-4dd9-b39e-742e9178bdad",
-    "titulo": "¡Bienvenida a Chic Life! 10% OFF primera compra",
-    "subtitulo": "Nos alegra tenerte aquí — empieza tu rutina de belleza",
-    "descripcion": "Por ser nueva en Chic Life, tienes un beneficio especial en tu primera compra.",
-    "tipo": "bienvenida",
-    "imagen_url": "",
-    "texto_cta": "Reclamar mi beneficio",
-    "url_cta": "",
-    "descuento_pct": 10,
-    "color_fondo": "#059669",
-    "color_texto": "#FFFFFF",
-    "posicion": "hero",
-    "fecha_inicio": "2026-09-21T18:00:00.336Z",
-    "fecha_fin": "2026-10-05T18:00:00.336Z",
-    "requiere_inscripcion": 0,
-    "api_url": null
   }
 ]
