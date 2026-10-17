@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "id": "15e6b260-b760-426b-98e1-22e36b4e613f",
+    "titulo": "Tip Chic Life: 5 hábitos para un cabello más saludable",
+    "subtitulo": "Cuida tu cabello con estos consejos de expertas",
+    "descripcion": "Descubre los mejores tips para el cuidado de tu cabello con nuestras expertas en belleza.",
+    "tipo": "contenido",
+    "imagen_url": "",
+    "texto_cta": "Ver más tips",
+    "url_cta": "",
+    "descuento_pct": 0,
+    "color_fondo": "#0F172A",
+    "color_texto": "#FBBF24",
+    "posicion": "hero",
+    "fecha_inicio": "2026-10-14T02:04:35.841Z",
+    "fecha_fin": "2026-10-19T02:04:35.841Z",
+    "requiere_inscripcion": 0,
+    "api_url": null
+  }
+]
