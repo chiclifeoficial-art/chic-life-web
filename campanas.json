@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "id": "58566865-ebc9-43aa-9514-9a16448993d2",
+    "titulo": "¡Flash Sale de Chic Life! 15% de Descuento",
+    "subtitulo": "Solo 3 días para revitalizar tu rutina de belleza",
+    "descripcion": "Aprovecha un 15% de descuento en toda la línea de productos Chic Life. Desde cuidado de la piel hasta maquillaje, renueva tu look con la calidad colombiana que amas. Oferta válida del 3 al 5 de noviembre. ¡No dejes pasar esta oportunidad y luce radiante!",
+    "tipo": "flash_sale",
+    "imagen_url": "",
+    "texto_cta": "¡Compra ahora y ahorra!",
+    "url_cta": "",
+    "descuento_pct": 15,
+    "color_fondo": "#DC2626",
+    "color_texto": "#FFFFFF",
+    "posicion": "hero",
+    "fecha_inicio": "2026-11-02T18:00:02.149Z",
+    "fecha_fin": "2026-11-05T18:00:02.149Z",
+    "requiere_inscripcion": 0,
+    "api_url": null
+  }
+]
